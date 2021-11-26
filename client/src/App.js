@@ -2,8 +2,8 @@ import './App.css';
 
 function App() {
   return (
-    <div>
-    
+    <div className="bg-gray-200">
+      henlo
     </div>
   );
 }
