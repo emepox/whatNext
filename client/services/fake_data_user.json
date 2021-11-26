@@ -1,0 +1,17 @@
+[
+  {
+    "id": "1",
+    "username": "qwerty",
+    "favourites": "1,2,3"
+  },
+  {
+    "id": "2",
+    "username": "germinal",
+    "favourites": "2,3,4"
+  },
+  {
+    "id": "3",
+    "username": "Sofia",
+    "favourites": "3,4"
+  }
+]
