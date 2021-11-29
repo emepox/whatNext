@@ -11,12 +11,12 @@ const supersecret = process.env.SUPER_SECRET;
 
 
 router.post("/register", usernameNotTaken, async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, email } = req.body;
   try {
 
     const hash = await bcrypt.hash(password, saltRounds);
 
-    await models.User.create({ username, password: hash });
+    await models.User.create({ username, password: hash, email  });
 
     res.send({ message: "Register successful" });
 
