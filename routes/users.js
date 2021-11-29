@@ -10,8 +10,10 @@ const saltRounds = 10;
 const supersecret = process.env.SUPER_SECRET;
 
 
-router.post("/register", usernameNotTaken, async (req, res) => {
+router.post( "/register", usernameNotTaken, async ( req, res ) => {
+  console.log("HOLA")
   const { username, password, email } = req.body;
+  console.log(username, email, password)
   try {
 
     const hash = await bcrypt.hash(password, saltRounds);

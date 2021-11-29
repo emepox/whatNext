@@ -14,7 +14,6 @@ export default function Register() {
   const handleChange = (e) => {
     const { value, name } = e.target;
     setNewUser((state) => ({ ...state, [name]: value }));
-    console.log(newUser);
   };
 
   const handleSubmit = (e) => {
@@ -23,38 +22,37 @@ export default function Register() {
     addUser();
   };
 
-  const addUser = async () => {
+    const addUser = async () => {
+        console.log(newUser)
     try {
-        await fetch( "/users/register", {
+        const { data } = await axios( "/users/register", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newUser),
-      });
+        data: newUser,
+        } );
+        
       setNewUser({
         username: "",
         email: "",
         password: "",
       });
 
-    //   new Noty({
-    //     theme: "bootstrap-v4",
-    //     type: "success",
-    //     layout: "topRight",
-    //     text: "User registered.",
-    //     timeout: 1000,
-    //   }).show();
+      new Noty({
+        theme: "bootstrap-v4",
+        type: "success",
+        layout: "topRight",
+        text: "User registered.",
+        timeout: 1000,
+      }).show();
     } catch (err) {
-      setAlert(err);
+      setAlert(err[0]);
       console.log(err);
-    //   new Noty({
-    //     theme: "bootstrap-v4",
-    //     type: "error",
-    //     layout: "topRight",
-    //     text: "Ouch! Something went wrong. Try again!",
-    //     timeout: 2000,
-    //   }).show();
+      new Noty({
+        theme: "bootstrap-v4",
+        type: "error",
+        layout: "topRight",
+        text: "Ouch! Something went wrong. Try again!",
+        timeout: 2000,
+      }).show();
     }
   };
 
