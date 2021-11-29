@@ -1,20 +1,24 @@
-import React from "react";
+import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
+import Home from "./Home";
+import React from "react";
 
 import Register from "./components/Register";
 import Login from "./components/Login";
 
 export default function App() {
   return (
-    <React.StrictMode>
+    <div>
       <BrowserRouter>
-        <div>henlo</div>
         <Routes>
+          <Route path="/" element={<Home />}/>  
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
         </Routes>
-      </BrowserRouter>
-    </React.StrictMode>
+      </BrowserRouter>  
+    </div>
   );
 }
+
+
+
