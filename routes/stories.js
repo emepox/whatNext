@@ -52,4 +52,23 @@ router.post("/", async function (req, res) {
 
 });
 
+//deletes story by id
+router.delete("/:id", async function (req, res) {
+    try{
+        const { id } = req.params
+        const stories = await models.Story.destroy(
+            {
+                where: { id }
+            }
+        );
+    
+    res.send("Story successfully deleted!")
+    
+    } catch (error) {
+    res.status(500).send(error);
+    }
+});
+
+
+
 module.exports = router;
