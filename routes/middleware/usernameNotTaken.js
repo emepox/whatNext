@@ -2,9 +2,7 @@
 var models = require("../../models")
 
 async function userNotTaken( req, res, next ) {
-  console.log("HOLAAAA estoy en la guardia")
   try {
-      console.log(req)
       const { username } = req.body;
       console.log(username)
   

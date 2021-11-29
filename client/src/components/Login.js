@@ -28,9 +28,10 @@ export default function Login() {
 // Called when submitting
   const login = async () => {
     try {
-      const { data } = await axios.post("/users/login", {
-        data: logIn,
-      });
+        const { data } = await axios("/users/login", {
+          method: "POST",
+          data: logIn,
+        });
       //store it locally
       localStorage.setItem("token", data.token);
 
