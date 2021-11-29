@@ -3,12 +3,14 @@ var router = express.Router();
 require("dotenv").config();
 var bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
+var models = require("../models")
 const userShouldBeLoggedIn = require("./middleware/userShouldBeLoggedIn")
+const usernameNotTaken = require("./middleware/usernameNotTaken")
 const saltRounds = 10;
 const supersecret = process.env.SUPER_SECRET;
 
 
-router.post("/register", async (req, res) => {
+router.post("/register", usernameNotTaken, async (req, res) => {
   const { username, password } = req.body;
   try {
 
