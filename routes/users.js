@@ -48,7 +48,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/dashboard", userShouldBeLoggedIn, (req, res) => {
+router.get("/dashboard", userShouldBeLoggedIn, async (req, res) => {
   const {user_id} = req
   try {
     const user = await models.User.findOne({ where: { id:user_id } })

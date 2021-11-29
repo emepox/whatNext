@@ -1,13 +1,13 @@
-const { Model } = require("sequelize/dist");
-var models = require("../models")
+// const { Model } = require("sequelize/dist");
+var models = require("../../models")
 
 async function emailNotTaken(req, res, next) {
     try {
       const { username } = req.body;
   
-      const results = await models.User.findOne({ where: {username}})
+      const user = await models.User.findOne({ where: {username}})
   
-      if (results.data.length) {
+      if (user) {
         return res.status(400).send({ message: "Username already taken, please use another one or log in!" });
       }
       next();
