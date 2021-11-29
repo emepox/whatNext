@@ -4,7 +4,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.addColumn(
       "Nodes", // name of Source model
-      "storyId", // name of the key we're adding
+      "StoryId", // name of the key we're adding
       {
         type: Sequelize.INTEGER,
         references: {
@@ -20,7 +20,7 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
     return queryInterface.removeColumn(
       "Nodes", // name of Source model
-      "storyId" // key we want to remove
+      "StoryId" // key we want to remove
     );
   }
 };
