@@ -10,8 +10,11 @@ const saltRounds = 10;
 const supersecret = process.env.SUPER_SECRET;
 
 
-router.post("/register", usernameNotTaken, async (req, res) => {
+
+router.post( "/register", usernameNotTaken, async ( req, res ) => {
   const { username, password, email } = req.body;
+  console.log( username, email, password )
+  console.log(supersecret);
   try {
 
     const hash = await bcrypt.hash(password, saltRounds);
@@ -25,20 +28,22 @@ router.post("/register", usernameNotTaken, async (req, res) => {
   }
 });
 
-router.post("/login", async (req, res) => {
+router.post( "/login", async ( req, res ) => {
   const { username, password } = req.body;
-
   try {
-    const user = await models.User.findOne({ where: { username } });
+    const user = await models.User.findOne( { where: { username } } );
 
     if (user) {
       const user_id = user.id;
 
-      const correctPassword = await bcrypt.compare(password, user.password);
+      const correctPassword = await bcrypt.compare( password, user.password );
 
-      if (!correctPassword) throw new Error("Incorrect password");
+      if ( !correctPassword ) throw new Error( "Incorrect password" );
+      console.log("Llega hasta aquí", user_id)
 
-      var token = jwt.sign({ user_id }, supersecret);
+      var token = jwt.sign( { user_id }, supersecret );
+
+      console.log("token", token)
       res.send({ message: "Login successful, here is your token", token });
     } else {
       throw new Error("User does not exist");
