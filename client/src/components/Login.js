@@ -41,12 +41,9 @@ export default function Login() {
         layout: "topRight",
         text: "You are logged in.",
         timeout: 1000,
-        callbacks: {
-          afterClose: function () {
-            window.location.href = "/";
-          },
-        },
-      }).show();
+      } ).show();
+      window.location.href = "/dashboard";
+
     } catch (error) {
       console.log(error);
 
