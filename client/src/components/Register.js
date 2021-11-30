@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Noty from "noty";
+import useAuth from "../hooks/useAuth";
 
 export default function Register() {
   let [newUser, setNewUser] = useState({
@@ -10,6 +11,7 @@ export default function Register() {
   });
   const [alert, setAlert] = useState(null);
   const { username, email, password } = newUser;
+  const auth = useAuth();
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -42,7 +44,10 @@ export default function Register() {
         layout: "topRight",
         text: "User registered.",
         timeout: 1000,
-      }).show();
+      } ).show();
+
+      if ( !auth.isLoggedIn ) await auth.signin( { username, password } );
+      
     } catch (err) {
       setAlert(err[0]);
       console.log(err);

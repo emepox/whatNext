@@ -64,7 +64,7 @@ router.get("/dashboard", userShouldBeLoggedIn, async (req, res) => {
 });
 
 // gets all stories from one user
-router.get("/:id/stories", async function (req, res) {
+router.get("/:id/stories", userShouldBeLoggedIn, async function (req, res) {
   try {
       const { id } = req.params
       const stories = await models.Story.findAll(
@@ -74,7 +74,7 @@ router.get("/:id/stories", async function (req, res) {
           }
         );
     
-        res.send(stories);
+    res.send( { message: "your stories", stories });
     
   } catch (error) {
     res.status(500).send(error);
