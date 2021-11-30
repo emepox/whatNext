@@ -41,6 +41,23 @@ router.put("/:id/edges", async function (req, res) {
 
 });
 
+//deletes node by id
+router.delete("/:id", async function (req, res) {
+    try{
+        const { id } = req.params
+        const nodes = await models.Node.destroy(
+            {
+                where: { id }
+            }
+        );
+    
+    res.send("Node successfully deleted!")
+    
+    } catch (error) {
+    res.status(500).send(error);
+    }
+});
+
 
 
 module.exports = router;
