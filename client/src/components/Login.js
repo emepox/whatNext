@@ -42,7 +42,7 @@ export default function Login() {
         text: "You are logged in.",
         timeout: 1000,
       } ).show();
-      window.location.href = "/dashboard";
+      window.location.href = "/profile";
 
     } catch (error) {
       console.log(error);

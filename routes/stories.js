@@ -37,6 +37,24 @@ router.get("/:id", async function (req, res) {
     }
 });
 
+// gets all nodes from a story
+router.get("/:id/nodes", async function (req, res) {
+  try {
+      const { id } = req.params;
+      const nodes = await models.Node.findAll(
+      {
+          attributes: ['id', 'situation'],
+          where: { StoryId: id },
+      }
+    );
+
+    res.send(nodes);
+    
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 // adds new story, returns story.id (TODO:configure first so it gets the id of the first node of the story)
 router.post("/", async function (req, res) {
     try {
