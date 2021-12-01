@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import React from "react";
-import Navbar from './Navbar';
+import Navbar from './components/Navbar';
 import Parallax from "./components/Parallax";
 import DraggableList from "./components/Draggable";
 

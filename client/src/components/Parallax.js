@@ -82,7 +82,7 @@ export default function App() {
           }}
         />
 
-        <ParallaxLayer
+        <ParallaxLayer 
           offset={0}
           speed={0.1}
           onClick={() => parallax.current.scrollTo(1)}
@@ -119,8 +119,7 @@ export default function App() {
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-            
-          <img src={url('bash')} style={{ width: '40%' }} />
+          <img src={url('bash')} style={{ width: '40%' }} className="transform hover:scale-105 transition duration-400"/>
         </ParallaxLayer>
 
         <ParallaxLayer
