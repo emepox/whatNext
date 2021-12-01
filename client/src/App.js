@@ -5,7 +5,7 @@ import React from "react";
 
 import Register from "./components/Register";
 import Login from "./components/Login";
-import Creator from "./components/Creator";
+import Creator from "./components/CreateGame";
 
 export default function App() {
   return (

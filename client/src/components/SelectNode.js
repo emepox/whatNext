@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./Creator.css"
+import "./CreateGame.css"
 const axios = require('axios');
 
-export default function Creator() {  
+export default function SelectNode() {  
     // const {situation, media, StoryId, option} = object;
     // new node to be posted to DB
     const [newNode, setNewNode] = useState({
@@ -60,27 +60,6 @@ export default function Creator() {
 
     return (
         <div>
-            <h3>"Jabalí unchained"</h3><br/>
-            <form>
-            <div>
-                WHAT? (parent node) <br/>Jabalí gets into a bar
-            </div>
-            <br/>
-            <div>
-                <button onClick={handleSubmit}>SELECT CHOICE</button>-----
-                <button onClick={handleSubmit}>CREATE NEW CHOICE</button>
-            </div>
-            </form>
-            <br/><br/>
-            ******CASE "CREATE NEW CHOICE"****** POST /nodes + PUT /nodes
-            <div>
-                <label>Choice 1</label><br/><textarea name="option" rows="1" cols="50" onChange={handleChange}></textarea><br/>
-                <label>What next?</label><br/><textarea name="situation" rows="4" cols="50" onChange={handleChange}></textarea><br/>
-            </div>
-            <br/>
-            **************
-            <br/><br/>
-            ******CASE "SELECT CHOICE"****** PUT /nodes
             <div>
                 <label>Choice 1</label><br/><textarea name="option" rows="1" cols="50" onChange={handleChange}></textarea><br/>
                 <label for="nodes">What next?</label>
@@ -90,18 +69,9 @@ export default function Creator() {
                     <option value="married">Jabalí gets married</option>
                 </select>
             </div>
-            <br/>
-            **************
             <br/><br/>
             <div>
                 <button onClick={handleSubmit}>SAVE</button><br/><br/>
-                <button onClick={handleSubmit}>CREATE/SELECT ANOTHER CHOICE</button>----
-                <button onClick={handleSubmit}>CONTINUE STORYLINE</button>
-                <br/><br/>
-                <button onClick={handleSubmit}>STORY IS FINISHED!</button>
-            </div>
-            <div>
-                NODE LIST HERE 
             </div>
 
         </div>
