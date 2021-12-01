@@ -23,12 +23,12 @@ export default function Navbar() {
 
   return (
     <div>
-      <div className="bg-white opacity-70 shadow-lg px-12 py-8 grid grid-cols-2">
+      <div className="bg-white opacity-90 shadow-lg px-12 py-8 grid grid-cols-2">
         <a
-          href="/"
-          className="block mt-1 text-lg leading-tight font-medium text-black hover:text-indigo-500"
+          href="/parallax"
+          className="block mt-1 text-xl leading-tight font-medium  font-mono italic text-black hover:text-indigo-500"
         >
-          ModularStory
+          WhatNext
         </a>
         <div className="text-right space-x-3">
           {!auth.isLoggedIn && (

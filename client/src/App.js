@@ -7,6 +7,9 @@ import ParallaxComponent from "./components/ParallaxComponent";
 import DraggableList from "./components/Draggable";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import CreateStory from "./components/CreateStory";
+import StoryDetails from "./components/StoryDetails";
+
 import Story from './components/Story';
 import Home from "./components/Home";
 import Navbar from './components/Navbar';
@@ -20,7 +23,8 @@ import PrivateRoute from "./components/PrivateRoute";
 export default function App() {
   return (
 
-    <div style={{ width: '100%', height: '100%' }}>
+    <div className="bg-bgColor" style={{ width: '100%', height: '100%' }}>
+    
       <AuthProvider>
         <BrowserRouter>
           <Navbar />
@@ -48,13 +52,23 @@ export default function App() {
               path="/create"
               element={
                 <PrivateRoute>
-                  <CreateGame />
+
+                  <CreateStory />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/start"
+              element={
+                <PrivateRoute>
+                  <StoryDetails />
                 </PrivateRoute>
               }
             />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
+
 
     </div>
   );

@@ -3,7 +3,7 @@ import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax';
 import Hot from '../img/Hot.png';
 import Home from "./Home";
 
-// Little helpers ...
+
 const url = (name, wrap = false) =>
   `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 
