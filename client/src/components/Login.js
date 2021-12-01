@@ -95,7 +95,7 @@ export default function Login() {
               <div><p className="text-2xl mb-12 font-mono italic flex flex-col items-center justify-center">WhatNext</p></div>  
               <div className="flex flex-col items-center justify-center">
                 <input
-                  className="fontAwesome border-2 border-gray-200 pr-10 pl-2 mt-2 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  className="fontAwesome border-2 border-gray-200 pr-10 pl-2 py-1 mt-2 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                   id="username"
                   name="username"
                   placeholder="&#xf007; Username"
@@ -107,7 +107,7 @@ export default function Login() {
               
               <div className="flex flex-col items-center justify-center">
                 <input
-                  className="fontAwesome border-2 border-gray-200 rounded pr-10 pl-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  className="fontAwesome border-2 border-gray-200 rounded pr-10 pl-2 py-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                   id="password"
                   name="password"
                   type="password"

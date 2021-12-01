@@ -102,12 +102,12 @@ export default function Register() {
                 className="w-96 h-96 rounded-md bg-white p-11 space-y-4 shadow-lg opacity-90" 
                 onSubmit={(e) => handleSubmit(e)}>
                 <div className="flex flex-col items-center justify-center">
-                  <p className="text-2xl mb-10 font-mono italic">WhatNext</p>
+                  <p className="text-2xl mb-8 font-mono italic">WhatNext</p>
                 </div>  
 
                 <div className="flex flex-col items-center justify-center">
                   <input
-                    className="fontAwesome border-2 border-gray-200 rounded pr-10 pl-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    className="fontAwesome border-2 border-gray-200 rounded pr-10 pl-2 py-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                     id="username"
                     name="username"
                     value={username}
@@ -119,7 +119,7 @@ export default function Register() {
 
                 <div className="flex flex-col items-center justify-center">
                   <input
-                    className="fontAwesome border-2 border-gray-200 rounded pr-10 pl-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    className="fontAwesome border-2 border-gray-200 rounded pr-10 pl-2 py-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                     id="email"
                     name="email"
                     value={email}
@@ -131,7 +131,7 @@ export default function Register() {
 
                 <div className="flex flex-col items-center justify-center">
                   <input
-                    className="fontAwesome border-2 border-gray-200 rounded pr-10 pl-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    className="fontAwesome border-2 border-gray-200 rounded pr-10 pl-2 py-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                     id="password"
                     name="password"
                     type="password"
