@@ -1,9 +1,9 @@
 import React from 'react'
 import Navbar from './Navbar'
-import Beetjuice from './img/Beetjuice.png'
-import Bestpickle from './img/Bestpickle.png'
-import Citric from './img/Citric.png'
-import Hot from './img/Hot.png'
+import Beetjuice from '../img/Beetjuice.png'
+import Bestpickle from '../img/Bestpickle.png'
+import Citric from '../img/Citric.png'
+import Hot from '../img/Hot.png'
 
 export default function Home() {
   return (
