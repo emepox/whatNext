@@ -7,6 +7,7 @@ import DraggableList from "./components/Draggable";
 
 import Register from "./components/Register";
 import Login from "./components/Login";
+import Story from './components/Story';
 import Home from "./components/Home";
 import Navbar from './components/Navbar';
 import Dashboard from "./components/Dashboard";
@@ -14,6 +15,7 @@ import Dashboard from "./components/Dashboard";
 
 import AuthProvider from "./components/AuthProvider";
 import PrivateRoute from "./components/PrivateRoute";
+
 
 export default function App() {
   return (
@@ -27,8 +29,12 @@ export default function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/play" element={<Dashboard />} />
+
             <Route path="/parallax" element={<Parallax />} />
           <Route path="/draggable" element={<DraggableList items={'Lorem ipsum dolor sit'.split(' ')} />} />
+
+            <Route path="/story/:id/:page" element={<Story />} />
+
 
             <Route
               path="/dashboard"
