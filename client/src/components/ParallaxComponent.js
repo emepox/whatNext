@@ -9,7 +9,7 @@ const url = (name, wrap = false) =>
 
   console.log(url('clients'));
 
-export default function App() {
+export default function ParallaxComponent() {
   const parallax = useRef(null);   
 
   return (

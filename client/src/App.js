@@ -1,17 +1,16 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
-import Navbar from './components/Navbar';
-import Parallax from "./components/Parallax";
-import DraggableList from "./components/Draggable";
 
+
+import ParallaxComponent from "./components/ParallaxComponent";
+import DraggableList from "./components/Draggable";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Story from './components/Story';
 import Home from "./components/Home";
 import Navbar from './components/Navbar';
-import Dashboard from "./components/Dashboard";
-
+import Profile from "./components/Profile";
 
 import AuthProvider from "./components/AuthProvider";
 import PrivateRoute from "./components/PrivateRoute";
@@ -28,19 +27,19 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/play" element={<Dashboard />} />
+            <Route path="/play" element={<Profile />} />
 
-            <Route path="/parallax" element={<Parallax />} />
+            <Route path="/parallax" element={<ParallaxComponent />} />
           <Route path="/draggable" element={<DraggableList items={'Lorem ipsum dolor sit'.split(' ')} />} />
 
             <Route path="/story/:id/:page" element={<Story />} />
 
 
             <Route
-              path="/dashboard"
+              path="/profile"
               element={
                 <PrivateRoute>
-                  <Dashboard />
+                  <Profile />
                 </PrivateRoute>
               }
             />
@@ -48,7 +47,7 @@ export default function App() {
               path="/create"
               element={
                 <PrivateRoute>
-                  <Dashboard />
+                  <Profile />
                 </PrivateRoute>
               }
             />
