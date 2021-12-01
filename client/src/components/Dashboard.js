@@ -4,12 +4,13 @@ import Bestpickle from '../img/Bestpickle.png'
 import Citric from '../img/Citric.png'
 import Hot from '../img/Hot.png'
 
-export default function Home() {
+export default function Dashboard() {
   return (
     <div className="bg-gradient-to-r from-white to-grayBg via-grayVia h-screen">
        
       {/* <div className="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 gap-3"> */}
       <div className="md:container md:mx-auto">
+        <h1>HOLA I AM THE DASHBOARD</h1>
       <div className="my-3 grid justify-items-center lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
       
       

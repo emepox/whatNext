@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Noty from "noty";
+import useAuth from "../hooks/useAuth";
 
 export default function Register() {
   let [newUser, setNewUser] = useState({
@@ -10,11 +11,11 @@ export default function Register() {
   });
   const [alert, setAlert] = useState(null);
   const { username, email, password } = newUser;
+  const auth = useAuth();
 
   const handleChange = (e) => {
     const { value, name } = e.target;
     setNewUser((state) => ({ ...state, [name]: value }));
-    console.log(newUser);
   };
 
   const handleSubmit = (e) => {
@@ -23,38 +24,40 @@ export default function Register() {
     addUser();
   };
 
-  const addUser = async () => {
+    const addUser = async () => {
+        console.log(newUser)
     try {
-        await fetch( "/users/register", {
+        const { data } = await axios( "/users/register", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newUser),
-      });
+        data: newUser,
+        } );
+        
       setNewUser({
         username: "",
         email: "",
         password: "",
       });
 
-    //   new Noty({
-    //     theme: "bootstrap-v4",
-    //     type: "success",
-    //     layout: "topRight",
-    //     text: "User registered.",
-    //     timeout: 1000,
-    //   }).show();
+      new Noty({
+        theme: "bootstrap-v4",
+        type: "success",
+        layout: "topRight",
+        text: "User registered.",
+        timeout: 1000,
+      } ).show();
+
+      if ( !auth.isLoggedIn ) await auth.signin( { username, password } );
+      
     } catch (err) {
-      setAlert(err);
+      setAlert(err[0]);
       console.log(err);
-    //   new Noty({
-    //     theme: "bootstrap-v4",
-    //     type: "error",
-    //     layout: "topRight",
-    //     text: "Ouch! Something went wrong. Try again!",
-    //     timeout: 2000,
-    //   }).show();
+      new Noty({
+        theme: "bootstrap-v4",
+        type: "error",
+        layout: "topRight",
+        text: "Ouch! Something went wrong. Try again!",
+        timeout: 2000,
+      }).show();
     }
   };
 
