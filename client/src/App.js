@@ -1,6 +1,9 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
+import Navbar from './components/Navbar';
+import Parallax from "./components/Parallax";
+import DraggableList from "./components/Draggable";
 
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -14,7 +17,8 @@ import PrivateRoute from "./components/PrivateRoute";
 
 export default function App() {
   return (
-    <div>
+
+    <div style={{ width: '100%', height: '100%' }}>
       <AuthProvider>
         <BrowserRouter>
           <Navbar />
@@ -23,6 +27,8 @@ export default function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/play" element={<Dashboard />} />
+            <Route path="/parallax" element={<Parallax />} />
+          <Route path="/draggable" element={<DraggableList items={'Lorem ipsum dolor sit'.split(' ')} />} />
 
             <Route
               path="/dashboard"
@@ -43,6 +49,7 @@ export default function App() {
           </Routes>
         </BrowserRouter>
       </AuthProvider>
+
     </div>
   );
 }
