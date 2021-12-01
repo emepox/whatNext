@@ -7,6 +7,9 @@ import ParallaxComponent from "./components/ParallaxComponent";
 import DraggableList from "./components/Draggable";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import CreateStory from "./components/CreateStory";
+import StoryDetails from "./components/StoryDetails";
+
 import Story from './components/Story';
 import Home from "./components/Home";
 import Navbar from './components/Navbar';
@@ -47,13 +50,22 @@ export default function App() {
               path="/create"
               element={
                 <PrivateRoute>
-                  <Profile />
+                  <CreateStory />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/start"
+              element={
+                <PrivateRoute>
+                  <StoryDetails />
                 </PrivateRoute>
               }
             />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
+
 
     </div>
   );
