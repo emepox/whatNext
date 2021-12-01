@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import Noty from "noty";
 
-
 export default function Navbar() {
   const auth = useAuth();
 
