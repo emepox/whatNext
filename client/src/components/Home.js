@@ -6,15 +6,15 @@ import Hot from '../img/Hot.png'
 
 export default function Home() {
   return (
-    <div className="bg-gradient-to-r from-white to-grayBg via-grayVia h-screen">
+    <div style={{ width: '100%', height: '100%' }}>
        
       {/* <div className="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 gap-3"> */}
       <div className="md:container md:mx-auto">
-      <div className="my-3 grid justify-items-center lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
+      <div className="grid justify-items-center lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
       
       
         <div className="my-5">
-          <div className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md opacity-80 overflow-hidden md:max-w-2xl hover:shadow-lg hover:opacity-100 transform hover:scale-105 transition duration-400">
+          <div className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400">
             <div className="md:flex">
               <div className="md:flex-initial">
                 <img className="object-cover h-48 w-screen" src={Hot} alt="whatever" />
@@ -29,7 +29,7 @@ export default function Home() {
         </div>
 
         <div className="my-5">
-          <div className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md opacity-80 overflow-hidden md:max-w-2xl hover:shadow-lg hover:opacity-100 transform hover:scale-105 transition duration-400">
+          <div className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400">
             <div className="md:flex">
               <div className="md:flex-initial">
                 <img className="object-cover h-48 w-screen" src={Bestpickle} alt="whatever" />
@@ -45,7 +45,7 @@ export default function Home() {
 
       
         <div className="my-5">
-          <div className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md opacity-80 overflow-hidden md:max-w-2xl hover:shadow-lg hover:opacity-100 transform hover:scale-105 transition duration-400">
+          <div className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400">
             <div className="md:flex">
               <div className="md:flex-initial">
                 <img className="object-cover h-48 w-screen" src={Citric} alt="whatever" />
@@ -60,7 +60,7 @@ export default function Home() {
         </div>
 
         <div className="my-5">
-          <div className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md opacity-80 overflow-hidden md:max-w-2xl hover:shadow-lg hover:opacity-100 transform hover:scale-105 transition duration-400">
+          <div className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400">
             <div className="md:flex">
               <div className="md:flex-initial">
                 <img className="object-cover h-48 w-screen" src={Beetjuice} alt="whatever" />

@@ -22,7 +22,8 @@ import PrivateRoute from "./components/PrivateRoute";
 export default function App() {
   return (
 
-    <div style={{ width: '100%', height: '100%' }}>
+    <div className="bg-bgColor" style={{ width: '100%', height: '100%' }}>
+    
       <AuthProvider>
         <BrowserRouter>
           <Navbar />
