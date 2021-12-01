@@ -8,7 +8,7 @@ import DraggableList from "./components/Draggable";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import CreateGame from "./components/CreateGame";
-
+import GameDetails from "./components/GameDetails";
 
 import Story from './components/Story';
 import Home from "./components/Home";
@@ -51,6 +51,14 @@ export default function App() {
               element={
                 <PrivateRoute>
                   <CreateGame />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/start"
+              element={
+                <PrivateRoute>
+                  <GameDetails />
                 </PrivateRoute>
               }
             />

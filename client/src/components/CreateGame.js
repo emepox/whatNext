@@ -57,7 +57,10 @@ export default function CreateGame() {
   // creates new node in DB
   async function createNode() {
     try {
-      const response = await axios.post('/nodes');
+      const response = await axios.post('/nodes', {
+        method: "POST",
+        data: newNode,
+      });
       const nodeId = await response.data;
       setStartNodeId(nodeId.id)
     } catch (error) {
@@ -102,7 +105,7 @@ export default function CreateGame() {
             <div>
                 <label for="nodes">WHAT NEXT? Choose next scenario</label>
                 <select name="nodes" id="nodes">
-                    {!nodeList && <option key="0" value="0">no scenarios created yet!</option>}
+                    {!nodeList && <option key="0" selected="true" disabled="disabled">no scenarios created yet!</option>}
                     {nodeList && nodeList.map((node) =>
                       <option key={node.id} value={node.id}>{node.situation}</option> 
                     )}
