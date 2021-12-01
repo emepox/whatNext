@@ -20,6 +20,7 @@ export default function App() {
   return (
 
     <div className="bg-bgColor" style={{ width: '100%', height: '100%' }}>
+    
       <AuthProvider>
         <BrowserRouter>
           <Navbar />

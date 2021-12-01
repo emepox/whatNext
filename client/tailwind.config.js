@@ -4,9 +4,14 @@ module.exports = {
   theme: {
     extend: {
       gradientColorStops: theme => ({
-        'grayBg': '#dcdde1',
-        'grayVia': '#F0F1F3',
+        // 'grayBg': '#dcdde1',
+        // 'grayVia': '#F0F1F3',
+        'first': '#447EB4',
+        'middle': '#646eb2',
+        'last': '#8F5FB1'
       }),
+
+      
 
       backgroundColor: theme => ({
         'bgColor': '#253237',
