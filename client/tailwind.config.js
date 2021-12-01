@@ -5,8 +5,13 @@ module.exports = {
     extend: {
       gradientColorStops: theme => ({
         'grayBg': '#dcdde1',
-        'grayVia': '#F0F1F3'
+        'grayVia': '#F0F1F3',
       }),
+
+      backgroundColor: theme => ({
+        'bgColor': '#253237',
+      }),
+      
       container: {
         padding: {
           DEFAULT: '2rem',

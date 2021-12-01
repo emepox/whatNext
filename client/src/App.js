@@ -9,7 +9,6 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Story from './components/Story';
 import Home from "./components/Home";
-import Navbar from './components/Navbar';
 import Dashboard from "./components/Dashboard";
 
 
@@ -20,7 +19,7 @@ import PrivateRoute from "./components/PrivateRoute";
 export default function App() {
   return (
 
-    <div style={{ width: '100%', height: '100%' }}>
+    <div className="bg-bgColor" style={{ width: '100%', height: '100%' }}>
       <AuthProvider>
         <BrowserRouter>
           <Navbar />
