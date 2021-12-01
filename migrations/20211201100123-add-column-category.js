@@ -7,8 +7,6 @@ module.exports = {
       "category", // name of the key we're adding
       {
         type: Sequelize.STRING,
-        onUpdate: "CASCADE",
-        onDelete: "SET NULL",
       }
     );
   },
