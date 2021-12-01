@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import "./CreateGame.css"
+import "./CreateStory.css"
 
 const axios = require('axios');
 
-export default function CreateGame() {  
+export default function CreateStory( {storyId, storyName} ) {  
   // const {situation, media, StoryId, option} = object;
   // new node to be posted to DB
   const [newNode, setNewNode] = useState({
     situation: "",
-    storyId: "",
+    storyId: storyId,
     option: ""
   });
   
@@ -18,23 +18,21 @@ export default function CreateGame() {
   const [nextNodeId, setNextNodeId] = useState(null) 
   const [nodeExists, setNodeExists] = useState(false)
 
-  // calls getFilteredItems() whenever colors, seasons or categories changes
   useEffect(() => {
     getNodes();
   }, []); //TODO: something missing here
 
-  // creates new node in DB
+  // gets all nodes related to a storyId
   async function getNodes() {
     try {
       const { data } = await axios.get(`/stories/${newNode.storyId}/nodes`); //
-      // const nodes = await response.data;
       setNodeList(data)
     } catch (error) {
       console.error(error);
     }
   }
 
-  // controls conditional rendering (new node or existing node)
+  // controls conditional rendering of node form (toggle: new node vs existing node)
   const handleButton = (event) => {
     event.preventDefault();
     setNodeExists((state) => (!state));
@@ -49,7 +47,9 @@ export default function CreateGame() {
   // on submit, if it is a new node it calls createNode. In any case, it creates edge.
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!nodeExists) createNode();
+    if (!nodeExists) {
+      createNode();
+    }
     addEdges();
   };
 
@@ -57,9 +57,10 @@ export default function CreateGame() {
   // creates new node in DB
   async function createNode() {
     try {
+      const {situation, storyId} = newNode;
       const response = await axios.post('/nodes', {
         method: "POST",
-        data: newNode,
+        data: {situation, storyId},
       });
       const nodeId = await response.data;
       setStartNodeId(nodeId.id)
@@ -81,10 +82,10 @@ export default function CreateGame() {
 
     return (
         <div>
-            <h3>"Jabalí unchained"</h3><br/>
+            <h3>{storyName}</h3><br/>
             <form>
             <div>
-                WHAT? The current scenario: <br/>Jabalí gets into a bar
+                WHAT? The current scenario: <br/>{startNodeId ? startNodeId : "Create you first scenario below!"}
             </div>
             <br/>
             <div>
@@ -94,23 +95,24 @@ export default function CreateGame() {
             </form>
             <br/><br/>
             <div>
-                <label>Player chooses:</label><br/><textarea name="option" rows="1" cols="50" onChange={handleChange}></textarea><br/>
+                <label>If player chooses:</label><br/><textarea name="option" rows="1" cols="50" onChange={handleChange} placeholder="Write the choice that will lead to the next scenario"></textarea><br/>
             </div>
-            {!nodeExists && 
-              <div>
-                <label>WHAT NEXT? Type next scenario</label><br/>
-                <textarea name="situation" rows="4" cols="50" onChange={handleChange}></textarea><br/>
-              </div>}
-            {nodeExists && 
-            <div>
-                <label for="nodes">WHAT NEXT? Choose next scenario</label>
-                <select name="nodes" id="nodes">
-                    {!nodeList && <option key="0" selected="true" disabled="disabled">no scenarios created yet!</option>}
-                    {nodeList && nodeList.map((node) =>
-                      <option key={node.id} value={node.id}>{node.situation}</option> 
-                    )}
-                </select>
-            </div>}
+            {
+            nodeExists 
+              ? <div>
+                  <label for="nodes">WHAT NEXT? Choose next scenario</label>
+                  <select name="nodes" id="nodes">
+                      {!nodeList && <option key="0" selected="true" disabled="disabled">no scenarios created yet!</option>}
+                      {nodeList && nodeList.map((node) =>
+                        <option key={node.id} value={node.id}>{node.situation}</option> 
+                      )}
+                  </select>
+                </div>
+              : <div>
+                  <label>WHAT NEXT?</label><br/>
+                  <textarea name="situation" rows="4" cols="50" onChange={handleChange} placeholder="Write the next scenario"></textarea><br/>
+                </div>
+            }
             <br/>
             <br/><br/>
             <div>
@@ -122,6 +124,7 @@ export default function CreateGame() {
             </div>
             {nodeList && nodeList.map((node) =>
             <div key={node.id}>{node.situation}</div> )}
+            
         </div>
     )
 }

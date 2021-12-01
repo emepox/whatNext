@@ -2,24 +2,6 @@ var express = require("express");
 var router = express.Router();
 var models = require("../models");
 
-// gets all nodes 
-router.get("/", async function (req, res) {
-    try {
-        const {StoryId} = req.body;
-        const nodes = await models.Node.findAll(
-        {
-            attributes: ['id', 'situation'],
-            where: { StoryId: StoryId },
-        }
-      );
-  
-      res.send(stories);
-      
-    } catch (error) {
-      res.status(500).send(error);
-    }
-});
-
 
 // creates a node (without edges)
 router.post("/", async function (req, res) {

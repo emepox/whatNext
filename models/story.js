@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     reproductions: DataTypes.INTEGER,
     rating: DataTypes.INTEGER,
     media: DataTypes.STRING,
+    category: DataTypes.STRING,
     isPrivate: DataTypes.BOOLEAN,
     isFinished: DataTypes.BOOLEAN,
     first: DataTypes.INTEGER

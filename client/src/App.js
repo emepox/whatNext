@@ -7,8 +7,8 @@ import ParallaxComponent from "./components/ParallaxComponent";
 import DraggableList from "./components/Draggable";
 import Register from "./components/Register";
 import Login from "./components/Login";
-import CreateGame from "./components/CreateGame";
-import GameDetails from "./components/GameDetails";
+import CreateStory from "./components/CreateStory";
+import StoryDetails from "./components/StoryDetails";
 
 import Story from './components/Story';
 import Home from "./components/Home";
@@ -50,7 +50,7 @@ export default function App() {
               path="/create"
               element={
                 <PrivateRoute>
-                  <CreateGame />
+                  <CreateStory />
                 </PrivateRoute>
               }
             />
@@ -58,7 +58,7 @@ export default function App() {
               path="/start"
               element={
                 <PrivateRoute>
-                  <GameDetails />
+                  <StoryDetails />
                 </PrivateRoute>
               }
             />

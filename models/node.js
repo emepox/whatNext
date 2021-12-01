@@ -18,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
   };
   Node.init({
     situation: DataTypes.TEXT,
-    media: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Node',
