@@ -100,6 +100,9 @@ export default function Creator() {
                 <br/><br/>
                 <button onClick={handleSubmit}>STORY IS FINISHED!</button>
             </div>
+            <div>
+                NODE LIST HERE 
+            </div>
 
         </div>
     )
