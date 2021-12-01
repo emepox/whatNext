@@ -7,8 +7,7 @@ import Login from "./components/Login";
 import Story from './components/Story';
 import Home from "./components/Home";
 import Navbar from './components/Navbar';
-import Dashboard from "./components/Dashboard";
-
+import Dashboard from "./components/Profile";
 
 import AuthProvider from "./components/AuthProvider";
 import PrivateRoute from "./components/PrivateRoute";
