@@ -11,8 +11,6 @@ module.exports = {
         'last': '#8F5FB1'
       }),
 
-      
-
       backgroundColor: theme => ({
         'bgColor': '#253237',
       }),
