@@ -64,17 +64,17 @@ router.get("/dashboard", userShouldBeLoggedIn, async (req, res) => {
 });
 
 // gets all stories from one user
-router.get("/:id/stories", userShouldBeLoggedIn, async function (req, res) {
+router.get("/profile", userShouldBeLoggedIn, async function (req, res) {
   try {
-      const { id } = req.params
+      const { user_id } = req
       const stories = await models.Story.findAll(
           {
-              where: { UserId: id },
+              where: { UserId: user_id },
               include: {model:models.User, attributes:['username']} 
           }
         );
     
-    res.send( { message: "your stories", stories });
+    res.send(stories);
     
   } catch (error) {
     res.status(500).send(error);

@@ -1,121 +1,59 @@
-import React from "react";
-import Beetjuice from "../img/Beetjuice.png";
-import Bestpickle from "../img/Bestpickle.png";
-import Citric from "../img/Citric.png";
-import Hot from "../img/Hot.png";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 
-export default function GridStories() {
+import useAuth from "../hooks/useAuth";
+
+export default function GridStories({isProfile}) {
+
+  const auth = useAuth();
+  const [stories, setStories] = useState([]);
+
+useEffect(() => {
+  requestData();
+}, []);
+
+  const requestData = async () => {
+    console.log(isProfile)
+    // const url = isProfile ? "users/profile/" : "/stories/";
+    // console.log(url)
+
+    try {
+
+      if ( isProfile ) {
+        const { data } = await axios("users/profile/", {
+          headers: {
+            authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        } );
+        console.log(data)
+        setStories(data);
+      } else {
+        const { data } = await axios("/stories/");
+        console.log(data)
+        setStories(data);
+      }
+
+      console.log("stories:", stories);
+
+
+    } catch (error) {
+      console.log(error);
+    }
+};
+
+
   return (
- 
-        <div className="my-3 grid justify-items-center lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
-          <div className="my-5">
-            <div className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md opacity-80 overflow-hidden md:max-w-2xl hover:shadow-lg hover:opacity-100 transform hover:scale-105 transition duration-400">
-              <div className="md:flex">
-                <div className="md:flex-initial">
-                  <img
-                    className="object-cover h-48 w-screen"
-                    src={Hot}
-                    alt="whatever"
-                  />
-                  <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3 ml-2">
-                    Adventure
-                  </div>
-                  <a
-                    href="#"
-                    className="block mt-1 text-lg leading-tight font-medium text-black hover:underline ml-2 mt-3"
-                  >
-                    Boar visits the city
-                  </a>
-                  <p className="mt-2 text-gray-500 ml-2 mr-2">
-                    Join the boar in this new adventure visiting Barcelona. What
-                    will happen? Only you can tell
-                  </p>
-                </div>
-              </div>
-    
-
-          <div className="my-5">
-            <div className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md opacity-80 overflow-hidden md:max-w-2xl hover:shadow-lg hover:opacity-100 transform hover:scale-105 transition duration-400">
-              <div className="md:flex">
-                <div className="md:flex-initial">
-                  <img
-                    className="object-cover h-48 w-screen"
-                    src={Bestpickle}
-                    alt="whatever"
-                  />
-                  <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3 ml-2">
-                    Horror
-                  </div>
-                  <a
-                    href="#"
-                    className="block mt-1 text-lg leading-tight font-medium text-black hover:underline ml-2 mt-3"
-                  >
-                    Boar tries pickles
-                  </a>
-                  <p className="mt-2 text-gray-500 ml-2 mr-2">
-                    Join the boar in this new adventure visiting Barcelona. What
-                    will happen? Only you can tell
-                  </p>
-                </div>
-              </div>
-            </div>
+    <div>
+      HELLO I AM THE GRID OF STORIES
+      {stories.map((story) => (
+        <article className="bg-gray-100 border-solid border-4 border-light-blue-500">
+          <div>
+            <p>{story.name}</p>
+            <p>{story.description}</p>
+            {/* <p>{story.category}</p> */}
           </div>
-
-          <div className="my-5">
-            <div className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md opacity-80 overflow-hidden md:max-w-2xl hover:shadow-lg hover:opacity-100 transform hover:scale-105 transition duration-400">
-              <div className="md:flex">
-                <div className="md:flex-initial">
-                  <img
-                    className="object-cover h-48 w-screen"
-                    src={Citric}
-                    alt="whatever"
-                  />
-                  <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3 ml-2">
-                    Love
-                  </div>
-                  <a
-                    href="#"
-                    className="block mt-1 text-lg leading-tight font-medium text-black hover:underline ml-2 mt-3"
-                  >
-                    Boar falls in love
-                  </a>
-                  <p className="mt-2 text-gray-500 ml-2 mr-2">
-                    Join the boar in this new adventure visiting Barcelona. What
-                    will happen? Only you can tell
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="my-5">
-            <div className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md opacity-80 overflow-hidden md:max-w-2xl hover:shadow-lg hover:opacity-100 transform hover:scale-105 transition duration-400">
-              <div className="md:flex">
-                <div className="md:flex-initial">
-                  <img
-                    className="object-cover h-48 w-screen"
-                    src={Beetjuice}
-                    alt="whatever"
-                  />
-                  <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3 ml-2">
-                    Drama
-                  </div>
-                  <a
-                    href="#"
-                    className="block mt-1 text-lg leading-tight font-medium text-black hover:underline ml-2 mt-3"
-                  >
-                    Boar doesn't get beets
-                  </a>
-                  <p className="mt-2 text-gray-500 ml-2 mr-2">
-                    Join the boar in this new adventure visiting Barcelona. What
-                    will happen? Only you can tell
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        </article>
+      ))}
     </div>
   );
 }

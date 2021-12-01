@@ -55,7 +55,11 @@ export default function Register() {
         timeout: 1000,
       } ).show();
 
-      if ( !auth.isLoggedIn ) await auth.signin( { username, password } );
+      if ( !auth.isLoggedIn ) {
+        await auth.signin( { username, password } );
+        window.location.href = "/profile";
+      }
+      
       
     } catch (err) {
       setAlert(err[0]);

@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
 
-
+import CreateGame from './components/CreateGame';
 import ParallaxComponent from "./components/ParallaxComponent";
 import DraggableList from "./components/Draggable";
 import Register from "./components/Register";
@@ -14,6 +14,7 @@ import Story from './components/Story';
 import Home from "./components/Home";
 import Navbar from './components/Navbar';
 import Profile from "./components/Profile";
+import AllStories from './components/AllStories';
 
 import AuthProvider from "./components/AuthProvider";
 import PrivateRoute from "./components/PrivateRoute";
@@ -31,7 +32,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/play" element={<Profile />} />
+            <Route path="/play" element={<AllStories />} />
 
             <Route path="/parallax" element={<ParallaxComponent />} />
           <Route path="/draggable" element={<DraggableList items={'Lorem ipsum dolor sit'.split(' ')} />} />
@@ -51,6 +52,7 @@ export default function App() {
               path="/create"
               element={
                 <PrivateRoute>
+
                   <CreateStory />
                 </PrivateRoute>
               }
