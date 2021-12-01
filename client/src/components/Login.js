@@ -28,9 +28,10 @@ export default function Login() {
 // Called when submitting
   const login = async () => {
     try {
-      const { data } = await axios.post("/users/login", {
-        data: logIn,
-      });
+        const { data } = await axios("/users/login", {
+          method: "POST",
+          data: logIn,
+        });
       //store it locally
       localStorage.setItem("token", data.token);
 
@@ -40,12 +41,9 @@ export default function Login() {
         layout: "topRight",
         text: "You are logged in.",
         timeout: 1000,
-        callbacks: {
-          afterClose: function () {
-            window.location.href = "/";
-          },
-        },
-      }).show();
+      } ).show();
+      window.location.href = "/dashboard";
+
     } catch (error) {
       console.log(error);
 

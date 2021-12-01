@@ -1,9 +1,10 @@
 // const { Model } = require("sequelize/dist");
 var models = require("../../models")
 
-async function emailNotTaken(req, res, next) {
-    try {
+async function userNotTaken( req, res, next ) {
+  try {
       const { username } = req.body;
+      console.log(username)
   
       const user = await models.User.findOne({ where: {username}})
   
@@ -16,4 +17,4 @@ async function emailNotTaken(req, res, next) {
     }
   }
   
-  module.exports = emailNotTaken;
+  module.exports = userNotTaken;
