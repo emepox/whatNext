@@ -45,7 +45,7 @@ router.put("/:id/edges", async function (req, res) {
 router.delete("/:id", async function (req, res) {
     try{
         const { id } = req.params
-        const nodes = await models.Node.destroy(
+        await models.Node.destroy(
             {
                 where: { id }
             }

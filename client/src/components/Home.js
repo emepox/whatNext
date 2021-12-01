@@ -1,14 +1,12 @@
 import React from 'react'
-import Navbar from './Navbar'
-import Beetjuice from './img/Beetjuice.png'
-import Bestpickle from './img/Bestpickle.png'
-import Citric from './img/Citric.png'
-import Hot from './img/Hot.png'
+import Beetjuice from '../img/Beetjuice.png'
+import Bestpickle from '../img/Bestpickle.png'
+import Citric from '../img/Citric.png'
+import Hot from '../img/Hot.png'
 
 export default function Home() {
   return (
     <div className="bg-gradient-to-r from-white to-grayBg via-grayVia h-screen">
-      <Navbar />
        
       {/* <div className="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 gap-3"> */}
       <div className="md:container md:mx-auto">
