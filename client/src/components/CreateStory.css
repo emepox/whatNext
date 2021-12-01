@@ -1,5 +1,5 @@
-body {
-    background-color: rgb(230, 230, 230);
+#StoryDetails {
+    background-color: rgb(230, 230, 230) !important;
 }
 
 button {

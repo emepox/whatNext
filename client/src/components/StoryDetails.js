@@ -34,6 +34,9 @@ export default function StoryDetails() {
         try {
         const { data } = await axios('/stories', {
             method: "POST",
+            headers: {
+                authorization: "Bearer " + localStorage.getItem("token"),
+            },
             data: newStory,
         });
         console.log(data)
