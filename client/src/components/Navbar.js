@@ -61,10 +61,10 @@ export default function Navbar() {
           </a>
           {auth.isLoggedIn && (
             <NavLink
-              to="/dashboard"
+              to="/profile"
               className="text-base leading-tight font-light text-black hover:text-indigo-500"
             >
-              Dashboard
+              Profile
             </NavLink>
           )}
           <a
