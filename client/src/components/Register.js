@@ -4,6 +4,7 @@ import Noty from "noty";
 import useAuth from "../hooks/useAuth";
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import Avatar from "../img/Avatar.png";
+import "./Login.css";
 
 
 const url = (name, wrap = false) =>
@@ -100,42 +101,48 @@ export default function Register() {
               <form
                 className="w-96 h-96 rounded-md bg-white p-11 space-y-4 shadow-lg opacity-90" 
                 onSubmit={(e) => handleSubmit(e)}>
-                <div><p className="text-2xl mb-12 ml-20 font-mono italic">WhatNext</p></div>  
-                <div>
-                  <label htmlFor="username" className="text-gray-500">Username</label>
+                <div className="flex flex-col items-center justify-center">
+                  <p className="text-2xl mb-8 font-mono italic">WhatNext</p>
+                </div>  
+
+                <div className="flex flex-col items-center justify-center">
                   <input
-                    className="border-2 border-gray-200 rounded ml-5 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    className="fontAwesome border-2 border-gray-200 rounded pr-10 pl-2 py-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                     id="username"
                     name="username"
                     value={username}
+                    placeholder="&#xf007; Username"
                     onChange={(e) => handleChange(e)}
+                    required
                   />
                 </div>
 
-                <div>
-                  <label htmlFor="email" className="text-gray-500">Email</label>
+                <div className="flex flex-col items-center justify-center">
                   <input
-                    className="border-2 border-gray-200 rounded ml-14 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    className="fontAwesome border-2 border-gray-200 rounded pr-10 pl-2 py-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                     id="email"
                     name="email"
                     value={email}
+                    placeholder="&#x40; Email"
                     onChange={(e) => handleChange(e)}
+                    required
                   />
                 </div>
 
-                <div>
-                  <label htmlFor="password" className="text-gray-500">Password</label>
+                <div className="flex flex-col items-center justify-center">
                   <input
-                    className="border-2 border-gray-200 rounded ml-6 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    className="fontAwesome border-2 border-gray-200 rounded pr-10 pl-2 py-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                     id="password"
                     name="password"
                     type="password"
                     value={password}
+                    placeholder="&#xf023; Password"
                     onChange={(e) => handleChange(e)}
+                    required
                   />
                 </div>
-                <div className="mt-6">
-                  <button type="submit" className="bg-purple-500 px-3 py-2 ml-20 mt-10 text-white text-base uppercase tracking-wide rounded-full py-2 px-5 hover:bg-purple-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 ">
+                <div className="flex flex-col items-center justify-center">
+                  <button type="submit" className="bg-purple-500 px-3 py-2 mt-7 text-white text-base uppercase tracking-wide rounded-full py-2 px-5 hover:bg-purple-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 ">
                     Sign up
                   </button>
                 </div>
