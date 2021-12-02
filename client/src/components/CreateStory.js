@@ -3,29 +3,36 @@ import "./CreateStory.css"
 
 const axios = require('axios');
 
-export default function CreateStory( {storyId, storyName} ) {  
+export default function CreateStory( {postedStory} ) {  
   // const {situation, media, StoryId, option} = object;
   // new node to be posted to DB
+  const {id, name, description, first} = postedStory
+
   const [newNode, setNewNode] = useState({
-    situation: "",
-    storyId: storyId,
+    nextId: null,
+    situation: null,
+    StoryId: id, 
     option: ""
   });
   
   const [nodeList, setNodeList] = useState([])
   // const [edge, setEdge] = useState({option:""})
-  const [startNodeId, setStartNodeId] = useState(null)
+  const [startNode, setStartNode] = useState(null)
   const [nextNodeId, setNextNodeId] = useState(null) 
   const [nodeExists, setNodeExists] = useState(false)
 
+  // useEffect(() => {
+  //   if (!startNode) addFirstNode();
+  // }, []); 
+
   useEffect(() => {
     getNodes();
-  }, []); //TODO: something missing here
+  }, []); 
 
   // gets all nodes related to a storyId
   async function getNodes() {
     try {
-      const { data } = await axios.get(`/stories/${newNode.storyId}/nodes`); //
+      const { data } = await axios.get(`/stories/${id}/nodes`); 
       setNodeList(data)
     } catch (error) {
       console.error(error);
@@ -47,45 +54,51 @@ export default function CreateStory( {storyId, storyName} ) {
   // on submit, if it is a new node it calls createNode. In any case, it creates edge.
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!nodeExists) {
-      createNode();
-    }
+    // if (!nodeExists) {
+    //   createNode();
+    // }
     addEdges();
   };
 
      
   // creates new node in DB
-  async function createNode() {
-    try {
-      const {situation, storyId} = newNode;
-      const response = await axios.post('/nodes', {
-        method: "POST",
-        data: {situation, storyId},
-      });
-      const nodeId = await response.data;
-      setStartNodeId(nodeId.id)
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  // async function createNode() {
+  //   try {
+  //     const {situation, storyId} = newNode;
+  //     const response = await axios.post('/nodes', {
+  //       method: "POST",
+  //       data: {situation, storyId},
+  //     });
+  //     const nodeId = await response.data;
+  //     setStartNodeId(nodeId.id)
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+  
 
   // creates edge between two nodes in DB 
   async function addEdges () {
     try {
-      const response = await axios.put(`/nodes/${startNodeId}/edges`, {}); //TODO: STUFF MISSING HERE 
-      const nextId = await response.data;
-      setNextNodeId(nextId.id)
+      const { data } = await axios(`/nodes/${first}/edges`, {
+        method: "PUT",
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        data: newNode,
+      }); 
+      setNextNodeId(data.id)
     } catch (error) {
       console.log(error);
     }
-  };
+  };  
 
     return (
-        <div>
-            <h3>{storyName}</h3><br/>
+        <div id="StoryDetails">
+            <h3>{name}</h3><br/>
             <form>
             <div>
-                WHAT? The current scenario: <br/>{startNodeId ? startNodeId : "Create you first scenario below!"}
+                WHAT? The current scenario: <br/>{startNode ? startNode.situation : "Create you first scenario below!"}
             </div>
             <br/>
             <div>
@@ -100,8 +113,8 @@ export default function CreateStory( {storyId, storyName} ) {
             {
             nodeExists 
               ? <div>
-                  <label for="nodes">WHAT NEXT? Choose next scenario</label>
-                  <select name="nodes" id="nodes">
+                  <label for="id">WHAT NEXT? Choose next scenario</label>
+                  <select name="nextId" value={+newNode.nextId} onChange={handleChange}>
                       {!nodeList && <option key="0" selected="true" disabled="disabled">no scenarios created yet!</option>}
                       {nodeList && nodeList.map((node) =>
                         <option key={node.id} value={node.id}>{node.situation}</option> 
@@ -122,6 +135,8 @@ export default function CreateStory( {storyId, storyName} ) {
                 <br/><br/>
                 <button>FINISH STORY</button>
             </div>
+            <br/>
+            ALL SAVED SCENARIOS
             {nodeList && nodeList.map((node) =>
             <div key={node.id}>{node.situation}</div> )}
             

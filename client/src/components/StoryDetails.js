@@ -21,8 +21,12 @@ export default function StoryDetails() {
         isFinished: 0,
     })
 
-    const [storyId, setStoryId] = useState();
-    const [storyName, setStoryName] = useState();
+    const [postedStory, setPostedStory] = useState({
+        id:null,
+        name:null,
+        description:null,
+        first:null
+    });
 
     // changes newGame values for inputs
     const handleChange = (event) => {
@@ -47,10 +51,8 @@ export default function StoryDetails() {
             data: newStory,
 
         });
-        console.log(data);
-        setStoryId(data.id);
-        setStoryName(data.name);
-      } catch (error) {
+        setPostedStory(data)
+        } catch (error) {
         console.error(error);
       }
     }
@@ -78,8 +80,8 @@ export default function StoryDetails() {
                     justifyContent: 'center',
                     }}>
                     <div className="flex flex-col items-center justify-center">
-                        {!storyId &&
-                        <form onSubmit={handleSubmit} className="rounded-md bg-white p-11 space-y-4 shadow-lg opacity-90">
+                        {!postedStory.id 
+                        ? <form onSubmit={handleSubmit} className="rounded-md bg-white p-11 space-y-4 shadow-lg opacity-90">
                             <div><p className="text-2xl font-mono italic flex flex-col items-center justify-center">Story details</p></div>
                             <div>
                                 <input name="name" value={newStory.name} placeholder="Title" onChange={handleChange} className="border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent pr-custom" />
@@ -109,8 +111,7 @@ export default function StoryDetails() {
                             </div>
                         </form>
                         }
-                        {storyId &&
-                        <CreateStory storyId={storyId} storyName={storyName}/>
+                       : <CreateStory postedStory={postedStory}/>
                         }
                     </div>
                 </ParallaxLayer>

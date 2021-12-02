@@ -2,6 +2,8 @@ var express = require("express");
 var router = express.Router();
 var models = require("../models");
 
+const userShouldBeLoggedIn = require("./middleware/userShouldBeLoggedIn");
+
 
 // creates a node (without edges)
 router.post("/", async function (req, res) {
@@ -9,7 +11,7 @@ router.post("/", async function (req, res) {
        const {situation, StoryId} = req.body;
        const node = await models.Node.create({situation, StoryId})
 
-       res.send({id:node.dataValues.id})
+       res.send({id:node.dataValues.id, situation:node.dataValues.situation})
        
 
     } catch (error) {
@@ -19,23 +21,30 @@ router.post("/", async function (req, res) {
 });
 
 
-router.put("/:id/edges", async function (req, res) {
+router.put("/:id/edges", userShouldBeLoggedIn, async function (req, res) {
     try {
         const {id} = req.params;  // ID of parent node
-
-        const node = await models.Node.findOne(
-            {
-                where: { id }
-            }
-          );
+        const { user_id } = req;
+        const {nextId, situation, StoryId, option} = req.body; // only for new nodes
+        // console.log(typeOf(StoryId))
         
-        await node.setNext(id, {through: { option: option }})
+        let nextNode = {}
+        // find child node or create it from scratch
+        if (+nextId){
+            nextNode = await models.Node.findOne(
+                {
+                    where: { id }
+                }
+            );
+        } else {nextNode = await models.Node.create({situation, StoryId})}
+        console.log(nextNode)
+        await nextNode.setNext(+id, {through: { option: option }})
 
-        res.send({id:node.dataValues.id})
+        res.send({id:nextNode.dataValues.id})
        
 
     } catch (error) {
-      res.status(500).send(error);
+      res.status(500).send(error.message);
     }
 
 });

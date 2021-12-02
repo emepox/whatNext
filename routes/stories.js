@@ -62,16 +62,24 @@ router.get("/:id/nodes", async function (req, res) {
 // adds new story, returns story.id (TODO:configure first so it gets the id of the first node of the story)
 router.post( "/", userShouldBeLoggedIn, async function ( req, res ) {
   
-  console.log(req)
   const { user_id } = req;
     try {
-       const {name, description, media, category, isPrivate, isFinished, first} = req.body;
-       const story = await models.Story.create({ name, description, UserId: user_id, media, category, isPrivate, isFinished, first })
-
-
-       res.send({id:story.dataValues.id, name:story.dataValues.name,})
+      const {name, description, media, category, isPrivate, isFinished} = req.body;
+       const story = await models.Story.create({ name, description, UserId: user_id, media, category, isPrivate, isFinished})
+       const startNode = await models.Node.create({situation:story.dataValues.name, StoryId:story.dataValues.id})
+       await models.Story.update({ first: startNode.dataValues.id}, {
+        where: {
+          first: null
+        }
+       })
+       const updatedStory = await models.Story.findOne({
+        where: {
+          id: story.dataValues.id
+        }
+       })
+       console.log("hola:",updatedStory)
+       res.send({id:updatedStory.dataValues.id, name:updatedStory.dataValues.name, description:updatedStory.dataValues.description, first:updatedStory.dataValues.first})
        
-
     } catch (error) {
       res.status(500).send(error);
     }
