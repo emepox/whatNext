@@ -1,9 +1,23 @@
 var express = require("express");
+const { startsWith } = require("sequelize/dist/lib/operators");
 var router = express.Router();
 var models = require("../models");
 
 const userShouldBeLoggedIn = require("./middleware/userShouldBeLoggedIn");
 
+
+router.get("/:id", async function (req, res) {
+    const {id} = req.params
+    try {
+        const node = await models.Node.findOne({ where: { id }, include:{model:models.Node, as: "Start", attributes:["id"]}})
+
+       res.send(node)
+
+    } catch (error) {
+      res.status(500).send(error);
+    }
+
+});
 
 // creates a node (without edges)
 router.post("/", async function (req, res) {
