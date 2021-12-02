@@ -26,34 +26,25 @@ router.put("/:id/edges", userShouldBeLoggedIn, async function (req, res) {
         const {id} = req.params;  // ID of parent node
         const { user_id } = req;
         const {nextId, situation, StoryId, option} = req.body; // only for new nodes
-
-        // find parent node
-        const startNode = await models.Node.findOne(
-            {
-                where: { id }
-            }
-          );
-
-        // find parent node
-        const nextNode = await models.Node.findOne(
-            {
-                where: { id }
-            }
-          );
+        // console.log(typeOf(StoryId))
         
-        
+        let nextNode = {}
+        // find child node or create it from scratch
+        if (+nextId){
+            nextNode = await models.Node.findOne(
+                {
+                    where: { id }
+                }
+            );
+        } else {nextNode = await models.Node.create({situation, StoryId})}
+        console.log(nextNode)
+        await nextNode.setNext(+id, {through: { option: option }})
 
-        if (!node){
-            node = await models.Node.create({situation, StoryId})
-        }
-
-        await node.setNext(id, {through: { option: option }})
-
-        res.send({id:node.dataValues.id})
+        res.send({id:nextNode.dataValues.id})
        
 
     } catch (error) {
-      res.status(500).send(error);
+      res.status(500).send(error.message);
     }
 
 });

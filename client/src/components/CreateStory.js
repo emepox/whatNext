@@ -3,13 +3,15 @@ import "./CreateStory.css"
 
 const axios = require('axios');
 
-export default function CreateStory( {storyId, storyName} ) {  
+export default function CreateStory( {postedStory} ) {  
   // const {situation, media, StoryId, option} = object;
   // new node to be posted to DB
+  const {id, name, description, first} = postedStory
+
   const [newNode, setNewNode] = useState({
     nextId: null,
-    situation: "",
-    storyId: 27, //storyId,
+    situation: null,
+    StoryId: id, 
     option: ""
   });
   
@@ -19,18 +21,18 @@ export default function CreateStory( {storyId, storyName} ) {
   const [nextNodeId, setNextNodeId] = useState(null) 
   const [nodeExists, setNodeExists] = useState(false)
 
-  useEffect(() => {
-    addFirstNode();
-  }, []); 
+  // useEffect(() => {
+  //   if (!startNode) addFirstNode();
+  // }, []); 
 
   useEffect(() => {
     getNodes();
-  }, []); //TODO: something missing here
+  }, []); 
 
   // gets all nodes related to a storyId
   async function getNodes() {
     try {
-      const { data } = await axios.get(`/stories/${newNode.storyId}/nodes`); //
+      const { data } = await axios.get(`/stories/${id}/nodes`); 
       setNodeList(data)
     } catch (error) {
       console.error(error);
@@ -73,31 +75,12 @@ export default function CreateStory( {storyId, storyName} ) {
   //     console.error(error);
   //   }
   // }
-
-  // creates edge between two nodes in DB 
-  async function addFirstNode () {
-    try {
-      const firstNode = {
-        situation: "Let's start!",
-        StoryId: 27 //storyId,
-      };
-      const { data } = await axios('/nodes', {
-        method: "POST",
-        data: firstNode,
-      });
-      console.log(data)
-      setStartNode(data)
-      
-    } catch (error) {
-      console.error(error);
-    }
-  }
   
 
   // creates edge between two nodes in DB 
   async function addEdges () {
     try {
-      const { data } = await axios(`/nodes/${startNode.id}/edges`, {
+      const { data } = await axios(`/nodes/${first}/edges`, {
         method: "PUT",
         headers: {
           authorization: "Bearer " + localStorage.getItem("token"),
@@ -108,11 +91,11 @@ export default function CreateStory( {storyId, storyName} ) {
     } catch (error) {
       console.log(error);
     }
-  };
+  };  
 
     return (
         <div id="StoryDetails">
-            <h3>{storyName}</h3><br/>
+            <h3>{name}</h3><br/>
             <form>
             <div>
                 WHAT? The current scenario: <br/>{startNode ? startNode.situation : "Create you first scenario below!"}

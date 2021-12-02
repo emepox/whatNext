@@ -15,8 +15,12 @@ export default function StoryDetails() {
         isFinished: 0,
     })
 
-    const [storyId, setStoryId] = useState();
-    const [storyName, setStoryName] = useState();
+    const [postedStory, setPostedStory] = useState({
+        id:null,
+        name:null,
+        description:null,
+        first:null
+    });
 
     // changes newGame values for inputs
     const handleChange = (event) => {
@@ -40,17 +44,17 @@ export default function StoryDetails() {
             data: newStory,
         });
         console.log(data)
-        setStoryId(data.id)
-        setStoryName(data.name)
+        setPostedStory(data)
         } catch (error) {
         console.error(error);
         }
     }
 
+
     return (
         <div>
-            {!storyId &&
-            <form>
+            {!postedStory.id 
+            ? <form>
                 <input name="name" value={newStory.name} placeholder="Title" onChange={handleChange}/><br/>
                 <textarea name="description" rows="4" cols="50" onChange={handleChange} placeholder="Add a brief summary"></textarea><br/>
                 Category: 
@@ -66,9 +70,7 @@ export default function StoryDetails() {
                 <input name="media" value={newStory.media} placeholder="Add the URL of an image that illustrates your story" onChange={handleChange}/><br/>
                 <button onClick={handleSubmit} >START WRITING!</button>
             </form>
-            }
-            {storyId &&
-            <CreateStory storyId={storyId} storyName={storyName}/>
+            :<CreateStory postedStory={postedStory}/>
             }
         </div>
     )
