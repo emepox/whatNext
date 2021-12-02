@@ -48,7 +48,7 @@ export default function Navbar() {
             </NavLink>
           )}
           <a
-            href="/create"
+            href="/start"
             className="text-base leading-tight font-light text-black hover:text-indigo-500"
           >
             Create a story
