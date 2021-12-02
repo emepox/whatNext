@@ -114,7 +114,7 @@ export default function StoryDetails() {
                         }
                     </div>
                 </ParallaxLayer>
-                <ParallaxLayer offset={1} speed={2} style={{ backgroundColor: '#646EB2' }} />
+                <ParallaxLayer offset={1} speed={2} style={{ backgroundColor: '#805E73' }} />
 
                 <ParallaxLayer
                     offset={1}
