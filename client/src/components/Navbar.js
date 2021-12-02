@@ -48,7 +48,7 @@ export default function Navbar() {
             </NavLink>
           )}
           <a
-            href="/create"
+            href="/start"
             className="text-base leading-tight font-light text-black hover:text-indigo-500"
           >
             Create a story
@@ -76,7 +76,7 @@ export default function Navbar() {
           {auth.isLoggedIn && (
             <NavLink
               to="/#"
-              className="text-base leading-tight font-light text-black hover:text-indigo-500"
+              className="text-base leading-tight font-light text-white bg-purple-400 rounded-full hover:bg-purple-500 p-3"
               onClick={logout}
             >
               Logout

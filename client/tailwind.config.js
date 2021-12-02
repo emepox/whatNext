@@ -11,7 +11,9 @@ module.exports = {
         'last': '#8F5FB1'
       }),
 
-      
+      spacing: {
+        'custom':'59.8%'
+      },
 
       backgroundColor: theme => ({
         'bgColor': '#253237',
