@@ -37,6 +37,7 @@ export default function StoryDetails() {
 
     // creates new story in DB
     async function createStory() {
+      
         try {
         const { data } = await axios('/stories', {
             method: "POST",
@@ -44,14 +45,16 @@ export default function StoryDetails() {
                 authorization: "Bearer " + localStorage.getItem("token"),
             },
             data: newStory,
+
         });
-        console.log(data)
-        setStoryId(data.id)
-        setStoryName(data.name)
-        } catch (error) {
+        console.log(data);
+        setStoryId(data.id);
+        setStoryName(data.name);
+      } catch (error) {
         console.error(error);
-        }
+      }
     }
+
 
     return (
         <div>
