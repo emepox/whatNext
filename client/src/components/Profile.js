@@ -1,11 +1,33 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import GridStories from "./GridStories";
+import axios from "axios";
+import useAuth from "../hooks/useAuth";
 
-import GridStories from './GridStories';
+export default function Profile(isProfile) {
+  const auth = useAuth();
+  const [user, setUser] = useState([]);
 
-export default function Profile() {
+  useEffect(() => {
+    requestData();
+  }, []);
+
+  const requestData = async () => {
+    try {
+      const { data } = await axios("users/dashboard/", {
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      console.log(data);
+      setUser(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="bg-gradient-to-r from-white to-grayBg via-grayVia h-screen">
-      HELLO I AM THE PROFILE PAGE
+      HELLO {user.username} I AM THE PROFILE PAGE
       <div className="md:container md:mx-auto">
         <GridStories isProfile={true} />
       </div>

@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-
 import useAuth from "../hooks/useAuth";
 
 export default function GridStories({isProfile}) {
 
   const auth = useAuth();
-  const [stories, setStories] = useState([]);
+  const [ stories, setStories ] = useState( [] );
+  
 
 useEffect(() => {
   requestData();
@@ -26,14 +26,13 @@ useEffect(() => {
           },
         } );
         console.log(data)
-        setStories(data);
+        setStories( data );
       } else {
         const { data } = await axios("/stories/");
         console.log(data)
         setStories(data);
       }
 
-      console.log("stories:", stories);
 
 
     } catch (error) {

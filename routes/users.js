@@ -49,6 +49,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// gets all the info of the logged in user
 router.get("/dashboard", userShouldBeLoggedIn, async (req, res) => {
   const { id } = req.user;
   try {
@@ -63,14 +64,13 @@ router.get("/dashboard", userShouldBeLoggedIn, async (req, res) => {
 // gets all stories from one user
 router.get("/profile", userShouldBeLoggedIn, async function (req, res) {
   try {
-      const { id } = req.user
+    const { id } = req.user;
       const stories = await models.Story.findAll(
           {
               where: { UserId: id },
               include: {model:models.User, attributes:['username']} 
           }
         );
-    
 
     res.send(stories);
   } catch (error) {
