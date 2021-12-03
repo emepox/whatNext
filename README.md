@@ -67,6 +67,12 @@ Happy coding!
 
 ### API routes plan
 
+| URl             | HTTP METHOD | DESCRIPTION                   | REQUEST OBJECT         | RESPONSE OBJECT |
+|-----------------|-------------|-------------------------------|------------------------|-----------------|
+| /users/login    | POST        | Provides authentication token | { username, password } | token           |
+| /users/register | POST        | Adds new user to database     | { username, password } |                 |
+
+
 
 
 ## Components
