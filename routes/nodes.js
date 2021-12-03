@@ -1,9 +1,23 @@
 var express = require("express");
+const { startsWith } = require("sequelize/dist/lib/operators");
 var router = express.Router();
 var models = require("../models");
 
 const userShouldBeLoggedIn = require("./middleware/userShouldBeLoggedIn");
 
+
+router.get("/:id", async function (req, res) {
+    const {id} = req.params
+    try {
+        const node = await models.Node.findOne({ where: { id }, include:{model:models.Node, as: "Start", attributes:["id"]}})
+
+       res.send(node)
+
+    } catch (error) {
+      res.status(500).send(error);
+    }
+
+});
 
 // creates a node (without edges)
 router.post("/", async function (req, res) {
@@ -24,23 +38,17 @@ router.post("/", async function (req, res) {
 router.put("/:id/edges", userShouldBeLoggedIn, async function (req, res) {
     try {
         const {id} = req.params;  // ID of parent node
-        const { user_id } = req;
-        const {nextId, situation, StoryId, option} = req.body; // only for new nodes
+        const {nextId, option} = req.body; // only for new nodes
         // console.log(typeOf(StoryId))
         
-        let nextNode = {}
-        // find child node or create it from scratch
-        if (+nextId){
-            nextNode = await models.Node.findOne(
-                {
-                    where: { id }
-                }
-            );
-        } else {nextNode = await models.Node.create({situation, StoryId})}
-        console.log(nextNode)
+        let nextNode = await models.Node.findOne(
+            {
+                where: { id:nextId }
+            }
+        )
         await nextNode.setNext(+id, {through: { option: option }})
 
-        res.send({id:nextNode.dataValues.id})
+        res.send({message:"edge established"})
        
 
     } catch (error) {
@@ -49,6 +57,21 @@ router.put("/:id/edges", userShouldBeLoggedIn, async function (req, res) {
 
 });
 
+router.put("/edit/:id", async function (req, res) {
+    try{
+        const { id } = req.params
+        await models.Node.update(req.body,
+            {
+                where: { id }
+            }
+        );
+    
+    res.send("Situation successfully updated!")
+    
+    } catch (error) {
+    res.status(500).send(error);
+    }
+  });
 
 // router.put("/:id/edges", async function (req, res) {
 //     try {
