@@ -120,6 +120,7 @@ export default function ParallaxComponent() {
             justifyContent: 'center',
           }}>
           <img src={url('bash')} style={{ width: '40%' }} className="transform hover:scale-105 transition duration-400"/>
+          
         </ParallaxLayer>
 
         <ParallaxLayer
