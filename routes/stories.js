@@ -99,7 +99,24 @@ router.put("/:id/first", async function (req, res) {
       }
     );
 
-    res.send("Story successfully deleted!");
+    res.send("Story successfully edited!");
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// Switches isFinished to true in STORIES table
+router.put("/:id/finish", async function (req, res) {
+  try {
+    const { id } = req.params;
+    await models.Story.update(
+      { isFinished: 1 },
+      {
+        where: { id },
+      }
+    );
+
+    res.send("Story successfully edited!");
   } catch (error) {
     res.status(500).send(error);
   }
