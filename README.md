@@ -67,10 +67,35 @@ Happy coding!
 
 ### API routes plan
 
-| URl             | HTTP METHOD | DESCRIPTION                   | REQUEST OBJECT         | RESPONSE OBJECT |
-|-----------------|-------------|-------------------------------|------------------------|-----------------|
-| /users/login    | POST        | Provides authentication token | { username, password } | token           |
-| /users/register | POST        | Adds new user to database     | { username, password } |                 |
+#### /users
+
+| URl             | HTTP METHOD | DESCRIPTION                   | REQUEST OBJECT         | RESPONSE OBJECT                                                                                                                                     |
+|-----------------|-------------|-------------------------------|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| /users/login    | POST        | Provides authentication token | { username, password } | token                                                                                                                                               |
+| /users/register | POST        | Adds new user to database     | { username, password } |                                                                                                                                                     |
+| /users/profile  | GET         | Gets all stories from a user  | { id }                 | [{ id: integer, name: string, description: text, category: string, reproductions: integer, rating: integer, media: string, username: string }] |
+
+#### /nodes
+
+| URl              | HTTP METHOD | DESCRIPTION                       | REQUEST OBJECT                                     | RESPONSE OBJECT                                    |
+|------------------|-------------|-----------------------------------|----------------------------------------------------|----------------------------------------------------|
+| /nodes/:id       | GET         | Gets node with a given id         | { id: integer }                                    | { id: integer, situation: text, StoryID: integer } |
+| /nodes/          | POST        | Adds new node to database         | { situation: text, StoryID: integer }              | { id: integer, situation: text }                   |
+| /nodes/:id/edges | PUT         | Adds edge between two given nodes | { id: integer }, { nextId: integer, option: text } |                                                    |
+| /nodes/edit/:id  | PUT         | Updates node with given id        | { situation: text }                                |                                                    |
+| /nodes/:id       | DELETE      | Deletes node with given id        | { id: integer }                                    |                                                    |
+
+#### /stories
+
+| URl                | HTTP METHOD | DESCRIPTION                         | REQUEST OBJECT                                                                              | RESPONSE OBJECT                                                                                                                              |
+|--------------------|-------------|-------------------------------------|---------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| /stories           | GET         | Gets all stories info               |                                                                                             | [{ id: integer, name: string, description: text, category: string, reproductions: integer, rating: integer, media: string }...]              |
+| /stories/:id       | GET         | Gets story with a given id          | { id: integer }                                                                             | { id: integer, name: string, description: text, category: string, reproductions: integer, rating: integer, media: string, username: string } |
+| /stories/          | POST        | Adds new story to database          | { name: string, description: text, category: string, media: string, isPrivate, isFinished } | { id: integer, name: string, description: text, category: string, reproductions: integer, rating: integer, media: string}                    |
+| /stories/:id/first | PUT         | Adds first node id to a given story | { id: integer }, { firstId: integer }                                                       |                                                                                                                                              |
+| /stories/:id       | DELETE      | Deletes story with given id         | { id: integer }                                                                             |                                                                                                                                              |
+
+
 
 
 
@@ -83,9 +108,9 @@ Happy coding!
   - Profile.js
 - StoryDetails.js
   - CreateStory.js
-    - CreateNode.js
-    - EditNode.js
-    - AddEdge.js
+   - CreateNode.js
+   - EditNode.js
+   - AddEdge.js
 - Story.js
 - AuthProvider.js
   - Register.js
