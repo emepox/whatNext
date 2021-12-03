@@ -2,7 +2,6 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
 
-import CreateGame from './components/CreateGame';
 import ParallaxComponent from "./components/ParallaxComponent";
 import DraggableList from "./components/Draggable";
 import Register from "./components/Register";

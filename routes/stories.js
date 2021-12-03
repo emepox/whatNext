@@ -66,24 +66,29 @@ router.post( "/", userShouldBeLoggedIn, async function ( req, res ) {
     try {
       const {name, description, media, category, isPrivate, isFinished} = req.body;
        const story = await models.Story.create({ name, description, UserId: user_id, media, category, isPrivate, isFinished})
-       const startNode = await models.Node.create({situation:story.dataValues.name, StoryId:story.dataValues.id})
-       await models.Story.update({ first: startNode.dataValues.id}, {
-        where: {
-          first: null
-        }
-       })
-       const updatedStory = await models.Story.findOne({
-        where: {
-          id: story.dataValues.id
-        }
-       })
-       console.log("hola:",updatedStory)
-       res.send({id:updatedStory.dataValues.id, name:updatedStory.dataValues.name, description:updatedStory.dataValues.description, first:updatedStory.dataValues.first})
+       res.send(story.dataValues)
        
     } catch (error) {
       res.status(500).send(error);
     }
 
+});
+
+router.put("/:id/first", async function (req, res) {
+  try{
+      const { id } = req.params
+      const {firstId} = req.body
+      await models.Story.update({first:firstId},
+          {
+              where: { id }
+          }
+      );
+  
+  res.send("Story successfully deleted!")
+  
+  } catch (error) {
+  res.status(500).send(error);
+  }
 });
 
 //deletes story by id
