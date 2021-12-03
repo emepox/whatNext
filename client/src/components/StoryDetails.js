@@ -2,7 +2,9 @@ import {React, useState, useRef} from 'react'
 import CreateStory from './CreateStory';
 import "./CreateStory.css"
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
-import Create from "./CreateStory";
+import Noty from 'noty';
+import "../../node_modules/noty/lib/themes/mint.css";
+import "../../node_modules/noty/lib/noty.css";
 
 const axios = require('axios');
 
@@ -52,8 +54,22 @@ export default function StoryDetails() {
 
         });
         setPostedStory(data)
+        new Noty({
+            theme: 'mint',
+            type: 'success',
+            layout: 'topRight',
+            text: "New WhatNext template generated. It's time to fill it in! ⚡️",
+            timeout: 2000,
+          }).show();
         } catch (error) {
         console.error(error);
+        new Noty({
+            theme: 'mint',
+            type: 'error',
+            layout: 'topRight',
+            text: "Ouch! Something went wrong 😑... Try again!",
+            timeout: 2000
+          }).show();
       }
     }
 
@@ -92,7 +108,7 @@ export default function StoryDetails() {
                             <div className="grid grid-cols-2 gap-4">
                                 <div><p className="text-gray-400">Category:</p></div> 
                                 <div>
-                                    <select name="category" value={newStory.category} onChange={handleChange}>
+                                    <select name="category" value={newStory.category} required onChange={handleChange}>
                                         <option value="">-Please choose an option-</option>
                                         <option value="Comedy">Comedy</option>
                                         <option value="Drama">Drama</option>

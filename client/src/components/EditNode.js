@@ -1,4 +1,7 @@
 import React, {useState} from 'react'
+import Noty from 'noty';
+import "../../node_modules/noty/lib/themes/mint.css";
+import "../../node_modules/noty/lib/noty.css";
 const axios = require('axios');
 
 export default function EditNode({getNodes, nodeList}) {
@@ -20,8 +23,29 @@ export default function EditNode({getNodes, nodeList}) {
             },
           });
           getNodes()
+          new Noty({
+            theme: 'mint',
+            type: 'success',
+            layout: 'topRight',
+            text: 'Scenario edited successfully ✨',
+            timeout: 2000,
+          }).show();
+          new Noty({
+            theme: 'mint',
+            type: 'information',
+            layout: 'topRight',
+            text: "👉 Now you can EDIT other scenarios, CREATE a new one and/or CONNECT them!",
+            timeout: 6000,
+          }).show();
         } catch (error) {
           console.log(error);
+          new Noty({
+            theme: 'mint',
+            type: 'error',
+            layout: 'topRight',
+            text: `${error.message}`,
+            timeout: 2000
+          }).show();
         }
     }
 
