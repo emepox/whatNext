@@ -31,22 +31,6 @@ export default function Navbar() {
           WhatNext
         </a>
         <div className="text-right space-x-3">
-          {!auth.isLoggedIn && (
-            <NavLink
-              to="/login"
-              className="text-base leading-tight font-light text-black hover:text-indigo-500"
-            >
-              Login
-            </NavLink>
-          )}
-          {!auth.isLoggedIn && (
-            <NavLink
-              to="/register"
-              className="text-base leading-tight font-light text-black hover:text-indigo-500"
-            >
-              Sign Up
-            </NavLink>
-          )}
           <a
             href="/start"
             className="text-base leading-tight font-light text-black hover:text-indigo-500"
@@ -73,10 +57,31 @@ export default function Navbar() {
           >
             About
           </a>
+
+          <a>|</a>
+
+           {!auth.isLoggedIn && (
+            <NavLink
+              to="/login"
+              className="text-base leading-tight font-light text-white bg-purple-400 rounded-full hover:bg-purple-500 px-3 py-2"
+            >
+              Login
+            </NavLink>
+          )}
+
+          {!auth.isLoggedIn && (
+            <NavLink
+              to="/register"
+              className="text-base leading-tight font-light text-white bg-purple-400 rounded-full hover:bg-purple-500 px-3 py-2"
+            >
+              Sign Up 
+            </NavLink>
+          )}
+
           {auth.isLoggedIn && (
             <NavLink
               to="/#"
-              className="text-base leading-tight font-light text-white bg-purple-400 rounded-full hover:bg-purple-500 p-3"
+              className="text-base leading-tight font-light text-white bg-purple-400 rounded-full hover:bg-purple-500 px-3 py-2"
               onClick={logout}
             >
               Logout
