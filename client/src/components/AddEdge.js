@@ -4,10 +4,11 @@ const axios = require('axios');
 export default function AddEdge({nodeList}) {
 
     const [newEdge, setNewEdge]= useState({
-        start:nodeList[0].id,
-        next:nodeList[0].id,
+        start:null,
+        next:null,
         option: ""
     })
+    const [error, setError] = useState("")
 
     const handleChange = (event) => {
         const {name, value} = event.target
@@ -18,6 +19,7 @@ export default function AddEdge({nodeList}) {
       
     try {
         if(start===next) throw new Error("Situation can't connect to itself")
+        if(!start||!next) throw new Error("Please select a node")
         await axios(`/nodes/${start}/edges`, {
         method: 'PUT',
         headers: {
@@ -29,7 +31,7 @@ export default function AddEdge({nodeList}) {
         },
       });
     } catch (error) {
-      console.log(error);
+      setError(error)
     }
   }
 
@@ -42,6 +44,7 @@ const handleSubmit = (event) => {
 
   return <div>
       <form onSubmit={handleSubmit}>
+          <label></label>
           <select name="start" onChange={handleChange}>
           <option value="" selected disabled hidden>Choose situation</option>
               {nodeList.map(node => 
@@ -57,5 +60,6 @@ const handleSubmit = (event) => {
               </select>
               <button>Add connection</button>
       </form>
+      {error&&<div>{error}</div>}
       </div>;
 }

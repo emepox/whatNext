@@ -28,7 +28,7 @@ export default function CreateNode({storyId, getNodes, nodeList}) {
     return (
         <div>
             <form onSubmit={createNode}>
-                <textarea rows="4" cols="50" onChange={handleChange} placeholder="What is the situation" className="border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" required></textarea>
+                <textarea rows="4" cols="50" onChange={handleChange} placeholder="What is the situation" className="border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" required></textarea><br/>
                 <button>save situation</button>
             </form>
         </div>
