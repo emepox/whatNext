@@ -5,7 +5,7 @@ var models = require( "../models" );
 const userShouldBeLoggedIn = require("./middleware/userShouldBeLoggedIn");
 
 
-// gets story information (for homepage, for example)
+// gets ALL STORIES information // READ STORIES PAGE
 router.get("/", async function (req, res) {
     try {
       const stories = await models.Story.findAll(
@@ -23,7 +23,9 @@ router.get("/", async function (req, res) {
     }
 });
 
-//gets story with a specific id
+//gets A STORY with a specific ID // READ A STORY
+// Doesn't need to be guarded YET
+// To guard when functionality PUBLIC/PRIVATE is enabled.
 router.get("/:id", async function (req, res) {
     try {
         const { id } = req.params
@@ -41,7 +43,9 @@ router.get("/:id", async function (req, res) {
     }
 });
 
-// gets all nodes from a story
+// gets ALL NODES from A STORY
+// To read a story. See above comment.
+
 router.get("/:id/nodes", async function (req, res) {
   try {
       const { id } = req.params;
@@ -59,13 +63,15 @@ router.get("/:id/nodes", async function (req, res) {
   }
 });
 
-// adds new story, returns story.id (TODO:configure first so it gets the id of the first node of the story)
+// POSTS new story, returns story.id 
+// TODO: configure first so it gets the id of the first node of the story 
+
 router.post( "/", userShouldBeLoggedIn, async function ( req, res ) {
-  
-  const { user_id } = req;
+  console.log("I am in the endpoint, this is the user:", req.user)
+  const { id } = req.user;
     try {
       const {name, description, media, category, isPrivate, isFinished} = req.body;
-       const story = await models.Story.create({ name, description, UserId: user_id, media, category, isPrivate, isFinished})
+       const story = await models.Story.create({ name, description, UserId: id, media, category, isPrivate, isFinished})
        res.send(story.dataValues)
        
     } catch (error) {
@@ -74,6 +80,7 @@ router.post( "/", userShouldBeLoggedIn, async function ( req, res ) {
 
 });
 
+// PUTS the FIRST NODE ID in STORIES table
 router.put("/:id/first", async function (req, res) {
   try{
       const { id } = req.params
