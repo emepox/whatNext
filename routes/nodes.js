@@ -35,6 +35,7 @@ router.post("/", async function (req, res) {
 });
 
 router.put("/:id/edges", userShouldBeLoggedIn, async function (req, res) {
+
   try {
     const { id } = req.params; // ID of parent node
     const { nextId, option } = req.body; // only for new nodes
