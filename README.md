@@ -31,7 +31,7 @@ This project uses several additional libraries, which should also get installed 
 - React router <https://reactrouter.com/>
 - Axios <https://axios-http.com/>
 - Noty <https://ned.im/noty/#/>
-- Bootstrap <https://getbootstrap.com/>
+- Tailwind <https://tailwindcss.com/docs>
 
 ### Database Prep
 
