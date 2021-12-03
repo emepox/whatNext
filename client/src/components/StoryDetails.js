@@ -21,8 +21,12 @@ export default function StoryDetails() {
         isFinished: 0,
     })
 
-    const [storyId, setStoryId] = useState();
-    const [storyName, setStoryName] = useState();
+    const [postedStory, setPostedStory] = useState({
+        id:null,
+        name:null,
+        description:null,
+        first:null
+    });
 
     // changes newGame values for inputs
     const handleChange = (event) => {
@@ -47,10 +51,8 @@ export default function StoryDetails() {
             data: newStory,
 
         });
-        console.log(data);
-        setStoryId(data.id);
-        setStoryName(data.name);
-      } catch (error) {
+        setPostedStory(data)
+        } catch (error) {
         console.error(error);
       }
     }
@@ -78,8 +80,8 @@ export default function StoryDetails() {
                     justifyContent: 'center',
                     }}>
                     <div className="flex flex-col items-center justify-center">
-                        {!storyId &&
-                        <form onSubmit={handleSubmit} className="rounded-md bg-white p-11 space-y-4 shadow-lg opacity-90">
+                        {!postedStory.id 
+                        ? <form onSubmit={handleSubmit} className="rounded-md bg-white p-11 space-y-4 shadow-lg opacity-90">
                             <div><p className="text-2xl font-mono italic flex flex-col items-center justify-center">Story details</p></div>
                             <div>
                                 <input name="name" value={newStory.name} placeholder="Title" onChange={handleChange} className="border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent pr-custom" />
@@ -102,15 +104,13 @@ export default function StoryDetails() {
                                 </div>
                             </div>
                             <div>
-                            <input name="media" value={newStory.media} placeholder="Add the URL of an image that illustrates your story" onChange={handleChange} className="border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent pr-custom mb-4"/>
+                            <input maxlength="255" name="media" value={newStory.media} placeholder="Add the URL of an image that illustrates your story" onChange={handleChange} className="border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent pr-custom mb-4"/>
                             </div>
                             <div className="flex flex-col items-center justify-center">
                             <button onClick={() => parallax.current.scrollTo(1)} className="bg-purple-500 px-3 py-2 text-white text-base uppercase tracking-wide rounded-full py-2 px-5 hover:bg-purple-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 ">START WRITING!</button>
                             </div>
                         </form>
-                        }
-                        {storyId &&
-                        <CreateStory storyId={storyId} storyName={storyName}/>
+                       : <CreateStory postedStory={postedStory}/>
                         }
                     </div>
                 </ParallaxLayer>
@@ -126,7 +126,7 @@ export default function StoryDetails() {
                         backgroundImage: url('stars', true),
                         backgroundSize: 'cover',
                     }}>
-                    <Create />
+                    <CreateStory postedStory={postedStory}/>
                 </ParallaxLayer>
             </Parallax>
         </div>

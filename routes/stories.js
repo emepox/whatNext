@@ -62,20 +62,33 @@ router.get("/:id/nodes", async function (req, res) {
 // adds new story, returns story.id (TODO:configure first so it gets the id of the first node of the story)
 router.post( "/", userShouldBeLoggedIn, async function ( req, res ) {
   
-  console.log(req)
   const { user_id } = req;
     try {
-       const {name, description, media, category, isPrivate, isFinished, first} = req.body;
-       const story = await models.Story.create({ name, description, UserId: user_id, media, category, isPrivate, isFinished, first })
-
-
-       res.send({id:story.dataValues.id, name:story.dataValues.name,})
+      const {name, description, media, category, isPrivate, isFinished} = req.body;
+       const story = await models.Story.create({ name, description, UserId: user_id, media, category, isPrivate, isFinished})
+       res.send(story.dataValues)
        
-
     } catch (error) {
       res.status(500).send(error);
     }
 
+});
+
+router.put("/:id/first", async function (req, res) {
+  try{
+      const { id } = req.params
+      const {firstId} = req.body
+      await models.Story.update({first:firstId},
+          {
+              where: { id }
+          }
+      );
+  
+  res.send("Story successfully deleted!")
+  
+  } catch (error) {
+  res.status(500).send(error);
+  }
 });
 
 //deletes story by id

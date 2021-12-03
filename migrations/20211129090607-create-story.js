@@ -23,6 +23,9 @@ module.exports = {
       media: {
         type: Sequelize.STRING
       },
+      category: {
+        type: Sequelize.STRING
+      },
       isPrivate: {
         type: Sequelize.BOOLEAN
       },

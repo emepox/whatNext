@@ -1,7 +1,23 @@
 var express = require("express");
+const { startsWith } = require("sequelize/dist/lib/operators");
 var router = express.Router();
 var models = require("../models");
 
+const userShouldBeLoggedIn = require("./middleware/userShouldBeLoggedIn");
+
+
+router.get("/:id", async function (req, res) {
+    const {id} = req.params
+    try {
+        const node = await models.Node.findOne({ where: { id }, include:{model:models.Node, as: "Start", attributes:["id"]}})
+
+       res.send(node)
+
+    } catch (error) {
+      res.status(500).send(error);
+    }
+
+});
 
 // creates a node (without edges)
 router.post("/", async function (req, res) {
@@ -9,7 +25,7 @@ router.post("/", async function (req, res) {
        const {situation, StoryId} = req.body;
        const node = await models.Node.create({situation, StoryId})
 
-       res.send({id:node.dataValues.id})
+       res.send({id:node.dataValues.id, situation:node.dataValues.situation})
        
 
     } catch (error) {
@@ -19,27 +35,43 @@ router.post("/", async function (req, res) {
 });
 
 
-router.put("/:id/edges", async function (req, res) {
+router.put("/:id/edges", userShouldBeLoggedIn, async function (req, res) {
     try {
         const {id} = req.params;  // ID of parent node
+        const {nextId, option} = req.body; // only for new nodes
+        // console.log(typeOf(StoryId))
+        
+        let nextNode = await models.Node.findOne(
+            {
+                where: { id:nextId }
+            }
+        )
+        await nextNode.setNext(+id, {through: { option: option }})
 
-        const node = await models.Node.findOne(
+        res.send({message:"edge established"})
+       
+
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+
+});
+
+router.put("/edit/:id", async function (req, res) {
+    try{
+        const { id } = req.params
+        await models.Node.update(req.body,
             {
                 where: { id }
             }
-          );
-        
-        await node.setNext(id, {through: { option: option }})
-
-        res.send({id:node.dataValues.id})
-       
-
+        );
+    
+    res.send("Situation successfully updated!")
+    
     } catch (error) {
-      res.status(500).send(error);
+    res.status(500).send(error);
     }
-
-});
-
+  });
 
 // router.put("/:id/edges", async function (req, res) {
 //     try {
