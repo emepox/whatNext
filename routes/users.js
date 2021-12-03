@@ -50,11 +50,12 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/dashboard", userShouldBeLoggedIn, async (req, res) => {
-  const { user_id } = req;
+  const { id } = req.user;
   try {
-    const user = await models.User.findOne({ where: { id: user_id } });
-    res.send(user);
-  } catch (error) {
+    const user = await models.User.findOne({ where: { id:id } })
+    res.send(user)
+  } catch(error){
+
     res.status(400).send({ message: err.message });
   }
 });
@@ -62,11 +63,14 @@ router.get("/dashboard", userShouldBeLoggedIn, async (req, res) => {
 // gets all stories from one user
 router.get("/profile", userShouldBeLoggedIn, async function (req, res) {
   try {
-    const { user_id } = req;
-    const stories = await models.Story.findAll({
-      where: { UserId: user_id },
-      include: { model: models.User, attributes: ["username"] },
-    });
+      const { id } = req.user
+      const stories = await models.Story.findAll(
+          {
+              where: { UserId: id },
+              include: {model:models.User, attributes:['username']} 
+          }
+        );
+    
 
     res.send(stories);
   } catch (error) {
