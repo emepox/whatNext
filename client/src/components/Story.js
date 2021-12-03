@@ -33,8 +33,8 @@ export default function Story() {
           <div>{image && <img src={image} />}</div>
           <div className="w-24 m-2">{currentNode.situation}</div>
           <div className="flex">
-          {currentNode.edges ? (
-            currentNode.edges.map((edge) => (
+          {currentNode.Start ? (
+            currentNode.Start.map((edge) => (
               <div>
                 <button
                   className="bg-yellow-200 p-2 rounded m-2"
