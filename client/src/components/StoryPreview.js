@@ -35,12 +35,26 @@ export default function StoryPreview() {
             <div className="text-3xl text-white font-mono italic flex flex-col items-center justify-center mb-3">
               {story.name}
             </div>
-            <div className="text-m text-white font-mono italic flex flex-col items-center justify-center mb-3">
-              by {story.User.username}
-            </div>
             <hr/>
-            <Rating/>
-            <button onClick={() => handlePlay(story.id, story.first) } className="bg-purple-400 text-white p-1 rounded m-2 hover:bg-purple-500 hover:shadow-lg">Play</button>
+            <div className="flex flex-col items-center justify-center my-3">
+            <img
+                    className="object-cover"
+                    src={story.media}
+                    alt="Game's image"
+                  />
+            </div>
+            <div className="text-m text-white font-mono flex flex-col items-start justify-start mb-3">
+              Created by: <br/>
+              {story.User.username}
+            </div>
+            <div className="text-m text-white font-mono flex flex-col items-start justify-start mb-3">
+              What is it about? <br/>
+              {story.description}
+            </div>
+            <div className="text-m text-white font-mono flex flex-col items-start justify-start mb-3">
+              Rating:
+            </div>
+            <button onClick={() => handlePlay(story.id, story.first) } className="bg-purple-400 text-white py-3 px-5 rounded m-3 hover:bg-purple-500 hover:shadow-lg">Play</button>
           </div>
         )}   
     </div>
