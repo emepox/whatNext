@@ -1,0 +1,9 @@
+#StoryDetails {
+    background-color: rgb(230, 230, 230) !important;
+}
+
+button {
+    background-color:rgb(187, 246, 248);
+    padding: 5px;
+    border-radius: 5%;
+} 

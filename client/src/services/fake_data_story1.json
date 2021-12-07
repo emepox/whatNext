@@ -1,0 +1,72 @@
+[{
+    "id": "1",
+    "situation": "Situation 1",
+    "media": "../img/placeholder",
+    "storyId": "1",
+    " ":[
+        {
+            "next":"2",
+            "option":"option1.1"
+        },
+        {
+            "next":"3",
+            "option":"option1.2"
+        }
+    ]
+},
+{
+    "id": "2",
+    "situation": "Situation 2",
+    "media": "../img/placeholder.jpg",
+    "storyId": "1",
+    "edges":[
+        {
+            "next":"4",
+            "option":"option2.1"
+        },
+        {
+            "next":"5",
+            "option":"option2.2"
+        }
+    ]
+},
+{
+    "id": "3",
+    "situation": "Situation 3",
+    "media": "../img/placeholder.jpg",
+    "storyId": "1",
+    "edges":[
+        {
+            "next":"6",
+            "option":"option3.1"
+        },
+        {
+            "next":"7",
+            "option":"option3.2"
+        }
+    ]
+},
+{
+    "id": "4",
+    "situation": "Outcome 1",
+    "media": "../img/placeholder.jpg",
+    "storyId": "1"
+},
+{
+    "id": "5",
+    "situation": "Outcome 2",
+    "media": "../img/placeholder.jpg",
+    "storyId": "1"
+},
+{
+    "id": "6",
+    "situation": "Outcome 3",
+    "media": "../img/placeholder.jpg",
+    "storyId": "1"
+},
+{
+    "id": "7",
+    "situation": "Outcome 4",
+    "media": "../img/placeholder.jpg",
+    "storyId": "1"
+}]
