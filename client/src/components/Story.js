@@ -10,15 +10,18 @@ import {
   useSpringRef,
 } from '@react-spring/web'
 import StylesDisplayCards from './StylesDisplayCards.module.css';
+const axios = require("axios");
 
 export default function Story() {
   const navigate = useNavigate();
   const { id, page } = useParams();
+  const [story, setStory] = useState(null);
   const [currentNode, setCurrentNode] = useState(null);
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState(null);
 
   useEffect(() => getCurrentNode(page), [page]);
+  useEffect(() => getStory(id), []);
   //   useEffect(() => {if (currentNode&&currentNode.media)getImage()}, [currentNode])
 
   const getCurrentNode = async (id) => {
@@ -27,6 +30,15 @@ export default function Story() {
     console.log(node);
     setCurrentNode(node);
     setLoading(false);
+  };
+
+  const getStory = async (id) => {
+    try {
+      const { data } = await axios.get(`/stories/${id}/`);
+      setStory(data);
+    } catch (error) {
+      console.log(error);    
+    }
   };
 
   //   const getImage = async () => {
@@ -83,10 +95,17 @@ export default function Story() {
     
         
         {loading && <div>loading</div>}
-        {currentNode && (
+        {currentNode && story &&  (
           <div className="">
             {/* <div>{image && <img src={image} />}</div> */}
-            <div className="text-xl text-white font-mono italic flex flex-col items-center justify-center mb-3">
+            <div className="text-3xl text-white font-mono italic flex flex-col items-center justify-center mb-3">
+              {story.name}
+            </div>
+            <div className="text-m text-white font-mono italic flex flex-col items-center justify-center mb-3">
+              by {story.User.username}
+            </div>
+            <hr/>
+            <div className="text-xl text-white font-light flex flex-col items-center justify-center mt-5 mb-3">
               {currentNode.situation}
             </div>
             
