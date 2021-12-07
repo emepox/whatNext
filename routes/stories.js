@@ -15,11 +15,10 @@ router.get("/", async function (req, res) {
         "description",
         "category",
         "reproductions",
-        "rating",
         "media",
         "first"
       ],
-      where: { isFinished: 0 },
+      where: { isFinished: 1 },
       include: { model: models.User, attributes: ["username", "id"] },
     });
 
