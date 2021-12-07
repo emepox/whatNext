@@ -78,6 +78,7 @@ export default function Story() {
   }
 
   return (
+
     <div className="flex flex-col items-center justify-center">
     
         
@@ -94,8 +95,8 @@ export default function Story() {
                 {transition((style, edge) => (
                   <animated.div className="w-full h-full rounded-borderstoryCustom" style={style}>
                     <div className="grid grid-cols-3 gap-3">
-                      {currentNode.edges ? (
-                        currentNode.edges.map((edge) => (
+                      {currentNode.Start ? (
+                        currentNode.Start.map((edge) => (
                           
                             <button
                               className="bg-purple-400 p-2 rounded m-2 hover:bg-purple-500 hover:shadow-lg"

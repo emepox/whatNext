@@ -2,7 +2,9 @@ import {React, useState, useRef} from 'react'
 import CreateStory from './CreateStory';
 import "./CreateStory.css"
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
-import Create from "./CreateStory";
+import Noty from 'noty';
+import "../../node_modules/noty/lib/themes/mint.css";
+import "../../node_modules/noty/lib/noty.css";
 
 const axios = require('axios');
 
@@ -12,7 +14,9 @@ const url = (name, wrap = false) =>
 export default function StoryDetails() {
     const parallax = useRef(null);
 
-  
+
+    const categories = ["Action", "Comedy", "Drama", "Horror", "Love", "Mystery", "Other"];
+
 
     const [newStory, setNewStory] = useState({
         name: "",
@@ -55,8 +59,22 @@ export default function StoryDetails() {
 
         });
         setPostedStory(data)
+        new Noty({
+            theme: 'mint',
+            type: 'success',
+            layout: 'topRight',
+            text: "New WhatNext template generated. It's time to fill it in! ⚡️",
+            timeout: 2000,
+          }).show();
         } catch (error) {
         console.error(error);
+        new Noty({
+            theme: 'mint',
+            type: 'error',
+            layout: 'topRight',
+            text: "Ouch! Something went wrong 😑... Try again!",
+            timeout: 2000
+          }).show();
       }
     }
 
@@ -97,14 +115,11 @@ export default function StoryDetails() {
                             <div className="grid grid-cols-2 gap-4">
                                 <div><p className="text-gray-400">Category:</p></div> 
                                 <div>
+
                                     <select name="category" value={newStory.category} onChange={handleChange} required>
+
                                         <option value="">-Please choose an option-</option>
-                                        <option value="Comedy">Comedy</option>
-                                        <option value="Drama">Drama</option>
-                                        <option value="Horror">Horror</option>
-                                        <option value="Love">Love</option>
-                                        <option value="Mystery">Mystery</option>
-                                        <option value="Other">Other</option>
+                                        {categories.map(category => <option value={category}>{category}</option>)}
                                     </select>
                                 </div>
                             </div>
@@ -130,7 +145,9 @@ export default function StoryDetails() {
                         backgroundImage: url('stars', true),
                         backgroundSize: 'cover',
                     }}>
+
                     {postedStory.id && <CreateStory postedStory={postedStory}/>}
+
                 </ParallaxLayer>
             </Parallax>
         </div>
