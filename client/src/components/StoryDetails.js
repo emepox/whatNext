@@ -14,6 +14,8 @@ const url = (name, wrap = false) =>
 export default function StoryDetails() {
     const parallax = useRef(null);
 
+    const categories = ["Action", "Comedy", "Drama", "Horror", "Love", "Mystery", "Other"];
+
     const [newStory, setNewStory] = useState({
         name: "",
         description: "",
@@ -110,12 +112,7 @@ export default function StoryDetails() {
                                 <div>
                                     <select name="category" value={newStory.category} required onChange={handleChange}>
                                         <option value="">-Please choose an option-</option>
-                                        <option value="Comedy">Comedy</option>
-                                        <option value="Drama">Drama</option>
-                                        <option value="Horror">Horror</option>
-                                        <option value="Love">Love</option>
-                                        <option value="Mystery">Mystery</option>
-                                        <option value="Other">Other</option>
+                                        {categories.map(category => <option value={category}>{category}</option>)}
                                     </select>
                                 </div>
                             </div>
@@ -142,7 +139,7 @@ export default function StoryDetails() {
                         backgroundImage: url('stars', true),
                         backgroundSize: 'cover',
                     }}>
-                    <CreateStory postedStory={postedStory}/>
+                    <CreateStory postedStory={postedStory} categories={categories}/>
                 </ParallaxLayer>
             </Parallax>
         </div>

@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Select from 'react-select'
 import Noty from 'noty';
 import "../../node_modules/noty/lib/themes/mint.css";
 import "../../node_modules/noty/lib/noty.css";
@@ -7,9 +8,13 @@ const axios = require('axios');
 export default function EditNode({getNodes, nodeList}) {
     const [editedNode, setEditedNode] = useState(null)
 
-    const handleChoice = event => {
-        setEditedNode(nodeList[event.target.value])
+    // const handleChoice = event => {
+    //     setEditedNode(nodeList[event.target.value])
+    // }
+    const handleChangeSelect = (selectedOption) => {
+        setEditedNode((state => ({id:selectedOption.value, situation:selectedOption.label})))
     }
+
     const handleChange = event =>{
         setEditedNode(state => ({...state, situation:event.target.value}))
     }
@@ -51,12 +56,19 @@ export default function EditNode({getNodes, nodeList}) {
 
     return (
         <div>
-            <select name="start" onChange={handleChoice}>
+            <Select 
+                name="next"
+                onChange={(selectedOption) => handleChangeSelect(selectedOption)}
+                required
+                options={nodeList.map(node => {return {label:node.situation, value:node.id}})}
+            />
+            {/* <select name="start" onChange={handleChoice}>
                 <option value="" selected disabled hidden>Choose Situation</option>
               {nodeList.map((node, i) => 
                   <option key={node.id} value={i} >{node.situation}</option>
               )}
-              </select><br/>
+            </select> */}
+            <br/>
               {
                   editedNode&& 
                   <div>
