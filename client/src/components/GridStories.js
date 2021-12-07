@@ -2,15 +2,16 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
 import Select from 'react-select'
+import { useNavigate } from "react-router-dom";
 
 
 export default function GridStories({isProfile}) {
   
+  const navigate = useNavigate();
   const auth = useAuth();
   const [stories, setStories ] = useState( [] );
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilters, setCategoryFilters] = useState([]);
-  //["Comedy", "Drama", "Horror", "Love", "Mystery", "Other"]
 
   const options = [
     { value: 'Action', label: 'Action' },
@@ -27,12 +28,7 @@ export default function GridStories({isProfile}) {
   }, []);
 
   const requestData = async () => {
-    console.log(isProfile)
-    // const url = isProfile ? "users/profile/" : "/stories/";
-    // console.log(url)
-
     try {
-
       if ( isProfile ) {
         const { data } = await axios("users/profile/", {
           headers: {
@@ -46,13 +42,10 @@ export default function GridStories({isProfile}) {
         console.log(data)
         setStories(data);
       }
-
-
-
     } catch (error) {
       console.log(error);
     }
-};
+  };
   
   const handleMultiChange = (selectedOptions) => {
     setCategoryFilters((state) => selectedOptions.map(selectedOption => selectedOption.value));
@@ -66,12 +59,17 @@ export default function GridStories({isProfile}) {
     return searchQuery === "" || story.name.toLowerCase().includes(searchQuery.toLowerCase()) || story.description.toLowerCase().includes(searchQuery.toLowerCase());
   };
 
+  const handlePlay = async (id, first) => {
+    console.log(id, first)
+    navigate(`/story/${id}/${first}`)
+  };
+
+  //TODO: MAKE THIS WORK
   const handleEdit = (id) => {
     console.log(`Click edit ${id}`)
   }
 
   const handleDelete = async (id) => {
-    console.log( `Click delete ${ id }` );
     try {
       await axios.delete( `stories/${ id }` )
       requestData();
@@ -79,22 +77,8 @@ export default function GridStories({isProfile}) {
     } catch ( err ) {
       console.log(err)
     }
-
   };
 
-  const handlePlay = async (id) => {
-    console.log( `Click delete ${ id }` );
-    try {
-      await axios.delete( `stories/${ id }` )
-      requestData();
-      
-    } catch ( err ) {
-      console.log(err)
-    }
-
-  };
-  
-  
   return (
     <div className="flex flex-col items-center justify-center">
       {/* <p className="text-2xl text-white font-mono italic mb-10 ">Your Stories</p> */}
@@ -132,7 +116,7 @@ export default function GridStories({isProfile}) {
           })
           .map((story) => (
             // this is a card
-            <div key={ story.id } className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400">
+            <div key={ story.id } onClick={() => handlePlay(story.id, story.first)} className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400">
               <div className="md:flex">
                 <div className="md:flex-initial">
                   <img
@@ -150,12 +134,11 @@ export default function GridStories({isProfile}) {
                     <p>{story.name}</p>
                   </a>
                   <p className="mt-3 text-gray-500 ml-2 mr-2">
-                    {story.description}
+                    {story.description} 
                   </p>
-
                   {isProfile && (
                     <div className="flex justify-center">
-                      <button onClick={() => handlePlay(story.id) } className="bg-purple-400 text-white p-1 rounded m-2 hover:bg-purple-500 hover:shadow-lg">Play</button>
+                      <button onClick={() => handlePlay(story.id, story.first) } className="bg-purple-400 text-white p-1 rounded m-2 hover:bg-purple-500 hover:shadow-lg">Play</button>
                       <button onClick={() => handleEdit(story.id) } className="bg-purple-400 text-white p-1 rounded m-2 hover:bg-purple-500 hover:shadow-lg">Edit</button>
                       <button onClick={() => handleDelete(story.id)} className="bg-red-400 text-white p-1 rounded m-2 hover:bg-red-500 hover:shadow-lg">Delete</button>
                     </div>
