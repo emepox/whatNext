@@ -53,10 +53,9 @@ router.post("/login", async (req, res) => {
 router.get("/dashboard", userShouldBeLoggedIn, async (req, res) => {
   const { id } = req.user;
   try {
-    const user = await models.User.findOne({ where: { id:id } })
-    res.send(user)
-  } catch(error){
-
+    const user = await models.User.findOne({ where: { id: id } });
+    res.send(user);
+  } catch (error) {
     res.status(400).send({ message: err.message });
   }
 });
@@ -65,14 +64,26 @@ router.get("/dashboard", userShouldBeLoggedIn, async (req, res) => {
 router.get("/profile", userShouldBeLoggedIn, async function (req, res) {
   try {
     const { id } = req.user;
-      const stories = await models.Story.findAll(
-          {
-              where: { UserId: id },
-              include: {model:models.User, attributes:['username']} 
-          }
-        );
+    const stories = await models.Story.findAll({
+      where: { UserId: id },
+      include: { model: models.User, attributes: ["username"] },
+    });
 
     res.send(stories);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+router.post("/favourites", userShouldBeLoggedIn, async function (req, res) {
+  try {
+    const { id } = req.user;
+    const { storyId } = req.body;
+    const user = await models.User.findOne({
+      where: { id },
+    });
+    await user.addFavourite(storyId);
+    res.send("Successfuly added to favs");
   } catch (error) {
     res.status(500).send(error);
   }

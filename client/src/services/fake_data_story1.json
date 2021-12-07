@@ -3,7 +3,7 @@
     "situation": "Situation 1",
     "media": "../img/placeholder",
     "storyId": "1",
-    "edges":[
+    " ":[
         {
             "next":"2",
             "option":"option1.1"
