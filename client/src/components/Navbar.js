@@ -25,7 +25,7 @@ export default function Navbar() {
     <div>
       <div className="bg-white opacity-90 shadow-lg px-12 py-8 grid grid-cols-2">
         <a
-          href="/parallax"
+          href="/"
           className="block mt-1 text-xl leading-tight font-medium  font-mono italic text-black hover:text-indigo-500"
         >
           WhatNext
@@ -52,7 +52,7 @@ export default function Navbar() {
             </NavLink>
           )}
           <a
-            href="/#about"
+            href="/home"
             className="text-base leading-tight font-light text-black hover:text-indigo-500"
           >
             About
@@ -80,7 +80,7 @@ export default function Navbar() {
 
           {auth.isLoggedIn && (
             <NavLink
-              to="/#"
+              to="/"
               className="text-base leading-tight font-light text-white bg-purple-400 rounded-full hover:bg-purple-500 px-3 py-2"
               onClick={logout}
             >

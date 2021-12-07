@@ -3,7 +3,6 @@ import axios from "axios";
 import Noty from "noty";
 import useAuth from "../hooks/useAuth";
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
-import Avatar from "../img/Avatar.png";
 import "./Login.css";
 
 
