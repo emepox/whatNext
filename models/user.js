@@ -1,16 +1,5 @@
 'use strict';
-
-const bcrypt = require( "bcrypt" );
-const jwt = require( "jsonwebtoken" );
 const { Model } = require( 'sequelize' );
-const saltRounds = 10;
-
-const hashFunction = (user, options) => {
-  const hash = bcrypt.hash(password, saltRounds);
-  user.password = hash;
-};
-
-
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -36,8 +25,5 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
     }
   );
-
-  User.beforeCreate(hashFunction);
-
   return User;
 };

@@ -50,10 +50,10 @@ module.exports = {
          },
          {
            name: "Jabalí 4: Jabalí returns",
-           description: "More Jabalí for you.",
+           description: "Jabalí, but more.",
            reproductions: 0,
            media:
-             "https://cazawonke.com/wp-content/uploads/2020/01/jabalies.jpg",
+             "https://minuartia.com/wp-content/uploads/2020/10/article-senglar.jpeg",
            category: "Drama",
            isPrivate: 0,
            isFinished: 0,
