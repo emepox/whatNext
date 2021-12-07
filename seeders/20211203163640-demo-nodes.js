@@ -7,6 +7,12 @@ module.exports = {
        "Nodes",
        [
          {
+           situation: "Jabali escapes the forest.",
+           StoryId: 1,
+           createdAt: new Date(),
+           updatedAt: new Date(),
+         },
+         {
            situation: "Jabali enters a bar.",
            StoryId: 1,
            createdAt: new Date(),
