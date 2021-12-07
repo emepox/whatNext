@@ -4,19 +4,44 @@ module.exports = {
   theme: {
     extend: {
       gradientColorStops: theme => ({
-        // 'grayBg': '#dcdde1',
-        // 'grayVia': '#F0F1F3',
         'first': '#447EB4',
         'middle': '#646eb2',
         'last': '#8F5FB1'
       }),
 
+      borderRadius: {
+        'borderstoryCustom': '5px'
+      },
+
+      fontSize: {
+        'custom': ['6em', '80px']
+      },
+
       spacing: {
         'custom':'59.8%'
       },
 
+      height: {
+        'custom': '80px'
+      },
+
+      leading: {
+        'custom': '80px'
+      },
+
+      padding: {
+        'custom': '0.05em',
+        'StoryCustom': '20px',
+        'inputcustom': '17.4em'
+      },
+
+
       backgroundColor: theme => ({
         'bgColor': '#253237',
+      }),
+
+      btnColor:  theme => ({
+        'btnIndigo': '#6366F1',
       }),
       
       container: {

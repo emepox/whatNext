@@ -2,7 +2,9 @@ import {React, useState, useRef} from 'react'
 import CreateStory from './CreateStory';
 import "./CreateStory.css"
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
-import Create from "./CreateStory";
+import Noty from 'noty';
+import "../../node_modules/noty/lib/themes/mint.css";
+import "../../node_modules/noty/lib/noty.css";
 
 const axios = require('axios');
 
@@ -11,6 +13,10 @@ const url = (name, wrap = false) =>
 
 export default function StoryDetails() {
     const parallax = useRef(null);
+
+
+    const categories = ["Action", "Comedy", "Drama", "Horror", "Love", "Mystery", "Other"];
+
 
     const [newStory, setNewStory] = useState({
         name: "",
@@ -37,6 +43,7 @@ export default function StoryDetails() {
     const handleSubmit = (event) => {
         event.preventDefault();
         createStory();
+        parallax.current.scrollTo(1);
     };
 
     // creates new story in DB
@@ -52,10 +59,26 @@ export default function StoryDetails() {
 
         });
         setPostedStory(data)
+        new Noty({
+            theme: 'mint',
+            type: 'success',
+            layout: 'topRight',
+            text: "New WhatNext template generated. It's time to fill it in! ⚡️",
+            timeout: 2000,
+          }).show();
         } catch (error) {
         console.error(error);
+        new Noty({
+            theme: 'mint',
+            type: 'error',
+            layout: 'topRight',
+            text: "Ouch! Something went wrong 😑... Try again!",
+            timeout: 2000
+          }).show();
       }
     }
+
+    
 
 
     return (
@@ -80,37 +103,33 @@ export default function StoryDetails() {
                     justifyContent: 'center',
                     }}>
                     <div className="flex flex-col items-center justify-center">
-                        {!postedStory.id 
-                        ? <form onSubmit={handleSubmit} className="rounded-md bg-white p-11 space-y-4 shadow-lg opacity-90">
+                        {!postedStory.id &&
+                         <form onSubmit={handleSubmit} className="rounded-md bg-white p-11 space-y-4 shadow-lg opacity-90">
                             <div><p className="text-2xl font-mono italic flex flex-col items-center justify-center">Story details</p></div>
                             <div>
-                                <input name="name" value={newStory.name} placeholder="Title" onChange={handleChange} className="border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent pr-custom" />
+                                <input name="name" value={newStory.name} placeholder="Title" onChange={handleChange} className="border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent pr-inputcustom" required/>
                             </div>
                             <div>
-                                <textarea name="description" rows="4" cols="50" onChange={handleChange} placeholder="Add a brief summary" className="border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"></textarea>
+                                <textarea name="description" rows="4" cols="50" onChange={handleChange} placeholder="Add a brief summary" className="border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" required></textarea>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div><p className="text-gray-400">Category:</p></div> 
                                 <div>
-                                    <select name="category" value={newStory.category} onChange={handleChange}>
+
+                                    <select name="category" value={newStory.category} onChange={handleChange} required>
+
                                         <option value="">-Please choose an option-</option>
-                                        <option value="Comedy">Comedy</option>
-                                        <option value="Drama">Drama</option>
-                                        <option value="Horror">Horror</option>
-                                        <option value="Love">Love</option>
-                                        <option value="Mystery">Mystery</option>
-                                        <option value="Other">Other</option>
+                                        {categories.map(category => <option value={category}>{category}</option>)}
                                     </select>
                                 </div>
                             </div>
                             <div>
-                            <input maxlength="255" name="media" value={newStory.media} placeholder="Add the URL of an image that illustrates your story" onChange={handleChange} className="border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent pr-custom mb-4"/>
+                            <input maxlength="255" name="media" value={newStory.media} placeholder="Add the URL of an image that illustrates your story" onChange={handleChange} className="border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent pr-inputcustom mb-4" required/>
                             </div>
                             <div className="flex flex-col items-center justify-center">
-                            <button onClick={() => parallax.current.scrollTo(1)} className="bg-purple-500 px-3 py-2 text-white text-base uppercase tracking-wide rounded-full py-2 px-5 hover:bg-purple-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 ">START WRITING!</button>
+                            <button className="bg-purple-500 px-3 py-2 text-white text-base uppercase tracking-wide rounded-full py-2 px-5 hover:bg-purple-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 ">START WRITING!</button>
                             </div>
                         </form>
-                       : <CreateStory postedStory={postedStory}/>
                         }
                     </div>
                 </ParallaxLayer>
@@ -126,7 +145,9 @@ export default function StoryDetails() {
                         backgroundImage: url('stars', true),
                         backgroundSize: 'cover',
                     }}>
-                    <CreateStory postedStory={postedStory}/>
+
+                    {postedStory.id && <CreateStory postedStory={postedStory}/>}
+
                 </ParallaxLayer>
             </Parallax>
         </div>

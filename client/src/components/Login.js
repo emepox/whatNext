@@ -1,9 +1,10 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import Noty from "noty";
+import "../../node_modules/noty/lib/themes/mint.css";
+import "../../node_modules/noty/lib/noty.css";
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import "./Login.css";
-
 
 
 const url = (name, wrap = false) =>
@@ -45,7 +46,7 @@ export default function Login() {
       localStorage.setItem("token", data.token);
 
       new Noty({
-        theme: "bootstrap-v4",
+        theme: "mint",
         type: "success",
         layout: "topRight",
         text: "You are logged in.",
@@ -57,7 +58,7 @@ export default function Login() {
       console.log(error);
 
       new Noty({
-        theme: "bootstrap-v4",
+        theme: "mint",
         type: "error",
         layout: "topRight",
         text: "Something went wrong.",

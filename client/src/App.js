@@ -17,6 +17,9 @@ import AllStories from './components/AllStories';
 
 import AuthProvider from "./components/AuthProvider";
 import PrivateRoute from "./components/PrivateRoute";
+import Test from "./components/Story copy copy";
+
+
 
 
 export default function App() {
@@ -28,15 +31,14 @@ export default function App() {
         <BrowserRouter>
           <Navbar />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/play" element={<AllStories />} />
-
-            <Route path="/parallax" element={<ParallaxComponent />} />
-          <Route path="/draggable" element={<DraggableList items={'Lorem ipsum dolor sit'.split(' ')} />} />
-
+            <Route path="/" element={<ParallaxComponent />} />
+            <Route path="/draggable" element={<DraggableList items={'Lorem ipsum dolor sit'.split(' ')} />} />
             <Route path="/story/:id/:page" element={<Story />} />
+            <Route path="/test/:id/:page" element={<Test />} />
 
 
             <Route

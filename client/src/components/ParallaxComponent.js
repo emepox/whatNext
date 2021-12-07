@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax';
 import Hot from '../img/Hot.png';
-import Home from "./Home";
+import HomeTitle from "./HomeTitle";
 
 
 const url = (name, wrap = false) =>
@@ -84,29 +84,14 @@ export default function ParallaxComponent() {
 
         <ParallaxLayer 
           offset={0}
-          speed={0.1}
-          onClick={() => parallax.current.scrollTo(1)}
+          speed={1.5}
           style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
           }}>
           {/* <img src={url('server')} style={{ width: '20%' }} /> */}
-          
-          <div className="my-5">
-          <div className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400">
-            <div className="md:flex">
-              <div className="md:flex-initial">
-                <img className="object-cover h-48 w-screen" src={Hot} alt="whatever" />
-                <div className='uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3 ml-2'>
-                  Adventure
-                  </div>
-                  <a href="#" className="block mt-1 text-lg leading-tight font-medium text-black hover:underline ml-2 mt-3">Boar visits the city</a>
-                  <p className="mt-2 text-gray-500 ml-2 mr-2">Join the boar in this new adventure visiting Barcelona. What will happen? Only you can tell</p>
-                </div>
-            </div>
-          </div>
-        </div>
+          <HomeTitle />
         
         </ParallaxLayer>
 
