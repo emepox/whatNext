@@ -35,7 +35,6 @@ router.post("/login", async (req, res) => {
       const correctPassword = await bcrypt.compare(password, user.password);
 
       if (!correctPassword) throw new Error("Incorrect password");
-      console.log("Llega hasta aquí", user_id);
 
       var token = jwt.sign({ user_id }, supersecret);
 
