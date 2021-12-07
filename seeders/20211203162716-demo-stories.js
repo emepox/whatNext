@@ -10,7 +10,8 @@ module.exports = {
            name: "Jabalí",
            description: "This is the story of a true survivor: Jabalí.",
            reproductions: 0,
-           media: "../client/src/img/placeholder.jpg",
+           media:
+             "https://elcomercio.pe/resizer/KsHKxeRO4pmkG7Unb9mGR6rr1Vc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/ZHS7NZPLMRFK7OOG7CHS67R4WI.jpeg",
            category: "Drama",
            isPrivate: 0,
            isFinished: 0,
@@ -21,9 +22,10 @@ module.exports = {
          },
          {
            name: "Jabalí 2: Jabalí strikes back",
-           description: "This is the story of a true survivor: Jabalí.",
+           description: "Jabalí is back for vengeance.",
            reproductions: 0,
-           media: "../client/src/img/placeholder.jpg",
+           media:
+             "https://site-782965.mozfiles.com/files/782965/galleries/20698508/large/JABALI5.jpg?",
            category: "Drama",
            isPrivate: 0,
            isFinished: 0,
@@ -34,9 +36,10 @@ module.exports = {
          },
          {
            name: "Jabalí 3: Jabalí unchained",
-           description: "This is the story of a true survivor: Jabalí.",
+           description: "Our hero is back without restraints.",
            reproductions: 0,
-           media: "../client/src/img/placeholder.jpg",
+           media:
+             "https://revistajaraysedal.es/wp-content/uploads/2021/04/edad-maximo-desarrollo-jabali-768x432.jpg",
            category: "Drama",
            isPrivate: 0,
            isFinished: 0,
@@ -47,9 +50,10 @@ module.exports = {
          },
          {
            name: "Jabalí 4: Jabalí returns",
-           description: "This is the story of a true survivor: Jabalí.",
+           description: "More Jabalí for you.",
            reproductions: 0,
-           media: "../client/src/img/placeholder.jpg",
+           media:
+             "https://cazawonke.com/wp-content/uploads/2020/01/jabalies.jpg",
            category: "Drama",
            isPrivate: 0,
            isFinished: 0,
