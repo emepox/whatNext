@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import * as api from "../services/api";
+import Rating from 'react-rating';
+
 import {
   useTransition,
   useSpring,
@@ -108,6 +110,7 @@ export default function Story() {
             <div className="text-xl text-white font-light flex flex-col items-center justify-center mt-5 mb-3">
               {currentNode.situation}
             </div>
+            <Rating/>
             
             <div className="w-full h-full p-StoryCustom flex flex-col items-center justify-center">
               <animated.div style={{ ...rest, width: size, height: size }} className="relative p-5 rounded shadow-md">
@@ -132,6 +135,7 @@ export default function Story() {
                         >
                           finish
                         </button>
+
                       )}
                     </div>
                   </animated.div> 
