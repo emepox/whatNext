@@ -1,95 +1,122 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import * as api from "../services/api";
-import {
-  useTransition,
-  useSpring,
-  useChain,
-  config,
-  animated,
-  useSpringRef,
-} from '@react-spring/web'
-import StylesDisplayCards from './StylesDisplayCards.module.css';
+import WheelPicker from 'react-simple-wheel-picker';
 
 export default function Test() {
   const navigate = useNavigate();
   const { id, page } = useParams();
-  const [open, setOpen] = useState(false);
   const [currentNode, setCurrentNode] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState(null);
+  const [data, setData] = useState(null)
+  const [selectedId, setSelectedId] = useState(0)
 
-  const currentOptions = (() => {
-    if (!currentNode) {
-      return [];
-    }
-    if (currentNode.edges && currentNode.edges.length > 0) {
-      return currentNode.edges;
-    } else {
-      return [
-        {
-          next: '1',
-          option: 'Finish'
-        }
-      ];
-    }
-  })();
-
-  useEffect(() => {
-    getCurrentNode(page)
-  }, [id, page]);
-
-  useEffect(() => {
-    setOpen(true);
-  }, [id, page]);
+  useEffect(() => getCurrentNode(page), [page]);
 
   const getCurrentNode = async (id) => {
+    setLoading(true);
     const node = await api.getNode(id);
+    console.log(node);
     setCurrentNode(node);
+    node.Start&&setData(node.Start.map(e => ({id:`${e.next}`, value:e.option})))
+    console.log(data);
+    setLoading(false);
   };
+  // const data = currentNode.Start.map(e => ({id:`${e.next}`, value:e.option}))
+ 
+  //   const getImage = async () => {
+  //     import placeholder from "../img/placeholder.jpg"
+  //     setImage(placeholder)
+  //   }
 
-  function handleOption(e, edge) {
-    e.preventDefault();
-    setOpen(false);
-    setTimeout(() => {
-      navigate(`/test/${id}/${edge.next}`);
-    }, 1500);
-  }
 
-  // Animations
-  const springApi = useSpringRef();
-  const { size, ...rest } = useSpring({
-    ref: springApi,
-    config: config.stiff,
-    from: { size: '20%', background: 'hotpink' },
-    to: {
-      size: open ? '100%' : '20%',
-      background: open ? 'white' : 'hotpink'
-    }
-  });
-  const transApi = useSpringRef();
-  const transition = useTransition(open ? currentOptions : [], {
-    ref: transApi,
-    trail: 400 / currentOptions.length,
-    from: { opacity: 0, scale: 0 },
-    enter: { opacity: 1, scale: 1 },
-    leave: { opacity: 0, scale: 0 }
-  });
-  // This will orchestrate the two animations above, comment the last arg and it creates a sequence
-  useChain(open ? [springApi, transApi] : [transApi, springApi], [
-    0,
-    open ? 0.1 : 0.6
-  ]);
+  //----ANIMATION EFFECT----- 
+  const handleOnChange = target => {
+    // setSelectedId(target.id)
+    console.log(target)
+};
+
   return (
-    <div className={StylesDisplayCards.wrapper}>
-      <animated.div
-        style={{ ...rest, width: size, height: size }}
-        className={StylesDisplayCards.container}
-      >
-        {transition((style, item) => (
-          <animated.div className={StylesDisplayCards.item} style={style}>
-            <button onClick={(e) => handleOption(e, item)}>{item.option}</button>
-          </animated.div>
-        ))}
-      </animated.div>
+
+    <div className="flex flex-col items-center justify-center">
+
+        {loading && <div>loading</div>}
+        {currentNode && (
+          
+          <div className="">
+            {/* <div>{image && <img src={image} />}</div> */}
+            <div className="text-xl text-white font-mono italic flex flex-col items-center justify-center mb-3">
+              {currentNode.situation}
+            </div>
+            
+            <div className="w-full h-full p-StoryCustom flex flex-col items-center justify-center">
+              {data&&<WheelPicker
+              data={data}
+              onChange={handleOnChange}
+              height={150}
+              width={100}
+              titleText="Enter value same as aria-label"
+              itemHeight={30}
+              selectedID={data[0].id}
+              color="#ccc"
+              activeColor="#333"
+              backgroundColor="#fff"
+              />}
+            </div>
+            {selectedId&&<button onClick={navigate(`/test/1/${selectedId}`)}>next</button>}
+          </div>
+
+        )}
     </div>
-  );
+  )
 }
+
+// import React from 'react';
+// import WheelPicker from 'react-simple-wheel-picker';
+
+// const data = [
+//   {
+//       id: '1',
+//       value: 'test1'
+//   },
+//   {
+//       id: '2',
+//       value: 'test2'
+//   },
+//   {
+//       id: '3',
+//       value: 'test3'
+//   },
+//   {
+//       id: '4',
+//       value: 'test4'
+//   },
+//   {
+//       id: '5',
+//       value: 'test5'
+//   }
+// ];
+
+// export default function Test() {
+//     const handleOnChange = target => {
+//         console.log(target);
+//     };
+
+//   return (
+//     <div>
+//         <WheelPicker
+//             data={data}
+//             onChange={handleOnChange}
+//             height={150}
+//             width={100}
+//             titleText="Enter value same as aria-label"
+//             itemHeight={30}
+//             selectedID={data[0].id}
+//             color="#ccc"
+//             activeColor="#333"
+//             backgroundColor="#fff"
+//         />
+//     </div>
+//   )
+// }

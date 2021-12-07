@@ -53,8 +53,7 @@ export default function Profile(isProfile) {
             justifyContent: 'center',
           }}>
             <div className="flex flex-col items-center justify-center">
-              HELLO {user.username} I AM THE PROFILE PAGE
-              <p className="text-2xl text-white font-mono italic mb-10 ">Your Stories</p>
+              <p className="text-2xl text-white font-mono italic mb-10 ">Hello {user.username}! Here are your Stories</p>
               <GridStories isProfile={true} />
             </div>
 

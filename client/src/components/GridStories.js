@@ -68,15 +68,18 @@ export default function GridStories({isProfile}) {
   
   
   return (
-    <div className="flex flex-col items-center justify-center">
-      {/* <p className="text-2xl text-white font-mono italic mb-10 ">Your Stories</p> */}
-    <div>
-            <p>SEARCH for</p>
-            <input  className="border-2 border-gray-200 pr-10 pl-2 py-1 mt-2 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" name="searchWord" placeholder = "title, description..." onChange={(event) => setSearchQuery(event.target.value)} />
-          </div>
-          <div>
-            <p> Category filter</p>
-            <Select 
+    <div className="grid grid-cols-5">
+      
+      <div className="">
+        <div>
+          <p className="mb-2 text-white">Search for</p>
+          <input className="border-2 border-gray-200 pr-10 pl-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mb-4" name="searchWord" placeholder = "title, description..." onChange={(event) => setSearchQuery(event.target.value)} />
+        </div>
+        <div>
+          <p className="mb-2 text-white"> Category filter</p>
+          <div className="rounded pr-selectCustom">
+            <Select
+            placeholder= 'Select category' 
             options={options} 
             isMulti 
             onChange={(selectedOptions) => handleMultiChange(selectedOptions)}
@@ -90,25 +93,31 @@ export default function GridStories({isProfile}) {
               }
             })}
             />
+          </div>
+        </div>
       </div>
-      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-7"> 
-        {stories.filter((story) => {
-          if (hasSearchFilter(story) && hasCategoryFilter(story)) return story}).map((story) => (        
-          // this is a card
-          <div className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400">
-            <div className="md:flex">
-              <div className="md:flex-initial">
-                <img className="object-cover h-48 w-screen" src={story.media} alt="Game's image" />
-                <div className='uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3 ml-2'>
-                  <p>{story.category}</p>
+
+      <div className="flex justify-start col-span-4">
+        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-7"> 
+          {stories.filter((story) => {
+            if (hasSearchFilter(story) && hasCategoryFilter(story)) return story}).map((story) => (        
+            // this is a card
+            <div className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400">
+              <div className="md:flex">
+                <div className="md:flex-initial">
+                  <img className="object-cover h-48 w-screen" src={story.media} alt="Game's image" />
+                  <div className='uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3 ml-2'>
+                    <p>{story.category}</p>
+                  </div>
+                  <a href="#" className="block text-lg leading-tight font-medium text-black hover:underline ml-2 mt-6"><p>{story.name}</p></a>
+                  <p className="mt-3 text-gray-500 ml-2 mr-2"><p>{story.description}</p></p>
                 </div>
-                <a href="#" className="block text-lg leading-tight font-medium text-black hover:underline ml-2 mt-6"><p>{story.name}</p></a>
-                <p className="mt-3 text-gray-500 ml-2 mr-2"><p>{story.description}</p></p>
               </div>
             </div>
-          </div>
-        ))} 
-      </div>   
+          ))} 
+        </div>   
+      </div>
+
     </div>
    
   )

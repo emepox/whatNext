@@ -32,7 +32,8 @@ module.exports = {
       padding: {
         'custom': '0.05em',
         'StoryCustom': '20px',
-        'inputcustom': '17.4em'
+        'inputcustom': '17.4em',
+        'selectCustom': '4.5rem',
       },
 
 
@@ -63,6 +64,7 @@ module.exports = {
       // skew: ['group-hover']
       scale: ['hover'],
       opacity: ['hover'],
+      underline: ['hover']
     },
   },
   plugins: [],

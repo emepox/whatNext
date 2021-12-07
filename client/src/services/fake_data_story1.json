@@ -3,7 +3,7 @@
     "situation": "Situation 1",
     "media": "../img/placeholder",
     "storyId": "1",
-    "edges":[
+    "Start":[
         {
             "next":"2",
             "option":"option1.1"
@@ -19,7 +19,7 @@
     "situation": "Situation 2",
     "media": "../img/placeholder.jpg",
     "storyId": "1",
-    "edges":[
+    "Start":[
         {
             "next":"4",
             "option":"option2.1"
@@ -35,7 +35,7 @@
     "situation": "Situation 3",
     "media": "../img/placeholder.jpg",
     "storyId": "1",
-    "edges":[
+    "Start":[
         {
             "next":"6",
             "option":"option3.1"
