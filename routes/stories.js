@@ -17,6 +17,7 @@ router.get("/", async function (req, res) {
         "reproductions",
         "rating",
         "media",
+        "first"
       ],
       where: { isFinished: 0 },
       include: { model: models.User, attributes: ["username", "id"] },
