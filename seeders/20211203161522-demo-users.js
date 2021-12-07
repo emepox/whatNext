@@ -7,7 +7,8 @@ module.exports = {
     [
       {
         username: "margarita",
-        password: "1234",
+        password:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJpYXQiOjE2MzgzNTc2NDJ9.0_h8w_FScmUDtYHAzOK82sH9iLuio9Vfpdiyhi68RPY",
         email: "margarita@margarita.margarita",
         favourites: "1,2,3,4",
         createdAt: new Date(),
@@ -15,7 +16,8 @@ module.exports = {
       },
       {
         username: "pepe",
-        password: "1234",
+        password:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJpYXQiOjE2MzgzNTc2NDJ9.0_h8w_FScmUDtYHAzOK82sH9iLuio9Vfpdiyhi68RPY",
         email: "margarita@margarita.margarita",
         favourites: "1,2,3,4",
         createdAt: new Date(),
@@ -23,7 +25,8 @@ module.exports = {
       },
       {
         username: "fulano",
-        password: "1234",
+        password:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJpYXQiOjE2MzgzNTc2NDJ9.0_h8w_FScmUDtYHAzOK82sH9iLuio9Vfpdiyhi68RPY",
         email: "margarita@margarita.margarita",
         favourites: "1,2,3,4",
         createdAt: new Date(),
@@ -31,7 +34,8 @@ module.exports = {
       },
       {
         username: "mengano",
-        password: "1234",
+        password:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJpYXQiOjE2MzgzNTc2NDJ9.0_h8w_FScmUDtYHAzOK82sH9iLuio9Vfpdiyhi68RPY",
         email: "margarita@margarita.margarita",
         favourites: "1,2,3,4",
         createdAt: new Date(),
