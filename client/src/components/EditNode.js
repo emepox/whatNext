@@ -3,6 +3,7 @@ import Select from 'react-select'
 import Noty from 'noty';
 import "../../node_modules/noty/lib/themes/mint.css";
 import "../../node_modules/noty/lib/noty.css";
+
 const axios = require('axios');
 
 export default function EditNode({getNodes, nodeList}) {
@@ -79,6 +80,7 @@ export default function EditNode({getNodes, nodeList}) {
                   <button onClick={handleClick} className="bg-blue-400 p-2 rounded m-2 hover:bg-blue-500 hover:shadow-lg">Submit Changes</button>
                   </div>
               }
+
         </div>
     )
 }
