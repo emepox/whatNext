@@ -4,6 +4,9 @@ import "./CreateStory.css";
 import CreateNode from "./CreateNode";
 import AddEdge from "./AddEdge";
 import EditNode from "./EditNode";
+import Noty from 'noty';
+import "../../node_modules/noty/lib/themes/mint.css";
+import "../../node_modules/noty/lib/noty.css";
 const axios = require("axios");
 
 export default function CreateStory({ postedStory }) {
@@ -22,7 +25,7 @@ export default function CreateStory({ postedStory }) {
       const { data } = await axios.get(`/stories/${id}/nodes`);
       setNodeList(data);
     } catch (error) {
-      console.error(error);
+      console.error(error);      
     }
   }
 
@@ -52,9 +55,27 @@ export default function CreateStory({ postedStory }) {
   async function finishStory() {
   try {
     await axios.put(`/stories/${id}/finish`);
-    navigate(`/play`)
+    new Noty({
+      theme: 'mint',
+      type: 'success',
+      layout: 'topRight',
+      text: 'Your WhatNext is ready to go! 🚀',
+      timeout: 2000,
+      callbacks: {
+        afterClose: function () {
+          navigate(`/play`);
+        }
+      }
+    }).show();
   } catch (error) {
     console.error(error);
+    new Noty({
+      theme: 'mint',
+      type: 'error',
+      layout: 'topRight',
+      text: "Ouch! Something went wrong 😑... Try again!",
+      timeout: 2000
+    }).show();
   }
 }
 
