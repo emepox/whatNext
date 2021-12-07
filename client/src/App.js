@@ -8,6 +8,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import CreateStory from "./components/CreateStory";
 import StoryDetails from "./components/StoryDetails";
+import StoryPreview from "./components/StoryPreview";
 
 import Story from './components/Story';
 import Home from "./components/Home";
@@ -39,6 +40,7 @@ export default function App() {
             <Route path="/draggable" element={<DraggableList items={'Lorem ipsum dolor sit'.split(' ')} />} />
             <Route path="/story/:id/:page" element={<Story />} />
             <Route path="/test/:id/:page" element={<Test />} />
+            <Route path="/story/:id/preview" element={<StoryPreview />} />
 
 
             <Route

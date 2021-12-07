@@ -60,8 +60,11 @@ export default function GridStories({isProfile}) {
   };
 
   const handlePlay = async (id, first) => {
-    console.log(id, first)
     navigate(`/story/${id}/${first}`)
+  };
+
+  const handlePreview = async (id) => {
+    navigate(`/story/${id}/preview`)
   };
 
   //TODO: MAKE THIS WORK
@@ -116,7 +119,7 @@ export default function GridStories({isProfile}) {
           })
           .map((story) => (
             // this is a card
-            <div key={ story.id } onClick={() => handlePlay(story.id, story.first)} className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400">
+            <div key={ story.id } onClick={() => handlePreview(story.id)} className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400">
               <div className="md:flex">
                 <div className="md:flex-initial">
                   <img
