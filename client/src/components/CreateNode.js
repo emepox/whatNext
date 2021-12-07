@@ -45,9 +45,13 @@ export default function CreateNode({storyId, getNodes, nodeList}) {
 
     return (
         <div>
+          <p className="text-white text-xl font-mono mb-3"> CREATE A SCENARIO</p>
             <form onSubmit={createNode}>
-                <textarea rows="4" cols="50" onChange={handleChange} placeholder="What is the situation" className="border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" required></textarea><br/>
-                <button>save situation</button>
+                <p className="text-white font-mono mb-3"> 1️⃣  WHAT is happening? <i>Player will read this before making a choice</i></p>
+                <textarea rows="4" onChange={handleChange} placeholder="Type in a scenario" className="w-full border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" required></textarea>
+                <br/><br/>
+                <p className="text-white font-mono mb-3"> 2️⃣ <i>Don't forget to save!</i></p>
+                <button className="bg-blue-400 p-2 rounded m-2 hover:bg-blue-500 hover:shadow-lg">SAVE SCENARIO</button>
             </form>
         </div>
     )

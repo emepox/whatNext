@@ -71,8 +71,9 @@ const handleSubmit = (event) => {
 
 
   return <div>
+      <p className="text-white text-xl font-mono mb-3"> CONNECT SCENARIOS</p>
       <form onSubmit={handleSubmit}>
-          <label></label>
+          <p className="text-white font-mono mb-3"> WHAT? Player reads:</p>
           <Select 
             name="start"
             onChange={(selectedOption) => handleChangeSelect(selectedOption, "start")}
@@ -86,7 +87,9 @@ const handleSubmit = (event) => {
               )}
               </select> */}
           <br/>
-          <textarea name="option" rows="4" cols="50" onChange={handleChange} placeholder="What action is taken? " className="border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" required></textarea><br/>
+          <p className="text-white font-mono mb-3"> If Player CHOOSES...</p>
+          <textarea name="option" rows="4" onChange={handleChange} placeholder="Type in a choice" className="w-full border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" required></textarea><br/>
+          <p className="text-white font-mono mb-3"> NEXT scenario will be:</p>
           <Select 
             name="next"
             onChange={(selectedOption) => handleChangeSelect(selectedOption, "next")}
@@ -99,7 +102,7 @@ const handleSubmit = (event) => {
                   <option key={node.id} value={node.id} >{node.situation}</option>
               )}
               </select> */}
-          <button >Add connection</button> {/* disabled={newEdge.start === newEdge.next} */}
+          <button className="bg-blue-400 p-2 rounded m-2 hover:bg-blue-500 hover:shadow-lg">Add connection</button> {/* disabled={newEdge.start === newEdge.next} */}
       </form>
       {/* {error&&<div>{error}</div>} */}
     </div>;

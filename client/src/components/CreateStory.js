@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./CreateStory.css";
 import CreateNode from "./CreateNode";
 import AddEdge from "./AddEdge";
 import EditNode from "./EditNode";
+import DeleteNode from "./DeleteNode";
 import Noty from 'noty';
 import "../../node_modules/noty/lib/themes/mint.css";
 import "../../node_modules/noty/lib/noty.css";
@@ -44,6 +44,8 @@ export default function CreateStory({ postedStory }) {
         return <AddEdge nodeList={nodeList} />;
       case "edit":
         return <EditNode getNodes={getNodes} nodeList={nodeList} />;
+      case "delete":
+        return <DeleteNode getNodes={getNodes} nodeList={nodeList} />;  
     }
   };
 
@@ -80,28 +82,48 @@ export default function CreateStory({ postedStory }) {
 }
 
   return (
-    <div id="StoryDetails">
-      <h3 className="p-3 text-xl ">{name}</h3>
-      <form className="flex space-x-4">
-        <button name="create" onClick={handleToggle}>
+    <div >
+      <div>
+      <h3 className="text-2xl font-mono italic flex flex-col items-center justify-center text-white mb-4">{name}</h3>
+      <hr/>
+      <br/>
+      <p className="text-white font-mono mb-3"> Instructions:
+      <ol>
+        <li> 1. Create at least two scenarios by clicking on "Create scenario". Do not forget to save!</li>
+        <li> 2. Add a choice that, if made by the player, will connect two scenarios by clicking on "Connect scenarios".</li>
+        <li> 3. If you need it, you can also edit or delete saved scenarios</li>
+        <li> 4. When your WhatNext is ready, click on "WhatNext completed!" </li>
+      </ol>
+      </p><br/>
+      <hr/>
+      <form className="flex space-x-4 mt-4">
+        <button name="create" onClick={handleToggle} className="bg-yellow-400 p-2 rounded m-2 hover:bg-yellow-500 hover:shadow-lg">
           Create Scenario
         </button>
-        <button name="connect" onClick={handleToggle}>
+        <button name="connect" onClick={handleToggle} className="bg-yellow-400 p-2 rounded m-2 hover:bg-yellow-500 hover:shadow-lg">
           Connect Scenarios
         </button>
-        <button name="edit" onClick={handleToggle}>
+        <button name="edit" onClick={handleToggle} className="bg-yellow-400 p-2 rounded m-2 hover:bg-yellow-500 hover:shadow-lg">
           Edit Scenario
         </button>
-      </form><br/>
-      {renderSwitch()}
-      <br />
-        <button name="finish" onClick={handleButton}>
+        <button name="delete" onClick={handleToggle} className="bg-yellow-400 p-2 rounded m-2 hover:bg-yellow-500 hover:shadow-lg">
+          Delete Scenario
+        </button>
+        <button name="finish" onClick={handleButton} className="bg-green-400 p-2 rounded m-2 hover:bg-green-500 hover:shadow-lg">
           Story Completed!
         </button>
+      </form>
+      <br/>
+      </div>
+      <div>
+      {renderSwitch()}
       <br />
-      ALL SAVED SCENARIOS
-      {nodeList &&
+      </div>
+      <div>
+        ALL SAVED SCENARIOS
+        {nodeList &&
         nodeList.map((node) => <div key={node.id}>{node.situation}</div>)}
+      </div>
     </div>
   );
 }
