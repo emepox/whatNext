@@ -5,7 +5,6 @@ import "../../node_modules/noty/lib/themes/mint.css";
 import "../../node_modules/noty/lib/noty.css";
 import useAuth from "../hooks/useAuth";
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
-import Avatar from "../img/Avatar.png";
 import "./Login.css";
 
 
