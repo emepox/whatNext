@@ -2,15 +2,16 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
 import Select from 'react-select'
+import { useNavigate } from "react-router-dom";
 
 
 export default function GridStories({isProfile}) {
   
+  const navigate = useNavigate();
   const auth = useAuth();
   const [stories, setStories ] = useState( [] );
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilters, setCategoryFilters] = useState([]);
-  //["Comedy", "Drama", "Horror", "Love", "Mystery", "Other"]
 
   const options = [
     { value: 'Action', label: 'Action' },
@@ -27,12 +28,7 @@ export default function GridStories({isProfile}) {
   }, []);
 
   const requestData = async () => {
-    console.log(isProfile)
-    // const url = isProfile ? "users/profile/" : "/stories/";
-    // console.log(url)
-
     try {
-
       if ( isProfile ) {
         const { data } = await axios("users/profile/", {
           headers: {
@@ -46,13 +42,10 @@ export default function GridStories({isProfile}) {
         console.log(data)
         setStories(data);
       }
-
-
-
     } catch (error) {
       console.log(error);
     }
-};
+  };
   
   const handleMultiChange = (selectedOptions) => {
     setCategoryFilters((state) => selectedOptions.map(selectedOption => selectedOption.value));
@@ -65,8 +58,27 @@ export default function GridStories({isProfile}) {
   const hasSearchFilter = (story) => {
     return searchQuery === "" || story.name.toLowerCase().includes(searchQuery.toLowerCase()) || story.description.toLowerCase().includes(searchQuery.toLowerCase());
   };
-  
-  
+
+  const handlePlay = async (id, first) => {
+    console.log(id, first)
+    navigate(`/story/${id}/${first}`)
+  };
+
+  //TODO: MAKE THIS WORK
+  const handleEdit = (id) => {
+    console.log(`Click edit ${id}`)
+  }
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete( `stories/${ id }` )
+      requestData();
+      
+    } catch ( err ) {
+      console.log(err)
+    }
+  };
+
   return (
     <div className="grid grid-cols-5">
       
@@ -119,6 +131,5 @@ export default function GridStories({isProfile}) {
       </div>
 
     </div>
-   
-  )
+  );
 }

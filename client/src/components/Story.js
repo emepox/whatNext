@@ -11,10 +11,13 @@ import {
 const url = (name, wrap = false) =>
 `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 
+const axios = require("axios");
+
 export default function Story() {
   const parallax = useRef(null);
   const navigate = useNavigate();
   const { id, page } = useParams();
+  const [story, setStory] = useState(null);
   const [currentNode, setCurrentNode] = useState(null);
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState(null);
@@ -22,6 +25,8 @@ export default function Story() {
   const [selectedId, setSelectedId] = useState(0)
 
   useEffect(() => getCurrentNode(page), [page]);
+
+  useEffect(() => getStory(id), []);
 
   const getCurrentNode = async (id) => {
     setLoading(true);
@@ -33,6 +38,21 @@ export default function Story() {
   };
 
   const [flip, set] = useState(false)
+
+  const getStory = async (id) => {
+    try {
+      const { data } = await axios.get(`/stories/${id}/`);
+      setStory(data);
+    } catch (error) {
+      console.log(error);    
+    }
+  };
+
+  //   const getImage = async () => {
+  //     import placeholder from "../img/placeholder.jpg"
+  //     setImage(placeholder)
+  //   }
+
 
   const { scroll } = useSpring({
     scroll: (currentNode && currentNode.length - 1) * 50,
@@ -121,7 +141,7 @@ export default function Story() {
 
 
 
-
+// ---------------------previous story-----------------------------
 // import React, { useEffect, useState } from "react";
 // import { useParams, useNavigate } from "react-router-dom";
 // import * as api from "../services/api";
@@ -205,14 +225,23 @@ export default function Story() {
 //     <div className="">
         
 //         {loading && <div>loading</div>}
-//         {currentNode && (
+//         {currentNode && story &&  (
 //           <div className="">
 //             {/* <div>{image && <img src={image} />}</div> */}
-//             <div className="text-xl font-mono italic flex flex-col items-center justify-center mb-3">{currentNode.situation}</div>
+//             <div className="text-3xl text-white font-mono italic flex flex-col items-center justify-center mb-3">
+//               {story.name}
+//             </div>
+//             <div className="text-m text-white font-mono italic flex flex-col items-center justify-center mb-3">
+//               by {story.User.username}
+//             </div>
+//             <hr/>
+//             <div className="text-xl text-white font-light flex flex-col items-center justify-center mt-5 mb-3">
+//               {currentNode.situation}
+//             </div>
             
-//             <div className="w-full h-full p-StoryCustom flex flex-col items-center justify-center">
+// //             <div className="w-full h-full p-StoryCustom flex flex-col items-center justify-center">
               
-//               <animated.div style={{ ...rest, width: size, height: size }} className="relative p-5 rounded shadow-md"
+// //               <animated.div style={{ ...rest, width: size, height: size }} className="relative p-5 rounded shadow-md"
 //               >
 //                 {/* Select an option */}
 //                 {transition((style, edge) => (

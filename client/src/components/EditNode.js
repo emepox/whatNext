@@ -3,6 +3,7 @@ import Select from 'react-select'
 import Noty from 'noty';
 import "../../node_modules/noty/lib/themes/mint.css";
 import "../../node_modules/noty/lib/noty.css";
+
 const axios = require('axios');
 
 export default function EditNode({getNodes, nodeList}) {
@@ -56,6 +57,8 @@ export default function EditNode({getNodes, nodeList}) {
 
     return (
         <div>
+            <p className="text-white text-xl font-mono mb-3"> EDIT A SCENARIO</p>
+            <p className="text-white font-mono mb-3"> What scenario do you want to edit?</p>
             <Select 
                 name="next"
                 onChange={(selectedOption) => handleChangeSelect(selectedOption)}
@@ -72,10 +75,12 @@ export default function EditNode({getNodes, nodeList}) {
               {
                   editedNode&& 
                   <div>
-                  <textarea value={editedNode.situation} rows="4" cols="50" onChange={handleChange} placeholder="What action is taken? " className="border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" required></textarea><br/>
-                  <button onClick={handleClick}>Submit Changes</button>
+                  <p className="text-white font-mono mb-3"> WHAT is <i>really</i> happening?</p>
+                  <textarea value={editedNode.situation} rows="4" onChange={handleChange} placeholder="Type in a scenario" className="w-full border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" required></textarea><br/>
+                  <button onClick={handleClick} className="bg-blue-400 p-2 rounded m-2 hover:bg-blue-500 hover:shadow-lg">Submit Changes</button>
                   </div>
               }
+
         </div>
     )
 }

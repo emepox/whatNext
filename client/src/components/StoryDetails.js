@@ -1,6 +1,5 @@
 import {React, useState, useRef} from 'react'
 import CreateStory from './CreateStory';
-import "./CreateStory.css"
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import Noty from 'noty';
 import "../../node_modules/noty/lib/themes/mint.css";
