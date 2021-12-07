@@ -81,13 +81,25 @@ export default function GridStories({isProfile}) {
     }
 
   };
+
+  const handlePlay = async (id) => {
+    console.log( `Click delete ${ id }` );
+    try {
+      await axios.delete( `stories/${ id }` )
+      requestData();
+      
+    } catch ( err ) {
+      console.log(err)
+    }
+
+  };
   
   
   return (
     <div className="flex flex-col items-center justify-center">
       {/* <p className="text-2xl text-white font-mono italic mb-10 ">Your Stories</p> */}
       <div>
-        <p>SEARCH for</p>
+        <p className="text-white font-mono">SEARCH for</p>
         <input
           className="border-2 border-gray-200 pr-10 pl-2 py-1 mt-2 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
           name="searchWord"
@@ -96,7 +108,7 @@ export default function GridStories({isProfile}) {
         />
       </div>
       <div>
-        <p> Category filter</p>
+        <p className="text-white font-mono"> Category filter</p>
         <Select
           options={options}
           isMulti
@@ -142,9 +154,10 @@ export default function GridStories({isProfile}) {
                   </p>
 
                   {isProfile && (
-                    <div>
-                      <button onClick={() => handleEdit(story.id)}>Edit</button>
-                      <button onClick={() => handleDelete(story.id)}>Delete</button>
+                    <div className="flex justify-center">
+                      <button onClick={() => handlePlay(story.id) } className="bg-purple-400 text-white p-1 rounded m-2 hover:bg-purple-500 hover:shadow-lg">Play</button>
+                      <button onClick={() => handleEdit(story.id) } className="bg-purple-400 text-white p-1 rounded m-2 hover:bg-purple-500 hover:shadow-lg">Edit</button>
+                      <button onClick={() => handleDelete(story.id)} className="bg-red-400 text-white p-1 rounded m-2 hover:bg-red-500 hover:shadow-lg">Delete</button>
                     </div>
                   )}
                 </div>
