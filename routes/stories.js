@@ -62,11 +62,10 @@ router.get("/:id/nodes", async function (req, res) {
   }
 });
 
-// POSTS new story, returns story.id 
-// TODO: configure first so it gets the id of the first node of the story 
+// POSTS new story, returns story.id
+// TODO: configure first so it gets the id of the first node of the story
 
 router.post("/", userShouldBeLoggedIn, async function (req, res) {
-  console.log("I am in the endpoint, this is the user:", req.user)
   const { id } = req.user;
   try {
     const { name, description, media, category, isPrivate, isFinished } =
@@ -84,7 +83,6 @@ router.post("/", userShouldBeLoggedIn, async function (req, res) {
   } catch (error) {
     res.status(500).send(error);
   }
-
 });
 
 // PUTS the FIRST NODE ID in STORIES table
@@ -100,6 +98,24 @@ router.put("/:id/first", async function (req, res) {
     );
 
     res.send("Story successfully edited!");
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+router.put("/:storyId/review", userShouldBeLoggedIn, async function (req, res) {
+  try {
+    const { storyId } = req.params;
+    const { id } = req.user;
+    const { score } = req.body;
+    const review = await models.Rating.update(
+      { StoryId: storyId, score, UserId: id },
+      { where: { StoryId: storyId, UserId: id } }
+    );
+    if (!review[0]) await models.Rating.create(
+      { StoryId: storyId, score, UserId: id }
+    );
+    res.send("rating added")
   } catch (error) {
     res.status(500).send(error);
   }
