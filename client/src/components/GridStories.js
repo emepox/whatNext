@@ -59,12 +59,12 @@ export default function GridStories({isProfile}) {
     return searchQuery === "" || story.name.toLowerCase().includes(searchQuery.toLowerCase()) || story.description.toLowerCase().includes(searchQuery.toLowerCase());
   };
 
-  const handlePlay = async (id, first) => {
-    navigate(`/story/${id}/${first}`)
-  };
-
   const handlePreview = async (id) => {
     navigate(`/story/${id}/preview`)
+  };
+
+  const handlePlay = async (id, first) => {
+    navigate(`/story/${id}/${first}`)
   };
 
   //TODO: MAKE THIS WORK
@@ -119,7 +119,7 @@ export default function GridStories({isProfile}) {
           })
           .map((story) => (
             // this is a card
-            <div key={ story.id } onClick={() => handlePreview(story.id)} className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400">
+            <div key={ story.id } className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400">
               <div className="md:flex">
                 <div className="md:flex-initial">
                   <img
@@ -139,6 +139,11 @@ export default function GridStories({isProfile}) {
                   <p className="mt-3 text-gray-500 ml-2 mr-2">
                     {story.description} 
                   </p>
+                  {!isProfile && (
+                    <div className="flex justify-center">
+                      <button onClick={() => handlePreview(story.id) } className="bg-purple-400 text-white p-1 rounded m-2 hover:bg-purple-500 hover:shadow-lg">Play</button>
+                    </div>
+                  )}
                   {isProfile && (
                     <div className="flex justify-center">
                       <button onClick={() => handlePlay(story.id, story.first) } className="bg-purple-400 text-white p-1 rounded m-2 hover:bg-purple-500 hover:shadow-lg">Play</button>

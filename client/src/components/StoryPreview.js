@@ -25,6 +25,10 @@ export default function StoryPreview() {
     navigate(`/story/${id}/${first}`)
   };
 
+  //TODO: MAKE THIS WORK
+  const handleEdit = (id) => {
+    console.log(`Click edit ${id}`)
+  }
 
   return (
 
