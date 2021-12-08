@@ -33,7 +33,7 @@ export default function Profile(isProfile) {
   };
 
   return (
-    <div style={{ width: '100%', height: '100%', background: '#253237' }}>
+    <div style={{ width: '100%', height: '200%', background: '#253237' }}>
       <Parallax ref={parallax} pages={1}>
         <ParallaxLayer
             offset={0}

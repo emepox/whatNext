@@ -23,42 +23,42 @@ export default function Navbar() {
 
   return (
     <div>
-      <div className="bg-white opacity-90 shadow-lg px-12 py-8 grid grid-cols-2">
+      <div className="bg-navbarCustom shadow-lg px-10 py-8 grid grid-cols-2">
         <a
           href="/"
-          className="block mt-1 text-xl leading-tight font-medium  font-mono italic text-black hover:text-indigo-500"
+          className="block mt-1 text-xl leading-tight font-medium text-customWhite hover:text-indigo-500"
         >
           WhatNext
         </a>
         <div className="text-right space-x-3">
           <a
             href="/start"
-            className="text-base leading-tight font-light text-black hover:text-indigo-500"
+            className="text-base leading-tight font-light text-customWhite hover:text-indigo-500"
           >
             Create a story
           </a>
           <a
             href="/play"
-            className="text-base leading-tight font-light text-black hover:text-indigo-500"
+            className="text-base leading-tight font-light text-customWhite hover:text-indigo-500"
           >
             Play a game
           </a>
           {auth.isLoggedIn && (
             <NavLink
               to="/profile"
-              className="text-base leading-tight font-light text-black hover:text-indigo-500"
+              className="text-base leading-tight font-light text-customWhite hover:text-indigo-500"
             >
               Profile
             </NavLink>
           )}
           <a
             href="/home"
-            className="text-base leading-tight font-light text-black hover:text-indigo-500"
+            className="text-base leading-tight font-light text-customWhite hover:text-indigo-500"
           >
             About
           </a>
 
-          <a>|</a>
+          <a className="text-customWhite">|</a>
 
            {!auth.isLoggedIn && (
             <NavLink

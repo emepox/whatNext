@@ -39,10 +39,17 @@ module.exports = {
 
       backgroundColor: theme => ({
         'bgColor': '#253237',
+        'homeButton': '#00CD92'
       }),
 
       btnColor:  theme => ({
         'btnIndigo': '#6366F1',
+        'navbarCustom': '#1C2530',
+        
+      }),
+
+      textColor: theme => ({
+        'customWhite': '#F4F6F6',
       }),
       
       container: {

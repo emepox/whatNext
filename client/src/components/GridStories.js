@@ -85,7 +85,7 @@ export default function GridStories({isProfile}) {
       <div className="">
         <div>
           <p className="mb-2 text-white">Search for</p>
-          <input className="border-2 border-gray-200 pr-10 pl-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mb-4" name="searchWord" placeholder = "title, description..." onChange={(event) => setSearchQuery(event.target.value)} />
+          <input className="border-2 border-gray-200 pr-10 pl-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mb-5" name="searchWord" placeholder = "title, description..." onChange={(event) => setSearchQuery(event.target.value)} />
         </div>
         <div>
           <p className="mb-2 text-white"> Category filter</p>
@@ -122,7 +122,7 @@ export default function GridStories({isProfile}) {
                     <p>{story.category}</p>
                   </div>
                   <a href="#" className="block text-lg leading-tight font-medium text-black hover:underline ml-2 mt-6"><p>{story.name}</p></a>
-                  <p className="mt-3 text-gray-500 ml-2 mr-2"><p>{story.description}</p></p>
+                  <p className="mt-3 text-gray-500 ml-2 mr-2">{story.description}</p>
                 </div>
               </div>
             </div>

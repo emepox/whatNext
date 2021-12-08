@@ -141,7 +141,7 @@ export default function Story() {
 
 
 
-// ---------------------previous story-----------------------------
+// ---------------------PREVIOUS STORY.JS-----------------------------
 // import React, { useEffect, useState } from "react";
 // import { useParams, useNavigate } from "react-router-dom";
 // import * as api from "../services/api";

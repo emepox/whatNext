@@ -10,7 +10,7 @@ export default function AllStories(isProfile) {
   const parallax = useRef(null);
 
   return (
-    <div style={{ width: '100%', height: '100%', background: '#253237' }}>
+    <div style={{ width: '100%', height: '200%', background: '#253237' }}>
       <Parallax ref={parallax} pages={1}>
         <ParallaxLayer
             offset={0}
