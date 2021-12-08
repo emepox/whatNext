@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import * as api from "../services/api";
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
+import Rating from 'react-rating';
+
 import {
     useSpring,
     config,
@@ -224,20 +226,21 @@ export default function Story() {
 //     <div className="flex flex-col items-center justify-center">
 //     <div className="">
         
-//         {loading && <div>loading</div>}
-//         {currentNode && story &&  (
-//           <div className="">
-//             {/* <div>{image && <img src={image} />}</div> */}
-//             <div className="text-3xl text-white font-mono italic flex flex-col items-center justify-center mb-3">
-//               {story.name}
-//             </div>
-//             <div className="text-m text-white font-mono italic flex flex-col items-center justify-center mb-3">
-//               by {story.User.username}
-//             </div>
-//             <hr/>
-//             <div className="text-xl text-white font-light flex flex-col items-center justify-center mt-5 mb-3">
-//               {currentNode.situation}
-//             </div>
+        // {loading && <div>loading</div>}
+        // {currentNode && story &&  (
+        //   <div className="">
+        //     {/* <div>{image && <img src={image} />}</div> */}
+        //     <div className="text-3xl text-white font-mono italic flex flex-col items-center justify-center mb-3">
+        //       {story.name}
+        //     </div>
+        //     <div className="text-m text-white font-mono italic flex flex-col items-center justify-center mb-3">
+        //       by {story.User.username}
+        //     </div>
+        //     <hr/>
+        //     <div className="text-xl text-white font-light flex flex-col items-center justify-center mt-5 mb-3">
+        //       {currentNode.situation}
+        //     </div>
+        //     <Rating/>
             
 // //             <div className="w-full h-full p-StoryCustom flex flex-col items-center justify-center">
               
