@@ -22,7 +22,7 @@ export default function StoryPreview() {
 
   const handlePlay = async (id, first) => {
     console.log(id, first)
-    navigate(`/story/${id}/${first}`)
+    navigate(`/story/preview/${id}`)
   };
 
   //TODO: MAKE THIS WORK

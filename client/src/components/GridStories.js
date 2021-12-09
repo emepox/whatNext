@@ -3,15 +3,18 @@ import axios from "axios";
 import useAuth from "../hooks/useAuth";
 import Select from 'react-select'
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
+import Card from "./Card";
 
 
-export default function GridStories({isProfile}) {
-  
+export default function GridStories({isProfile, user}) {
+
   const navigate = useNavigate();
   const auth = useAuth();
   const [stories, setStories ] = useState( [] );
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilters, setCategoryFilters] = useState([]);
+  
 
   const options = [
     { value: 'Action', label: 'Action' },
@@ -25,6 +28,7 @@ export default function GridStories({isProfile}) {
 
   useEffect(() => {
   requestData();
+  console.log(user);
   }, []);
 
   const requestData = async () => {
@@ -35,14 +39,17 @@ export default function GridStories({isProfile}) {
             authorization: "Bearer " + localStorage.getItem("token"),
           },
         } );
+        
         console.log(data)
         setStories( data );
       } else {
         const { data } = await axios("/stories/");
         console.log(data)
+        
         setStories(data);
       }
     } catch (error) {
+      
       console.log(error);
     }
   };
@@ -81,81 +88,63 @@ export default function GridStories({isProfile}) {
       console.log(err)
     }
   };
+  
 
   return (
-    <div className="grid grid-cols-5">
-      
-      <div className="">
-        <div>
-          <p className="mb-2 text-white">Search for</p>
-          <input className="border-2 border-gray-200 pr-10 pl-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mb-5" name="searchWord" placeholder = "title, description..." onChange={(event) => setSearchQuery(event.target.value)} />
-        </div>
-        <div>
-          <p className="mb-2 text-white"> Category filter</p>
-          <div className="rounded pr-selectCustom">
-            <Select
-            placeholder= 'Select category' 
-            options={options} 
-            isMulti 
-            onChange={(selectedOptions) => handleMultiChange(selectedOptions)}
-            theme={(theme) => ({
-              ...theme,
-              borderRadius: 2,
-              colors: {
-                ...theme.colors,
-                primary: '#7C3AED',
-                primary25: '#EDE9FE',
-              }
-            })}
-            />
+    <div class="h-screen flex">
+      {/* SEARCH / FILTER SECTION */}
+      <div class="flex w-1/5 bg-grayCustom i justify-around items-top">
+        
+        <div className="mt-20">
+          <p className="tracking-wide text-md text-purple-600 font-semibold uppercase">Search and filter</p>
+          <div className="mt-7">
+            <p className="mb-2 text-gray-700">Search for</p>
+            <input className="border-2 border-gray-200 pr-10 pl-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mb-5" name="searchWord" placeholder = "title, description..." onChange={(event) => setSearchQuery(event.target.value)} />
+          </div>
+
+          <div>
+            <p className="mb-2 text-gray-700"> Category filter</p>
+            <div className="rounded pr-30">
+              <Select
+              placeholder= 'Select category' 
+              options={options} 
+              isMulti 
+              onChange={(selectedOptions) => handleMultiChange(selectedOptions)}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 2,
+                colors: {
+                  ...theme.colors,
+                  primary: '#7C3AED',
+                  primary25: '#EDE9FE',
+                }
+              })}
+              />
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="flex justify-start col-span-4">
-        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-7"> 
-          {stories.filter((story) => {
-            if (hasSearchFilter(story) && hasCategoryFilter(story)) return story}).map((story) => (        
-            // this is a card
-
-            <div key={ story.id } className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400">
-
-              <div className="md:flex">
-                <div className="md:flex-initial">
-                  <img className="object-cover h-48 w-screen" src={story.media} alt="Game's image" />
-                  <div className='uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3 ml-2'>
-                    <p>{story.category}</p>
-                  </div>
-
-                  <a
-                    href="#"
-                    className="block text-lg leading-tight font-medium text-black hover:underline ml-2 mt-6"
-                  >
-                    <p>{story.name}</p>
-                  </a>
-                  <p className="mt-3 text-gray-500 ml-2 mr-2">
-                    {story.description} 
-                  </p>
-                  {!isProfile && (
-                    <div className="flex justify-center">
-                      <button onClick={() => handlePreview(story.id) } className="bg-purple-400 text-white p-1 rounded m-2 hover:bg-purple-500 hover:shadow-lg">Play</button>
-                    </div>
-                  )}
-                  {isProfile && (
-                    <div className="flex justify-center">
-                      <button onClick={() => handlePlay(story.id, story.first) } className="bg-purple-400 text-white p-1 rounded m-2 hover:bg-purple-500 hover:shadow-lg">Play</button>
-                      <button onClick={() => handleEdit(story.id) } className="bg-purple-400 text-white p-1 rounded m-2 hover:bg-purple-500 hover:shadow-lg">Edit</button>
-                      <button onClick={() => handleDelete(story.id)} className="bg-red-400 text-white p-1 rounded m-2 hover:bg-red-500 hover:shadow-lg">Delete</button>
-                    </div>
-                  )}
-
-                </div>
-              </div>
-            </div>
-          ))} 
-        </div>   
+      <div class="w-4/5 bg-grayCustom1 justify-center">
+        {isProfile 
+        ? <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">Hello {user && user}! check all the stories</p>
+        : <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">Check All The Stories</p>
+        }
+        <div className="flex justify-center items-center"> 
+          <div className="flex justify-center items-center grid grid-cols-4 gap-10"> 
+            {stories && stories.filter((story) => {
+              if (hasSearchFilter(story) && hasCategoryFilter(story)) return story}).map((story) => (        
+              <Card 
+                story={story} 
+                isProfile={isProfile} 
+                handleEdit={() => handleEdit(story.id)} 
+                handleDelete={() => handleDelete(story.id)} 
+                handlePlay={() => handlePlay(story.id, story.first)}
+              />
+            ))} 
+          </div> 
+        </div>  
       </div>
-
-    </div>
-  );
+</div>
+  )
 }

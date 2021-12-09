@@ -33,32 +33,11 @@ export default function Profile(isProfile) {
   };
 
   return (
-    <div style={{ width: '100%', height: '200%', background: '#253237' }}>
-      <Parallax ref={parallax} pages={1}>
-        <ParallaxLayer
-            offset={0}
-            speed={0}
-            factor={3}
-            style={{
-              backgroundImage: url('stars', true),
-              backgroundSize: 'cover',
-            }}
-          />
-        <ParallaxLayer 
-          offset={0}
-          speed={0.1}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-            <div className="flex flex-col items-center justify-center">
-              <p className="text-2xl text-white font-mono italic mb-10 ">Hello {user.username}! Here are your Stories</p>
-              <GridStories isProfile={true} />
-            </div>
+    
+      <div className="">
+        <GridStories isProfile={true} user={user.username}/>
+      </div>
 
-        </ParallaxLayer>
-      </Parallax>
-    </div>
+
   );
 }

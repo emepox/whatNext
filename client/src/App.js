@@ -19,14 +19,14 @@ import AllStories from './components/AllStories';
 import AuthProvider from "./components/AuthProvider";
 import PrivateRoute from "./components/PrivateRoute";
 
-
+import StoryPreview2 from './components/StoryPreview2';
 
 
 
 export default function App() {
   return (
 
-    <div className="bg-bgColor" style={{ width: '100%', height: '100%' }}>
+    <div style={{ width: '100%', height: '100%' }}>
     
       <AuthProvider>
         <BrowserRouter>
@@ -39,8 +39,9 @@ export default function App() {
             <Route path="/" element={<ParallaxComponent />} />
             
             <Route path="/story/:id/:page" element={<Story />} />
-            <Route path="/test/:id/:page" element={<Test />} />
-            <Route path="/story/:id/preview" element={<StoryPreview />} />
+            <Route path="/story/preview/${id}" element={<StoryPreview />} />
+            <Route path="/storypreview" element={<StoryPreview2 />} />
+            
 
 
             <Route

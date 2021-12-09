@@ -39,12 +39,15 @@ module.exports = {
 
       backgroundColor: theme => ({
         'bgColor': '#253237',
-        'homeButton': '#00CD92'
+        'homeButton': '#00CD92',
+        'navbarCustom': '#1C2530',
+        'grayCustom': '#DAE1ED',
+        'grayCustom1': '#f8f9ff'
       }),
 
       btnColor:  theme => ({
         'btnIndigo': '#6366F1',
-        'navbarCustom': '#1C2530',
+        
         
       }),
 
