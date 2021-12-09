@@ -110,18 +110,18 @@
 //       </div>
 
 //       <div className="my-5">
-//         <div class="w-full mx-auto mt-20 text-center md:w-10/12">
-//             <div class="relative z-0 w-full mt-8">
-//                 <div class="relative overflow-hidden shadow-2xl">
-//                     <div class="flex items-center flex-none px-4 bg-green-400 rounded-b-none h-11 rounded-xl">
-//                         <div class="flex space-x-1.5">
-//                             <div class="w-3 h-3 border-2 border-white rounded-full"></div>
-//                             <div class="w-3 h-3 border-2 border-white rounded-full"></div>
-//                             <div class="w-3 h-3 border-2 border-white rounded-full"></div>
+//         <div className="w-full mx-auto mt-20 text-center md:w-10/12">
+//             <div className="relative z-0 w-full mt-8">
+//                 <div className="relative overflow-hidden shadow-2xl">
+//                     <div className="flex items-center flex-none px-4 bg-green-400 rounded-b-none h-11 rounded-xl">
+//                         <div className="flex space-x-1.5">
+//                             <div className="w-3 h-3 border-2 border-white rounded-full"></div>
+//                             <div className="w-3 h-3 border-2 border-white rounded-full"></div>
+//                             <div className="w-3 h-3 border-2 border-white rounded-full"></div>
 //                         </div>
 //                     </div>
 
-//                     <div class="w-full mx-auto mt-20 md:w-5/12 mb-20 ">
+//                     <div className="w-full mx-auto mt-20 md:w-5/12 mb-20 ">
 //                     <div><StoryPreview2 /></div>
 //                     <div><StoryPreview2 /></div>
 //                     </div>
@@ -179,23 +179,23 @@
       
 
 //       <section>
-//         <div class="container max-w-full mx-auto py-24 px-6">
-//           <h1 class="text-center text-4xl text-black font-medium leading-snug tracking-wider">
+//         <div className="container max-w-full mx-auto py-24 px-6">
+//           <h1 className="text-center text-4xl text-black font-medium leading-snug tracking-wider">
 //             Stories
 //           </h1>
-//           <p class="text-center text-lg text-gray-700 mt-2 px-6">
+//           <p className="text-center text-lg text-gray-700 mt-2 px-6">
 //             Sed ut perspiciatis unde omnis iste natus error sit voluptatem
 //             accusantium doloremque laudantium, totam rem aperiam.
 //           </p>
-//           <div class="h-1 mx-auto bg-indigo-200 w-24 opacity-75 mt-4 rounded"></div>
+//           <div className="h-1 mx-auto bg-indigo-200 w-24 opacity-75 mt-4 rounded"></div>
 
-//           <div class="max-w-full md:max-w-6xl mx-auto my-3 md:px-8">
-//             <div class="relative block flex flex-col md:flex-row items-center">
+//           <div className="max-w-full md:max-w-6xl mx-auto my-3 md:px-8">
+//             <div className="relative block flex flex-col md:flex-row items-center">
               
 //               {/* CARD HOBBIE */}
-//               <div class="w-11/12 max-w-sm sm:w-3/5 lg:w-1/3 sm:my-5 my-8 relative z-0 rounded-lg shadow-lg md:-mr-4">
-//                 <div class="bg-white text-black rounded-lg shadow-inner shadow-lg overflow-hidden">
-//                   <div class="block text-left text-sm sm:text-md text-black">
+//               <div className="w-11/12 max-w-sm sm:w-3/5 lg:w-1/3 sm:my-5 my-8 relative z-0 rounded-lg shadow-lg md:-mr-4">
+//                 <div className="bg-white text-black rounded-lg shadow-inner shadow-lg overflow-hidden">
+//                   <div className="block text-left text-sm sm:text-md text-black">
 //                     <img className="object-cover h-48 w-screen" src={Bestpickle} alt="whatever" />
 //                     <div className="m-5">
 //                       <div className='uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3'>
@@ -211,11 +211,11 @@
 
 
 //               {/* CARD MOST POPULAR */}
-//               <div class="w-full max-w-md sm:w-2/3 lg:w-1/3 sm:my-5 my-8 relative z-10 bg-white rounded-lg shadow-lg">
-//                 <div class="text-sm leading-none rounded-t-lg bg-gray-200 text-black font-semibold uppercase py-4 text-center tracking-wide">
+//               <div className="w-full max-w-md sm:w-2/3 lg:w-1/3 sm:my-5 my-8 relative z-10 bg-white rounded-lg shadow-lg">
+//                 <div className="text-sm leading-none rounded-t-lg bg-gray-200 text-black font-semibold uppercase py-4 text-center tracking-wide">
 //                   Most Popular
 //                 </div>
-//                 <div class="block text-left text-sm sm:text-md  text-black">
+//                 <div className="block text-left text-sm sm:text-md  text-black">
 //                     <img className="object-cover h-48 w-screen" src={Beetjuice} alt="whatever" />
 //                     <div className="m-5">
 //                       <div className='uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3'>
@@ -230,9 +230,9 @@
 
 
 //               {/* CARD ENTERPRISE */}
-//               <div class="w-11/12 max-w-sm sm:w-3/5 lg:w-1/3 sm:my-5 my-8 relative z-0 rounded-lg shadow-lg md:-mr-4">
-//                     <div class="bg-white text-black rounded-lg shadow-inner shadow-lg overflow-hidden">
-//                       <div class="block text-left text-sm sm:text-md text-black">
+//               <div className="w-11/12 max-w-sm sm:w-3/5 lg:w-1/3 sm:my-5 my-8 relative z-0 rounded-lg shadow-lg md:-mr-4">
+//                     <div className="bg-white text-black rounded-lg shadow-inner shadow-lg overflow-hidden">
+//                       <div className="block text-left text-sm sm:text-md text-black">
 //                         <img className="object-cover h-48 w-screen" src={Citric} alt="whatever" />
 //                         <div className="m-5">
 //                           <div className='uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3'>

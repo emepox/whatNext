@@ -5,6 +5,7 @@ import Select from 'react-select'
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import Card from "./Card";
+import CreateStory from "./CreateStory";
 
 
 export default function GridStories({isProfile, user}) {
@@ -14,7 +15,6 @@ export default function GridStories({isProfile, user}) {
   const [stories, setStories ] = useState( [] );
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilters, setCategoryFilters] = useState([]);
-  
 
   const options = [
     { value: 'Action', label: 'Action' },
@@ -65,17 +65,13 @@ export default function GridStories({isProfile, user}) {
     return searchQuery === "" || story.name.toLowerCase().includes(searchQuery.toLowerCase()) || story.description.toLowerCase().includes(searchQuery.toLowerCase());
   };
 
-  const handlePreview = async (id) => {
-    navigate(`/story/${id}/preview`)
-  };
-
   const handlePlay = async (id, first) => {
     navigate(`/story/${id}/${first}`)
   };
 
   //TODO: MAKE THIS WORK
-  const handleEdit = (id) => {
-    console.log(`Click edit ${id}`)
+  const handleEdit = (id, name) => {
+    navigate(`/create`, { state: { id, name }})
   }
 
   const handleDelete = async (id) => {
@@ -90,13 +86,16 @@ export default function GridStories({isProfile, user}) {
   
 
   return (
-    <div className="h-screen flex">
+
+    <div className="flex">
       {/* SEARCH / FILTER SECTION */}
-      <div className="flex w-1/5 bg-grayCustom i justify-around items-top">
+      <div className={(isProfile) ? "flex w-1/5 bg-grayCustom i justify-around items-top" : "flex w-1/5 bg-grayCustom i justify-around items-top h-screen"}>
+        
         <div className="mt-20">
-          <p className="tracking-wide text-md text-purple-600 font-semibold uppercase">
-            Search and filter
-          </p>
+          <p className="tracking-wide text-md text-purple-600 font-semibold uppercase">Search and filter</p>
+          {(isProfile)
+          ?<p className="tracking-wide text-md text-purple-600 font-semibold uppercase">your WhatNext</p>
+          :""}
           <div className="mt-7">
             <p className="mb-2 text-gray-700">Search for</p>
             <input
@@ -132,19 +131,19 @@ export default function GridStories({isProfile, user}) {
         </div>
       </div>
 
-      <div class="w-4/5 bg-grayCustom1 justify-center">
+      <div className="w-4/5 bg-grayCustom1 justify-center">
         {isProfile 
         ? <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">Hello {user && user}! Here are your <i>WhatNext</i>:</p>
         : <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">All WhatNext</p>
         }
         <div className="flex justify-center items-center"> 
-          <div className="flex justify-center items-center grid grid-cols-4 gap-10"> 
+          <div className="flex justify-center items-center grid-cols-4 gap-10"> 
             {stories && stories.filter((story) => {
               if (hasSearchFilter(story) && hasCategoryFilter(story)) return story}).map((story) => (        
               <Card 
                 story={story} 
                 isProfile={isProfile} 
-                handleEdit={() => handleEdit(story.id)} 
+                handleEdit={() => handleEdit(story.id, story.name)} 
                 handleDelete={() => handleDelete(story.id)} 
                 handlePlay={() => handlePlay(story.id, story.first)}
               />

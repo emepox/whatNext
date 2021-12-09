@@ -7,7 +7,7 @@ import "./Login.css";
 import Card from "./Card";
 
 
-export default function Favourites({isProfile, user}) {
+export default function Favourites({isProfile}) {
 
   const navigate = useNavigate();
   const auth = useAuth();
@@ -28,32 +28,28 @@ export default function Favourites({isProfile, user}) {
 
   useEffect(() => {
   requestData();
-  console.log(user);
   }, []);
 
   const requestData = async () => {
     try {
-      if ( isProfile ) {
-        const { data } = await axios("users/profile/", {
+        const { data } = await axios("users/favourites", {
           headers: {
             authorization: "Bearer " + localStorage.getItem("token"),
           },
         } );
         
-        console.log(data)
         setStories( data );
-      } else {
-        const { data } = await axios("/stories/");
-        console.log(data)
-        
-        setStories(data);
-      }
+
     } catch (error) {
-      
       console.log(error);
     }
   };
   
+
+  const handlePlay = async (id, first) => {
+    navigate(`/story/${id}/${first}`)
+  };
+
   const handleMultiChange = (selectedOptions) => {
     setCategoryFilters((state) => selectedOptions.map(selectedOption => selectedOption.value));
   };
@@ -64,10 +60,6 @@ export default function Favourites({isProfile, user}) {
 
   const hasSearchFilter = (story) => {
     return searchQuery === "" || story.name.toLowerCase().includes(searchQuery.toLowerCase()) || story.description.toLowerCase().includes(searchQuery.toLowerCase());
-  };
-
-  const handlePlay = async (id, first) => {
-    navigate(`/story/${id}/${first}`)
   };
 
   const handleDeleteFavourite = async (id) => {
@@ -82,17 +74,19 @@ export default function Favourites({isProfile, user}) {
   
 
   return (
-    <div class="h-screen flex">
+    <div className="flex">
       {/* SEARCH / FILTER SECTION */}
       <div class="flex w-1/5 bg-grayCustom i justify-around items-top">
-        
         <div className="mt-20">
-          {/* <p className="tracking-wide text-md text-purple-600 font-semibold uppercase">Search and filter</p>
+          <p className="tracking-wide text-md text-purple-600 font-semibold uppercase">Search and filter</p>
+          {(isProfile)
+          ?<p className="tracking-wide text-md text-purple-600 font-semibold uppercase">your favourites</p>
+          :""}
           <div className="mt-7">
             <p className="mb-2 text-gray-700">Search for</p>
             <input className="border-2 border-gray-200 pr-10 pl-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mb-5" name="searchWord" placeholder = "title, description..." onChange={(event) => setSearchQuery(event.target.value)} />
           </div>
-
+          
           <div>
             <p className="mb-2 text-gray-700"> Category filter</p>
             <div className="rounded pr-30">
@@ -112,21 +106,19 @@ export default function Favourites({isProfile, user}) {
               })}
               />
             </div>
-          </div>*/}
-        </div> 
+          </div>
+        </div>
       </div>
 
-      <div class="w-4/5 bg-grayCustom1 justify-center">
+      <div className="w-4/5 bg-grayCustom1 justify-top">
         <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">Your favourite <i>WhatNext</i>:</p>
         <div className="flex justify-center items-center"> 
           <div className="flex justify-center items-center grid grid-cols-4 gap-10"> 
-            {stories && stories.filter((story) => {
+              {stories && stories.filter((story) => {
               if (hasSearchFilter(story) && hasCategoryFilter(story)) return story}).map((story) => (        
               <Card 
                 story={story} 
-                isProfile={isProfile} 
-                handleEdit={() => handleEdit(story.id)} 
-                handleDelete={() => handleDelete(story.id)} 
+                isProfile={!isProfile}
                 handlePlay={() => handlePlay(story.id, story.first)}
               />
             ))} 

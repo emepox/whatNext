@@ -9,6 +9,9 @@ import Login from "./components/Login";
 import CreateStory from "./components/CreateStory";
 import StoryDetails from "./components/StoryDetails";
 import StoryPreview from "./components/StoryPreview";
+
+import TestFlow from "./components/TestFlow";
+
 import Story from './components/Story';
 import Home from "./components/Home";
 import Navbar from './components/Navbar';
@@ -37,9 +40,11 @@ export default function App() {
             <Route path="/" element={<ParallaxComponent />} />
 
             <Route path="/story/:id/:page" element={<Story />} />
-            <Route path="/story/preview/${id}" element={<StoryPreview />} />
+            <Route path="/story/preview/:id" element={<StoryPreview />} />
             <Route path="/storypreview" element={<StoryPreview2 />} />
             <Route path="/story/:id/end" element={<StoryEnd />} />
+            <Route path="/testflow" element={<TestFlow />} />
+
 
             <Route
               path="/profile"
