@@ -95,7 +95,13 @@ export default function Story() {
               <div className="text-xl font-mono text-white italic flex flex-col items-center justify-center mb-5">
                 {currentNode.situation}
               </div>
-              <Rating/>
+              <Rating
+                emptySymbol={<span className="material-icons text-white">
+                star_border
+                </span>}
+                fullSymbol={<span className="material-icons text-white">
+                grade
+                </span>}/>
               <p className="text-white mb-3 font-mono text-gray-400">Scroll and select an option from the list below</p>
               <div className="bg-white rounded font-mono text-purple-500"> 
                 <animated.div

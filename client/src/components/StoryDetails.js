@@ -2,7 +2,7 @@ import {React, useState, useRef} from 'react'
 import CreateStory from './CreateStory';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import Noty from 'noty';
-import "../../node_modules/noty/lib/themes/mint.css";
+import "../../node_modules/noty/lib/themes/sunset.css";
 import "../../node_modules/noty/lib/noty.css";
 
 const axios = require('axios');
@@ -59,7 +59,7 @@ export default function StoryDetails() {
         });
         setPostedStory(data)
         new Noty({
-            theme: 'mint',
+            theme: 'sunset',
             type: 'success',
             layout: 'topRight',
             text: "New WhatNext template generated. It's time to fill it in! ⚡️",
@@ -68,7 +68,7 @@ export default function StoryDetails() {
         } catch (error) {
         console.error(error);
         new Noty({
-            theme: 'mint',
+            theme: 'sunset',
             type: 'error',
             layout: 'topRight',
             text: "Ouch! Something went wrong 😑... Try again!",

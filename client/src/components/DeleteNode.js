@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Select from 'react-select'
 import Noty from 'noty';
-import "../../node_modules/noty/lib/themes/mint.css";
+import "../../node_modules/noty/lib/themes/sunset.css";
 import "../../node_modules/noty/lib/noty.css";
 const axios = require('axios');
 
@@ -23,14 +23,14 @@ export default function DeleteNode({getNodes, nodeList}) {
           });
           getNodes()
           new Noty({
-            theme: 'mint',
+            theme: 'sunset',
             type: 'success',
             layout: 'topRight',
             text: 'Scenario deleted successfully ✨',
             timeout: 2000,
           }).show();
           new Noty({
-            theme: 'mint',
+            theme: 'sunset',
             type: 'information',
             layout: 'topRight',
             text: "👉 Now you can EDIT other scenarios, CREATE a new one and/or CONNECT them!",
@@ -39,7 +39,7 @@ export default function DeleteNode({getNodes, nodeList}) {
         } catch (error) {
           console.log(error);
           new Noty({
-            theme: 'mint',
+            theme: 'sunset',
             type: 'error',
             layout: 'topRight',
             text: `${error.message}`,
