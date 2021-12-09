@@ -14,6 +14,7 @@ import Home from "./components/Home";
 import Navbar from './components/Navbar';
 import Profile from "./components/Profile";
 import AllStories from './components/AllStories';
+import StoryEnd from './components/StoryEnd';
 
 import AuthProvider from "./components/AuthProvider";
 import PrivateRoute from "./components/PrivateRoute";
@@ -24,9 +25,7 @@ import StoryPreview2 from './components/StoryPreview2';
 
 export default function App() {
   return (
-
-    <div style={{ width: '100%', height: '100%' }}>
-    
+    <div style={{ width: "100%", height: "100%" }}>
       <AuthProvider>
         <BrowserRouter>
           <Navbar />
@@ -36,12 +35,11 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/play" element={<AllStories />} />
             <Route path="/" element={<ParallaxComponent />} />
-            
+
             <Route path="/story/:id/:page" element={<Story />} />
             <Route path="/story/preview/${id}" element={<StoryPreview />} />
             <Route path="/storypreview" element={<StoryPreview2 />} />
-            
-
+            <Route path="/story/:id/end" element={<StoryEnd />} />
 
             <Route
               path="/profile"
@@ -55,7 +53,6 @@ export default function App() {
               path="/create"
               element={
                 <PrivateRoute>
-
                   <CreateStory />
                 </PrivateRoute>
               }
@@ -71,8 +68,6 @@ export default function App() {
           </Routes>
         </BrowserRouter>
       </AuthProvider>
-
-
     </div>
   );
 }
