@@ -2,6 +2,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import GridStories from './GridStories';
+import Favourites from './Favourites';
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
 
@@ -36,6 +37,7 @@ export default function Profile(isProfile) {
     
       <div className="">
         <GridStories isProfile={true} user={user.username}/>
+        <Favourites isProfile={true} user={user}/>
       </div>
 
 
