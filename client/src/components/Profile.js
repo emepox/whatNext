@@ -35,9 +35,9 @@ export default function Profile(isProfile) {
 
   return (
     
-      <div className="">
+      <div>
         <GridStories isProfile={true} user={user.username}/>
-        <Favourites isProfile={true} user={user}/>
+        <Favourites isProfile={true}/>
       </div>
 
 
