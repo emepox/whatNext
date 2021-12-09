@@ -62,14 +62,6 @@ export default function App() {
               }
             />
             <Route
-              path="/edit"
-              element={
-                <PrivateRoute>
-                  <CreateStory postedStory/>
-                </PrivateRoute>
-              }
-            />
-            <Route
               path="/start"
               element={
                 <PrivateRoute>

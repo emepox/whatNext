@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import CreateNode from "./CreateNode";
 import AddEdge from "./AddEdge";
 import EditNode from "./EditNode";
@@ -12,8 +12,13 @@ import "./Login.css";
 const axios = require("axios");
 
 
-export default function CreateStory({ postedStory}) {
-  const { id, name } = postedStory;
+export default function CreateStory({ postedStory }) {
+  
+  const { state } = useLocation();
+  const { id, name } = state;
+  console.log(state)
+  // const { id, name } = postedStory;
+   
   const [nodeList, setNodeList] = useState([]);
   const [toggle, setToggle] = useState("create");
   const navigate = useNavigate();
@@ -31,7 +36,7 @@ export default function CreateStory({ postedStory}) {
       console.error(error);      
     }
   }
-
+  
   const handleToggle = (event) => {
     event.preventDefault();
     setToggle(event.target.name);

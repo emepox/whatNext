@@ -1,6 +1,7 @@
 import {React, useState, useRef} from 'react'
 import CreateStory from './CreateStory';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
+import { useNavigate } from "react-router-dom";
 import Noty from 'noty';
 import "../../node_modules/noty/lib/themes/sunset.css";
 import "../../node_modules/noty/lib/noty.css";
@@ -12,10 +13,9 @@ const url = (name, wrap = false) =>
 
 export default function StoryDetails() {
     const parallax = useRef(null);
-
-
+    const navigate = useNavigate();
+    
     const categories = ["Action", "Comedy", "Drama", "Horror", "Love", "Mystery", "Other"];
-
 
     const [newStory, setNewStory] = useState({
         name: "",
@@ -33,6 +33,7 @@ export default function StoryDetails() {
         first:null
     });
 
+    
     // changes newGame values for inputs
     const handleChange = (event) => {
         const { value, name } = event.target;
@@ -64,6 +65,10 @@ export default function StoryDetails() {
             layout: 'topRight',
             text: "New WhatNext template generated. It's time to fill it in! ⚡️",
             timeout: 2000,
+            callbacks: {
+            afterClose: function () {
+                navigate(`/start`, { state: { id:data.id, name:data.name }});
+            }}
           }).show();
         } catch (error) {
         console.error(error);

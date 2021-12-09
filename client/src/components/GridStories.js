@@ -15,7 +15,6 @@ export default function GridStories({isProfile, user}) {
   const [stories, setStories ] = useState( [] );
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilters, setCategoryFilters] = useState([]);
-  
 
   const options = [
     { value: 'Action', label: 'Action' },
@@ -73,9 +72,7 @@ export default function GridStories({isProfile, user}) {
 
   //TODO: MAKE THIS WORK
   const handleEdit = (id, name) => {
-    // console.log(id, name)
-    const postedStory = {id, name}
-    navigate(`/edit`, postedStory)
+    navigate(`/create`, { state: { id, name }})
   }
 
   const handleDelete = async (id) => {
