@@ -36,7 +36,7 @@ router.get("/:id", async function (req, res) {
     const { id } = req.params;
     const stories = await models.Story.findOne({
       where: { id },
-      include: { model: models.User, attributes: ["username"] },
+      include: { model: models.User, attributes: ["username", "id"] },
     });
 
     res.send(stories);
