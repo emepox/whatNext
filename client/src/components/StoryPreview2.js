@@ -38,34 +38,59 @@ export default function StoryPreview2() {
   }
 
   return (
-    <div>
-       <div className="mb-4">
-         
-        <div className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white">
-          <div className="w-full md:w-1/3 bg-white grid place-items-center">
-            <img src={Citric} className="rounded-xl" />
+    <div className="col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-4 xxl:col-span-4 px-6 py-6">
+    <p className="text-purple-500 font-semibold uppercase mt-10 mb-10">STORY DETAILS</p>
+      <div className="bg-white rounded-xl p-4 shadow-xl ">
+        <div className="flex flex-col justify-center items-center">
+          <div className="w-32 h-32 rounded-full bg-gray-300 border-2 border-white mt-2">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVxhAxJ4D7MOeTTj6kR9PBeZonW5HM7giKjTbEmR-HMBwf3G1VqGnlwpO1kWrdyIZu8_U&usqp=CAU"
+              className="rounded-full w-auto"
+            />
           </div>
-          <div className="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3">
-            <div className="flex justify-between item-center">
-              <p className="text-gray-500 font-medium hidden md:block ">HORROR</p>
-              <div className="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-yellow-500" viewBox="0 0 20 20"
-                  fill="currentColor">
-                  <path
-                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-                <p className="text-gray-600 font-bold text-sm ml-1">
-                  4.96
-                  <span className="text-gray-500 font-normal">(76 reviews)</span>
-                </p>
+          <p className="font-semibold text-xl mt-1">Title</p>
+          <p className="font-semibold text-base text-gray-400">category</p>
+
+          <div className="relative p-4 rounded-lg shadow-xl w-full bg-cover bg-center h-32 mt-4">
+            <div className="absolute inset-0 bg-gray-400 bg-opacity-50"></div>
+            <div className="relative w-full h-full px-4 sm:px-6 lg:px-4 flex items-center justify-center">
+              <div>
+                <h3 className="text-center text-white text-xl font-bold">What is it about?</h3>
+                <h3 className="text-center text-white  mt-2 ">
+                  cat ipsum. Meow meow
+                </h3>
               </div>
-          
-              
             </div>
-            <h3 className="font-black text-gray-800 md:text-3xl text-xl ">Boar visits the city</h3>
-            <p className="md:text-lg text-gray-500 text-base">Join the boar in this new adventure visiting Barcelona. What will happen? Only you can tell</p>
-         
           </div>
+        </div>
+      </div>
+  
+      <div className="bg-white p-3 rounded-xl shadow-xl flex items-center justify-between mt-4">
+        <div className="flex space-x-6 items-center">
+          <img
+            src="https://i.pinimg.com/originals/25/0c/a0/250ca0295215879bd0d53e3a58fa1289.png"
+            className="w-auto h-24 rounded-lg"
+          />
+          <div>
+            <p className="font-semibold text-base">Created by</p>
+            <p className="font-semibold text-sm text-gray-400">
+              username
+            </p>
+          </div>
+        </div>
+      </div>
+ 
+      <div className="bg-white rounded-xl p-4 shadow-xl mt-4">
+        <div className="flex flex-col justify-center items-center">
+          <img
+            src="https://cdn3d.iconscout.com/3d/premium/thumb/upload-social-media-post-4291893-3569926.png"
+            className="w-auto h-40 rounded-lg"
+          />
+          <p className="font-semibold text-xl mt-1">Rating</p>
+          <p className="font-semibold text-sm text-gray-400 text-center">
+            cat ipsum. meow meow
+          </p>
+          <div className="mt-5"><Rating /></div>
         </div>
       </div>
     </div>

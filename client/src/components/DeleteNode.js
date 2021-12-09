@@ -15,8 +15,7 @@ export default function DeleteNode({getNodes, nodeList}) {
     const handleChange = event =>{
         setDeletedNode(state => ({...state, situation:event.target.value}))
     }
-    const handleClick = async () =>{
-        const {id} = deletedNode
+    const handleClick = async (id) =>{
         try {
             await axios(`/nodes/${id}`, {
             method: 'DELETE',
