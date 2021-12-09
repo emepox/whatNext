@@ -40,14 +40,14 @@ export default function StoryEnd() {
         e.preventDefault();
         console.log( "HEEE" )
         try {
-            await axios(`/stories/ratings`, {
+            await axios(`/stories/${id}review`, {
               method: "PUT",
               headers: {
                 authorization: "Bearer " + localStorage.getItem("token"),
               },
               data: {
                 score: rating,
-                storyId: story.id,
+                // storyId: story.id,
               },
             });
             

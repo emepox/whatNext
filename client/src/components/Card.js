@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Card({story, isProfile, handleEdit, handleDelete, handlePlay}) {
   return (
-
+<div>
       <div key={ story.id } className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-xl overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400">
         
         <div className="md:flex">
@@ -85,7 +85,7 @@ export default function Card({story, isProfile, handleEdit, handleDelete, handle
                 </div>
               </div>
             </div>
-          </div>
+      </div>
 
           <div className="ml-5 mr-5">
             <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3 ">
@@ -104,6 +104,7 @@ export default function Card({story, isProfile, handleEdit, handleDelete, handle
                 : story.description}
             </p>
           </div>
+    
           {/*             
             {!isProfile && (
               <div className="flex justify-center">
@@ -112,7 +113,7 @@ export default function Card({story, isProfile, handleEdit, handleDelete, handle
             )} */}
 
         </div>
-      </div>
-    </div>
+  
+      
   );
 }
