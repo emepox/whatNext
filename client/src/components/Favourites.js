@@ -7,7 +7,7 @@ import "./Login.css";
 import Card from "./Card";
 
 
-export default function GridStories({isProfile, user}) {
+export default function Favourites({isProfile, user}) {
 
   const navigate = useNavigate();
   const auth = useAuth();
@@ -28,6 +28,7 @@ export default function GridStories({isProfile, user}) {
 
   useEffect(() => {
   requestData();
+  console.log(user);
   }, []);
 
   const requestData = async () => {
@@ -65,22 +66,13 @@ export default function GridStories({isProfile, user}) {
     return searchQuery === "" || story.name.toLowerCase().includes(searchQuery.toLowerCase()) || story.description.toLowerCase().includes(searchQuery.toLowerCase());
   };
 
-  const handlePreview = async (id) => {
-    navigate(`/story/${id}/preview`)
-  };
-
   const handlePlay = async (id, first) => {
     navigate(`/story/${id}/${first}`)
   };
 
-  //TODO: MAKE THIS WORK
-  const handleEdit = (id) => {
-    console.log(`Click edit ${id}`)
-  }
-
-  const handleDelete = async (id) => {
+  const handleDeleteFavourite = async (id) => {
     try {
-      await axios.delete( `stories/${ id }` )
+      await axios.delete( `users/favourites/${ id }` )
       requestData();
       
     } catch ( err ) {
@@ -90,53 +82,42 @@ export default function GridStories({isProfile, user}) {
   
 
   return (
-    <div className="h-screen flex">
+    <div class="h-screen flex">
       {/* SEARCH / FILTER SECTION */}
-      <div className="flex w-1/5 bg-grayCustom i justify-around items-top">
+      <div class="flex w-1/5 bg-grayCustom i justify-around items-top">
+        
         <div className="mt-20">
-          <p className="tracking-wide text-md text-purple-600 font-semibold uppercase">
-            Search and filter
-          </p>
+          {/* <p className="tracking-wide text-md text-purple-600 font-semibold uppercase">Search and filter</p>
           <div className="mt-7">
             <p className="mb-2 text-gray-700">Search for</p>
-            <input
-              className="border-2 border-gray-200 pr-10 pl-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mb-5"
-              name="searchWord"
-              placeholder="title, description..."
-              onChange={(event) => setSearchQuery(event.target.value)}
-            />
+            <input className="border-2 border-gray-200 pr-10 pl-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mb-5" name="searchWord" placeholder = "title, description..." onChange={(event) => setSearchQuery(event.target.value)} />
           </div>
 
           <div>
             <p className="mb-2 text-gray-700"> Category filter</p>
             <div className="rounded pr-30">
               <Select
-                placeholder="Select category"
-                options={options}
-                isMulti
-                onChange={(selectedOptions) =>
-                  handleMultiChange(selectedOptions)
+              placeholder= 'Select category' 
+              options={options} 
+              isMulti 
+              onChange={(selectedOptions) => handleMultiChange(selectedOptions)}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 2,
+                colors: {
+                  ...theme.colors,
+                  primary: '#7C3AED',
+                  primary25: '#EDE9FE',
                 }
-                theme={(theme) => ({
-                  ...theme,
-                  borderRadius: 2,
-                  colors: {
-                    ...theme.colors,
-                    primary: "#7C3AED",
-                    primary25: "#EDE9FE",
-                  },
-                })}
+              })}
               />
             </div>
-          </div>
-        </div>
+          </div>*/}
+        </div> 
       </div>
 
       <div class="w-4/5 bg-grayCustom1 justify-center">
-        {isProfile 
-        ? <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">Hello {user && user}! Here are your <i>WhatNext</i>:</p>
-        : <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">All WhatNext</p>
-        }
+        <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">Your favourite <i>WhatNext</i>:</p>
         <div className="flex justify-center items-center"> 
           <div className="flex justify-center items-center grid grid-cols-4 gap-10"> 
             {stories && stories.filter((story) => {
@@ -152,6 +133,6 @@ export default function GridStories({isProfile, user}) {
           </div> 
         </div>  
       </div>
-    </div>
-  );
+</div>
+  )
 }
