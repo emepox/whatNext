@@ -32,16 +32,27 @@ module.exports = {
       padding: {
         'custom': '0.05em',
         'StoryCustom': '20px',
-        'inputcustom': '17.4em'
+        'inputcustom': '17.4em',
+        'selectCustom': '4.5rem',
       },
 
 
       backgroundColor: theme => ({
         'bgColor': '#253237',
+        'homeButton': '#00CD92',
+        'navbarCustom': '#1C2530',
+        'grayCustom': '#DAE1ED',
+        'grayCustom1': '#f8f9ff'
       }),
 
       btnColor:  theme => ({
         'btnIndigo': '#6366F1',
+        
+        
+      }),
+
+      textColor: theme => ({
+        'customWhite': '#F4F6F6',
       }),
       
       container: {
@@ -63,6 +74,7 @@ module.exports = {
       // skew: ['group-hover']
       scale: ['hover'],
       opacity: ['hover'],
+      underline: ['hover']
     },
   },
   plugins: [],

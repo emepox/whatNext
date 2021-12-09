@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
 
 import ParallaxComponent from "./components/ParallaxComponent";
-import DraggableList from "./components/Draggable";
+
 import Register from "./components/Register";
 import Login from "./components/Login";
 import CreateStory from "./components/CreateStory";
@@ -18,15 +18,15 @@ import AllStories from './components/AllStories';
 
 import AuthProvider from "./components/AuthProvider";
 import PrivateRoute from "./components/PrivateRoute";
-import Test from "./components/Story copy copy";
 
+import StoryPreview2 from './components/StoryPreview2';
 
 
 
 export default function App() {
   return (
 
-    <div className="bg-bgColor" style={{ width: '100%', height: '100%' }}>
+    <div style={{ width: '100%', height: '100%' }}>
     
       <AuthProvider>
         <BrowserRouter>
@@ -37,10 +37,11 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/play" element={<AllStories />} />
             <Route path="/" element={<ParallaxComponent />} />
-            <Route path="/draggable" element={<DraggableList items={'Lorem ipsum dolor sit'.split(' ')} />} />
+            
             <Route path="/story/:id/:page" element={<Story />} />
-            <Route path="/test/:id/:page" element={<Test />} />
-            <Route path="/story/:id/preview" element={<StoryPreview />} />
+            <Route path="/story/preview/${id}" element={<StoryPreview />} />
+            <Route path="/storypreview" element={<StoryPreview2 />} />
+            
 
 
             <Route
