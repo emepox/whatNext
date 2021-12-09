@@ -28,7 +28,6 @@ export default function GridStories({isProfile, user}) {
 
   useEffect(() => {
   requestData();
-  console.log(user);
   }, []);
 
   const requestData = async () => {
@@ -91,60 +90,78 @@ export default function GridStories({isProfile, user}) {
   
 
   return (
-    <div class="h-screen flex">
+    <div className="h-screen flex">
       {/* SEARCH / FILTER SECTION */}
-      <div class="flex w-1/5 bg-grayCustom i justify-around items-top">
-        
+      <div className="flex w-1/5 bg-grayCustom i justify-around items-top">
         <div className="mt-20">
-          <p className="tracking-wide text-md text-purple-600 font-semibold uppercase">Search and filter</p>
+          <p className="tracking-wide text-md text-purple-600 font-semibold uppercase">
+            Search and filter
+          </p>
           <div className="mt-7">
             <p className="mb-2 text-gray-700">Search for</p>
-            <input className="border-2 border-gray-200 pr-10 pl-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mb-5" name="searchWord" placeholder = "title, description..." onChange={(event) => setSearchQuery(event.target.value)} />
+            <input
+              className="border-2 border-gray-200 pr-10 pl-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mb-5"
+              name="searchWord"
+              placeholder="title, description..."
+              onChange={(event) => setSearchQuery(event.target.value)}
+            />
           </div>
 
           <div>
             <p className="mb-2 text-gray-700"> Category filter</p>
             <div className="rounded pr-30">
               <Select
-              placeholder= 'Select category' 
-              options={options} 
-              isMulti 
-              onChange={(selectedOptions) => handleMultiChange(selectedOptions)}
-              theme={(theme) => ({
-                ...theme,
-                borderRadius: 2,
-                colors: {
-                  ...theme.colors,
-                  primary: '#7C3AED',
-                  primary25: '#EDE9FE',
+                placeholder="Select category"
+                options={options}
+                isMulti
+                onChange={(selectedOptions) =>
+                  handleMultiChange(selectedOptions)
                 }
-              })}
+                theme={(theme) => ({
+                  ...theme,
+                  borderRadius: 2,
+                  colors: {
+                    ...theme.colors,
+                    primary: "#7C3AED",
+                    primary25: "#EDE9FE",
+                  },
+                })}
               />
             </div>
           </div>
         </div>
       </div>
 
-      <div class="w-4/5 bg-grayCustom1 justify-center">
-        {isProfile 
-        ? <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">Hello {user && user}! check all the stories</p>
-        : <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">Check All The Stories</p>
-        }
-        <div className="flex justify-center items-center"> 
-          <div className="flex justify-center items-center grid grid-cols-4 gap-10"> 
-            {stories && stories.filter((story) => {
-              if (hasSearchFilter(story) && hasCategoryFilter(story)) return story}).map((story) => (        
-              <Card 
-                story={story} 
-                isProfile={isProfile} 
-                handleEdit={() => handleEdit(story.id)} 
-                handleDelete={() => handleDelete(story.id)} 
-                handlePlay={() => handlePlay(story.id, story.first)}
-              />
-            ))} 
-          </div> 
-        </div>  
+      <div className="w-4/5 bg-grayCustom1 justify-center">
+        {isProfile ? (
+          <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">
+            Hello {user && user}! check all the stories
+          </p>
+        ) : (
+          <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">
+            Check All The Stories
+          </p>
+        )}
+        <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center grid grid-cols-4 gap-10">
+            {stories &&
+              stories
+                .filter((story) => {
+                  if (hasSearchFilter(story) && hasCategoryFilter(story))
+                    return story;
+                })
+                .map((story) => (
+                  <Card
+                    story={story}
+                    isProfile={isProfile}
+                    handleEdit={() => handleEdit(story.id)}
+                    handleDelete={() => handleDelete(story.id)}
+                    handlePlay={() => handlePlay(story.id, story.first)}
+                  />
+                ))}
+          </div>
+        </div>
       </div>
-</div>
-  )
+    </div>
+  );
 }
