@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import Noty from "noty";
+import "../../node_modules/noty/lib/themes/sunset.css";
 
 export default function Navbar() {
   const auth = useAuth();
@@ -11,7 +12,7 @@ export default function Navbar() {
     localStorage.removeItem("token");
 
     new Noty({
-      theme: "bootstrap-v4",
+      theme: "sunset",
       type: "success",
       layout: "topRight",
       text: "Logging you out.",
@@ -35,27 +36,33 @@ export default function Navbar() {
             href="/start"
             className="text-base leading-tight font-light text-customWhite hover:text-indigo-500"
           >
-            Create a story
+            create
           </a>
+          <a className="text-customWhite">|</a>
           <a
             href="/play"
             className="text-base leading-tight font-light text-customWhite hover:text-indigo-500"
           >
-            Play a game
+            play
           </a>
+          <a className="text-customWhite">|</a>
           {auth.isLoggedIn && (
+            
             <NavLink
               to="/profile"
               className="text-base leading-tight font-light text-customWhite hover:text-indigo-500"
             >
-              Profile
+              profile
             </NavLink>
+            
           )}
+          {auth.isLoggedIn && <a className="text-customWhite">|</a>}
+
           <a
             href="/home"
             className="text-base leading-tight font-light text-customWhite hover:text-indigo-500"
           >
-            About
+            about
           </a>
 
           <a className="text-customWhite">|</a>
@@ -65,7 +72,7 @@ export default function Navbar() {
               to="/login"
               className="text-base leading-tight font-light text-white bg-purple-500 rounded-full hover:bg-purple-600 px-3 py-2"
             >
-              Login
+              login
             </NavLink>
           )}
 
@@ -74,7 +81,7 @@ export default function Navbar() {
               to="/register"
               className="text-base leading-tight font-light text-white bg-purple-500 rounded-full hover:bg-purple-600 px-3 py-2"
             >
-              Sign Up 
+              sign up 
             </NavLink>
           )}
 
@@ -84,7 +91,7 @@ export default function Navbar() {
               className="text-base leading-tight font-light text-white bg-purple-500 rounded-full hover:bg-purple-600 px-3 py-2"
               onClick={logout}
             >
-              Logout
+              logout
             </NavLink>
           )}
         </div>

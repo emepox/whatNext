@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import Noty from "noty";
-import "../../node_modules/noty/lib/themes/mint.css";
+import "../../node_modules/noty/lib/themes/sunset.css";
 import "../../node_modules/noty/lib/noty.css";
 import "./Login.css";
 
@@ -39,11 +39,11 @@ export default function Login() {
       localStorage.setItem("token", data.token);
 
       new Noty({
-        theme: "mint",
+        theme: "sunset",
         type: "success",
         layout: "topRight",
-        text: "You are logged in.",
-        timeout: 1000,
+        text: "Login successful! 🤘",
+        timeout: 2000,
       } ).show();
       window.location.href = "/profile";
 
@@ -51,10 +51,10 @@ export default function Login() {
       console.log(error);
 
       new Noty({
-        theme: "mint",
+        theme: "sunset",
         type: "error",
         layout: "topRight",
-        text: "Something went wrong.",
+        text: "Oops! Something went wrong. Try again!",
         timeout: 2000,
       }).show();
     }

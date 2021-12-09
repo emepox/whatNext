@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import Noty from "noty";
-import "../../node_modules/noty/lib/themes/mint.css";
+import "../../node_modules/noty/lib/themes/sunset.css";
 import "../../node_modules/noty/lib/noty.css";
 import useAuth from "../hooks/useAuth";
 
@@ -45,11 +45,11 @@ export default function Register() {
       });
 
       new Noty({
-        theme: "mint",
+        theme: "sunset",
         type: "success",
         layout: "topRight",
-        text: "User registered.",
-        timeout: 1000,
+        text: "Registration completed!",
+        timeout: 2000,
       } ).show();
 
       if ( !auth.isLoggedIn ) {
@@ -62,7 +62,7 @@ export default function Register() {
       setAlert(err[0]);
       console.log(err);
       new Noty({
-        theme: "mint",
+        theme: "sunset",
         type: "error",
         layout: "topRight",
         text: "Ouch! Something went wrong. Try again!",

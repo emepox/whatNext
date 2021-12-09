@@ -63,7 +63,7 @@ Happy coding!
 
 ### Database schema
 
-![Database schema](https://github.com/) TO BE ADDED
+![Database schema](https://github.com/CodeOp-tech/ModularStory/blob/staging/client/src/img/db-schema.png) 
 
 ### API routes plan
 
