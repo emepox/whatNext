@@ -12,7 +12,7 @@ import "./Login.css";
 const axios = require("axios");
 
 
-export default function CreateStory({ postedStory }) {
+export default function CreateStory({ postedStory}) {
   const { id, name } = postedStory;
   const [nodeList, setNodeList] = useState([]);
   const [toggle, setToggle] = useState("create");

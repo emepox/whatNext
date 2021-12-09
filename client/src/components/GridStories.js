@@ -5,6 +5,7 @@ import Select from 'react-select'
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import Card from "./Card";
+import CreateStory from "./CreateStory";
 
 
 export default function GridStories({isProfile, user}) {
@@ -71,8 +72,10 @@ export default function GridStories({isProfile, user}) {
   };
 
   //TODO: MAKE THIS WORK
-  const handleEdit = (id) => {
-    console.log(`Click edit ${id}`)
+  const handleEdit = (id, name) => {
+    // console.log(id, name)
+    const postedStory = {id, name}
+    navigate(`/edit`, postedStory)
   }
 
   const handleDelete = async (id) => {
@@ -124,7 +127,7 @@ export default function GridStories({isProfile, user}) {
         </div>
       </div>
 
-      <div class="w-4/5 bg-grayCustom1 justify-center">
+      <div className="w-4/5 bg-grayCustom1 justify-center">
         {isProfile 
         ? <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">Hello {user && user}! Here are your <i>WhatNext</i>:</p>
         : <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">All WhatNext</p>
@@ -136,7 +139,7 @@ export default function GridStories({isProfile, user}) {
               <Card 
                 story={story} 
                 isProfile={isProfile} 
-                handleEdit={() => handleEdit(story.id)} 
+                handleEdit={() => handleEdit(story.id, story.name)} 
                 handleDelete={() => handleDelete(story.id)} 
                 handlePlay={() => handlePlay(story.id, story.first)}
               />

@@ -7,7 +7,7 @@ import "./Login.css";
 import Card from "./Card";
 
 
-export default function Favourites({isProfile, user}) {
+export default function Favourites({isProfile}) {
 
   const navigate = useNavigate();
   const auth = useAuth();
@@ -74,7 +74,7 @@ export default function Favourites({isProfile, user}) {
   
 
   return (
-    <div class="flex">
+    <div className="flex">
       {/* SEARCH / FILTER SECTION */}
       <div class="flex w-1/5 bg-grayCustom i justify-around items-top">
         <div className="mt-20">
@@ -110,7 +110,7 @@ export default function Favourites({isProfile, user}) {
         </div>
       </div>
 
-      <div class="w-4/5 bg-grayCustom1 justify-top">
+      <div className="w-4/5 bg-grayCustom1 justify-top">
         <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">Your favourite <i>WhatNext</i>:</p>
         <div className="flex justify-center items-center"> 
           <div className="flex justify-center items-center grid grid-cols-4 gap-10"> 
