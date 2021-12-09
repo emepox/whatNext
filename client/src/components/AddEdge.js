@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Noty from 'noty';
 import Select from 'react-select'
-import "../../node_modules/noty/lib/themes/mint.css";
+import "../../node_modules/noty/lib/themes/sunset.css";
 import "../../node_modules/noty/lib/noty.css";
 const axios = require('axios');
 
@@ -40,14 +40,14 @@ export default function AddEdge({nodeList}) {
         },
       });
       new Noty({
-        theme: 'mint',
+        theme: 'sunset',
         type: 'success',
         layout: 'topRight',
         text: 'Connection added successfully ✨',
         timeout: 2000,
       }).show();
       new Noty({
-        theme: 'mint',
+        theme: 'sunset',
         type: 'information',
         layout: 'topRight',
         text: "👉 Now you can EDIT your scenarios, CREATE another scenario and/or CONNECT other scenarios",
@@ -55,7 +55,7 @@ export default function AddEdge({nodeList}) {
       }).show();
     } catch (error) {
       new Noty({
-        theme: 'mint',
+        theme: 'sunset',
         type: 'error',
         layout: 'topRight',
         text: `${error.message}`,
