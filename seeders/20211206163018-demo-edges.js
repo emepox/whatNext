@@ -7,6 +7,27 @@ module.exports = {
       "Edges",
       [
         {
+          start: 1,
+          next: 2,
+          option: "It's a bar!",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          start: 1,
+          next: 3,
+          option: "The fanciest restaurant in town",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          start: 1,
+          next: 4,
+          option: "A new vinacoteca!",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
           start: 2,
           next: 5,
           option: "You invite Jabalí to a beer.",
