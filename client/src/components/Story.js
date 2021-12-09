@@ -143,6 +143,7 @@ export default function Story() {
               <div className="text-xl text-white flex flex-col items-center justify-center mb-5 bg-gradient-to-r from-first to-purple-500 rounded-lg shadow-2xl flex flex-col items-center justify center px-52 py-2 w-5/12">
                 {currentNode.situation}
               </div>
+
               <p className="mb-3 text-gray-800 mt-10">
                 Scroll and select an option from the list below
               </p>
@@ -152,6 +153,7 @@ export default function Story() {
                 </p>
               </div>
               <div className="w-5/12 bg-white rounded-b shadow-lg">
+
                 <animated.div
                   style={{
                     position: "relative",
@@ -166,14 +168,16 @@ export default function Story() {
                   {currentNode.Start ? (
                     currentNode.Start.map((edge) => (
                       <a
+
                         className="grid grid-cols-1 divide-y divide-gray-300 hover:underline"
-                        onClick={() => navigate(`/story/${id}/${edge.next}`)}
+                        onClick={() => navigate(`/story/${id}/end`)}
                         // key={`${word}_${i}`}
                         style={{
                           width: "100%",
                           height: 40,
                           textAlign: "center",
                         }}
+
                       >
                         {edge.option}
                       </a>

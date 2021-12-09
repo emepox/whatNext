@@ -74,6 +74,24 @@ router.get("/profile", userShouldBeLoggedIn, async function (req, res) {
   }
 });
 
+// gets all favourite stories from a user
+router.get("/favourites", userShouldBeLoggedIn, async function (req, res) {
+  try {
+    const { id } = req.user;
+    const stories = await models.User.findOne({
+      where: { id },
+      include: {
+        model: models.Story, 
+        as:"Favourite",
+        through: {  where: { UserId: id } }
+      },
+    });
+    res.send(stories.Favourite);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 router.post("/favourites", userShouldBeLoggedIn, async function (req, res) {
   try {
     const { id } = req.user;
@@ -83,6 +101,35 @@ router.post("/favourites", userShouldBeLoggedIn, async function (req, res) {
     });
     await user.addFavourite(storyId);
     res.send("Successfuly added to favs");
+  } catch (error) {
+    res.status(500).send(error);
+  }
+} );
+
+
+router.put("/ratings", userShouldBeLoggedIn, async function (req, res) {
+  const { id } = req.user;
+  const {score, storyId} = req.body;
+  console.log( id, storyId, score )
+
+  try {
+    const result = await models.Rating.findOne({
+      where: {
+        UserId: id,
+        StoryId: storyId,
+      },
+    } );
+
+    await models.Rating.upsert(
+      {
+        id: result.id,
+        score: score,
+        StoryId: storyId,
+        UserId: id,
+      }
+    );
+    
+    res.send("BADABADAMOOOOOMBA");
   } catch (error) {
     res.status(500).send(error);
   }

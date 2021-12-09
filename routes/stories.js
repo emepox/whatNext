@@ -16,7 +16,7 @@ router.get("/", async function (req, res) {
         "category",
         "reproductions",
         "media",
-        "first"
+        "first",
       ],
       where: { isFinished: 1 },
       include: { model: models.User, attributes: ["username", "id"] },
@@ -36,7 +36,7 @@ router.get("/:id", async function (req, res) {
     const { id } = req.params;
     const stories = await models.Story.findOne({
       where: { id },
-      include: { model: models.User, attributes: ["username"] },
+      include: { model: models.User, attributes: ["username", "id"] },
     });
 
     res.send(stories);
@@ -54,9 +54,14 @@ router.get("/:id/nodes", async function (req, res) {
     const nodes = await models.Node.findAll({
       attributes: ["id", "situation"],
       where: { StoryId: id },
+      include: { model: models.Node, as: "Start", attributes: ["id"] },
     });
 
-    res.send(nodes);
+    const result = nodes.map((node) => ({
+      ...node.dataValues,
+      Start: node.dataValues.Start.map((e) => e.Edge),
+    }));
+    res.send(result);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -112,10 +117,9 @@ router.put("/:storyId/review", userShouldBeLoggedIn, async function (req, res) {
       { StoryId: storyId, score, UserId: id },
       { where: { StoryId: storyId, UserId: id } }
     );
-    if (!review[0]) await models.Rating.create(
-      { StoryId: storyId, score, UserId: id }
-    );
-    res.send("rating added")
+    if (!review[0])
+      await models.Rating.create({ StoryId: storyId, score, UserId: id });
+    res.send("rating added");
   } catch (error) {
     res.status(500).send(error);
   }

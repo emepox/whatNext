@@ -1,8 +1,9 @@
 import {React, useState, useRef} from 'react'
 import CreateStory from './CreateStory';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
+import { useNavigate } from "react-router-dom";
 import Noty from 'noty';
-import "../../node_modules/noty/lib/themes/mint.css";
+import "../../node_modules/noty/lib/themes/sunset.css";
 import "../../node_modules/noty/lib/noty.css";
 import Texts from "../img/Texts.png";
 
@@ -13,10 +14,9 @@ const url = (name, wrap = false) =>
 
 export default function StoryDetails() {
     const parallax = useRef(null);
-
-
+    const navigate = useNavigate();
+    
     const categories = ["Action", "Comedy", "Drama", "Horror", "Love", "Mystery", "Other"];
-
 
     const [newStory, setNewStory] = useState({
         name: "",
@@ -34,6 +34,7 @@ export default function StoryDetails() {
         first:null
     });
 
+    
     // changes newGame values for inputs
     const handleChange = (event) => {
         const { value, name } = event.target;
@@ -60,16 +61,20 @@ export default function StoryDetails() {
         });
         setPostedStory(data)
         new Noty({
-            theme: 'mint',
+            theme: 'sunset',
             type: 'success',
             layout: 'topRight',
             text: "New WhatNext template generated. It's time to fill it in! ⚡️",
             timeout: 2000,
+            callbacks: {
+            afterClose: function () {
+                navigate(`/start`, { state: { id:data.id, name:data.name }});
+            }}
           }).show();
         } catch (error) {
         console.error(error);
         new Noty({
-            theme: 'mint',
+            theme: 'sunset',
             type: 'error',
             layout: 'topRight',
             text: "Ouch! Something went wrong 😑... Try again!",
@@ -111,21 +116,21 @@ export default function StoryDetails() {
                         </div>
                         {!postedStory.id &&
                          <form onSubmit={handleSubmit} className="rounded-2xl bg-white p-11 space-y-4 shadow-xl opacity-90">
-                            <div><p className="font-medium self-center text-xl sm:text-3xl text-gray-700 flex flex-col items-center justify-center">Story details</p></div>
+
+                            <div><p className="font-medium self-center text-xl sm:text-3xl text-gray-800 flex flex-col items-center justify-center">New WhatNext</p></div>
+
                             {/* add a brief explanation about what to do */}
                             <div>
                                 <input name="name" value={newStory.name} placeholder="Title" onChange={handleChange} className="border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent pr-inputcustom" required/>
                             </div>
                             <div>
-                                <textarea name="description" rows="4" cols="50" onChange={handleChange} placeholder="Add a brief summary" className="border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" required></textarea>
+                                <textarea name="description" rows="4" onChange={handleChange} placeholder="Add a brief summary" className="w-full border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" required></textarea>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div><p className="text-gray-400">Category:</p></div> 
                                 <div>
-
-                                    <select name="category" value={newStory.category} onChange={handleChange} required>
-
-                                        <option value="">-Please choose an option-</option>
+                                    <select name="category" value={newStory.category} onChange={handleChange} className="w-full border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" required>
+                                        <option value="">Choose a category</option>
                                         {categories.map(category => <option value={category}>{category}</option>)}
                                     </select>
                                 </div>

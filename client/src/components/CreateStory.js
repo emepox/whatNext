@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import CreateNode from "./CreateNode";
 import AddEdge from "./AddEdge";
 import EditNode from "./EditNode";
 import DeleteNode from "./DeleteNode";
 import Noty from 'noty';
-import "../../node_modules/noty/lib/themes/mint.css";
+import "../../node_modules/noty/lib/themes/sunset.css";
 import "../../node_modules/noty/lib/noty.css";
 import "./Login.css";
 
@@ -13,7 +13,12 @@ const axios = require("axios");
 
 
 export default function CreateStory({ postedStory }) {
-  const { id, name } = postedStory;
+  
+  const { state } = useLocation();
+  const { id, name } = state;
+  console.log(state)
+  // const { id, name } = postedStory;
+   
   const [nodeList, setNodeList] = useState([]);
   const [toggle, setToggle] = useState("create");
   const navigate = useNavigate();
@@ -31,7 +36,7 @@ export default function CreateStory({ postedStory }) {
       console.error(error);      
     }
   }
-
+  
   const handleToggle = (event) => {
     event.preventDefault();
     setToggle(event.target.name);
@@ -61,7 +66,7 @@ export default function CreateStory({ postedStory }) {
   try {
     await axios.put(`/stories/${id}/finish`);
     new Noty({
-      theme: 'mint',
+      theme: 'sunset',
       type: 'success',
       layout: 'topRight',
       text: 'Your WhatNext is ready to go! 🚀',
@@ -75,7 +80,7 @@ export default function CreateStory({ postedStory }) {
   } catch (error) {
     console.error(error);
     new Noty({
-      theme: 'mint',
+      theme: 'sunset',
       type: 'error',
       layout: 'topRight',
       text: "Ouch! Something went wrong 😑... Try again!",
