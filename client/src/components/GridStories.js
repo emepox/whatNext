@@ -28,7 +28,6 @@ export default function GridStories({isProfile, user}) {
 
   useEffect(() => {
   requestData();
-  console.log(user);
   }, []);
 
   const requestData = async () => {
@@ -87,6 +86,7 @@ export default function GridStories({isProfile, user}) {
   
 
   return (
+
     <div className="flex">
       {/* SEARCH / FILTER SECTION */}
       <div className={(isProfile) ? "flex w-1/5 bg-grayCustom i justify-around items-top" : "flex w-1/5 bg-grayCustom i justify-around items-top h-screen"}>
@@ -98,26 +98,33 @@ export default function GridStories({isProfile, user}) {
           :""}
           <div className="mt-7">
             <p className="mb-2 text-gray-700">Search for</p>
-            <input className="border-2 border-gray-200 pr-10 pl-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mb-5" name="searchWord" placeholder = "title, description..." onChange={(event) => setSearchQuery(event.target.value)} />
+            <input
+              className="border-2 border-gray-200 pr-10 pl-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mb-5"
+              name="searchWord"
+              placeholder="title, description..."
+              onChange={(event) => setSearchQuery(event.target.value)}
+            />
           </div>
 
           <div>
             <p className="mb-2 text-gray-700"> Category filter</p>
             <div className="rounded pr-30">
               <Select
-              placeholder= 'Select category' 
-              options={options} 
-              isMulti 
-              onChange={(selectedOptions) => handleMultiChange(selectedOptions)}
-              theme={(theme) => ({
-                ...theme,
-                borderRadius: 2,
-                colors: {
-                  ...theme.colors,
-                  primary: '#7C3AED',
-                  primary25: '#EDE9FE',
+                placeholder="Select category"
+                options={options}
+                isMulti
+                onChange={(selectedOptions) =>
+                  handleMultiChange(selectedOptions)
                 }
-              })}
+                theme={(theme) => ({
+                  ...theme,
+                  borderRadius: 2,
+                  colors: {
+                    ...theme.colors,
+                    primary: "#7C3AED",
+                    primary25: "#EDE9FE",
+                  },
+                })}
               />
             </div>
           </div>
@@ -144,6 +151,6 @@ export default function GridStories({isProfile, user}) {
           </div> 
         </div>  
       </div>
-</div>
-  )
+    </div>
+  );
 }

@@ -128,7 +128,7 @@ export default function Story() {
                     ) : (
                       <a
                         className="flex flex-col items-center justify-center hover:underline"
-                        onClick={() => navigate(`/story/${id}/1`)}
+                        onClick={() => navigate(`/story/${id}/end`)}
                         style={{ width: '100%', height: 50, textAlign: 'center' }}
 
                       >
