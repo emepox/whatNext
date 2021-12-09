@@ -66,10 +66,6 @@ export default function GridStories({isProfile, user}) {
     return searchQuery === "" || story.name.toLowerCase().includes(searchQuery.toLowerCase()) || story.description.toLowerCase().includes(searchQuery.toLowerCase());
   };
 
-  const handlePreview = async (id) => {
-    navigate(`/story/${id}/preview`)
-  };
-
   const handlePlay = async (id, first) => {
     navigate(`/story/${id}/${first}`)
   };
@@ -91,12 +87,15 @@ export default function GridStories({isProfile, user}) {
   
 
   return (
-    <div class="h-screen flex">
+    <div className="flex">
       {/* SEARCH / FILTER SECTION */}
-      <div class="flex w-1/5 bg-grayCustom i justify-around items-top">
+      <div className={(isProfile) ? "flex w-1/5 bg-grayCustom i justify-around items-top" : "flex w-1/5 bg-grayCustom i justify-around items-top h-screen"}>
         
         <div className="mt-20">
           <p className="tracking-wide text-md text-purple-600 font-semibold uppercase">Search and filter</p>
+          {(isProfile)
+          ?<p className="tracking-wide text-md text-purple-600 font-semibold uppercase">your WhatNext</p>
+          :""}
           <div className="mt-7">
             <p className="mb-2 text-gray-700">Search for</p>
             <input className="border-2 border-gray-200 pr-10 pl-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mb-5" name="searchWord" placeholder = "title, description..." onChange={(event) => setSearchQuery(event.target.value)} />
@@ -131,7 +130,7 @@ export default function GridStories({isProfile, user}) {
         : <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">All WhatNext</p>
         }
         <div className="flex justify-center items-center"> 
-          <div className="flex justify-center items-center grid grid-cols-4 gap-10"> 
+          <div className="flex justify-center items-center grid-cols-4 gap-10"> 
             {stories && stories.filter((story) => {
               if (hasSearchFilter(story) && hasCategoryFilter(story)) return story}).map((story) => (        
               <Card 
