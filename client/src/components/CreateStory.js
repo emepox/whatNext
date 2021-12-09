@@ -5,6 +5,7 @@ import AddEdge from "./AddEdge";
 import EditNode from "./EditNode";
 import DeleteNode from "./DeleteNode";
 import Noty from 'noty';
+// import FlowTest from "./FlowTest";
 import "../../node_modules/noty/lib/themes/mint.css";
 import "../../node_modules/noty/lib/noty.css";
 import "./Login.css";
@@ -27,6 +28,7 @@ export default function CreateStory({ postedStory }) {
     try {
       const { data } = await axios.get(`/stories/${id}/nodes`);
       setNodeList(data);
+      console.log(data);
     } catch (error) {
       console.error(error);      
     }
@@ -125,7 +127,7 @@ export default function CreateStory({ postedStory }) {
           <p className="font-semibold">ALL SAVED SCENARIOS</p>
           
           <div>
-            {nodeList &&
+            {/* {nodeList &&
             nodeList.map((node) => 
               <div key={node.id} className="cols mt-7 p-5 bg-gray-100 rounded shadow-xl">
                 {node.situation} 
@@ -136,7 +138,9 @@ export default function CreateStory({ postedStory }) {
                   Edit Scenario
                 </button>
               </div>
-            )}
+            )} */}
+            {/* <FlowTest getNodes={getNodes} nodeList={nodeList} /> */}
+
           </div>
         </div>
     </div>
