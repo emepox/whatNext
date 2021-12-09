@@ -5,10 +5,7 @@ import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import Card from "./Card";
-
 import Texts from "../img/Texts.png";
-
-import CreateStory from "./CreateStory";
 
 export default function GridStories({ isProfile, user }) {
   const navigate = useNavigate();
@@ -29,6 +26,7 @@ export default function GridStories({ isProfile, user }) {
 
   useEffect(() => {
     requestData();
+    console.log(user);
   }, []);
 
   const requestData = async () => {
@@ -71,12 +69,17 @@ export default function GridStories({ isProfile, user }) {
     );
   };
 
+  const handlePreview = async (id) => {
+    navigate(`/story/${id}/preview`);
+  };
+
   const handlePlay = async (id, first) => {
     navigate(`/story/${id}/${first}`);
   };
 
-  const handleEdit = (id, name) => {
-    navigate(`/create`, { state: { id, name } });
+  //TODO: MAKE THIS WORK
+  const handleEdit = (id) => {
+    console.log(`Click edit ${id}`);
   };
 
   const handleDelete = async (id) => {
@@ -91,39 +94,25 @@ export default function GridStories({ isProfile, user }) {
   return (
     <div className="flex">
       {/* SEARCH / FILTER SECTION */}
-      <div
-        className={
-          isProfile
-            ? "flex w-1/4 bg-white  justify-around items-top"
-            : "flex w-1/4 bg-white  justify-around items-top h-screen"
-        }
-      >
+      
+      <div className="flex w-1/4 bg-white justify-around items-top">
         <div className="col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-4 xxl:col-span-4 px-6 py-6">
-          <div className="bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200">
-            <p className="tracking-wide text-md text-purple-600 font-semibold uppercase">
-              Search and filter
-            </p>
-            {isProfile ? (
-              <p className="tracking-wide text-md text-purple-600 font-semibold uppercase">
-                your WhatNext
-              </p>
-            ) : (
-              ""
-            )}
+          <p className="tracking-wide text-md text-purple-600 font-semibold uppercase mb-10">
+            Search and filter
+          </p>
 
-            {/* Search Bar */}
+          {/* Search and filter */}
+          <div className="bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200">
             <div className="mt-3">
               <p className="mb-2 text-gray-700">Search for</p>
               <input
-                className="border-2 border-gray-300 pr-10 pl-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mb-5"
+                className="border-2 border-gray-300 pr-10 pl-2 py-1 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mb-5"
                 name="searchWord"
                 placeholder="title, description..."
                 onChange={(event) => setSearchQuery(event.target.value)}
               />
             </div>
-            {/* End of Search Bar */}
 
-            {/* Category filter */}
             <div>
               <p className="mb-2 text-gray-700"> Category filter</p>
               <div className="rounded pr-20 mb-3">
@@ -146,39 +135,26 @@ export default function GridStories({ isProfile, user }) {
                 />
               </div>
             </div>
-            {/* End of Category filter */}
           </div>
 
           {/* Want to create story? */}
           <div className="flex items-center bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200 mt-7">
             <img src={Texts} className="mt-5 w-6/12"></img>
-            <div className="">
-              <p className="font-semibold text-lg text-gray-600 mb-5">
-                Want to create a story?
-              </p>
-              <a
-                href="/start"
-                className="bg-blue-500 rounded-full p-2 text-white"
-              >
-                Let's go!
-              </a>
+            <div className="">      
+              <p className="font-semibold text-lg text-gray-600 mb-5">Want to create a story?</p>
+              <a href="/start" className="bg-blue-500 rounded-full p-2 text-white">Let's go!</a>
             </div>
           </div>
-          {/* End of Want to create story? */}
         </div>
       </div>
+      
 
       {/* CARDS DISPLAY SECTION */}
-      <div className="w-4/5 bg-grayCustom2 justify-center">
-        {isProfile ? (
-          <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">
-            Hello {user && user}! Here are your <i>WhatNext</i>:
-          </p>
-        ) : (
-          <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">
-            All WhatNext
-          </p>
-        )}
+      <div className="w-4/5 h-screen bg-grayCustom2 justify-center">
+        {isProfile  
+          ? <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">Hello {user && user}! check all the stories</p>
+          : <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">Check All The Stories</p>
+        }
         <div className="flex justify-center items-center">
           <div className="flex justify-center items-center grid grid-cols-4 gap-10">
             {stories &&
@@ -191,7 +167,7 @@ export default function GridStories({ isProfile, user }) {
                   <Card
                     story={story}
                     isProfile={isProfile}
-                    handleEdit={() => handleEdit(story.id, story.name)}
+                    handleEdit={() => handleEdit(story.id)}
                     handleDelete={() => handleDelete(story.id)}
                     handlePlay={() => handlePlay(story.id, story.first)}
                   />
@@ -199,7 +175,6 @@ export default function GridStories({ isProfile, user }) {
           </div>
         </div>
       </div>
-      {/* END OF CARDS DISPLAY SECTION */}
     </div>
   );
 }

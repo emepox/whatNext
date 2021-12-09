@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Noty from 'noty';
 import "../../node_modules/noty/lib/themes/sunset.css";
 import "../../node_modules/noty/lib/noty.css";
+import Texts from "../img/Texts.png";
 
 const axios = require('axios');
 
@@ -94,7 +95,7 @@ export default function StoryDetails() {
                     speed={0}
                     factor={3}
                     style={{
-                        backgroundColor: '#DCE0EB'
+                        backgroundColor: '#f6f6f9'
                     }}
                     />
 
@@ -103,14 +104,21 @@ export default function StoryDetails() {
                     speed={2.5}
                     style={{
                     display: 'flex',
-                    alignItems: 'center',
+                    alignItems: 'start',
                     justifyContent: 'center',
                     
                     }}>
                     <div className="flex flex-col items-center justify-center">
+                        <div className="flex flex-col items-center justify-center mt-20">
+                            <img src={Texts} className="w-5/12"/>
+                            <p className="text-3xl font-bold text-gray-700 mt-5">A blank canvas for you</p>
+                            <p className="text-lg text-gray-700 mb-20 mt-3">Every big idea starts with a WhatNext</p>
+                        </div>
                         {!postedStory.id &&
                          <form onSubmit={handleSubmit} className="rounded-2xl bg-white p-11 space-y-4 shadow-xl opacity-90">
+
                             <div><p className="font-medium self-center text-xl sm:text-3xl text-gray-800 flex flex-col items-center justify-center">New WhatNext</p></div>
+
                             {/* add a brief explanation about what to do */}
                             <div>
                                 <input name="name" value={newStory.name} placeholder="Title" onChange={handleChange} className="border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent pr-inputcustom" required/>

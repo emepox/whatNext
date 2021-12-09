@@ -3,6 +3,7 @@ import { useTrail, a } from '@react-spring/web';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import "./Login.css";
 import Home from "../img/Home.png";
+import HomeSecond from "../img/HomeSecond.png"
 
 const url = (name, wrap = false) =>
   `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
@@ -40,15 +41,8 @@ export default function App({scroll}) {
       </div>
       <div class="w-full mx-auto mt-20 text-center md:w-10/12">
             <div class="relative z-0 w-full mt-8">
-                <div>
-                    {/* <div class="flex items-center flex-none px-4 bg-green-400 rounded-b-none h-11 rounded-xl">
-                        <div class="flex space-x-1.5">
-                            <div class="w-3 h-3 border-2 border-white rounded-full"></div>
-                            <div class="w-3 h-3 border-2 border-white rounded-full"></div>
-                            <div class="w-3 h-3 border-2 border-white rounded-full"></div>
-                        </div>
-                    </div> */}
-                    <img className="relative rounded-xl shadow-2xl" src={Home}/>
+                <div className="flex items-center justify-center ">
+                    <img className="relative rounded-xl shadow-2xl w-11/12" src={HomeSecond}/>
                 </div>
             </div>
         </div>
