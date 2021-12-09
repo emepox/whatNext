@@ -85,7 +85,7 @@ export default function Card({story, isProfile, handleEdit, handleDelete, handle
                 </div>
               </div>
             </div>
-      </div>
+      
 
           <div className="ml-5 mr-5">
             <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3 ">
@@ -113,7 +113,7 @@ export default function Card({story, isProfile, handleEdit, handleDelete, handle
             )} */}
 
         </div>
-  
+  </div>
       
   );
 }
