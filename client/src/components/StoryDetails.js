@@ -140,7 +140,7 @@ export default function StoryDetails() {
                 </ParallaxLayer>
                 <ParallaxLayer offset={1} speed={2} style={{ backgroundColor: '#DCE0EB' }} />
 
-                <ParallaxLayer
+                {/* <ParallaxLayer
                     offset={1}
                     speed={0.5}
                     style={{
@@ -152,7 +152,7 @@ export default function StoryDetails() {
 
                     {postedStory.id && <CreateStory postedStory={postedStory}/>}
 
-                </ParallaxLayer>
+                </ParallaxLayer> */}
             </Parallax>
         </div>
     )
