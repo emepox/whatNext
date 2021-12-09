@@ -22,7 +22,7 @@ export default function Navbar() {
 
 
   return (
-    <div className="sticky top-0">
+    <div className="sticky top-0 z-50">
       <div className="bg-navbarCustom shadow-3xl px-10 py-8 grid grid-cols-2">
         <a
           href="/"

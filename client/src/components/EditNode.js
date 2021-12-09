@@ -19,8 +19,7 @@ export default function EditNode({getNodes, nodeList}) {
     const handleChange = event =>{
         setEditedNode(state => ({...state, situation:event.target.value}))
     }
-    const handleClick = async () =>{
-        const {id, situation} = editedNode
+    const handleClick = async (id, situation) =>{
         try {
             await axios(`/nodes/edit/${id}`, {
             method: 'PUT',
