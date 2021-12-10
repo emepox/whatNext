@@ -8,7 +8,7 @@ import Card from "./Card";
 import Texts from "../img/Texts.png";
 
 
-export default function GridStories({ isProfile, isFavourite, user, switchView }) {
+export default function SideBar({ isProfile, isFavourite, story, switchView }) {
   const navigate = useNavigate();
   const auth = useAuth();
   const [stories, setStories] = useState([]);
@@ -25,62 +25,7 @@ export default function GridStories({ isProfile, isFavourite, user, switchView }
     { value: "Other", label: "Other" },
   ];
 
-  useEffect(() => {
-    requestData();
-  }, []);
 
-  const requestData = async () => {
-    try {
-      // if we're in profile, see user's stories
-      if (isProfile) {
-        const { data } = await axios("users/profile/", {
-          headers: {
-            authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        });
-
-        setStories(data);
-      // else show all stories
-      } else {
-        const { data } = await axios("/stories/");
-        console.log(data);
-
-        setStories(data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const showFavourites = async () => {
-    try{
-      const { data } = await axios("users/favourites", {
-      headers: {
-        authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
-        setStories(data);
-    } catch (error) {
-        console.log(error);
-    }
-  };
-
-
-  const handleFavourite = async (storyId) => {
-    try {
-      await axios('/users/favourites/', {
-        method: "POST",
-        headers: {
-            authorization: "Bearer " + localStorage.getItem("token"),
-        },
-        data: {storyId: +storyId},
-      });
-      console.log(storyId)
-      // requestData();
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   const handleMultiChange = (selectedOptions) => {
     setCategoryFilters((state) =>
@@ -100,32 +45,7 @@ export default function GridStories({ isProfile, isFavourite, user, switchView }
     );
   };
 
-  const handlePlay = async (id, first) => {
-    navigate(`/story/${id}/${first}`);
-  };
-
-  const handleEdit = (id, name) => {
-    navigate(`/create`, { state: { id, name } });
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`stories/${id}`);
-      requestData();
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const handleDeleteFavourite = async (id) => {
-    try {
-      await axios.delete(`users/favourites/${id}`);
-      requestData();
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
+  
 
   return (
     <div className="flex">
@@ -188,22 +108,6 @@ export default function GridStories({ isProfile, isFavourite, user, switchView }
             {/* End of Category filter */}
           </div>
 
-          {/* See created WhatNext? */}
-          <div className="flex items-center bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200 mt-7">
-            <img src={Texts} className="mt-5 w-6/12"></img>
-            <div className="">
-              <p className="font-semibold text-lg text-gray-600 mb-5">
-                See your WhatNext
-              </p>
-              <button
-                onClick={() => requestData()}
-                className="bg-blue-500 rounded-full p-2 text-white"
-              >
-                My WhatNext
-              </button>
-            </div>
-          </div>
-          {/* End of see created */}
           {/* See favourite WhatNext? */}
           <div className="flex items-center bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200 mt-7">
             <img src={Texts} className="mt-5 w-6/12"></img>
@@ -212,14 +116,14 @@ export default function GridStories({ isProfile, isFavourite, user, switchView }
                 See your favourite WhatNext
               </p>
               <button
-                onClick={() => showFavourites()}
+                onClick={()=>switchView(isFavourite)}
                 className="bg-blue-500 rounded-full p-2 text-white"
               >
                 Go to favs
               </button>
             </div>
           </div>
-          {/* End of see favourites */}
+          {/* End of Want to create story? */}
           {/* Want to create story? */}
           <div className="flex items-center bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200 mt-7">
             <img src={Texts} className="mt-5 w-6/12"></img>
@@ -240,39 +144,6 @@ export default function GridStories({ isProfile, isFavourite, user, switchView }
         </div>
       </div>
 
-      {/* CARDS DISPLAY SECTION */}
-      <div className="w-4/5 bg-grayCustom2 justify-center">
-        {isProfile ? (
-          <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">
-            Hello {user && user}! Here are your <i>WhatNext</i>:
-          </p>
-        ) : (
-          <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">
-            All WhatNext
-          </p>
-        )}
-        <div className="flex justify-center items-center">
-          <div className="flex justify-center items-center grid grid-cols-4 gap-10">
-            {stories &&
-              stories
-                .filter((story) => {
-                  if (hasSearchFilter(story) && hasCategoryFilter(story))
-                    return story;
-                })
-                .map((story) => (
-                  <Card
-                    story={story}
-                    isProfile={isProfile}
-                    handleEdit={() => handleEdit(story.id, story.name)}
-                    handleDelete={() => handleDelete(story.id)}
-                    handlePlay={() => handlePlay(story.id, story.first)}
-                    handleFavourite={() => handleFavourite(story.id)}
-                  />
-                ))}
-          </div>
-        </div>
-      </div>
-      {/* END OF CARDS DISPLAY SECTION */}
     </div>
   );
 }

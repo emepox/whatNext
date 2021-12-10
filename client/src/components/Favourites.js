@@ -42,10 +42,6 @@ export default function Favourites({ user, isProfile, switchView, handleFavourit
     }
   };
 
-  const handlePlay = async (id, first) => {
-    navigate(`/story/${id}/${first}`);
-  };
-
   const handleMultiChange = (selectedOptions) => {
     setCategoryFilters((state) =>
       selectedOptions.map((selectedOption) => selectedOption.value)
@@ -62,6 +58,11 @@ export default function Favourites({ user, isProfile, switchView, handleFavourit
       story.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       story.description.toLowerCase().includes(searchQuery.toLowerCase())
     );
+  };
+
+
+  const handlePlay = async (id, first) => {
+    navigate(`/story/${id}/${first}`);
   };
 
   const handleDeleteFavourite = async (id) => {
