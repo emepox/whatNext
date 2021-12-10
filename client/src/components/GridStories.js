@@ -8,7 +8,7 @@ import Card from "./Card";
 import Texts from "../img/Texts.png";
 
 
-export default function GridStories({ isProfile, user, switchView }) {
+export default function GridStories({ isProfile, isFavourite, user, switchView }) {
   const navigate = useNavigate();
   const auth = useAuth();
   const [stories, setStories] = useState([]);
@@ -31,6 +31,7 @@ export default function GridStories({ isProfile, user, switchView }) {
 
   const requestData = async () => {
     try {
+      // if we're in profile, see user's stories
       if (isProfile) {
         const { data } = await axios("users/profile/", {
           headers: {
@@ -38,8 +39,8 @@ export default function GridStories({ isProfile, user, switchView }) {
           },
         });
 
-        console.log(data);
         setStories(data);
+      // else show all stories
       } else {
         const { data } = await axios("/stories/");
         console.log(data);
@@ -48,6 +49,36 @@ export default function GridStories({ isProfile, user, switchView }) {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const showFavourites = async () => {
+    try{
+      const { data } = await axios("users/favourites", {
+      headers: {
+        authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+        setStories(data);
+    } catch (error) {
+        console.log(error);
+    }
+  };
+
+
+  const handleFavourite = async (storyId) => {
+    try {
+      await axios('/users/favourites/', {
+        method: "POST",
+        headers: {
+            authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        data: {storyId: +storyId},
+      });
+      console.log(storyId)
+      // requestData();
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -86,44 +117,56 @@ export default function GridStories({ isProfile, user, switchView }) {
     }
   };
 
-  const handleFavourite = async (storyId) => {
+  const handleDeleteFavourite = async (id) => {
     try {
-      await axios('/users/favourites/', {
-        method: "POST",
-        headers: {
-            authorization: "Bearer " + localStorage.getItem("token"),
-        },
-        data: {storyId: +storyId},
-      });
-      console.log(storyId)
-      // requestData();
+      await axios.delete(`users/favourites/${id}`);
+      requestData();
     } catch (err) {
       console.log(err);
     }
   };
 
+
   return (
     <div className="flex">
-      {/* SEARCH / FILTER SECTION */}
-      <div
-        className={
-          isProfile
-            ? "flex w-1/4 bg-white  justify-around items-top"
-            : "flex w-1/4 bg-white  justify-around items-top h-screen"
-        }
-      >
+      {/* SIDEBAR */}
+      <div className="flex w-1/4 bg-white  justify-around items-top h-screen">
+        
         <div className="col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-4 xxl:col-span-4 px-6 py-6">
-          <div className="bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200">
+          {/* Profile choices */}
+          { (isProfile) && 
+          <div>
+            <p className="text-3xl font-bold text-gray-700 flex justify-center items-top m-10">
+            Hello {user && user}!
+            </p>
+            <div className="flex items-center bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200 mt-7">
+            <img src={Texts} className="mt-5 w-3/12"></img>
+            <div className="">
+              <p className="font-semibold text-lg text-gray-600 mb-5 mx-4">
+                What do you want to do?
+              </p>
+              <button
+                onClick={() => requestData()}
+                className="bg-blue-500 rounded-full p-2 text-white mx-3"
+              >
+                My WhatNext
+              </button>
+              <button
+                onClick={() => showFavourites()}
+                className="bg-blue-500 rounded-full p-2 text-white"
+              >
+                Go to favs
+              </button>
+            </div>
+          </div>
+          </div>}
+          {/* End of profile choices */}
+          
+          {/* FILTER BOX */}
+          <div className="bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200 mt-7">
             <p className="tracking-wide text-md text-purple-600 font-semibold uppercase">
               Search and filter
             </p>
-            {isProfile ? (
-              <p className="tracking-wide text-md text-purple-600 font-semibold uppercase">
-                your WhatNext
-              </p>
-            ) : (
-              ""
-            )}
 
             {/* Search Bar */}
             <div className="mt-3">
@@ -162,23 +205,8 @@ export default function GridStories({ isProfile, user, switchView }) {
             </div>
             {/* End of Category filter */}
           </div>
+          {/* END OF FILTER BOX */}
 
-          {/* See favourite WhatNext? */}
-          <div className="flex items-center bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200 mt-7">
-            <img src={Texts} className="mt-5 w-6/12"></img>
-            <div className="">
-              <p className="font-semibold text-lg text-gray-600 mb-5">
-                See your favourite WhatNext
-              </p>
-              <button
-                onClick={switchView}
-                className="bg-blue-500 rounded-full p-2 text-white"
-              >
-                Go to favs
-              </button>
-            </div>
-          </div>
-          {/* End of Want to create story? */}
           {/* Want to create story? */}
           <div className="flex items-center bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200 mt-7">
             <img src={Texts} className="mt-5 w-6/12"></img>
@@ -187,7 +215,7 @@ export default function GridStories({ isProfile, user, switchView }) {
                 Want to create a WhatNext?
               </p>
               <a
-                href="/start"
+                href={auth.isLoggedIn ? "/start" : "/login"}
                 className="bg-blue-500 rounded-full p-2 text-white"
               >
                 Let's go!
@@ -201,16 +229,7 @@ export default function GridStories({ isProfile, user, switchView }) {
 
       {/* CARDS DISPLAY SECTION */}
       <div className="w-4/5 bg-grayCustom2 justify-center">
-        {isProfile ? (
-          <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">
-            Hello {user && user}! Here are your <i>WhatNext</i>:
-          </p>
-        ) : (
-          <p className="text-3xl font-bold text-gray-700 flex justify-start items-top m-20">
-            All WhatNext
-          </p>
-        )}
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center m-20">
           <div className="flex justify-center items-center grid grid-cols-4 gap-10">
             {stories &&
               stories
