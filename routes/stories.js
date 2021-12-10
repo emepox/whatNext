@@ -195,12 +195,17 @@ router.get( "/:id/rating", async function ( req, res ) {
       attributes: ["score"],
       where: { StoryId: id },
     } );
-    
-    const sum = Object.keys(data).reduce(function (previous, key) {
-      return previous + data[key].score;
-    }, 0);
 
-    const average = (sum / data.length).toFixed(1);
+    let average = 0;
+
+    if ( data.length ) {
+      
+      const sum = Object.keys( data ).reduce(     function ( previous, key ) {
+        return previous + data[ key ].score;
+      }, 0 );      
+      average = ( sum / data.length ).toFixed( 1 );
+    }
+    
     const result = {
       average: average,
       amount: data.length
@@ -208,7 +213,7 @@ router.get( "/:id/rating", async function ( req, res ) {
     res.send(result);
   
   } catch ( err ) {
-    res.status(500).send(error);
+    res.status(500).send(err);
   }
 
 
