@@ -129,36 +129,36 @@ export default function Story() {
       <div className="w-3/4 bg-grayCustom1 justify-center">
           {story && (
           <p className="mt-80 mb-5 flex flex-cols items-center justify-center text-2xl font-bold leading-none tracking-normal text-gray-900 md:tracking-tight">
-            Start playing {story.name}
+            Now playing {story.name}
           </p>
           )}
           <p className="mb-6 flex flex-cols items-center justify-center leading-none tracking-normal text-gray-900 md:tracking-tight">
             What will happen next? You decide
           </p>
         
-        <div className="">
+        <div className="bg-white border-2 border-gray-100 rounded-xl shadow-2xl justify-center py-10 flex flex-col items-center justify-center mx-96">
           {loading && <div>loading</div>}
           {currentNode && (
             <div className="flex flex-col items-center justify-center">
-              <div className="text-xl text-white flex flex-col items-center justify-center mb-5 bg-gradient-to-r from-first to-purple-500 rounded-lg shadow-2xl flex flex-col items-center justify center px-52 py-2 w-5/12">
+              <div className="text-2xl text-gray-700 flex flex-col items-center justify-center">
                 {currentNode.situation}
               </div>
 
-              <p className="mb-3 text-gray-800 mt-10">
+              <p className="mb-3 text-gray-500 mt-5">
                 Scroll and select an option from the list below
               </p>
-              <div className="flex items-center flex-none px-4 bg-gradient-to-r from-first to-purple-500 rounded-b-none h-7 w-5/12 rounded-t">
+              <div className="flex items-center flex-none px-4 bg-purple-500 rounded-b-none h-7 w-full rounded-t">
                 <p className="text-white font-medium flex items-center justify-center">
                   Possible Scenarios
                 </p>
               </div>
-              <div className="w-5/12 bg-white rounded-b shadow-lg">
 
+              <div className="w-full bg-white rounded-b border-2 border-gray-200 mb-3">
                 <animated.div
                   style={{
                     position: "relative",
                     width: "100%",
-                    height: 60,
+                    height: 100,
                     overflow: "auto",
                     fontSize: "1em",
                     padding: 5,
@@ -193,9 +193,11 @@ export default function Story() {
                   )}
                 </animated.div>
               </div>
+
             </div>
           )}
         </div>
+
       </div>
     </div>
   );
