@@ -6,6 +6,7 @@ export default function Card({
   handleEdit,
   handleDelete,
   handlePlay,
+  handleFavourite
 }) {
   return (
     <div
@@ -134,9 +135,9 @@ export default function Card({
 
       <div className="ml-5 mr-5">
         <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3 ">
-          <p>{story.category}</p>
+          <p>{story.category} </p> 
         </div>
-
+        <button className="fontAwesome text-gray-200" onClick={handleFavourite} >&#xf004;</button>
         <a
           href="#"
           className="block text-lg leading-tight font-medium text-black hover:underline mt-6"

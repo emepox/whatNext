@@ -5,12 +5,10 @@ import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import Card from "./Card";
-
 import Texts from "../img/Texts.png";
 
-import CreateStory from "./CreateStory";
 
-export default function GridStories({ isProfile, user }) {
+export default function GridStories({ isProfile, user, switchView }) {
   const navigate = useNavigate();
   const auth = useAuth();
   const [stories, setStories] = useState([]);
@@ -88,6 +86,22 @@ export default function GridStories({ isProfile, user }) {
     }
   };
 
+  const handleFavourite = async (storyId) => {
+    try {
+      await axios('/users/favourites/', {
+        method: "POST",
+        headers: {
+            authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        data: {storyId: +storyId},
+      });
+      console.log(storyId)
+      // requestData();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="flex">
       {/* SEARCH / FILTER SECTION */}
@@ -149,12 +163,28 @@ export default function GridStories({ isProfile, user }) {
             {/* End of Category filter */}
           </div>
 
+          {/* See favourite WhatNext? */}
+          <div className="flex items-center bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200 mt-7">
+            <img src={Texts} className="mt-5 w-6/12"></img>
+            <div className="">
+              <p className="font-semibold text-lg text-gray-600 mb-5">
+                See your favourite WhatNext
+              </p>
+              <button
+                onClick={switchView}
+                className="bg-blue-500 rounded-full p-2 text-white"
+              >
+                Go to favs
+              </button>
+            </div>
+          </div>
+          {/* End of Want to create story? */}
           {/* Want to create story? */}
           <div className="flex items-center bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200 mt-7">
             <img src={Texts} className="mt-5 w-6/12"></img>
             <div className="">
               <p className="font-semibold text-lg text-gray-600 mb-5">
-                Want to create a story?
+                Want to create a WhatNext?
               </p>
               <a
                 href="/start"
@@ -165,6 +195,7 @@ export default function GridStories({ isProfile, user }) {
             </div>
           </div>
           {/* End of Want to create story? */}
+  
         </div>
       </div>
 
@@ -194,6 +225,7 @@ export default function GridStories({ isProfile, user }) {
                     handleEdit={() => handleEdit(story.id, story.name)}
                     handleDelete={() => handleDelete(story.id)}
                     handlePlay={() => handlePlay(story.id, story.first)}
+                    handleFavourite={() => handleFavourite(story.id)}
                   />
                 ))}
           </div>
