@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import Card from "./Card";
 import Texts from "../img/Texts.png";
+import Options from "../img/Options.png";
 
 
 export default function GridStories({ isProfile, isFavourite, user, switchView }) {
@@ -140,7 +141,8 @@ export default function GridStories({ isProfile, isFavourite, user, switchView }
             Hello {user && user}!
             </p>
             <div className="flex items-center bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200 mt-7">
-            <img src={Texts} className="mt-5 w-3/12"></img>
+            <img src={Options} className="w-3/12"></img>
+            {/* <span className="fontAwesome text-4xl text-blue-500 mr-10 ml-1">&#xf04e;</span> */}
             <div className="">
               <p className="font-semibold text-lg text-gray-600 mb-5 mx-4">
                 What do you want to do?
@@ -209,7 +211,7 @@ export default function GridStories({ isProfile, isFavourite, user, switchView }
 
           {/* Want to create story? */}
           <div className="flex items-center bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200 mt-7">
-            <img src={Texts} className="mt-5 w-6/12"></img>
+            <img src={Texts} className="w-32 mr-10"></img>
             <div className="">
               <p className="font-semibold text-lg text-gray-600 mb-5">
                 Want to create a WhatNext?

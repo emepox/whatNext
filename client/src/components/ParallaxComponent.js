@@ -8,6 +8,7 @@ import Thirdcard from "../img/Thirdcard.png";
 import Bestpickle from "../img/Bestpickle.png";
 import Citric from "../img/Citric.png";
 import Beetjuice from "../img/Beetjuice.png";
+import About from "./About"
 
 const url = (name, wrap = false) =>
   `${
@@ -117,109 +118,8 @@ export default function ParallaxComponent() {
         >
           {/* <img src={Thirdcard} style={{ width: '20%', height: '48%' }} /> */}
           {/* <Home /> */}
-          <section>
-            <div className="container max-w-full mx-auto py-24 px-6">
-              <h1 className="text-center text-4xl text-white font-medium leading-snug tracking-wider">
-                Stories
-              </h1>
-              <p className="text-center text-white mt-2 px-6">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam.
-              </p>
-              <div className="h-1 mx-auto bg-indigo-200 w-24 opacity-75 mt-4 rounded mb-10"></div>
-
-              <div className="max-w-full md:max-w-6xl mx-auto my-3 md:px-8">
-                <div className="relative block flex flex-col md:flex-row items-center">
-                  {/* CARD HOBBIE */}
-                  <div className="w-11/12 max-w-sm sm:w-3/5 lg:w-1/3 sm:my-5 my-8 relative z-0 rounded-lg shadow-lg md:-mr-4">
-                    <div className="bg-white text-black rounded-lg shadow-inner shadow-lg overflow-hidden">
-                      <div className="block text-left text-sm sm:text-md text-black">
-                        <img
-                          className="object-cover h-48 w-screen"
-                          src={Bestpickle}
-                          alt="whatever"
-                        />
-                        <div className="m-5">
-                          <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3">
-                            Horror
-                          </div>
-                          <a
-                            href="#"
-                            className="block mt-1 text-lg leading-tight font-medium text-black hover:underline mt-3"
-                          >
-                            Boar tries pickles
-                          </a>
-                          <p className="mt-2 text-gray-500 mr-2">
-                            Join the boar in this new adventure visiting
-                            Barcelona. What will happen? Only you can tell
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* CARD MOST POPULAR */}
-                  <div className="w-full max-w-md sm:w-2/3 lg:w-1/3 sm:my-5 my-8 relative z-10 bg-white rounded-lg shadow-lg">
-                    <div className="text-sm leading-none rounded-t-lg bg-gray-200 text-black font-semibold uppercase py-4 text-center tracking-wide">
-                      Most Popular
-                    </div>
-                    <div className="block text-left text-sm sm:text-md  text-black">
-                      <img
-                        className="object-cover h-48 w-screen"
-                        src={Beetjuice}
-                        alt="whatever"
-                      />
-                      <div className="m-5">
-                        <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3">
-                          Horror
-                        </div>
-                        <a
-                          href="#"
-                          className="block mt-1 text-lg leading-tight font-medium text-black hover:underline mt-3"
-                        >
-                          Boar tries pickles
-                        </a>
-                        <p className="mt-2 text-gray-500 mr-2 mb-20">
-                          Join the boar in this new adventure visiting
-                          Barcelona. What will happen? Only you can tell
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* CARD ENTERPRISE */}
-                  <div className="w-11/12 max-w-sm sm:w-3/5 lg:w-1/3 sm:my-5 my-8 relative z-0 rounded-lg shadow-lg md:-mr-4">
-                    <div className="bg-white text-black rounded-lg shadow-inner shadow-lg overflow-hidden">
-                      <div className="block text-left text-sm sm:text-md text-black">
-                        <img
-                          className="object-cover h-48 w-screen"
-                          src={Citric}
-                          alt="whatever"
-                        />
-                        <div className="m-5">
-                          <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3">
-                            Horror
-                          </div>
-                          <a
-                            href="#"
-                            className="block mt-1 text-lg leading-tight font-medium text-black hover:underline mt-3"
-                          >
-                            Boar tries pickles
-                          </a>
-                          <p className="mt-2 text-gray-500 mr-2">
-                            Join the boar in this new adventure visiting
-                            Barcelona. What will happen? Only you can tell
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* HERE IT ENDS  */}
-                </div>
-              </div>
-            </div>
-          </section>
-        </ParallaxLayer>
+          <About />
+          </ParallaxLayer>
       </Parallax>
     </div>
   );
