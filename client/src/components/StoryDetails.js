@@ -90,7 +90,6 @@ export default function StoryDetails() {
         <div>
             <Parallax ref={parallax} pages={1}>
                 <ParallaxLayer
-                    // className="bg-gradient-to-br from-pink-50 to-indigo-100"
                     offset={0}
                     speed={0}
                     factor={3}
