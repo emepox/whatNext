@@ -122,32 +122,4 @@ router.delete("/favourites", userShouldBeLoggedIn, async function (req, res) {
 } );
 
 
-router.put("/ratings", userShouldBeLoggedIn, async function (req, res) {
-  const { id } = req.user;
-  const {score, storyId} = req.body;
-  console.log( id, storyId, score )
-
-  try {
-    const result = await models.Rating.findOne({
-      where: {
-        UserId: id,
-        StoryId: storyId,
-      },
-    } );
-
-    await models.Rating.upsert(
-      {
-        id: result.id,
-        score: score,
-        StoryId: storyId,
-        UserId: id,
-      }
-    );
-    
-    res.send("BADABADAMOOOOOMBA");
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
-
 module.exports = router;

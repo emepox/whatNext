@@ -106,24 +106,55 @@ router.put("/:id/first", async function (req, res) {
   } catch (error) {
     res.status(500).send(error);
   }
-});
+} );
 
-router.put("/:storyId/review", userShouldBeLoggedIn, async function (req, res) {
+// POSTING REVIEWS
+
+// With UPSERT
+
+router.put("/:storyId/rating", userShouldBeLoggedIn, async function (req, res) {
+  const { id } = req.user;
+  const { score, storyId } = req.body;
+  console.log(id, storyId, score);
+
   try {
-    const { storyId } = req.params;
-    const { id } = req.user;
-    const { score } = req.body;
-    const review = await models.Rating.update(
-      { StoryId: storyId, score, UserId: id },
-      { where: { StoryId: storyId, UserId: id } }
-    );
-    if (!review[0])
-      await models.Rating.create({ StoryId: storyId, score, UserId: id });
-    res.send("rating added");
+    const result = await models.Rating.findOne({
+      where: {
+        UserId: id,
+        StoryId: storyId,
+      },
+    });
+    await models.Rating.upsert({
+      id: result?.id,
+      score: score,
+      StoryId: storyId,
+      UserId: id,
+    });
+
+    res.send("Rating added");
   } catch (error) {
     res.status(500).send(error);
   }
 });
+
+// Without UPSERT
+
+// router.put("/:storyId/review", userShouldBeLoggedIn, async function (req, res) {
+//   try {
+//     const { storyId } = req.params;
+//     const { id } = req.user;
+//     const { score } = req.body;
+//     const review = await models.Rating.update(
+//       { StoryId: storyId, score, UserId: id },
+//       { where: { StoryId: storyId, UserId: id } }
+//     );
+//     if (!review[0])
+//       await models.Rating.create({ StoryId: storyId, score, UserId: id });
+//     res.send("rating added");
+//   } catch (error) {
+//     res.status(500).send(error);
+//   }
+// });
 
 // Switches isFinished to true in STORIES table
 router.put("/:id/finish", async function (req, res) {
@@ -154,6 +185,33 @@ router.delete("/:id", async function (req, res) {
   } catch (error) {
     res.status(500).send(error);
   }
-});
+} );
+
+// GETS GLOBAL RATING OF A STORY
+router.get( "/:id/rating", async function ( req, res ) {
+  try {
+    const { id } = req.params;
+    const data = await models.Rating.findAll({
+      attributes: ["score"],
+      where: { StoryId: id },
+    } );
+    
+    const sum = Object.keys(data).reduce(function (previous, key) {
+      return previous + data[key].score;
+    }, 0);
+
+    const average = (sum / data.length).toFixed(1);
+    const result = {
+      average: average,
+      amount: data.length
+    }
+    res.send(result);
+  
+  } catch ( err ) {
+    res.status(500).send(error);
+  }
+
+
+})
 
 module.exports = router;
