@@ -8,7 +8,6 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import CreateStory from "./components/CreateStory";
 import StoryDetails from "./components/StoryDetails";
-import StoryPreview from "./components/StoryPreview";
 
 import TestFlow from "./components/TestFlow";
 
@@ -22,7 +21,6 @@ import StoryEnd from './components/StoryEnd';
 import AuthProvider from "./components/AuthProvider";
 import PrivateRoute from "./components/PrivateRoute";
 
-import StoryPreview2 from './components/StoryPreview2';
 
 
 
@@ -40,8 +38,6 @@ export default function App() {
             <Route path="/" element={<ParallaxComponent />} />
 
             <Route path="/story/:id/:page" element={<Story />} />
-            <Route path="/story/preview/:id" element={<StoryPreview />} />
-            <Route path="/storypreview" element={<StoryPreview2 />} />
             <Route path="/story/:id/end" element={<StoryEnd />} />
             <Route path="/testflow" element={<TestFlow />} />
 

@@ -7,7 +7,7 @@ export default function AllStories(isProfile) {
     <div>
       <div className="">
         {/* <p className="text-2xl text-white font-mono italic mb-10 ">Select a Story</p> */}
-        <GridStories isProfile={false} />
+        <GridStories isProfile={false} isFavourite={false}/>
       </div>
     </div>
   );
