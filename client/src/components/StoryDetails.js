@@ -88,7 +88,7 @@ export default function StoryDetails() {
 
     return (
         <div>
-            <Parallax ref={parallax} pages={2}>
+            <Parallax ref={parallax} pages={1}>
                 <ParallaxLayer
                     // className="bg-gradient-to-br from-pink-50 to-indigo-100"
                     offset={0}
@@ -146,9 +146,9 @@ export default function StoryDetails() {
                         
                     </div>
                 </ParallaxLayer>
-                <ParallaxLayer offset={1} speed={2} style={{ backgroundColor: '#DCE0EB' }} />
+                {/* <ParallaxLayer offset={1} speed={2} style={{ backgroundColor: '#DCE0EB' }} /> */}
 
-                <ParallaxLayer
+                {/* <ParallaxLayer
                     offset={1}
                     speed={0.5}
                     style={{
@@ -160,7 +160,7 @@ export default function StoryDetails() {
 
                     {postedStory.id && <CreateStory postedStory={postedStory}/>}
 
-                </ParallaxLayer>
+                </ParallaxLayer> */}
             </Parallax>
         </div>
     )
