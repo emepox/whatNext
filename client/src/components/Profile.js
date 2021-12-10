@@ -14,10 +14,15 @@ export default function Profile(isProfile) {
   const parallax = useRef(null);
   const auth = useAuth();
   const [user, setUser] = useState([]);
+  const [seeFavs, setSeeFavs] = useState(false);
 
   useEffect(() => {
     requestData();
   }, []);
+
+  const switchView = () => {
+    setSeeFavs(!seeFavs)
+  };
 
   const requestData = async () => {
     try {
@@ -36,8 +41,8 @@ export default function Profile(isProfile) {
   return (
     
       <div>
-        <GridStories isProfile={true} user={user.username}/>
-        <Favourites isProfile={true}/>
+        {!seeFavs ? <GridStories isProfile={true} user={user.username} switchView={() => switchView(true)}/> :
+        <Favourites isProfile={true} switchView={() => switchView(false)}/>}
       </div>
 
 
