@@ -21,9 +21,7 @@ export default function StoryEnd() {
         try {
             const { data } = await axios.get( `/stories/${id}/` );
             setStory( data )
-            setUser( data.User.username)
-            console.log( story );
-            console.log(user);
+            // setUser( data.User.username)
 
         } catch ( err ) {
             console.log(err)
@@ -54,10 +52,9 @@ export default function StoryEnd() {
 
     }
     
-
     return (
       <div>
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <div className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white">
             <div className="w-full md:w-1/3 bg-white grid place-items-center">
               <img src={story.media} className="rounded-xl" />
@@ -90,17 +87,18 @@ export default function StoryEnd() {
               <p className="md:text-lg text-gray-500 text-base">
                 {story.description}
               </p>
-              <p className="text-gray-400">Created by: {user}</p>
+              <p className="text-gray-400">
+                Created by: {story.User && story.User.username}
+              </p>
             </div>
           </div>
-            </div>
-            
-            {/* <Card story={ story } /> */}
-            
+        </div> */}
+        {Object.keys(story).length && <Card story={story} />}
+
         {/* CONTENEDOR DE RATINGS */}
-        <div className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white">
-          <form className="flex" onSubmit={(e) => handleSubmit(e)}>
-            <p>Rate this story:</p>
+        <div className="w-72 flex flex-col justify-center md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs mx-auto border border-white bg-white mt-5">
+          <form className="flex flex-col justify-center content-center" onSubmit={(e) => handleSubmit(e)}>
+            <p className="text-center">Rate this story</p>
             <Rating
               emptySymbol={
                 <span className="material-icons text-black">star_border</span>
