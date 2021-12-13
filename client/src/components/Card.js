@@ -19,8 +19,6 @@ export default function Card({
     requestRating();
   }, [] );
   
-
-
   const requestRating = async () => {
      try {
        const { data } = await axios.get(`/stories/${story.id}/rating`);

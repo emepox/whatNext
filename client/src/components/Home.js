@@ -2,7 +2,7 @@ import Beetjuice from "../img/Beetjuice.png";
 import Bestpickle from "../img/Bestpickle.png";
 import Citric from "../img/Citric.png";
 import Hot from "../img/Hot.png";
-import JabaliCards from "../img/JabaliCards.png"
+
 
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -254,7 +254,7 @@ export default function Home() {
     // </div>
 
     <div className="bg-grayCustom2 flex items-center justify-center  h-screen">
-      <img src={JabaliCards} className="w-8/12"></img>
+      
     </div>
   );
 }
