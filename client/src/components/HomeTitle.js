@@ -3,6 +3,10 @@ import { useTrail, a } from '@react-spring/web';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import "./Login.css";
 import Home from "../img/Home.png";
+import HomeSecond from "../img/HomeSecond.png"
+import Bestpickle from "../img/Bestpickle.png";
+import Citric from "../img/Citric.png";
+import Beetjuice from "../img/Beetjuice.png";
 
 const url = (name, wrap = false) =>
   `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
@@ -38,20 +42,110 @@ export default function App({scroll}) {
             </div>
         </div>
       </div>
-      <div class="w-full mx-auto mt-20 text-center md:w-10/12">
+
+      {/* OLD IMAGE */}
+      {/* <div class="w-full mx-auto mt-20 text-center md:w-10/12">
             <div class="relative z-0 w-full mt-8">
-                <div>
-                    {/* <div class="flex items-center flex-none px-4 bg-green-400 rounded-b-none h-11 rounded-xl">
-                        <div class="flex space-x-1.5">
-                            <div class="w-3 h-3 border-2 border-white rounded-full"></div>
-                            <div class="w-3 h-3 border-2 border-white rounded-full"></div>
-                            <div class="w-3 h-3 border-2 border-white rounded-full"></div>
-                        </div>
-                    </div> */}
-                    <img className="relative rounded-xl shadow-2xl" src={Home}/>
+                <div className="flex items-center justify-center ">
+                    <img className="relative rounded-xl shadow-2xl w-11/12" src={HomeSecond}/>
                 </div>
             </div>
-        </div>
+        </div> */}
+
+        <section>
+            <div className="container max-w-full mx-auto py-24 px-6">
+              <div className="max-w-full md:max-w-6xl mx-auto my-3 md:px-8">
+                <div className="relative block flex flex-col md:flex-row items-center">
+                  {/* CARD HOBBIE */}
+                  <div className="w-11/12 max-w-sm sm:w-3/5 lg:w-1/3 sm:my-5 my-8 relative z-0 rounded-lg shadow-lg md:-mr-4">
+                    <div className="bg-white text-black rounded-lg shadow-inner shadow-lg overflow-hidden">
+                      <div className="block text-left text-sm sm:text-md text-black">
+                        <img
+                          className="object-cover h-48 w-screen"
+                          src={Bestpickle}
+                          alt="whatever"
+                        />
+                        <div className="m-5">
+                          <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3">
+                            Horror
+                          </div>
+                          <a
+                            href="#"
+                            className="block mt-1 text-lg leading-tight font-medium text-black hover:underline mt-3"
+                          >
+                            Boar tries pickles
+                          </a>
+                          <p className="mt-2 text-gray-500 mr-2">
+                            Join the boar in this new adventure visiting
+                            Barcelona. What will happen? Only you can tell
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* CARD MOST POPULAR */}
+                  <div className="w-full max-w-md sm:w-2/3 lg:w-1/3 sm:my-5 my-8 relative z-10 bg-white rounded-lg shadow-lg">
+                    <div className="text-sm leading-none rounded-t-lg bg-gray-200 text-black font-semibold uppercase py-4 text-center tracking-wide">
+                      Most Popular
+                    </div>
+                    <div className="block text-left text-sm sm:text-md  text-black">
+                      <img
+                        className="object-cover h-48 w-screen"
+                        src={Beetjuice}
+                        alt="whatever"
+                      />
+                      <div className="m-5">
+                        <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3">
+                          Horror
+                        </div>
+                        <a
+                          href="#"
+                          className="block mt-1 text-lg leading-tight font-medium text-black hover:underline mt-3"
+                        >
+                          Boar tries pickles
+                        </a>
+                        <p className="mt-2 text-gray-500 mr-2 mb-20">
+                          Join the boar in this new adventure visiting
+                          Barcelona. What will happen? Only you can tell
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* CARD ENTERPRISE */}
+                  <div className="w-11/12 max-w-sm sm:w-3/5 lg:w-1/3 sm:my-5 my-8 relative z-0 rounded-lg shadow-lg md:-mr-4">
+                    <div className="bg-white text-black rounded-lg shadow-inner shadow-lg overflow-hidden">
+                      <div className="block text-left text-sm sm:text-md text-black">
+                        <img
+                          className="object-cover h-48 w-screen"
+                          src={Citric}
+                          alt="whatever"
+                        />
+                        <div className="m-5">
+                          <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3">
+                            Horror
+                          </div>
+                          <a
+                            href="#"
+                            className="block mt-1 text-lg leading-tight font-medium text-black hover:underline mt-3"
+                          >
+                            Boar tries pickles
+                          </a>
+                          <p className="mt-2 text-gray-500 mr-2">
+                            Join the boar in this new adventure visiting
+                            Barcelona. What will happen? Only you can tell
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* HERE IT ENDS  */}
+                </div>
+              </div>
+            </div>
+          </section>
+
 
     </div>
     

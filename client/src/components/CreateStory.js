@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import CreateNode from "./CreateNode";
 import AddEdge from "./AddEdge";
 import EditNode from "./EditNode";
@@ -15,7 +15,12 @@ const axios = require("axios");
 
 
 export default function CreateStory({ postedStory }) {
-  const { id, name } = postedStory;
+  
+  const { state } = useLocation();
+  const { id, name } = state;
+  console.log(state)
+  // const { id, name } = postedStory;
+   
   const [nodeList, setNodeList] = useState([]);
   const [toggle, setToggle] = useState("create");
   const navigate = useNavigate();
@@ -34,7 +39,7 @@ export default function CreateStory({ postedStory }) {
       console.error(error);      
     }
   }
-
+  
   const handleToggle = (event) => {
     event.preventDefault();
     setToggle(event.target.name);
@@ -87,6 +92,73 @@ export default function CreateStory({ postedStory }) {
   }
 }
 
+const handleDelete = async (id) =>{
+  try {
+      await axios(`/nodes/${id}`, {
+      method: 'DELETE',
+    });
+    getNodes()
+    new Noty({
+      theme: 'mint',
+      type: 'success',
+      layout: 'topRight',
+      text: 'Scenario deleted successfully ✨',
+      timeout: 2000,
+    }).show();
+    new Noty({
+      theme: 'mint',
+      type: 'information',
+      layout: 'topRight',
+      text: "👉 Now you can EDIT other scenarios, CREATE a new one and/or CONNECT them!",
+      timeout: 6000,
+    }).show();
+  } catch (error) {
+    console.log(error);
+    new Noty({
+      theme: 'mint',
+      type: 'error',
+      layout: 'topRight',
+      text: `${error.message}`,
+      timeout: 2000
+    }).show();
+  }
+}
+
+const handleEdit = async (id, situation) =>{
+  try {
+      await axios(`/nodes/edit/${id}`, {
+      method: 'PUT',
+      data: {
+          situation
+      },
+    });
+    getNodes()
+    new Noty({
+      theme: 'mint',
+      type: 'success',
+      layout: 'topRight',
+      text: 'Scenario edited successfully ✨',
+      timeout: 2000,
+    }).show();
+    new Noty({
+      theme: 'mint',
+      type: 'information',
+      layout: 'topRight',
+      text: "👉 Now you can EDIT other scenarios, CREATE a new one and/or CONNECT them!",
+      timeout: 6000,
+    }).show();
+  } catch (error) {
+    console.log(error);
+    new Noty({
+      theme: 'mint',
+      type: 'error',
+      layout: 'topRight',
+      text: `${error.message}`,
+      timeout: 2000
+    }).show();
+  }
+}
+
   return (
     <div className="grid grid-cols-2 gap-10">
       <div className="bg-white rounded-2xl shadow-2xl py-7 px-20">
@@ -132,10 +204,10 @@ export default function CreateStory({ postedStory }) {
             nodeList.map((node) => 
               <div key={node.id} className="cols mt-7 p-5 bg-gray-100 rounded shadow-xl">
                 {node.situation} 
-                <button name="delete" onClick={handleToggle} className="fontAwesome text-red-800 bg-red-400 p-2 rounded-full m-2 hover:bg-yellow-500 hover:shadow-lg">
+                <button name="delete" onClick={() => handleDelete(node.id)} className="fontAwesome text-red-800 bg-red-400 p-2 rounded-full m-2 hover:bg-yellow-500 hover:shadow-lg">
                   &#xf1f8; Delete
                 </button>
-                <button name="edit" onClick={handleToggle} className="text-yellow-700 bg-yellow-400 p-2 rounded-full m-2 hover:bg-yellow-500 hover:shadow-lg">
+                <button name="edit" onClick={() => handleEdit(node.id, node.situation)} className="text-yellow-700 bg-yellow-400 p-2 rounded-full m-2 hover:bg-yellow-500 hover:shadow-lg">
                   Edit Scenario
                 </button>
               </div>

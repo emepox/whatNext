@@ -96,6 +96,7 @@ router.post("/favourites", userShouldBeLoggedIn, async function (req, res) {
   try {
     const { id } = req.user;
     const { storyId } = req.body;
+    console.log(req.body)
     const user = await models.User.findOne({
       where: { id },
     });
@@ -104,6 +105,21 @@ router.post("/favourites", userShouldBeLoggedIn, async function (req, res) {
   } catch (error) {
     res.status(500).send(error);
   }
-});
+} );
+
+router.delete("/favourites", userShouldBeLoggedIn, async function (req, res) {
+  try {
+    const { id } = req.user;
+    const { storyId } = req.body;
+    const user = await models.User.findOne({
+      where: { id },
+    });
+    await user.removeFavourite(storyId);
+    res.send("Successfuly removed from favs");
+  } catch (error) {
+    res.status(500).send(error);
+  }
+} );
+
 
 module.exports = router;

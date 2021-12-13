@@ -4,9 +4,11 @@ module.exports = {
   theme: {
     extend: {
       gradientColorStops: theme => ({
-        'first': '#447EB4',
-        'middle': '#646eb2',
-        'last': '#8F5FB1'
+        // 'first': '#447EB4',
+        // 'middle': '#646eb2',
+        // 'last': '#8F5FB1'
+        'first': '#5069ef',
+        'second': '#715df4'
       }),
 
       borderRadius: {
@@ -24,6 +26,7 @@ module.exports = {
       height: {
         'custom': '80px',
         'flowH': '90%'
+
       },
 
       leading: {
@@ -43,7 +46,8 @@ module.exports = {
         'homeButton': '#00CD92',
         'navbarCustom': '#1C2530',
         'grayCustom': '#DAE1ED',
-        'grayCustom1': '#f8f9ff'
+        'grayCustom1': '#f8f9ff',
+        'grayCustom2': '#f6f6f9'
       }),
 
       btnColor:  theme => ({
