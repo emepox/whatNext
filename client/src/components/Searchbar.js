@@ -5,15 +5,16 @@ import "./Login.css";
 import Texts from "../img/Texts.png";
 import Options from "../img/Options.png";
 
-export default function Searchbar({
-  isProfile,
-  user,
-  options,
-  requestData,
-  setSearchQuery,
-  setCategoryFilters,
-  showFavourites,
-}) {
+
+export default function Searchbar({ 
+  isProfile, 
+  user, 
+  options, 
+  requestData, 
+  setSearchQuery, 
+  setCategoryFilters, 
+  showFavourites }){
+
   const auth = useAuth();
 
   const handleMultiChange = (selectedOptions) => {

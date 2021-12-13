@@ -11,8 +11,10 @@ export default function GridStories({ isProfile, user }) {
   const navigate = useNavigate();
   const auth = useAuth();
   const [stories, setStories] = useState([]);
+  const [favouritedStories, setFavouritedStories] = useState([])
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilters, setCategoryFilters] = useState([]);
+  
 
   const options = [
     { value: "Action", label: "Action" },
@@ -42,8 +44,6 @@ export default function GridStories({ isProfile, user }) {
       // else show all stories
       } else {
         const { data } = await axios("/stories/");
-        console.log(data);
-
         setStories(data);
       }
     } catch (error) {
@@ -51,6 +51,7 @@ export default function GridStories({ isProfile, user }) {
     }
   };
 
+  // display all favourited stories
   const showFavourites = async () => {
     try{
       const { data } = await axios("users/favourites", {
@@ -59,14 +60,16 @@ export default function GridStories({ isProfile, user }) {
       },
     });
         setStories(data);
+        // setFavouritedStories((state) => data.map((story) => {story.id = true}))
     } catch (error) {
         console.log(error);
     }
   };
 
-
+  // add or remove story from favourites
   const handleFavourite = async (story) => {
-    if (!story.isFavourite){
+    console.log(story)
+    if (!favouritedStories[story.id]){ 
     try {
       await axios('/users/favourites/', {
         method: "POST",
@@ -75,21 +78,26 @@ export default function GridStories({ isProfile, user }) {
         },
         data: {storyId: +story.id},
       });
-      story.isFavourite = true;
+      setFavouritedStories({...favouritedStories, [story.id]: true});
+      requestData()
     } catch (err) {
       console.log(err);
     }
    } else {
       try {
-        await axios.delete(`users/favourites/${story.id}`);
-        story.isFavourite = false;
-        console.log(story)
+        await axios(`/users/favourites/${story.id}`, {
+          method: "DELETE",
+          headers: {
+              authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        });
+        setFavouritedStories({...favouritedStories, [story.id]: false})
+        requestData()
       } catch (err) {
         console.log(err);
       }
    }
   };
-
 
   const hasCategoryFilter = (story) => {
     return !categoryFilters.length || categoryFilters.includes(story.category);
@@ -120,16 +128,6 @@ export default function GridStories({ isProfile, user }) {
     }
   };
 
-  const handleDeleteFavourite = async (id) => {
-    try {
-      await axios.delete(`users/favourites/${id}`);
-      requestData();
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-
   return (
     <div className="flex">
       {/* SIDEBAR */}
@@ -148,13 +146,13 @@ export default function GridStories({ isProfile, user }) {
                 })
                 .map((story) => (
                   <Card
-                    user={user}
                     story={story}
                     isProfile={isProfile}
                     handleEdit={() => handleEdit(story.id, story.name)}
                     handleDelete={() => handleDelete(story.id)}
                     handlePlay={() => handlePlay(story.id, story.first)}
                     handleFavourite={() => handleFavourite(story)}
+                    favouritedStories={favouritedStories}
                   />
                 ))}
           </div>

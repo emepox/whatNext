@@ -10,11 +10,12 @@ export default function Card({
   handleDelete,
   handlePlay,
   handleFavourite,
+  favouritedStories
 } ) {
   
   const auth = useAuth();
   const [ rating, setRating ] = useState( {} );
-  
+
   useEffect(() => {
     requestRating();
   }, [] );
@@ -88,14 +89,14 @@ export default function Card({
                           className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
                           role="menuitem"
                         >
-                          Edit story
+                          Edit 
                         </button>
                         <button
                           onClick={handleDelete}
                           tabIndex="1"
                           className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
                         >
-                          Delete story
+                          Delete 
                         </button>
                         <button
                           onClick={handlePlay}
@@ -135,11 +136,7 @@ export default function Card({
           </div>
           {auth.isLoggedIn && (
             <button
-              className={
-                story.isFavourite
-                  ? "fontAwesome text-gray-200"
-                  : "fontAwesome text-purple-500"
-              }
+              className={favouritedStories[story.id] ? "fontAwesome text-purple-500" : "fontAwesome text-gray-200"}
               onClick={handleFavourite}
             >
               &#xf004;
@@ -170,12 +167,6 @@ export default function Card({
         </div>
       </div>
 
-      {/*             
-            {!isProfile && (
-              <div className="flex justify-center">
-                <button onClick={() => handlePreview(story.id) } className="bg-purple-400 text-white p-1 rounded m-2 hover:bg-purple-500 hover:shadow-lg">Play</button>
-              </div>
-            )} */}
     </div>
   );
 }
