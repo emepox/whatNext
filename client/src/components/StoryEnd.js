@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+
+import useAuth from "../hooks/useAuth";
+
 import Rating from "react-rating";
 import Card from "./Card";
 
@@ -12,6 +15,8 @@ export default function StoryEnd() {
     const [user, setUser] = useState("");
 
     const { id } = useParams();
+    const auth = useAuth();
+
     
     useEffect(() => {
         requestStory();
@@ -97,21 +102,28 @@ export default function StoryEnd() {
 
         {/* CONTENEDOR DE RATINGS */}
         <div className="w-72 flex flex-col justify-center md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs mx-auto border border-white bg-white mt-5">
-          <form className="flex flex-col justify-center content-center" onSubmit={(e) => handleSubmit(e)}>
-            <p className="text-center">Rate this story</p>
-            <Rating
-              emptySymbol={
-                <span className="material-icons text-black">star_border</span>
-              }
-              fullSymbol={
-                <span className="material-icons text-black">grade</span>
-              }
-              onClick={(displayValue) => handleRating(displayValue)}
+          {auth.isLoggedIn ? (
+            <form
+              className="flex flex-col justify-center content-center"
+              onSubmit={(e) => handleSubmit(e)}
+            >
+              <p className="text-center">Rate this story</p>
 
-              // value={rating}
-            />
-            <button>Send</button>
-          </form>
+              <Rating
+                emptySymbol={
+                  <span className="material-icons text-black">star_border</span>
+                }
+                fullSymbol={
+                  <span className="material-icons text-black">grade</span>
+                }
+                onClick={(displayValue) => handleRating(displayValue)}
+                // value={rating}
+              />
+              <button>Send</button>
+            </form>
+          ) : (
+            <div className="text-center"><p>You need to be logged in to rate this story.</p><button><a href="/login">Log in</a></button></div>
+          )}
         </div>
       </div>
     );
