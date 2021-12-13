@@ -21,8 +21,9 @@ module.exports = {
            updatedAt: new Date(),
          },
          {
-           name: "Jabalí 2: Jabalí strikes back",
-           description: "Jabalí is back for vengeance.",
+           name: "Jabalí 2: Jabalí unchained",
+           description: "Our hero is back without restraints.",
+
            reproductions: 0,
            media:
              "https://elcomercio.pe/resizer/KsHKxeRO4pmkG7Unb9mGR6rr1Vc=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/ZHS7NZPLMRFK7OOG7CHS67R4WI.jpeg",
@@ -49,8 +50,8 @@ module.exports = {
            updatedAt: new Date(),
          },
          {
-           name: "Jabalí 4: Jabalí unchained",
-           description: "Our hero is back without restraints.",
+           name: "Jabalí 4: Jabalí strikes back",
+           description: "Jabalí is back for vengeance.",
            reproductions: 0,
            media:
              "https://revistajaraysedal.es/wp-content/uploads/2021/04/edad-maximo-desarrollo-jabali-768x432.jpg",

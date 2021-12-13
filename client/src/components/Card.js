@@ -114,7 +114,7 @@ export default function Card({
           </div>
         </div>
       </div>
-      <div onClick={handlePlay} className="cursor-pointer">
+      <div>
         {/* REVIEWS AND LIKE */}
         <div className="my-2 ml-5 mr-5 flex justify-between">
           <div className="flex items-center">
@@ -148,7 +148,7 @@ export default function Card({
         </div>
 
         {/* CARD INFO */}
-        <div className="ml-5 mr-5">
+        <div onClick={handlePlay} className="ml-5 mr-5 cursor-pointer">
           <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-5">
             <p>{story.category} </p>
           </div>
