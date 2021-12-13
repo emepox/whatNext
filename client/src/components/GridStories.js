@@ -129,9 +129,9 @@ export default function GridStories({ isProfile, user }) {
   };
 
   return (
-    <div className="flex bg-grayCustom2">
+    <div className="md:flex bg-grayCustom2 sm:flex-none ">
       {/* SIDEBAR */}
-      <div className="flex basis-1/5 bg-white  justify-around items-top h-screen">
+      <div className="flex basis-1/5 bg-white  justify-around items-top md:h-screen">
         <Searchbar
           isProfile={isProfile}
           user={user}
@@ -145,7 +145,7 @@ export default function GridStories({ isProfile, user }) {
       {/* CARDS DISPLAY SECTION */}
 
       <div className="basis-4/5">
-        <div className="flex m-10">
+        <div className="md:flex m-10">
           <div className="flex flex-wrap justify-left">
             {stories &&
               stories
