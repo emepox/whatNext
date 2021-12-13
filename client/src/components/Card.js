@@ -10,22 +10,20 @@ export default function Card({
   handleDelete,
   handlePlay,
   handleFavourite,
+  favouritedStories
 } ) {
   
   const auth = useAuth();
   const [ rating, setRating ] = useState( {} );
-  
+
   useEffect(() => {
     requestRating();
   }, [] );
   
-  console.log(story)
-
   const requestRating = async () => {
      try {
        const { data } = await axios.get(`/stories/${story.id}/rating`);
        setRating( data );
-       console.log(data)
      } catch (err) {
        console.log(err);
      }
@@ -34,7 +32,7 @@ export default function Card({
   return (
     <div
       key={story.id}
-      className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-xl overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400"
+      className="w-72 h-96 max-w-md m-4 bg-white rounded-xl shadow-xl overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400"
     >
       <div className="md:flex">
         <div className="md:flex-initial">
@@ -91,14 +89,14 @@ export default function Card({
                           className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
                           role="menuitem"
                         >
-                          Edit story
+                          Edit 
                         </button>
                         <button
                           onClick={handleDelete}
                           tabIndex="1"
                           className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
                         >
-                          Delete story
+                          Delete 
                         </button>
                         <button
                           onClick={handlePlay}
@@ -115,51 +113,11 @@ export default function Card({
               )}
             </div>
           </div>
-
-          <div className="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95">
-            <div
-              className="absolute right-0 w-56 mt-2 origin-top-right bg-white  border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
-              aria-labelledby="headlessui-menu-button-1"
-              id="headlessui-menu-items-117"
-              role="menu"
-            >
-              {isProfile && (
-                <div className="py-1">
-                  <button
-                    onClick={handleEdit}
-                    tabIndex="0"
-                    className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
-                    role="menuitem"
-                  >
-                    Edit story
-                  </button>
-                  <button
-                    onClick={handleDelete}
-                    tabIndex="1"
-                    className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
-                  >
-                    Delete story
-                  </button>
-                  <button
-                    onClick={handlePlay}
-                    tabIndex="2"
-                    className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
-                    role="menuitem"
-                  >
-                    Play
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
         </div>
       </div>
-
-      <div className="ml-5 mr-5">
-        <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3 ">
-          <p>{story.category} </p>
-        </div>
-        <div className="flex justify-between">
+      <div>
+        {/* REVIEWS AND LIKE */}
+        <div className="my-2 ml-5 mr-5 flex justify-between">
           <div className="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -178,35 +136,37 @@ export default function Card({
           </div>
           {auth.isLoggedIn && (
             <button
-              className="fontAwesome text-gray-200"
+              className={favouritedStories[story.id] ? "fontAwesome text-purple-500" : "fontAwesome text-gray-200"}
               onClick={handleFavourite}
             >
               &#xf004;
             </button>
           )}
         </div>
-        <a
+
+        {/* CARD INFO */}
+        <div onClick={handlePlay} className="ml-5 mr-5 cursor-pointer">
+          <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-5">
+            <p>{story.category} </p>
+          </div>
+
+          {/* <a
           href="#"
-          className="block text-lg leading-tight font-medium text-black hover:underline mt-6"
-        >
+          className="block text-lg leading-tight font-medium text-black hover:underline mt-2"
+        > */}
           <p>{story.name}</p>
-          <p className="font-small text-sm text-gray-300 mt-3">
+          {/* <p className="font-small text-sm text-gray-300 mt-3">
             by: {story.User && story.User.username}
+          </p> */}
+          {/* </a> */}
+          <p className="mt-3 text-gray-500 mr-2">
+            {story && story.description.length >= 85
+              ? `${story.description.slice(0, 85)}...`
+              : story.description}
           </p>
-        </a>
-        <p className="mt-3 text-gray-500 mr-2">
-          {story && story.description.length >= 91
-            ? `${story.description.slice(0, 90)}...`
-            : story.description}
-        </p>
+        </div>
       </div>
 
-      {/*             
-            {!isProfile && (
-              <div className="flex justify-center">
-                <button onClick={() => handlePreview(story.id) } className="bg-purple-400 text-white p-1 rounded m-2 hover:bg-purple-500 hover:shadow-lg">Play</button>
-              </div>
-            )} */}
     </div>
   );
 }

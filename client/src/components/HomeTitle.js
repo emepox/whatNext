@@ -53,11 +53,12 @@ export default function App({scroll}) {
         </div> */}
 
         <section>
-            <div className="container max-w-full mx-auto py-24 px-6">
+            <div className="container max-w-full mx-auto py-24 px-10">
               <div className="max-w-full md:max-w-6xl mx-auto my-3 md:px-8">
                 <div className="relative block flex flex-col md:flex-row items-center">
-                  {/* CARD HOBBIE */}
-                  <div className="w-11/12 max-w-sm sm:w-3/5 lg:w-1/3 sm:my-5 my-8 relative z-0 rounded-lg shadow-lg md:-mr-4">
+                  
+                  {/* CARD HORROR */}
+                  <div className="w-11/12 max-w-sm sm:w-3/5 lg:w-72 sm:my-5 my-8 relative rounded-lg shadow-lg md:-mr-4">
                     <div className="bg-white text-black rounded-lg shadow-inner shadow-lg overflow-hidden">
                       <div className="block text-left text-sm sm:text-md text-black">
                         <img
@@ -70,7 +71,7 @@ export default function App({scroll}) {
                             Horror
                           </div>
                           <a
-                            href="#"
+                            href="/play"
                             className="block mt-1 text-lg leading-tight font-medium text-black hover:underline mt-3"
                           >
                             Boar tries pickles
@@ -85,7 +86,7 @@ export default function App({scroll}) {
                   </div>
 
                   {/* CARD MOST POPULAR */}
-                  <div className="w-full max-w-md sm:w-2/3 lg:w-1/3 sm:my-5 my-8 relative z-10 bg-white rounded-lg shadow-lg">
+                  <div className="w-full max-w-md sm:w-2/3 lg:w-80 sm:my-5 my-8 relative bg-white rounded-lg shadow-lg">
                     <div className="text-sm leading-none rounded-t-lg bg-gray-200 text-black font-semibold uppercase py-4 text-center tracking-wide">
                       Most Popular
                     </div>
@@ -97,15 +98,15 @@ export default function App({scroll}) {
                       />
                       <div className="m-5">
                         <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3">
-                          Horror
+                          Drama
                         </div>
                         <a
-                          href="#"
+                          href="/play"
                           className="block mt-1 text-lg leading-tight font-medium text-black hover:underline mt-3"
                         >
                           Boar tries pickles
                         </a>
-                        <p className="mt-2 text-gray-500 mr-2 mb-20">
+                        <p className="mt-2 text-gray-500 mr-2 mb-10">
                           Join the boar in this new adventure visiting
                           Barcelona. What will happen? Only you can tell
                         </p>
@@ -113,9 +114,9 @@ export default function App({scroll}) {
                     </div>
                   </div>
 
-                  {/* CARD ENTERPRISE */}
-                  <div className="w-11/12 max-w-sm sm:w-3/5 lg:w-1/3 sm:my-5 my-8 relative z-0 rounded-lg shadow-lg md:-mr-4">
-                    <div className="bg-white text-black rounded-lg shadow-inner shadow-lg overflow-hidden">
+                  {/* CARD COMEDY */}
+                  <div className="w-11/12 max-w-sm sm:w-3/5 lg:w-72 sm:my-5 my-8 relative rounded-r-lg shadow-lg md:-mr-4">
+                    <div className="bg-white text-black rounded-r-lg shadow-inner shadow-lg overflow-hidden">
                       <div className="block text-left text-sm sm:text-md text-black">
                         <img
                           className="object-cover h-48 w-screen"
@@ -124,10 +125,10 @@ export default function App({scroll}) {
                         />
                         <div className="m-5">
                           <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3">
-                            Horror
+                            Comedy
                           </div>
                           <a
-                            href="#"
+                            href="/play"
                             className="block mt-1 text-lg leading-tight font-medium text-black hover:underline mt-3"
                           >
                             Boar tries pickles

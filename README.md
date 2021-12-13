@@ -32,6 +32,8 @@ This project uses several additional libraries, which should also get installed 
 - Axios <https://axios-http.com/>
 - Noty <https://ned.im/noty/#/>
 - Tailwind <https://tailwindcss.com/docs>
+- React Spring <https://react-spring.io>
+
 
 ### Database Prep
 
