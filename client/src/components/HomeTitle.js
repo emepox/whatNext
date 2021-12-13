@@ -43,15 +43,6 @@ export default function App({scroll}) {
         </div>
       </div>
 
-      {/* OLD IMAGE */}
-      {/* <div class="w-full mx-auto mt-20 text-center md:w-10/12">
-            <div class="relative z-0 w-full mt-8">
-                <div className="flex items-center justify-center ">
-                    <img className="relative rounded-xl shadow-2xl w-11/12" src={HomeSecond}/>
-                </div>
-            </div>
-        </div> */}
-
         <section>
             <div className="container max-w-full mx-auto py-24 px-10">
               <div className="max-w-full md:max-w-6xl mx-auto my-3 md:px-8">
@@ -88,7 +79,7 @@ export default function App({scroll}) {
                   {/* CARD MOST POPULAR */}
                   <div className="w-full max-w-md sm:w-2/3 lg:w-80 sm:my-5 my-8 relative bg-white rounded-lg shadow-lg">
                     <div className="text-sm leading-none rounded-t-lg bg-gray-200 text-black font-semibold uppercase py-4 text-center tracking-wide">
-                      Most Popular
+                      Play Most Popular
                     </div>
                     <div className="block text-left text-sm sm:text-md  text-black">
                       <img
