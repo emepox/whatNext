@@ -114,9 +114,9 @@ export default function Card({
           </div>
         </div>
       </div>
-
-      {/* REVIEWS AND LIKE */}
-      <div className="my-2 ml-5 mr-5 flex justify-between">
+      <div onClick={handlePlay} className="cursor-pointer">
+        {/* REVIEWS AND LIKE */}
+        <div className="my-2 ml-5 mr-5 flex justify-between">
           <div className="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -135,7 +135,11 @@ export default function Card({
           </div>
           {auth.isLoggedIn && (
             <button
-              className={story.isFavourite ? "fontAwesome text-gray-200" : "fontAwesome text-purple-500"}
+              className={
+                story.isFavourite
+                  ? "fontAwesome text-gray-200"
+                  : "fontAwesome text-purple-500"
+              }
               onClick={handleFavourite}
             >
               &#xf004;
@@ -143,26 +147,27 @@ export default function Card({
           )}
         </div>
 
+        {/* CARD INFO */}
+        <div className="ml-5 mr-5">
+          <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-5">
+            <p>{story.category} </p>
+          </div>
 
-      <div className="ml-5 mr-5">
-        <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-5">
-          <p>{story.category} </p>
-        </div>
-        
-        <a
+          {/* <a
           href="#"
           className="block text-lg leading-tight font-medium text-black hover:underline mt-2"
-        >
+        > */}
           <p>{story.name}</p>
           {/* <p className="font-small text-sm text-gray-300 mt-3">
             by: {story.User && story.User.username}
           </p> */}
-        </a>
-        <p className="mt-3 text-gray-500 mr-2">
-          {story && story.description.length >= 85
-            ? `${story.description.slice(0, 85)}...`
-            : story.description}
-        </p>
+          {/* </a> */}
+          <p className="mt-3 text-gray-500 mr-2">
+            {story && story.description.length >= 85
+              ? `${story.description.slice(0, 85)}...`
+              : story.description}
+          </p>
+        </div>
       </div>
 
       {/*             
