@@ -1,31 +1,14 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import useAuth from "../hooks/useAuth";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import Card from "./Card";
 import Texts from "../img/Texts.png";
+import Options from "../img/Options.png";
 
 
-export default function SideBar({ isProfile, isFavourite, story, switchView }) {
-  const navigate = useNavigate();
+export default function Searchbar({ isProfile, user, options, requestData, setSearchQuery, setCategoryFilters, showFavourites }) {
   const auth = useAuth();
-  const [stories, setStories] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [categoryFilters, setCategoryFilters] = useState([]);
-
-  const options = [
-    { value: "Action", label: "Action" },
-    { value: "Comedy", label: "Comedy" },
-    { value: "Drama", label: "Drama" },
-    { value: "Horror", label: "Horror" },
-    { value: "Love", label: "Love" },
-    { value: "Mystery", label: "Mystery" },
-    { value: "Other", label: "Other" },
-  ];
-
-
 
   const handleMultiChange = (selectedOptions) => {
     setCategoryFilters((state) =>
@@ -33,42 +16,45 @@ export default function SideBar({ isProfile, isFavourite, story, switchView }) {
     );
   };
 
-  const hasCategoryFilter = (story) => {
-    return !categoryFilters.length || categoryFilters.includes(story.category);
-  };
-
-  const hasSearchFilter = (story) => {
-    return (
-      searchQuery === "" ||
-      story.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      story.description.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  };
-
-  
 
   return (
-    <div className="flex">
-      {/* SEARCH / FILTER SECTION */}
-      <div
-        className={
-          isProfile
-            ? "flex w-1/4 bg-white  justify-around items-top"
-            : "flex w-1/4 bg-white  justify-around items-top h-screen"
-        }
-      >
+        
         <div className="col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-4 xxl:col-span-4 px-6 py-6">
-          <div className="bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200">
+          {/* Profile choices */}
+          { (isProfile) && 
+          <div>
+            <p className="text-3xl font-bold text-gray-700 flex justify-center items-top m-10">
+            Hello {user && user}!
+            </p>
+            <div className="flex items-center bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200 mt-7">
+            <img src={Options} className="w-3/12"></img>
+            {/* <span className="fontAwesome text-4xl text-blue-500 mr-10 ml-1">&#xf04e;</span> */}
+            <div>
+              <p className="font-semibold text-lg text-gray-600 mb-5 mx-4">
+                What do you want to do?
+              </p>
+              <button
+                onClick={() => requestData()}
+                className="bg-blue-500 rounded-full p-2 text-white mx-3"
+              >
+                My WhatNext
+              </button>
+              <button
+                onClick={() => showFavourites()}
+                className="bg-blue-500 rounded-full p-2 text-white"
+              >
+                Go to favs
+              </button>
+            </div>
+          </div>
+          </div>}
+          {/* End of profile choices */}
+          
+          {/* FILTER BOX */}
+          <div className="bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200 mt-7">
             <p className="tracking-wide text-md text-purple-600 font-semibold uppercase">
               Search and filter
             </p>
-            {isProfile ? (
-              <p className="tracking-wide text-md text-purple-600 font-semibold uppercase">
-                your WhatNext
-              </p>
-            ) : (
-              ""
-            )}
 
             {/* Search Bar */}
             <div className="mt-3">
@@ -107,32 +93,15 @@ export default function SideBar({ isProfile, isFavourite, story, switchView }) {
             </div>
             {/* End of Category filter */}
           </div>
-
-          {/* See favourite WhatNext? */}
+          {/* END OF FILTER BOX */}
           <div className="flex items-center bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200 mt-7">
-            <img src={Texts} className="mt-5 w-6/12"></img>
-            <div className="">
-              <p className="font-semibold text-lg text-gray-600 mb-5">
-                See your favourite WhatNext
-              </p>
-              <button
-                onClick={()=>switchView(isFavourite)}
-                className="bg-blue-500 rounded-full p-2 text-white"
-              >
-                Go to favs
-              </button>
-            </div>
-          </div>
-          {/* End of Want to create story? */}
-          {/* Want to create story? */}
-          <div className="flex items-center bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200 mt-7">
-            <img src={Texts} className="mt-5 w-6/12"></img>
+            <img src={Texts} className="w-32 mr-10"></img>
             <div className="">
               <p className="font-semibold text-lg text-gray-600 mb-5">
                 Want to create a WhatNext?
               </p>
               <a
-                href="/start"
+                href={auth.isLoggedIn ? "/start" : "/login"}
                 className="bg-blue-500 rounded-full p-2 text-white"
               >
                 Let's go!
@@ -142,8 +111,7 @@ export default function SideBar({ isProfile, isFavourite, story, switchView }) {
           {/* End of Want to create story? */}
   
         </div>
-      </div>
 
-    </div>
+      
   );
 }
