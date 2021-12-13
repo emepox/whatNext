@@ -58,6 +58,8 @@ module.exports = {
       textColor: theme => ({
         'customWhite': '#F4F6F6',
       }),
+
+    
       
       container: {
         padding: {
