@@ -44,7 +44,7 @@ router.put("/:id/edges", userShouldBeLoggedIn, async function (req, res) {
     let nextNode = await models.Node.findOne({
       where: { id: nextId },
     });
-    await nextNode.setNext(+id, { through: { option: option } });
+    await nextNode.addNext(+id, { through: { option: option } });
 
     res.send({ message: "edge established" });
   } catch (error) {

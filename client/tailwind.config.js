@@ -25,7 +25,8 @@ module.exports = {
 
       height: {
         'custom': '80px',
-        'hcustom': '90%'
+        'flowH': '90%'
+
       },
 
       leading: {

@@ -173,7 +173,6 @@ export default function Story() {
               What will happen next? You decide
               </p>
 
-
               <div className="h-1 w-full mx-auto border-b my-5"></div>
 
               {/* OPTIONS */}
