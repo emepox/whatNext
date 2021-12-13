@@ -29,8 +29,9 @@ export default function Story() {
   
     useEffect(() => {
       requestRating();
-    }, []);
-
+    }, [] );
+  
+  
     const requestRating = async () => {
       try {
         const { data } = await axios.get(`/stories/${id}/rating`);
