@@ -18,18 +18,19 @@ export default function Story() {
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState(null);
   const [data, setData] = useState(null);
-  const [ selectedId, setSelectedId ] = useState( 0 );
+  const [selectedId, setSelectedId] = useState(0);
   const [rating, setRating] = useState({});
-  
 
   useEffect(() => getCurrentNode(page), [page]);
+
 
   useEffect( () => getStory( id ), [] );
   
     useEffect(() => {
       requestRating();
-    }, []);
-
+    }, [] );
+  
+  
     const requestRating = async () => {
       try {
         const { data } = await axios.get(`/stories/${id}/rating`);
@@ -152,51 +153,36 @@ export default function Story() {
       </div>
 
       {/* SECCIÓN DE LA STORY */}
-      <div className="w-3/4 bg-grayCustom1 justify-center">
+      <div className="w-3/4 bg-grayCustom1 flex flex-col items-center justify-center">
         {story && (
-          <p className="mt-80 mb-5 flex flex-cols items-center justify-center text-2xl font-bold leading-none tracking-normal text-gray-900 md:tracking-tight">
-            Now playing {story.name}
-          </p>
+          <div>
+            <p className="mb-5 text-2xl font-bold text-gray-900">
+              Now playing {story.name}
+            </p>
+          </div>
         )}
-        <p className="mb-6 flex flex-cols items-center justify-center leading-none tracking-normal text-gray-900 md:tracking-tight">
-          What will happen next? You decide
-        </p>
 
-        <div className="bg-white border-2 border-gray-100 rounded-xl shadow-2xl justify-center py-10 flex flex-col items-center justify-center mx-96">
-          {loading && <div>loading</div>}
-          {currentNode && (
-            <div className="flex flex-col items-center justify-center">
-              <div className="text-2xl text-gray-700 flex flex-col items-center justify-center">
+        {loading && <div>loading</div>}
+        {currentNode && (
+          <div className="w-6/12 mx-auto rounded border">
+            <div className="bg-white rounded-lg p-10 shadow-sm overflow-y-auto h-auto">
+              <p className="text-xl font-medium text-purple-500">
                 {currentNode.situation}
-              </div>
-
-              <p className="mb-3 text-gray-500 mt-5">
-                Scroll and select an option from the list below
               </p>
-              <div className="flex items-center flex-none px-4 bg-purple-500 rounded-b-none h-7 w-full rounded-t">
-                <p className="text-white font-medium flex items-center justify-center">
-                  Possible Scenarios
-                </p>
-              </div>
+              <p className="text-sm font-light text-gray-600 my-3">
+              What will happen next? You decide
+              </p>
 
-              <div className="w-full bg-white rounded-b border-2 border-gray-200 mb-3">
-                <animated.div
-                  style={{
-                    position: "relative",
-                    width: "100%",
-                    height: 100,
-                    overflow: "auto",
-                    fontSize: "1em",
-                    padding: 5,
-                  }}
-                  scrollTop={scroll}
-                >
-                  {currentNode.Start ? (
-                    currentNode.Start.map((edge) => (
+
+              <div className="h-1 w-full mx-auto border-b my-5"></div>
+
+              {/* OPTIONS */}
+              {currentNode.Start ? (
+                currentNode.Start.map((edge) => (
+                  
+                    <div className="flex flex-col items-start justify-center transition hover:bg-indigo-50 cursor-pointer transition space-x-5 px-5 h-16">
                       <a
-                        className="grid grid-cols-1 divide-y divide-gray-300 hover:underline"
-                        onClick={() => navigate(`/story/${id}/end`)}
-                        // key={`${word}_${i}`}
+                        onClick={() => navigate(`/story/${id}/${edge.next}`)}
                         style={{
                           width: "100%",
                           height: 40,
@@ -205,21 +191,24 @@ export default function Story() {
                       >
                         {edge.option}
                       </a>
-                    ))
-                  ) : (
+                    </div>
+                  
+                ))
+              ) : (
+                
+                  <div className="flex flex-col items-start justify-center transition hover:bg-indigo-50 cursor-pointer transition space-x-5 px-5 h-16">
                     <a
-                      className="flex flex-col items-center justify-center hover:underline"
-                      onClick={() => navigate(`/story/${id}/1`)}
-                      style={{ width: "100%", height: 50, textAlign: "center" }}
+                      onClick={() => navigate(`/story/${id}/end`)}
+                      style={{ width: "100%", height: 40, textAlign: "center" }}
                     >
-                      finish
+                      Finish
                     </a>
-                  )}
-                </animated.div>
-              </div>
+                  </div>
+                
+              )}
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
