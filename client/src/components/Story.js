@@ -196,7 +196,7 @@ export default function Story() {
                     currentNode.Start.map((edge) => (
                       <a
                         className="grid grid-cols-1 divide-y divide-gray-300 hover:underline"
-                        onClick={() => navigate(`/story/${id}/end`)}
+                        onClick={() => navigate(`/story/${id}/${edge.next}`)}
                         // key={`${word}_${i}`}
                         style={{
                           width: "100%",
@@ -210,7 +210,7 @@ export default function Story() {
                   ) : (
                     <a
                       className="flex flex-col items-center justify-center hover:underline"
-                      onClick={() => navigate(`/story/${id}/1`)}
+                      onClick={() => navigate(`/story/${id}/end`)}
                       style={{ width: "100%", height: 50, textAlign: "center" }}
                     >
                       finish
