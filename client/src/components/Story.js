@@ -200,7 +200,7 @@ export default function Story() {
                   }}
                   scrollTop={scroll}
                 >
-                  {currentNode.Start ? (
+                  {currentNode.Start.length ? (
                     currentNode.Start.map((edge) => (
                       <a
                         className="grid grid-cols-1 divide-y divide-gray-300 hover:underline"
