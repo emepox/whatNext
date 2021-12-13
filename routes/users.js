@@ -77,21 +77,16 @@ router.get("/profile", userShouldBeLoggedIn, async function (req, res) {
 // gets all favourite stories from a user
 router.get("/favourites", userShouldBeLoggedIn, async function (req, res) {
   try {
-    const { id } = req.user;
-    const stories = await models.User.findOne({
-      where: { id },
-      include: {
-        model: models.Story, 
-        as:"Favourite",
-        through: {  where: { UserId: id } }
-      },
-    });
-    res.send(stories.Favourite);
+    const stories = await req.user.getFavourite(
+      // {include: {model: models.User, where:{id:models.Story.UserId}}}
+    )
+    res.send(stories);
   } catch (error) {
     res.status(500).send(error);
   }
 });
 
+// adds story to favourites
 router.post("/favourites", userShouldBeLoggedIn, async function (req, res) {
   try {
     const { id } = req.user;
@@ -107,14 +102,16 @@ router.post("/favourites", userShouldBeLoggedIn, async function (req, res) {
   }
 } );
 
-router.delete("/favourites", userShouldBeLoggedIn, async function (req, res) {
+//removes story from favourites
+router.delete("/favourites/:storyId", userShouldBeLoggedIn, async function (req, res) {
   try {
     const { id } = req.user;
-    const { storyId } = req.body;
+    // const { storyId } = req.body;
+    const { storyId } = req.params;
     const user = await models.User.findOne({
       where: { id },
     });
-    await user.removeFavourite(storyId);
+    await user.removeFavourite(+storyId);
     res.send("Successfuly removed from favs");
   } catch (error) {
     res.status(500).send(error);

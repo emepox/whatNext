@@ -23,7 +23,6 @@ export default function Card({
      try {
        const { data } = await axios.get(`/stories/${story.id}/rating`);
        setRating( data );
-       console.log(data)
      } catch (err) {
        console.log(err);
      }
@@ -114,7 +113,7 @@ export default function Card({
             </div>
           </div>
 
-          <div className="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95">
+          {/* <div className="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95">
             <div
               className="absolute right-0 w-56 mt-2 origin-top-right bg-white  border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
               aria-labelledby="headlessui-menu-button-1"
@@ -149,7 +148,7 @@ export default function Card({
                 </div>
               )}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -176,7 +175,7 @@ export default function Card({
           </div>
           {auth.isLoggedIn && (
             <button
-              className="fontAwesome text-gray-200"
+              className={story.isFavourite ? "fontAwesome text-gray-200" : "fontAwesome text-purple-500"}
               onClick={handleFavourite}
             >
               &#xf004;
