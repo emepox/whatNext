@@ -18,10 +18,9 @@ function userShouldBeLoggedIn(req, res, next) {
         const id = req.user_id;
         console.log("usuario:", id)
         const results = await models.User.findOne( { where: { id } } );        
-        const { username, favourites, createdAt, updatedAt } = results.dataValues;
 
         req.user = results;
-        console.log("I am in the guard, this is the user:",req.user)
+        console.log("I am in the guard")
         next();
       }
     });
