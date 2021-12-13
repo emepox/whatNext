@@ -152,25 +152,33 @@ export default function Story() {
       </div>
 
       {/* SECCIÓN DE LA STORY */}
-      <div className="w-3/4 bg-grayCustom1 justify-center">
-        {story && (
-          <p className="mt-80 mb-5 flex flex-cols items-center justify-center text-2xl font-bold leading-none tracking-normal text-gray-900 md:tracking-tight">
-            Now playing {story.name}
+      <div className="w-3/4 bg-grayCustom1 flex flex-col items-center justify-center">
+        
+          {story && (
+            <div>
+              <p className="mb-5 text-2xl font-bold text-gray-900">
+                Now playing {story.name}
+              </p>
+            </div>
+          )}
+        
+        <div className="flex flex-col items-center justify-center">
+          <p className="mb-6 text-gray-900">
+            What will happen next? You decide
           </p>
-        )}
-        <p className="mb-6 flex flex-cols items-center justify-center leading-none tracking-normal text-gray-900 md:tracking-tight">
-          What will happen next? You decide
-        </p>
+        </div>
 
-        <div className="bg-white border-2 border-gray-100 rounded-xl shadow-2xl justify-center py-10 flex flex-col items-center justify-center mx-96">
-          {loading && <div>loading</div>}
-          {currentNode && (
-            <div className="flex flex-col items-center justify-center">
-              <div className="text-2xl text-gray-700 flex flex-col items-center justify-center">
+        {loading && <div>loading</div>}
+        {currentNode && (
+        <div className="justify-center flex flex-col items-center justify-center py-10 px-96">
+          
+            <div className="w-custom">
+              <div className="bg-white border-2 border-gray-200 rounded-lg py-3 text-2xl text-gray-700 flex flex-col items-center justify-center">
                 {currentNode.situation}
               </div>
+        
 
-              <p className="mb-3 text-gray-500 mt-5">
+              <p className="mb-3 text-gray-500 mt-10">
                 Scroll and select an option from the list below
               </p>
               <div className="flex items-center flex-none px-4 bg-purple-500 rounded-b-none h-7 w-full rounded-t">
@@ -218,8 +226,9 @@ export default function Story() {
                 </animated.div>
               </div>
             </div>
+            </div>
           )}
-        </div>
+        
       </div>
     </div>
   );
