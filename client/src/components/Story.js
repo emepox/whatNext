@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import * as api from "../services/api";
 import Rating from "react-rating";
 import "./Login.css";
-import Dog from "../img/Dog.png";
 import Textbox from "../img/Textbox.png";
 
 import { useSpring, config, animated } from "@react-spring/web";

@@ -3,7 +3,6 @@ import useAuth from "../hooks/useAuth";
 import Select from "react-select";
 import "./Login.css";
 import Texts from "../img/Texts.png";
-import Options from "../img/Options.png";
 
 
 export default function Searchbar({ 
