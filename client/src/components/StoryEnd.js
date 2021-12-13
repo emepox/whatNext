@@ -20,6 +20,7 @@ export default function StoryEnd() {
     
     useEffect(() => {
         requestStory();
+        requestData();
     }, []);
 
     const requestStory = async () => {
@@ -32,6 +33,19 @@ export default function StoryEnd() {
             console.log(err)
         }
     }
+
+    const requestData = async () => {
+      try {
+        const { data } = await axios("users/dashboard/", {
+          headers: {
+            authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        });
+        setUser(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
     const handleRating = (displayValue) => {
         setRating( displayValue );
@@ -59,7 +73,7 @@ export default function StoryEnd() {
     
     return (
       <div>
-        {Object.keys(story).length && <Card story={story} />}
+        {Object.keys(story).length && <Card story={story} user={user}/>}
 
         {/* CONTENEDOR DE RATINGS */}
         <div className="w-72 flex flex-col justify-center md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs mx-auto border border-white bg-white mt-5">
@@ -72,15 +86,15 @@ export default function StoryEnd() {
 
               <Rating
                 emptySymbol={
-                  <span className="material-icons text-black">star_border</span>
+                  <span className="material-icons text-yellow-500">star_border</span>
                 }
                 fullSymbol={
-                  <span className="material-icons text-black">grade</span>
+                  <span className="material-icons text-yellow-500">grade</span>
                 }
                 onClick={(displayValue) => handleRating(displayValue)}
                 value={rating}
               />
-              <button>Send</button>
+              <button className="text-base leading-tight font-light text-white bg-purple-500 rounded-full hover:bg-purple-600 py-1">Send</button>
             </form>
           ) : (
             <div className="text-center"><p>You need to be logged in to rate this story.</p><button><a href="/login">Log in</a></button></div>

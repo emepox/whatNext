@@ -19,7 +19,10 @@ router.get("/", async function (req, res) {
         "first",
       ],
       where: { isFinished: 1 },
-      include: { model: models.User, attributes: ["username", "id"] },
+      include: [
+        { model: models.User, attributes: ["username", "id"] }, 
+        { model: models.User, as: "Favouritee", attributes: ["username", "id"]}
+      ]
     });
 
     res.send(stories);

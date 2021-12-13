@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
+// import user from "../../../models/user";
 
 
 export default function Card({
@@ -9,8 +10,8 @@ export default function Card({
   handleEdit,
   handleDelete,
   handlePlay,
-  handleFavourite,
-  favouritedStories
+  // handleFavourite,
+  user
 } ) {
   
   const auth = useAuth();
@@ -18,6 +19,7 @@ export default function Card({
 
   useEffect(() => {
     requestRating();
+    console.log(user)
   }, [] );
   
   const requestRating = async () => {
@@ -28,6 +30,34 @@ export default function Card({
        console.log(err);
      }
   }
+
+  // add or remove story from favourites
+  const handleFavourite = async (story) => {
+    if (!(story.Favouritee.some(fav => fav.id === user.id) || story.Favourites)){ 
+    try {
+      await axios('/users/favourites/', {
+        method: "POST",
+        headers: {
+            authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        data: {storyId: +story.id},
+      });
+    } catch (err) {
+      console.log(err);
+    }
+   } else {
+      try {
+        await axios(`/users/favourites/${story.id}`, {
+          method: "DELETE",
+          headers: {
+              authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        });
+      } catch (err) {
+        console.log(err);
+      }
+   }
+  };
 
   return (
     <div
@@ -134,9 +164,10 @@ export default function Card({
               </span>
             </p>
           </div>
-          {auth.isLoggedIn && (
+          {/* && Object.keys(user).length */}
+          {auth.isLoggedIn && user && (
             <button
-              className={favouritedStories[story.id] ? "fontAwesome text-purple-500" : "fontAwesome text-gray-200"}
+              className={((story.Favouritee && story.Favouritee.length && story.Favouritee.some((fav) => fav.id === user.id)) || story.Favourites) ? "fontAwesome text-purple-500" : "fontAwesome text-gray-200"}
               onClick={handleFavourite}
             >
               &#xf004;

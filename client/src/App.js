@@ -9,9 +9,6 @@ import Login from "./components/Login";
 import CreateStory from "./components/CreateStory";
 import StoryDetails from "./components/StoryDetails";
 
-
-import TestFlow from "./components/TestFlow";
-
 import Story from './components/Story';
 import Home from "./components/Home";
 import Navbar from './components/Navbar';
@@ -21,8 +18,6 @@ import StoryEnd from './components/StoryEnd';
 
 import AuthProvider from "./components/AuthProvider";
 import PrivateRoute from "./components/PrivateRoute";
-
-
 
 
 export default function App() {
@@ -40,7 +35,6 @@ export default function App() {
 
             <Route path="/story/:id/:page" element={<Story />} />
             <Route path="/story/:id/end" element={<StoryEnd />} />
-            <Route path="/testflow" element={<TestFlow />} />
 
 
             <Route

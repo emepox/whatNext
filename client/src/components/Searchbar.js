@@ -29,7 +29,7 @@ export default function Searchbar({
       {isProfile && (
         <div className="flex flex-col justify-center items-center">
           <p className="text-3xl font-bold text-gray-700 flex justify-center items-top m-10">
-            Hello {user && user}!
+            Hello {user && user.username}!
           </p>
 
           <div className="flex border-b border-gray-200">

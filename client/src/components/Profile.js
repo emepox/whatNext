@@ -35,7 +35,7 @@ export default function Profile() {
   return (
     
       <div>
-        <GridStories isProfile={true} user={user.username}/>
+        <GridStories isProfile={true} user={user}/>
       </div>
 
 
