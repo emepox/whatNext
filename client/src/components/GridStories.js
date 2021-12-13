@@ -149,8 +149,8 @@ export default function GridStories({ isProfile, user }) {
           <div className="flex justify-center items-center grid grid-cols-4 gap-10"> */}
 
       <div>
-        <div className="flex justify-center m-10">
-          <div className="flex flex-wrap">
+        <div className="flex m-10">
+          <div className="flex flex-wrap justify-evenly">
             {stories &&
               stories
                 .filter((story) => {
