@@ -23,21 +23,23 @@ export default function Story() {
 
   useEffect(() => getCurrentNode(page), [page]);
 
-  useEffect(() => getStory(id), []);
 
-  useEffect(() => {
-    requestRating();
-  }, []);
-
-  const requestRating = async () => {
-    try {
-      const { data } = await axios.get(`/stories/${id}/rating`);
-      setRating(data);
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  useEffect( () => getStory( id ), [] );
+  
+    useEffect(() => {
+      requestRating();
+    }, [] );
+  
+  
+    const requestRating = async () => {
+      try {
+        const { data } = await axios.get(`/stories/${id}/rating`);
+        setRating(data);
+        console.log(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
 
   const getCurrentNode = async (id) => {
     setLoading(true);
