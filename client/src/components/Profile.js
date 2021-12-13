@@ -19,11 +19,6 @@ export default function Profile() {
     requestData();
   }, []);
 
-  const switchView = () => {
-    setSeeFavs(!seeFavs)
-    console.log(seeFavs)
-  };
-
   const requestData = async () => {
     try {
       const { data } = await axios("users/dashboard/", {

@@ -23,7 +23,6 @@ export default function Card({
      try {
        const { data } = await axios.get(`/stories/${story.id}/rating`);
        setRating( data );
-       console.log(data)
      } catch (err) {
        console.log(err);
      }
@@ -114,7 +113,7 @@ export default function Card({
             </div>
           </div>
 
-          <div className="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95">
+          {/* <div className="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95">
             <div
               className="absolute right-0 w-56 mt-2 origin-top-right bg-white  border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
               aria-labelledby="headlessui-menu-button-1"
@@ -149,15 +148,12 @@ export default function Card({
                 </div>
               )}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
-      <div className="ml-5 mr-5">
-        <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3 ">
-          <p>{story.category} </p>
-        </div>
-        <div className="flex justify-between">
+      {/* REVIEWS AND LIKE */}
+      <div className="my-2 ml-5 mr-5 flex justify-between">
           <div className="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -176,25 +172,32 @@ export default function Card({
           </div>
           {auth.isLoggedIn && (
             <button
-              className="fontAwesome text-gray-200"
+              className={story.isFavourite ? "fontAwesome text-gray-200" : "fontAwesome text-purple-500"}
               onClick={handleFavourite}
             >
               &#xf004;
             </button>
           )}
         </div>
+
+
+      <div className="ml-5 mr-5">
+        <div className="uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-5">
+          <p>{story.category} </p>
+        </div>
+        
         <a
           href="#"
-          className="block text-lg leading-tight font-medium text-black hover:underline mt-6"
+          className="block text-lg leading-tight font-medium text-black hover:underline mt-2"
         >
           <p>{story.name}</p>
-          <p className="font-small text-sm text-gray-300 mt-3">
+          {/* <p className="font-small text-sm text-gray-300 mt-3">
             by: {story.User && story.User.username}
-          </p>
+          </p> */}
         </a>
         <p className="mt-3 text-gray-500 mr-2">
-          {story && story.description.length >= 91
-            ? `${story.description.slice(0, 90)}...`
+          {story && story.description.length >= 85
+            ? `${story.description.slice(0, 85)}...`
             : story.description}
         </p>
       </div>

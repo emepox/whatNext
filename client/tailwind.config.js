@@ -39,6 +39,10 @@ module.exports = {
         'selectCustom': '4.5rem',
       },
 
+      width: {
+        'custom': '40rem',
+      },
+
 
       backgroundColor: theme => ({
         'bgColor': '#253237',
@@ -58,6 +62,8 @@ module.exports = {
       textColor: theme => ({
         'customWhite': '#F4F6F6',
       }),
+
+    
       
       container: {
         padding: {

@@ -5,6 +5,8 @@ export async function getNode(id) {
     //fake
     // return fake_data_story1.filter(e => +e.id === +id)[0]
     // real
+    
+    //real
     try{
             const {data} = await axios.get(`/nodes/${id}`)
             return data
