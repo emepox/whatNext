@@ -177,7 +177,7 @@ export default function Story() {
               <div className="h-1 w-full mx-auto border-b my-5"></div>
 
               {/* OPTIONS */}
-              {currentNode.Start ? (
+              {currentNode.Start.length ? (
                 currentNode.Start.map((edge) => (
                   
                     <div className="flex flex-col items-start justify-center transition hover:bg-indigo-50 cursor-pointer transition space-x-5 px-5 h-16">
