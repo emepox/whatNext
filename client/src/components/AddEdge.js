@@ -3,9 +3,10 @@ import Noty from 'noty';
 import Select from 'react-select'
 import "../../node_modules/noty/lib/themes/sunset.css";
 import "../../node_modules/noty/lib/noty.css";
+import { getNode } from "../services/api";
 const axios = require('axios');
 
-export default function AddEdge({nodeList}) {
+export default function AddEdge({nodeList, getNodes}) {
 
     const [newEdge, setNewEdge]= useState({
         start:null,
@@ -39,6 +40,7 @@ export default function AddEdge({nodeList}) {
             option
         },
       });
+      getNodes()
       new Noty({
         theme: 'sunset',
         type: 'success',
@@ -67,6 +69,7 @@ export default function AddEdge({nodeList}) {
 const handleSubmit = (event) => {
     event.preventDefault();
     addEdges();
+ 
   };
 
 

@@ -22,7 +22,8 @@ module.exports = {
       },
 
       height: {
-        'custom': '80px'
+        'custom': '80px',
+        'flowH': '90%'
       },
 
       leading: {

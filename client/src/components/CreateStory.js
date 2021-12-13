@@ -9,6 +9,8 @@ import "../../node_modules/noty/lib/themes/sunset.css";
 import "../../node_modules/noty/lib/noty.css";
 import "./Login.css";
 
+import FlowTest from "./FlowTest";
+
 const axios = require("axios");
 
 
@@ -45,7 +47,7 @@ export default function CreateStory({ postedStory }) {
           <CreateNode storyId={id} getNodes={getNodes} nodeList={nodeList} />
         );
       case "connect":
-        return <AddEdge nodeList={nodeList} />;
+        return <AddEdge nodeList={nodeList} getNodes={getNodes}/>;
       case "edit":
         return <EditNode getNodes={getNodes} nodeList={nodeList} />;
       case "delete":
@@ -125,7 +127,7 @@ export default function CreateStory({ postedStory }) {
         <div className="text-gray-700 bg-white rounded-2xl shadow-2xl py-7 px-20">
           <p className="font-semibold">ALL SAVED SCENARIOS</p>
           
-          <div>
+          <div className="h-4/5">
             {/* {nodeList &&
             nodeList.map((node) => 
               <div key={node.id} className="cols mt-7 p-5 bg-gray-100 rounded shadow-xl">
@@ -138,7 +140,7 @@ export default function CreateStory({ postedStory }) {
                 </button>
               </div>
             )} */}
-            {/* <FlowTest getNodes={getNodes} nodeList={nodeList} /> */}
+            <FlowTest getNodes={getNodes} nodeList={nodeList} />
 
           </div>
         </div>

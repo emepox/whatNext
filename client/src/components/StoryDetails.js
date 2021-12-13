@@ -120,7 +120,7 @@ export default function StoryDetails() {
                                     <select name="category" value={newStory.category} onChange={handleChange} required>
 
                                         <option value="">-Please choose an option-</option>
-                                        {categories.map(category => <option value={category}>{category}</option>)}
+                                        {categories.map((category, i) => <option key={i} value={category}>{category}</option>)}
                                     </select>
                                 </div>
                             </div>
