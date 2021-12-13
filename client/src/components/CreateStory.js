@@ -85,7 +85,7 @@ export default function CreateStory() {
         type: "success",
         layout: "topRight",
         text: "Your WhatNext is ready to go! 🚀",
-        timeout: 2000,
+        timeout: 1000,
         callbacks: {
           afterClose: function () {
             navigate(`/play`);
@@ -108,7 +108,7 @@ export default function CreateStory() {
     <div>
       <div className="bg-white rounded-2xl shadow-2xl py-7 px-20">
         <div>
-          <h3 className="text-2xl text-bold text-gray-700 flex flex-col items-center justify-center mb-4">
+          <h3 className="text-4xl text-bold text-gray-700 flex flex-col items-center justify-center mb-4">
             {name}
           </h3>
           <hr />
@@ -131,7 +131,7 @@ export default function CreateStory() {
           </form>
           <hr />
           <br />
-          <div className="h-96">
+          <div className="h-128">
             <FlowChart getNodes={getNodes} nodeList={nodeList} />
           </div>
           <button

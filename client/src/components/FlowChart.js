@@ -8,6 +8,7 @@ const axios = require("axios");
 export default function FlowTest({ nodeList, getNodes }) {
   const [elements, setElements] = useState(null);
   const [edge, setEdge] = useState(null);
+  const [edited, setEdited] = useState(false);
   const [text, setText] = useState("");
 
   useEffect(() => {
@@ -47,6 +48,7 @@ export default function FlowTest({ nodeList, getNodes }) {
   const handleCancel = () => {
     setEdge(null);
     setText("");
+    setEdited(false);
   };
 
   const handleConnect = async (e) => {
@@ -66,19 +68,61 @@ export default function FlowTest({ nodeList, getNodes }) {
       getNodes();
       setEdge(null);
       setText("");
+      setEdited(false);
       new Noty({
         theme: "sunset",
         type: "success",
         layout: "topRight",
-        text: "Connection added successfully ✨",
-        timeout: 2000,
+        text: "Action added successfully ✨",
+        timeout: 1000,
       }).show();
+    } catch (error) {
       new Noty({
         theme: "sunset",
-        type: "information",
+        type: "error",
         layout: "topRight",
-        text: "👉 Now you can EDIT your scenarios, CREATE another scenario and/or CONNECT other scenarios",
-        timeout: 6000,
+        text: `${error.message}`,
+        timeout: 2000,
+      }).show();
+    }
+  };
+
+  const handleAddEdge = (params) => {
+    setEdited(false);
+    setText("");
+    setEdge(params);
+  };
+
+  const handleEdit = (event, edge) => {
+    event.preventDefault();
+    setEdited(true);
+    const editedNode = elements.find((e) => e.id === edge.id);
+    setEdge(editedNode);
+    setText(editedNode.label);
+  };
+
+  const handleDeleteEdge = async () => {
+    const { source, target } = edge;
+    try {
+      await axios(`/nodes/${source}/edges`, {
+        method: "DELETE",
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        data: {
+          nextId: target,
+        },
+      });
+      getNodes();
+      setEdge(null);
+      setText("");
+      setEdited(false);
+      new Noty({
+        theme: "sunset",
+        type: "success",
+        layout: "topRight",
+        text: "Action deleted!",
+        timeout: 1000,
       }).show();
     } catch (error) {
       new Noty({
@@ -98,7 +142,9 @@ export default function FlowTest({ nodeList, getNodes }) {
           <ReactFlow
             elements={elements}
             nodeTypes={{ special: NodeCard }}
-            onConnect={(params) => setEdge(params)}
+            onConnect={(params) => handleAddEdge(params)}
+            onEdgeContextMenu={handleEdit}
+            snapToGrid = {true}
           >
             <MiniMap />
             <Controls />
@@ -120,9 +166,17 @@ export default function FlowTest({ nodeList, getNodes }) {
               required
             ></textarea>
             <button className="text-white bg-green-400 py-2 px-3 rounded-full m-2 hover:bg-green-500 hover:shadow-lg">
-              add action
+              {edited ? "save action" : "add action"}
             </button>
           </form>
+          {edited && (
+            <button
+              onClick={handleDeleteEdge}
+              className="text-white bg-red-400 py-2 px-3 rounded-full m-2 hover:bg-red-500 hover:shadow-lg"
+            >
+              delete action
+            </button>
+          )}
           <button
             onClick={handleCancel}
             className="text-white bg-red-400 py-2 px-3 rounded-full m-2 hover:bg-red-500 hover:shadow-lg"

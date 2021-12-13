@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Handle } from "react-flow-renderer";
 import Noty from "noty";
+import "../../node_modules/noty/lib/themes/sunset.css";
+import "../../node_modules/noty/lib/noty.css";
 const axios = require("axios");
 
 export default function NodeCard({ data, isConnectable }) {
@@ -20,23 +22,16 @@ export default function NodeCard({ data, isConnectable }) {
       data.getNodes();
       data.handleCancel();
       new Noty({
-        theme: "mint",
+        theme: "sunset",
         type: "success",
         layout: "topRight",
         text: "Scenario deleted successfully ✨",
-        timeout: 2000,
-      }).show();
-      new Noty({
-        theme: "mint",
-        type: "information",
-        layout: "topRight",
-        text: "👉 Now you can EDIT other scenarios, CREATE a new one and/or CONNECT them!",
-        timeout: 6000,
+        timeout: 1000,
       }).show();
     } catch (error) {
       console.log(error);
       new Noty({
-        theme: "mint",
+        theme: "sunset",
         type: "error",
         layout: "topRight",
         text: `${error.message}`,
@@ -58,23 +53,16 @@ export default function NodeCard({ data, isConnectable }) {
       data.handleCancel();
       setEdited(false);
       new Noty({
-        theme: "mint",
+        theme: "sunset",
         type: "success",
         layout: "topRight",
         text: "Scenario edited successfully ✨",
-        timeout: 2000,
-      }).show();
-      new Noty({
-        theme: "mint",
-        type: "information",
-        layout: "topRight",
-        text: "👉 Now you can EDIT other scenarios, CREATE a new one and/or CONNECT them!",
-        timeout: 6000,
+        timeout: 1000,
       }).show();
     } catch (error) {
       console.log(error);
       new Noty({
-        theme: "mint",
+        theme: "sunset",
         type: "error",
         layout: "topRight",
         text: `${error.message}`,
@@ -118,7 +106,7 @@ export default function NodeCard({ data, isConnectable }) {
           <div class="inline-block text-left dropdown">
             <span class="rounded-md shadow-sm">
               <button
-                class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-gray-100 shadow-md rounded-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 rounded-full"
+                class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-gray-100 shadow-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 rounded-full"
                 type="button"
                 aria-haspopup="true"
                 aria-expanded="true"
