@@ -129,15 +129,28 @@ export default function GridStories({ isProfile, user }) {
   };
 
   return (
-    <div className="flex">
+    <div className="flex bg-grayCustom2">
       {/* SIDEBAR */}
       <div className="flex w-1/4 bg-white  justify-around items-top h-screen">
-        <Searchbar isProfile={isProfile} user={user} options={options} requestData={requestData} setSearchQuery={setSearchQuery} setCategoryFilters={setCategoryFilters} showFavourites={showFavourites} />
+        <Searchbar
+          isProfile={isProfile}
+          user={user}
+          options={options}
+          requestData={requestData}
+          setSearchQuery={setSearchQuery}
+          setCategoryFilters={setCategoryFilters}
+          showFavourites={showFavourites}
+        />
       </div>
       {/* CARDS DISPLAY SECTION */}
-      <div className="w-4/5 bg-grayCustom2 justify-center">
+
+      {/* <div className="w-4/5 bg-grayCustom2 justify-center">
         <div className="flex justify-center items-center m-20">
-          <div className="flex justify-center items-center grid grid-cols-4 gap-10">
+          <div className="flex justify-center items-center grid grid-cols-4 gap-10"> */}
+
+      <div>
+        <div className="flex justify-center m-10">
+          <div className="flex flex-wrap">
             {stories &&
               stories
                 .filter((story) => {
