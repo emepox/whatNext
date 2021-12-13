@@ -68,7 +68,7 @@ router.get("/profile", userShouldBeLoggedIn, async function (req, res) {
       include: { model: models.User, attributes: ["username"] },
     });
 
-    res.send(stories.Favourites);
+    res.send(stories);
   } catch (error) {
     res.status(500).send(error);
   }
