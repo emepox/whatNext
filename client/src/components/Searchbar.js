@@ -1,7 +1,6 @@
 import React from "react";
 import useAuth from "../hooks/useAuth";
 import Select from "react-select";
-import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import Texts from "../img/Texts.png";
 import Options from "../img/Options.png";

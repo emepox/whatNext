@@ -65,21 +65,30 @@ export default function GridStories({ isProfile, user }) {
   };
 
 
-  const handleFavourite = async (storyId) => {
+  const handleFavourite = async (story) => {
+    if (!story.isFavourite){
     try {
       await axios('/users/favourites/', {
         method: "POST",
         headers: {
             authorization: "Bearer " + localStorage.getItem("token"),
         },
-        data: {storyId: +storyId},
+        data: {storyId: +story.id},
       });
-      console.log(storyId)
+      story.isFavourite = true;
     } catch (err) {
       console.log(err);
     }
+   } else {
+      try {
+        await axios.delete(`users/favourites/${story.id}`);
+        story.isFavourite = false;
+        console.log(story)
+      } catch (err) {
+        console.log(err);
+      }
+   }
   };
-
 
 
   const hasCategoryFilter = (story) => {
@@ -139,12 +148,13 @@ export default function GridStories({ isProfile, user }) {
                 })
                 .map((story) => (
                   <Card
+                    user={user}
                     story={story}
                     isProfile={isProfile}
                     handleEdit={() => handleEdit(story.id, story.name)}
                     handleDelete={() => handleDelete(story.id)}
                     handlePlay={() => handlePlay(story.id, story.first)}
-                    handleFavourite={() => handleFavourite(story.id)}
+                    handleFavourite={() => handleFavourite(story)}
                   />
                 ))}
           </div>
