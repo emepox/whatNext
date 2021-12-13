@@ -7,12 +7,13 @@ import Card from "./Card";
 import Searchbar from "./Searchbar";
 
 
-export default function GridStories({ isProfile, user }) {
+export default function GridStories({ isProfile }) {
   const navigate = useNavigate();
   const auth = useAuth();
   const [stories, setStories] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilters, setCategoryFilters] = useState([]);
+  const [user, setUser] = useState([]);
   
 
   const options = [
@@ -27,9 +28,24 @@ export default function GridStories({ isProfile, user }) {
 
   useEffect(() => {
     requestData();
-    console.log(user)
+    requestUser();
   }, []);
 
+  // get logged in user info (object)
+  const requestUser = async () => {
+    try {
+      const { data } = await axios("users/dashboard/", {
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      setUser(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // get stories
   const requestData = async () => {
     try {
       // if we're in profile, see user's stories
@@ -142,13 +158,13 @@ export default function GridStories({ isProfile, user }) {
                 })
                 .map((story) => (
                   <Card
-                    user={user}
+                    user={user.id}
                     story={story}
                     isProfile={isProfile}
                     handleEdit={() => handleEdit(story.id, story.name)}
                     handleDelete={() => handleDelete(story.id)}
                     handlePlay={() => handlePlay(story.id, story.first)}
-                    // handleFavourite={() => handleFavourite(story)}
+                    requestData={requestData}
                   />
                 ))}
           </div>

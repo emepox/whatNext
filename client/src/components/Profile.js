@@ -12,30 +12,31 @@ const url = (name, wrap = false) =>
 export default function Profile() {
   const parallax = useRef(null);
   const auth = useAuth();
-  const [user, setUser] = useState([]);
+  // const [user, setUser] = useState([]);
   const [seeFavs, setSeeFavs] = useState(false);
 
-  useEffect(() => {
-    requestData();
-  }, []);
+  // useEffect(() => {
+  //   requestData();
+  // }, []);
 
-  const requestData = async () => {
-    try {
-      const { data } = await axios("users/dashboard/", {
-        headers: {
-          authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      });
-      setUser(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const requestData = async () => {
+  //   try {
+  //     const { data } = await axios("users/dashboard/", {
+  //       headers: {
+  //         authorization: "Bearer " + localStorage.getItem("token"),
+  //       },
+  //     });
+  //     setUser(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     
       <div>
-        <GridStories isProfile={true} user={user}/>
+        <GridStories isProfile={true} />
+        {/* user={user} */}
       </div>
 
 

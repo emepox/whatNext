@@ -10,7 +10,7 @@ export default function Card({
   handleEdit,
   handleDelete,
   handlePlay,
-  // handleFavourite,
+  requestData,
   user
 } ) {
   
@@ -19,7 +19,7 @@ export default function Card({
 
   useEffect(() => {
     requestRating();
-    console.log(user)
+    console.log(story.Favouritee)
   }, [] );
   
   const requestRating = async () => {
@@ -32,8 +32,9 @@ export default function Card({
   }
 
   // add or remove story from favourites
-  const handleFavourite = async (story) => {
-    if (!(story.Favouritee.some(fav => fav.id === user.id) || story.Favourites)){ 
+  const handleFavourite = async () => {
+    // console.log(story.Favouritee)
+    if (!(story.Favouritee.some(fav => fav.id === user) || story.Favourites)){ 
     try {
       await axios('/users/favourites/', {
         method: "POST",
@@ -42,6 +43,7 @@ export default function Card({
         },
         data: {storyId: +story.id},
       });
+      requestData();
     } catch (err) {
       console.log(err);
     }
@@ -53,6 +55,7 @@ export default function Card({
               authorization: "Bearer " + localStorage.getItem("token"),
           },
         });
+        requestData();
       } catch (err) {
         console.log(err);
       }
@@ -165,9 +168,9 @@ export default function Card({
             </p>
           </div>
           {/* && Object.keys(user).length */}
-          {auth.isLoggedIn && user && (
+          {auth.isLoggedIn && (
             <button
-              className={((story.Favouritee && story.Favouritee.length && story.Favouritee.some((fav) => fav.id === user.id)) || story.Favourites) ? "fontAwesome text-purple-500" : "fontAwesome text-gray-200"}
+              className={((story.Favouritee && story.Favouritee.length && story.Favouritee.some((fav) => fav.id === user)) || story.Favourites) ? "fontAwesome text-purple-500" : "fontAwesome text-gray-200"}
               onClick={handleFavourite}
             >
               &#xf004;
