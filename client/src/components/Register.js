@@ -72,7 +72,7 @@ export default function Register() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center" style={{ width: '100%', height: '95%', background: '#DCE0EB' }}> 
+    <div className="flex flex-col items-center justify-center" style={{ width: '100%', height: '95%', background: '#f6f6f9' }}> 
       
       <section id="login" className="md:container md:mx-auto">
         <div className="flex flex-col items-center justify-center">

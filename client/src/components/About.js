@@ -10,7 +10,7 @@ export default function About() {
           </h1>
           <div className="h-1 mx-auto bg-indigo-200 w-24 opacity-75 mt-4 rounded mb-5"></div>
           <p className="text-center text-lg text-white mt-2 px-6">
-            This is a students project that was created at <a href="http://codeop.tech">Codeop</a>, a full stack development bootcamp in Barcelona.
+            This is a students project that was created at <a href="http://codeop.tech" className="text-indigo-400">Codeop</a>, a full stack development bootcamp in Barcelona.
           </p>
           
         </div>
