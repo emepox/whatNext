@@ -23,7 +23,7 @@ export default function Card({
 
   const requestRating = async () => {
      try {
-       const { data } = await axios.get(`/stories/${story.id}/rating`);
+       const { data } = await axios.get(`/api/stories/${story.id}/rating`);
        setRating( data );
      } catch (err) {
        console.log(err);
@@ -34,7 +34,7 @@ export default function Card({
   const handleFavourite = async (view) => {
     if (!(story.Favouritee && story.Favouritee.some(fav => fav.id === user) || story.Favourites)){ 
     try {
-      await axios('/users/favourites/', {
+      await axios('/api/users/favourites/', {
         method: "POST",
         headers: {
             authorization: "Bearer " + localStorage.getItem("token"),
@@ -47,7 +47,7 @@ export default function Card({
     }
    } else {
       try {
-        await axios(`/users/favourites/${story.id}`, {
+        await axios(`/api/users/favourites/${story.id}`, {
           method: "DELETE",
           headers: {
               authorization: "Bearer " + localStorage.getItem("token"),

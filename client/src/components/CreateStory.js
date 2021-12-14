@@ -23,7 +23,7 @@ export default function CreateStory() {
   // gets all nodes related to a storyId
   async function getNodes() {
     try {
-      const { data } = await axios.get(`/stories/${id}/nodes`);
+      const { data } = await axios.get(`/api/stories/${id}/nodes`);
       setNodeList(data);
     } catch (error) {
       console.error(error);
@@ -50,7 +50,7 @@ export default function CreateStory() {
       });
 
       if (!nodeList.length)
-        await axios.put(`/stories/${id}/first`, { firstId: data.id });
+        await axios.put(`/api/stories/${id}/first`, { firstId: data.id });
       getNodes();
       setText("");
       new Noty({
@@ -79,7 +79,7 @@ export default function CreateStory() {
 
   async function finishStory() {
     try {
-      await axios.put(`/stories/${id}/finish`);
+      await axios.put(`/api/stories/${id}/finish`);
       new Noty({
         theme: "sunset",
         type: "success",
