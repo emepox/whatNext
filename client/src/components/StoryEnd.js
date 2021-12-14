@@ -72,8 +72,8 @@ export default function StoryEnd() {
     }
     
     return (
-      <div>
-        <p className="justify-center text-center text-2xl font-bold text-gray-900 mt-20">Your opining matters!</p>
+      <div className="flex flex-col items-center justify-center bg-grayCustom2 h-screen">
+        <p className="justify-center text-center text-2xl font-bold text-gray-900">Your opining matters!</p>
         <p className="text-center text-lg text-gray-900 mb-10">How was the game?</p>
         {Object.keys(story).length && <Card story={story} view={"end"}/>}
 
