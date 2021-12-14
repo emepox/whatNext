@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import Select from "react-select";
 import "./Login.css";
@@ -6,15 +7,17 @@ import Texts from "../img/Texts.png";
 
 
 export default function Searchbar({ 
-  isProfile, 
+  view, 
   user, 
   options, 
   requestData, 
   setSearchQuery, 
   setCategoryFilters, 
-  showFavourites }){
+  // showFavourites 
+  }){
 
   const auth = useAuth();
+  const navigate = useNavigate();
 
   const handleMultiChange = (selectedOptions) => {
     setCategoryFilters((state) =>
@@ -25,15 +28,15 @@ export default function Searchbar({
   return (
     <div className="p-6">
       {/* Profile choices */}
-      {isProfile && (
+      {(view==="profile" || view==="favs") && (
         <div className="flex flex-col justify-center items-center">
           <p className="text-3xl font-bold text-gray-700 flex justify-center items-top m-10">
-            Hello {user && user}!
+            Hello {user && user.username}!
           </p>
 
           <div className="flex border-b border-gray-200">
             <button
-              onClick={() => requestData()}
+              onClick={() => navigate("/profile")}
               className="fontAwesome flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 whitespace-nowrap focus:outline-none hover:border-gray-400 focus:border-blue-500 focus:text-blue-500"
             >
               <span>&#xf15c;</span>
@@ -41,7 +44,7 @@ export default function Searchbar({
             </button>
 
             <button
-              onClick={() => showFavourites()}
+              onClick={() => navigate("/favourites")}
               className="fontAwesome flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400 focus:border-blue-500 focus:text-blue-500"
             >
               <span>&#xf004;</span>
