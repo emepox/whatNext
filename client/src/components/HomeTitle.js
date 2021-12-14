@@ -1,17 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import "./Login.css";
 
 import Bestpickle from "../img/Bestpickle.png";
 import Citric from "../img/Citric.png";
 import Beetjuice from "../img/Beetjuice.png";
 
+
 export default function App({scroll}) {
-  const [open, setOpen] = useState(false);
-  const parallax = useRef(null);   
-  
-  useEffect(() => {
-    setOpen(state => !state);
-  }, [])
+
   return (
     
     <div className="flex flex-col items-center justify-center">

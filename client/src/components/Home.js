@@ -6,12 +6,7 @@ import Videodisplay from "./Videodisplay";
 import Teamwork from "../img/Teamwork.png";
 import Create from "../img/Create.png";
 
-const url = (name, wrap = false) =>
-  `${
-    wrap ? "url(" : ""
-  }https://awv3node-homepage.surge.sh/build/assets/${name}.svg${
-    wrap ? ")" : ""
-  }`;
+
 
 export default function Home() {
   const parallax = useRef(null);

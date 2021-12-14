@@ -39,7 +39,7 @@ export default function Card({
           <img
             className="object-cover h-48 w-screen"
             src={story.media}
-            alt="Game's image"
+            alt="Game"
           />
 
           {/* button with options above img */}
