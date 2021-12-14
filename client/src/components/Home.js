@@ -52,26 +52,13 @@ export default function Home() {
           />
         </ParallaxLayer>
 
-        <ParallaxLayer
-          offset={2.4}
-          speed={-0.4}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            pointerEvents: "none",
-          }}
-        >
+        <ParallaxLayer offset={2.4} speed={-0.4} style={{display: "flex", alignItems: "center", justifyContent: "center", pointerEvents: "none"}}>
+
           {/* <img src={url('earth')} style={{ width: '60%' }} /> */}
           <img src={Teamwork} style={{ width: "15%" }} />
         </ParallaxLayer>
 
-        <ParallaxLayer
-          offset={2}
-          speed={-0.3}
-          style={{
-            backgroundSize: "80%",
-            backgroundPosition: "center",
+        <ParallaxLayer offset={2} speed={-0.5} style={{ backgroundSize: "80%", backgroundPosition: "center",
             // backgroundImage: url('clients', true),
           }}
         />

@@ -65,7 +65,7 @@ export default function Searchbar({
         <div className="mt-3">
           <p className="mb-2 text-gray-700">Search for</p>
           <input
-            className="border-2 border-gray-300 pr-10 pl-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mb-5"
+            className="border-2 border-gray-300 pr-10 pl-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mb-5 rounded-lg"
             name="searchWord"
             placeholder="title, description..."
             onChange={(event) => setSearchQuery(event.target.value)}
@@ -84,7 +84,7 @@ export default function Searchbar({
               onChange={(selectedOptions) => handleMultiChange(selectedOptions)}
               theme={(theme) => ({
                 ...theme,
-                borderRadius: "12px",
+                borderRadius: "10px",
                 colors: {
                   ...theme.colors,
                   primary: "#7C3AED",
