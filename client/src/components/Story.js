@@ -26,7 +26,7 @@ export default function Story() {
   
     const requestRating = async () => {
       try {
-        const { data } = await axios.get(`/stories/${id}/rating`);
+        const { data } = await axios.get(`/api/stories/${id}/rating`);
         setRating(data);
       } catch (err) {
         console.log(err);

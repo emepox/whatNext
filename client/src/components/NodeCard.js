@@ -44,7 +44,7 @@ export default function NodeCard({ data, isConnectable }) {
   const handleEdit = async () => {
     const { id } = data.node;
     try {
-      await axios(`/nodes/edit/${id}`, {
+      await axios(`/api/nodes/edit/${id}`, {
         method: "PUT",
         data: {
           situation,

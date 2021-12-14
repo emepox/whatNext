@@ -26,7 +26,7 @@ export default function StoryEnd() {
 
     const requestStory = async () => {
         try {
-            const { data } = await axios.get( `/stories/${id}/` );
+            const { data } = await axios.get( `/api/stories/${id}/` );
             setStory( data )
             
         } catch ( err ) {
@@ -36,7 +36,7 @@ export default function StoryEnd() {
 
     const requestUser = async () => {
       try {
-        const { data } = await axios("/users/dashboard/", {
+        const { data } = await axios("/api/users/dashboard/", {
           headers: {
             authorization: "Bearer " + localStorage.getItem("token"),
           },
@@ -54,7 +54,7 @@ export default function StoryEnd() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios(`/stories/${id}/rating`, {
+            await axios(`/api/stories/${id}/rating`, {
               method: "PUT",
               headers: {
                 authorization: "Bearer " + localStorage.getItem("token"),
@@ -77,35 +77,6 @@ export default function StoryEnd() {
       navigate(`/story/${id}/${first}`);
     };
     
-    // add or remove story from favourites
-  // const handleSingleFavourite = async () => {
-  //   if (!(story.Favouritee && story.Favouritee.some(fav => fav.id === user) || story.Favourites)){ 
-  //   try {
-  //     await axios('/users/favourites/', {
-  //       method: "POST",
-  //       headers: {
-  //           authorization: "Bearer " + localStorage.getItem("token"),
-  //       },
-  //       data: {storyId: +story.id},
-  //     });
-  //     requestStory();
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  //  } else {
-  //     try {
-  //       await axios(`/users/favourites/${story.id}`, {
-  //         method: "DELETE",
-  //         headers: {
-  //             authorization: "Bearer " + localStorage.getItem("token"),
-  //         },
-  //       });
-  //     requestStory();
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //  }
-  // };
 
 
     return (

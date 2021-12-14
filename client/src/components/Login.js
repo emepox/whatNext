@@ -31,7 +31,7 @@ export default function Login() {
 // Called when submitting
   const login = async () => {
     try {
-        const { data } = await axios("/users/login", {
+        const { data } = await axios("/api/users/login", {
           method: "POST",
           data: logIn,
         });

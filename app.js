@@ -16,9 +16,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/users', usersRouter);
-app.use('/nodes', nodesRouter);
-app.use('/stories', storiesRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/nodes', nodesRouter);
+app.use('/api/stories', storiesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
