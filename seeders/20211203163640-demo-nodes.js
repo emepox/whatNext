@@ -94,12 +94,16 @@ module.exports = {
            StoryId: 2,
            x: -503,
            y: -80,
+           createdAt: new Date(),
+           updatedAt: new Date(),
          },
          {
            situation: "They want to buy the materials for their new homes.",
            StoryId: 2,
            x: 259,
            y: -674,
+           createdAt: new Date(),
+           updatedAt: new Date(),
          },
 
          {
@@ -108,6 +112,8 @@ module.exports = {
            StoryId: 2,
            x: 407,
            y: -205,
+           createdAt: new Date(),
+           updatedAt: new Date(),
          },
          {
            situation:
@@ -115,6 +121,8 @@ module.exports = {
            StoryId: 2,
            x: 251,
            y: 469,
+           createdAt: new Date(),
+           updatedAt: new Date(),
          },
          {
            situation:
@@ -122,6 +130,8 @@ module.exports = {
            StoryId: 2,
            x: 1744,
            y: -754,
+           createdAt: new Date(),
+           updatedAt: new Date(),
          },
          {
            situation:
@@ -129,6 +139,8 @@ module.exports = {
            StoryId: 2,
            x: 1723,
            y: -387,
+           createdAt: new Date(),
+           updatedAt: new Date(),
          },
          {
            situation:
@@ -136,12 +148,16 @@ module.exports = {
            StoryId: 2,
            x: 1723,
            y: -190,
+           createdAt: new Date(),
+           updatedAt: new Date(),
          },
          {
            situation: "The piglets die eaten by the wolf.",
            StoryId: 2,
            x: 1398,
            y: 75,
+           createdAt: new Date(),
+           updatedAt: new Date(),
          },
          {
            situation:
@@ -149,6 +165,8 @@ module.exports = {
            StoryId: 2,
            x: 1209,
            y: 253,
+           createdAt: new Date(),
+           updatedAt: new Date(),
          },
          {
            situation:
@@ -156,6 +174,8 @@ module.exports = {
            StoryId: 2,
            x: 1271,
            y: 812,
+           createdAt: new Date(),
+           updatedAt: new Date(),
          },
          {
            situation:
@@ -163,6 +183,8 @@ module.exports = {
            StoryId: 2,
            x: 1821,
            y: 401,
+           createdAt: new Date(),
+           updatedAt: new Date(),
          },
          {
            situation:
@@ -170,6 +192,8 @@ module.exports = {
            StoryId: 2,
            x: 2107,
            y: 101,
+           createdAt: new Date(),
+           updatedAt: new Date(),
          },
        ],
        {}

@@ -63,6 +63,20 @@ module.exports = {
            createdAt: new Date(),
            updatedAt: new Date(),
          },
+         {
+           name: "The Three Little Pigs",
+           description: "This is the story of the three little pigs.",
+           reproductions: 0,
+           media:
+             "https://oakhouseschool.com/wp-content/uploads/2018/12/three-little-pigs.jpg",
+           category: "Horror",
+           isPrivate: 0,
+           isFinished: 1,
+           userId: 1,
+           first: 11,
+           createdAt: new Date(),
+           updatedAt: new Date(),
+         },
        ],
        {}
      );

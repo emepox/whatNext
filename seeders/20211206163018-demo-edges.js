@@ -73,7 +73,7 @@ module.exports = {
         {
           start: 11,
           next: 13,
-          option: "The three little pigs get lost in the forest.ou panic.",
+          option: "The three little pigs get lost in the forest.",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -92,14 +92,7 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
-        {
-          start: 13,
-          next: 15,
-          option:
-            "They couldn't buy anything because they didn't have any money because well, they were pigs.",
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
+
         {
           start: 13,
           next: 17,
