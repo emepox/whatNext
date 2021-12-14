@@ -55,7 +55,7 @@ export default function FlowTest({ nodeList, getNodes }) {
     e.preventDefault();
     const { source, target } = edge;
     try {
-      await axios(`/nodes/${source}/edges`, {
+      await axios(`/api/nodes/${source}/edges`, {
         method: "PUT",
         headers: {
           authorization: "Bearer " + localStorage.getItem("token"),
@@ -104,7 +104,7 @@ export default function FlowTest({ nodeList, getNodes }) {
   const handleDeleteEdge = async () => {
     const { source, target } = edge;
     try {
-      await axios(`/nodes/${source}/edges`, {
+      await axios(`/api/nodes/${source}/edges`, {
         method: "DELETE",
         headers: {
           authorization: "Bearer " + localStorage.getItem("token"),

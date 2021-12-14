@@ -16,7 +16,7 @@ export default function NodeCard({ data, isConnectable }) {
   const handleDelete = async () => {
     const { id } = data.node;
     try {
-      await axios(`/nodes/${id}`, {
+      await axios(`/api/nodes/${id}`, {
         method: "DELETE",
       });
       data.getNodes();
@@ -43,7 +43,7 @@ export default function NodeCard({ data, isConnectable }) {
   const handleEdit = async () => {
     const { id } = data.node;
     try {
-      await axios(`/nodes/edit/${id}`, {
+      await axios(`/api/nodes/edit/${id}`, {
         method: "PUT",
         data: {
           situation,

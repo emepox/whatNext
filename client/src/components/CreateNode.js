@@ -17,12 +17,12 @@ export default function CreateNode({storyId, getNodes, nodeList}) {
   async function createNode(event) {
       event.preventDefault()
     try {
-      const {data} = await axios.post('/nodes', {
+      const {data} = await axios.post('/api/nodes', {
         situation: text,
         StoryId: storyId
       });
 
-      if(!nodeList.length) await axios.put(`/stories/${storyId}/first`, {firstId:data.id});
+      if(!nodeList.length) await axios.put(`/api/stories/${storyId}/first`, {firstId:data.id});
       getNodes()
       new Noty({
         theme: 'sunset',

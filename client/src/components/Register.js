@@ -31,7 +31,7 @@ export default function Register() {
 
     const addUser = async () => {
     try {
-        await axios( "/users/register", {
+        await axios( "/api/users/register", {
         method: "POST",
         data: newUser,
         } );

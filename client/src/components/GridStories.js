@@ -34,7 +34,7 @@ export default function GridStories({ view }) {
   // get logged in user info (object)
   const requestUser = async () => {
     try {
-      const { data } = await axios("users/dashboard/", {
+      const { data } = await axios("/api/users/dashboard/", {
         headers: {
           authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -51,7 +51,7 @@ export default function GridStories({ view }) {
       switch (view){
         case "profile":
           {
-            const { data } = await axios("users/profile/", {
+            const { data } = await axios("/api/users/profile/", {
               headers: {
                 authorization: "Bearer " + localStorage.getItem("token"),
               },
@@ -61,7 +61,7 @@ export default function GridStories({ view }) {
           }
         case "favs":
           { 
-            const { data } = await axios("users/favourites", {
+            const { data } = await axios("/api/users/favourites", {
             headers: {
               authorization: "Bearer " + localStorage.getItem("token"),
             },
@@ -71,7 +71,7 @@ export default function GridStories({ view }) {
           }
         case "all":
           {
-            const { data } = await axios("/stories/");
+            const { data } = await axios("/api/stories/");
             setStories(data);
           break;
           }
@@ -80,21 +80,6 @@ export default function GridStories({ view }) {
       console.log(error);
     }
   };
-
-  // display all favourited stories
-  // const showFavourites = async () => {
-  //   try{
-  //     const { data } = await axios("users/favourites", {
-  //     headers: {
-  //       authorization: "Bearer " + localStorage.getItem("token"),
-  //     },
-  //     });        
-  //     setStories(data);
-        
-  //   } catch (error) {
-  //       console.log(error);
-  //   }
-  // };
 
 
   const hasCategoryFilter = (story) => {
@@ -119,7 +104,7 @@ export default function GridStories({ view }) {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`stories/${id}`); 
+      await axios.delete(`/api/stories/${id}`); 
     } catch (err) {
       console.log(err);
     }
