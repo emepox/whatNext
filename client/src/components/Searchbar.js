@@ -63,7 +63,7 @@ export default function Searchbar({
         <div className="mt-3">
           <p className="mb-2 text-gray-700">Search for</p>
           <input
-            className="border-2 border-gray-300 pr-10 pl-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mb-5 rounded-lg"
+            className="border border-gray-300 pr-10 pl-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mb-5 rounded-lg"
             name="searchWord"
             placeholder="title, description..."
             onChange={(event) => setSearchQuery(event.target.value)}

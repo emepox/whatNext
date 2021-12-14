@@ -8,8 +8,9 @@ export default function Card({
   handleEdit,
   handleDelete,
   handlePlay,
-  requestStories,
+  onFavourited,
   user,
+  toggle
 } ) {
   
   const auth = useAuth();
@@ -17,7 +18,7 @@ export default function Card({
 
   useEffect(() => {
     requestRating();
-  }, [] );
+  }, [toggle] );
   
 
   const requestRating = async () => {
@@ -40,7 +41,7 @@ export default function Card({
         },
         data: {storyId: +story.id},
       });
-      requestStories(view);
+      onFavourited(view);
     } catch (err) {
       console.log(err);
     }
@@ -52,7 +53,7 @@ export default function Card({
               authorization: "Bearer " + localStorage.getItem("token"),
           },
         });
-      requestStories(view);
+        onFavourited(view);
       } catch (err) {
         console.log(err);
       }

@@ -161,7 +161,7 @@ export default function GridStories({ view }) {
                     handleEdit={() => handleEdit(story.id, story.name)}
                     handleDelete={() => handleDelete(story.id)}
                     handlePlay={() => handlePlay(story.id, story.first)}
-                    requestStories={requestStories}
+                    onFavourited={requestStories}
                   />
                 ))}
           </div>
