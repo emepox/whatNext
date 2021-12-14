@@ -1,32 +1,17 @@
 
-import React, { useState, useEffect } from 'react'
+import React, { useRef } from 'react'
 import GridStories from './GridStories';
-import axios from "axios";
+import useAuth from "../hooks/useAuth";
 
-export default function Profile() {
-  const [user, setUser] = useState([]);
 
-  useEffect(() => {
-    requestData();
-  }, []);
-
-  const requestData = async () => {
-    try {
-      const { data } = await axios("users/dashboard/", {
-        headers: {
-          authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      });
-      setUser(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export default function Profile(isProfile) {
+  const parallax = useRef(null);
+  const auth = useAuth();
 
   return (
     
       <div>
-        <GridStories isProfile={true} user={user.username}/>
+        <GridStories isProfile={isProfile} />
       </div>
 
 
