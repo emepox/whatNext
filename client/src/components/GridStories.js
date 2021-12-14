@@ -29,7 +29,6 @@ export default function GridStories({ view }) {
   useEffect(() => {
     requestData(view);
     requestUser();
-    
   }, [view]);
 
   // get logged in user info (object)
@@ -76,12 +75,6 @@ export default function GridStories({ view }) {
             setStories(data);
           break;
           }
-        // case "end":
-        //   {
-        //     const { data } = await axios.get(`/stories/${story.id}`);
-        //     setStories(data);
-        //   break;
-        //   }
       }
     } catch (error) {
       console.log(error);
@@ -162,6 +155,7 @@ export default function GridStories({ view }) {
                   <Card
                     key={story.id}
                     story={story}
+                    user={user.id}
                     view={view}
                     handleEdit={() => handleEdit(story.id, story.name)}
                     handleDelete={() => handleDelete(story.id)}
