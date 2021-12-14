@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import useAuth from "../hooks/useAuth";
 
 import Rating from "react-rating";
 import Card from "./Card";
-
 import axios from "axios";
 
 export default function StoryEnd() {
@@ -16,27 +15,26 @@ export default function StoryEnd() {
 
     const { id } = useParams();
     const auth = useAuth();
-
+    const navigate = useNavigate();
     
     useEffect(() => {
         requestStory();
-        requestData();
+        requestUser();
+        console.log(user)
     }, []);
 
     const requestStory = async () => {
         try {
             const { data } = await axios.get( `/stories/${id}/` );
             setStory( data )
-            // setUser( data.User.username)
-
         } catch ( err ) {
             console.log(err)
         }
     }
 
-    const requestData = async () => {
+    const requestUser = async () => {
       try {
-        const { data } = await axios("users/dashboard/", {
+        const { data } = await axios("/users/dashboard/", {
           headers: {
             authorization: "Bearer " + localStorage.getItem("token"),
           },
@@ -70,12 +68,46 @@ export default function StoryEnd() {
         }
 
     }
+
+    const handlePlay = async (id, first) => {
+      navigate(`/story/${id}/${first}`);
+    };
     
+    // add or remove story from favourites
+  const handleSingleFavourite = async () => {
+    if (!(story.Favouritee && story.Favouritee.some(fav => fav.id === user) || story.Favourites)){ 
+    try {
+      await axios('/users/favourites/', {
+        method: "POST",
+        headers: {
+            authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        data: {storyId: +story.id},
+      });
+      requestStory();
+    } catch (err) {
+      console.log(err);
+    }
+   } else {
+      try {
+        await axios(`/users/favourites/${story.id}`, {
+          method: "DELETE",
+          headers: {
+              authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        });
+      requestStory();
+      } catch (err) {
+        console.log(err);
+      }
+   }
+  };
+
     return (
       <div className="flex flex-col items-center justify-center bg-grayCustom2 h-screen">
-        <p className="justify-center text-center text-2xl font-bold text-gray-900">Your opining matters!</p>
+        <p className="justify-center text-center text-2xl font-bold text-gray-900">Your opinion matters!</p>
         <p className="text-center text-lg text-gray-900 mb-10">How was the game?</p>
-        {Object.keys(story).length && <Card story={story} view={"end"}/>}
+        {Object.keys(story).length && <Card story={story} handlePlay={() => handlePlay(story.id, story.first)} handleFavourite={handleSingleFavourite}/>}
 
         {/* CONTENEDOR DE RATINGS */}
         <div className="w-72 flex flex-col justify-center md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs mx-auto border border-white bg-white mt-5">

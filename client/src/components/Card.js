@@ -8,8 +8,8 @@ export default function Card({
   handleEdit,
   handleDelete,
   handlePlay,
-  requestData,
-  user
+  requestStories,
+  user,
 } ) {
   
   const auth = useAuth();
@@ -40,7 +40,7 @@ export default function Card({
         },
         data: {storyId: +story.id},
       });
-      requestData(view);
+      requestStories(view);
     } catch (err) {
       console.log(err);
     }
@@ -52,12 +52,14 @@ export default function Card({
               authorization: "Bearer " + localStorage.getItem("token"),
           },
         });
-      requestData(view);
+      requestStories(view);
       } catch (err) {
         console.log(err);
       }
    }
   };
+
+  
 
   return (
     <div

@@ -27,7 +27,7 @@ export default function GridStories({ view }) {
 
 
   useEffect(() => {
-    requestData(view);
+    requestStories(view);
     requestUser();
   }, [view]);
 
@@ -46,7 +46,7 @@ export default function GridStories({ view }) {
   };
 
   // get stories
-  const requestData = async (view) => {
+  const requestStories = async (view) => {
       try {
       switch (view){
         case "profile":
@@ -120,11 +120,13 @@ export default function GridStories({ view }) {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`stories/${id}`);
-      requestData();
+      requestStories();
     } catch (err) {
       console.log(err);
     }
   };
+
+  
 
   return (
     <div className="md:flex bg-grayCustom2 sm:flex-none ">
@@ -134,7 +136,6 @@ export default function GridStories({ view }) {
           view={view}
           user={user}
           options={options}
-          requestData={requestData}
           setSearchQuery={setSearchQuery}
           setCategoryFilters={setCategoryFilters}
           // showFavourites={showFavourites}
@@ -160,7 +161,7 @@ export default function GridStories({ view }) {
                     handleEdit={() => handleEdit(story.id, story.name)}
                     handleDelete={() => handleDelete(story.id)}
                     handlePlay={() => handlePlay(story.id, story.first)}
-                    requestData={requestData}
+                    requestStories={requestStories}
                   />
                 ))}
           </div>
