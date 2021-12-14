@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import Card from "./Card";
 import Searchbar from "./Searchbar";
 
 
-export default function GridStories({ isProfile, user }) {
+export default function GridStories({ view }) {
   const navigate = useNavigate();
-  const auth = useAuth();
   const [stories, setStories] = useState([]);
-  const [favouritedStories, setFavouritedStories] = useState([])
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilters, setCategoryFilters] = useState([]);
+  const [user, setUser] = useState([]);
+  // const [isFavourite, setIsFavourite] = useState(false);
   
 
   const options = [
@@ -26,25 +25,56 @@ export default function GridStories({ isProfile, user }) {
     { value: "Other", label: "Other" },
   ];
 
+
   useEffect(() => {
-    requestData();
-  }, []);
+    requestStories(view);
+    requestUser();
+  }, [view]);
 
-  const requestData = async () => {
+  // get logged in user info (object)
+  const requestUser = async () => {
     try {
-      // if we're in profile, see user's stories
-      if (isProfile) {
-        const { data } = await axios("users/profile/", {
-          headers: {
-            authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        });
+      const { data } = await axios("users/dashboard/", {
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      setUser(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-        setStories(data);
-      // else show all stories
-      } else {
-        const { data } = await axios("/stories/");
-        setStories(data);
+  // get stories
+  const requestStories = async (view) => {
+      try {
+      switch (view){
+        case "profile":
+          {
+            const { data } = await axios("users/profile/", {
+              headers: {
+                authorization: "Bearer " + localStorage.getItem("token"),
+              },
+            });
+            setStories(data);
+          break;
+          }
+        case "favs":
+          { 
+            const { data } = await axios("users/favourites", {
+            headers: {
+              authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            });        
+            setStories(data);
+          break;
+          }
+        case "all":
+          {
+            const { data } = await axios("/stories/");
+            setStories(data);
+          break;
+          }
       }
     } catch (error) {
       console.log(error);
@@ -52,52 +82,20 @@ export default function GridStories({ isProfile, user }) {
   };
 
   // display all favourited stories
-  const showFavourites = async () => {
-    try{
-      const { data } = await axios("users/favourites", {
-      headers: {
-        authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
-        setStories(data);
-        // setFavouritedStories((state) => data.map((story) => {story.id = true}))
-    } catch (error) {
-        console.log(error);
-    }
-  };
+  // const showFavourites = async () => {
+  //   try{
+  //     const { data } = await axios("users/favourites", {
+  //     headers: {
+  //       authorization: "Bearer " + localStorage.getItem("token"),
+  //     },
+  //     });        
+  //     setStories(data);
+        
+  //   } catch (error) {
+  //       console.log(error);
+  //   }
+  // };
 
-  // add or remove story from favourites
-  const handleFavourite = async (story) => {
-    console.log(story)
-    if (!favouritedStories[story.id]){ 
-    try {
-      await axios('/users/favourites/', {
-        method: "POST",
-        headers: {
-            authorization: "Bearer " + localStorage.getItem("token"),
-        },
-        data: {storyId: +story.id},
-      });
-      setFavouritedStories({...favouritedStories, [story.id]: true});
-      requestData()
-    } catch (err) {
-      console.log(err);
-    }
-   } else {
-      try {
-        await axios(`/users/favourites/${story.id}`, {
-          method: "DELETE",
-          headers: {
-              authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        });
-        setFavouritedStories({...favouritedStories, [story.id]: false})
-        requestData()
-      } catch (err) {
-        console.log(err);
-      }
-   }
-  };
 
   const hasCategoryFilter = (story) => {
     return !categoryFilters.length || categoryFilters.includes(story.category);
@@ -122,24 +120,25 @@ export default function GridStories({ isProfile, user }) {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`stories/${id}`);
-      requestData();
+      requestStories();
     } catch (err) {
       console.log(err);
     }
   };
+
+  
 
   return (
     <div className="md:flex bg-grayCustom2 sm:flex-none ">
       {/* SIDEBAR */}
       <div className="md:flex basis-1/5 bg-white  justify-around items-top md:h-screen">
         <Searchbar
-          isProfile={isProfile}
+          view={view}
           user={user}
           options={options}
-          requestData={requestData}
           setSearchQuery={setSearchQuery}
           setCategoryFilters={setCategoryFilters}
-          showFavourites={showFavourites}
+          // showFavourites={showFavourites}
         />
       </div>
       {/* CARDS DISPLAY SECTION */}
@@ -155,13 +154,14 @@ export default function GridStories({ isProfile, user }) {
                 })
                 .map((story) => (
                   <Card
+                    key={story.id}
                     story={story}
-                    isProfile={isProfile}
+                    user={user.id}
+                    view={view}
                     handleEdit={() => handleEdit(story.id, story.name)}
                     handleDelete={() => handleDelete(story.id)}
                     handlePlay={() => handlePlay(story.id, story.first)}
-                    handleFavourite={() => handleFavourite(story)}
-                    favouritedStories={favouritedStories}
+                    onFavourited={requestStories}
                   />
                 ))}
           </div>

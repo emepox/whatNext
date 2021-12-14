@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
-
 export default function Card({
   story,
-  isProfile,
+  view,
   handleEdit,
   handleDelete,
   handlePlay,
-  handleFavourite,
-  favouritedStories
+  onFavourited,
+  user,
+  toggle
 } ) {
   
   const auth = useAuth();
@@ -18,8 +18,9 @@ export default function Card({
 
   useEffect(() => {
     requestRating();
-  }, [] );
+  }, [toggle] );
   
+
   const requestRating = async () => {
      try {
        const { data } = await axios.get(`/stories/${story.id}/rating`);
@@ -29,9 +30,41 @@ export default function Card({
      }
   }
 
+  // add or remove story from favourites
+  const handleFavourite = async (view) => {
+    if (!(story.Favouritee && story.Favouritee.some(fav => fav.id === user) || story.Favourites)){ 
+    try {
+      await axios('/users/favourites/', {
+        method: "POST",
+        headers: {
+            authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        data: {storyId: +story.id},
+      });
+      onFavourited(view);
+    } catch (err) {
+      console.log(err);
+    }
+   } else {
+      try {
+        await axios(`/users/favourites/${story.id}`, {
+          method: "DELETE",
+          headers: {
+              authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        });
+        onFavourited(view);
+      } catch (err) {
+        console.log(err);
+      }
+   }
+  };
+
+  
+
   return (
     <div
-      key={story.id}
+      
       className="w-72 h-96 max-w-md m-4 bg-white rounded-xl shadow-xl overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400"
     >
       <div className="md:flex">
@@ -39,18 +72,18 @@ export default function Card({
           <img
             className="object-cover h-48 w-screen"
             src={story.media}
-            alt="Game's image"
+            alt="Game"
           />
 
           {/* button with options above img */}
           <div className="absolute top-0 right-0 text-white p-2 m-2">
             <div className="">
               <div className="relative inline-block text-left dropdown">
-                {!isProfile && (
+                {!(view==="profile") && (
                   <span className="rounded-md shadow-sm">
                     <button
                       onClick={handlePlay}
-                      className="inline-flex justify-center w-full px-3 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-purple-500 shadow-md rounded-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 rounded-full"
+                      className="inline-flex justify-center w-full px-3 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-gray-300 opacity-100 hover:bg-purple-400 shadow-md rounded-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 rounded-full"
                       type="button"
                       aria-haspopup="true"
                       aria-expanded="true"
@@ -62,7 +95,7 @@ export default function Card({
                 )}
               </div>
 
-              {isProfile && (
+              {(view==="profile") && (
                 <div className="relative inline-block text-left dropdown">
                   <span className="rounded-md shadow-sm">
                     <button
@@ -134,10 +167,14 @@ export default function Card({
               </span>
             </p>
           </div>
+          {/* && Object.keys(user).length */}
           {auth.isLoggedIn && (
             <button
-              className={favouritedStories[story.id] ? "fontAwesome text-purple-500" : "fontAwesome text-gray-200"}
-              onClick={handleFavourite}
+              className={
+                ((story.Favouritee && story.Favouritee.length && story.Favouritee.some((fav) => fav.id === user)) || story.Favourites ) 
+                ? "fontAwesome text-red-400" 
+                : "fontAwesome text-gray-200 hover:text-red-300"}
+              onClick={() => handleFavourite(view)}
             >
               &#xf004;
             </button>
@@ -160,7 +197,7 @@ export default function Card({
           </p> */}
           {/* </a> */}
           <p className="mt-3 text-gray-500 mr-2">
-            {story && story.description.length >= 85
+            {(story && story.description.length >= 85)
               ? `${story.description.slice(0, 85)}...`
               : story.description}
           </p>

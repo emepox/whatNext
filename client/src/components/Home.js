@@ -1,19 +1,12 @@
 import React, { useRef } from "react";
-import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
+import { Parallax, ParallaxLayer} from "@react-spring/parallax";
 import HomeTitle from "./HomeTitle";
 import About from "./About";
 import Videodisplay from "./Videodisplay";
 import Teamwork from "../img/Teamwork.png";
 import Create from "../img/Create.png";
 
-const url = (name, wrap = false) =>
-  `${
-    wrap ? "url(" : ""
-  }https://awv3node-homepage.surge.sh/build/assets/${name}.svg${
-    wrap ? ")" : ""
-  }`;
 
-console.log(url("clients"));
 
 export default function Home() {
   const parallax = useRef(null);
@@ -46,32 +39,19 @@ export default function Home() {
           style={{ pointerEvents: "none" }}
         >
           <img
-            // src={url("satellite4")}
             src={Create}
-            style={{ width: "12%", marginLeft: "77%" }}
+            style={ { width: "12%", marginLeft: "77%" } }
+            alt="home-creativity"
           />
         </ParallaxLayer>
 
-        <ParallaxLayer
-          offset={2.4}
-          speed={-0.4}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            pointerEvents: "none",
-          }}
-        >
+        <ParallaxLayer offset={2.4} speed={-0.4} style={{display: "flex", alignItems: "center", justifyContent: "center", pointerEvents: "none"}}>
+
           {/* <img src={url('earth')} style={{ width: '60%' }} /> */}
-          <img src={Teamwork} style={{ width: "15%" }} />
+          <img src={Teamwork} style={{ width: "15%" }} alt="home"/>
         </ParallaxLayer>
 
-        <ParallaxLayer
-          offset={2}
-          speed={-0.3}
-          style={{
-            backgroundSize: "80%",
-            backgroundPosition: "center",
+        <ParallaxLayer offset={2} speed={-0.5} style={{ backgroundSize: "80%", backgroundPosition: "center",
             // backgroundImage: url('clients', true),
           }}
         />

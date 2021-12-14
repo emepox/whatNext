@@ -1,11 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import * as api from "../services/api";
-import Rating from "react-rating";
 import "./Login.css";
 import Textbox from "../img/Textbox.png";
-
-import { useSpring, config, animated } from "@react-spring/web";
 
 const axios = require("axios");
 
@@ -15,9 +12,6 @@ export default function Story() {
   const [story, setStory] = useState(null);
   const [currentNode, setCurrentNode] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [image, setImage] = useState(null);
-  const [data, setData] = useState(null);
-  const [selectedId, setSelectedId] = useState(0);
   const [rating, setRating] = useState({});
 
   useEffect(() => getCurrentNode(page), [page]);
@@ -34,7 +28,6 @@ export default function Story() {
       try {
         const { data } = await axios.get(`/stories/${id}/rating`);
         setRating(data);
-        console.log(data);
       } catch (err) {
         console.log(err);
       }
@@ -43,13 +36,9 @@ export default function Story() {
   const getCurrentNode = async (id) => {
     setLoading(true);
     const node = await api.getNode(id);
-    console.log(node);
     setCurrentNode(node);
-    console.log(data);
     setLoading(false);
   };
-
-  const [flip, set] = useState(false);
 
   const getStory = async (id) => {
     try {
@@ -59,21 +48,6 @@ export default function Story() {
       console.log(error);
     }
   };
-
-  //   const getImage = async () => {
-  //     import placeholder from "../img/placeholder.jpg"
-  //     setImage(placeholder)
-  //   }
-
-  const { scroll } = useSpring({
-    scroll: (currentNode && currentNode.length - 1) * 50,
-    from: { scroll: 0 },
-    reset: false,
-    reverse: flip,
-    delay: 200,
-    config: config.molasses,
-    // onRest: () => set(!flip),
-  });
 
   return (
     <div className="h-screen flex" style={{ width: "100%", height: "100%" }}>
@@ -90,6 +64,7 @@ export default function Story() {
                   <img
                     src={story.media}
                     className="object-cover h-48 w-80 rounded-lg"
+                    alt="media"
                   />
                 </div>
                 <p className="font-semibold text-xl mt-1">{story.name}</p>
@@ -115,7 +90,11 @@ export default function Story() {
 
             <div className="bg-white border-2 border-gray-200 p-3 rounded-xl shadow-xl flex items-center justify-between mt-4">
               <div className="flex space-x-6 items-center">
-                <img src={Textbox} className="w-auto h-24 rounded-lg" />
+                <img
+                  src={Textbox}
+                  className="w-auto h-24 rounded-lg"
+                  alt="something more"
+                />
                 <div>
                   <p className="font-semibold text-lg">Created by</p>
                   <p className="font-semibold text-gray-400">
@@ -169,40 +148,41 @@ export default function Story() {
                 {currentNode.situation}
               </p>
               <p className="text-sm font-light text-gray-600 my-3">
-              What will happen next? You decide
+                What will happen next? You decide
               </p>
 
               <div className="h-1 w-full mx-auto border-b my-5"></div>
 
               {/* OPTIONS */}
               {currentNode.Start.length ? (
-                currentNode.Start.map((edge) => (
-                  
-                    <div className="flex flex-col items-start justify-center transition hover:bg-indigo-50 cursor-pointer space-x-5 px-5 h-16">
-                      <a
-                        onClick={() => navigate(`/story/${id}/${edge.next}`)}
-                        style={{
-                          width: "100%",
-                          height: 40,
-                          textAlign: "center",
-                        }}
-                      >
-                        {edge.option}
-                      </a>
-                    </div>
-                  
+                currentNode.Start.map((edge, i) => (
+                  <div
+                    key={i}
+                    className="flex flex-col items-start justify-center transition hover:bg-indigo-50 cursor-pointer space-x-5 px-5 h-16"
+                  >
+                    <button
+                      onClick={() => navigate(`/story/${id}/${edge.next}`)}
+                      style={{
+                        width: "100%",
+                        height: 40,
+                        textAlign: "center",
+                      }}
+                    >
+                      {edge.option}
+                    </button>
+                  </div>
                 ))
               ) : (
-                
-                  <div className="flex flex-col items-start justify-center transition hover:bg-indigo-50 cursor-pointer space-x-5 px-5 h-16">
-                    <a
-                      onClick={() => navigate(`/story/${id}/end`)}
-                      style={{ width: "100%", height: 40, textAlign: "center" }}
-                    >
-                      Finish
-                    </a>
-                  </div>
-                
+                <div
+                  className="flex flex-col items-start justify-center transition hover:bg-indigo-50 cursor-pointer space-x-5 px-5 h-16"
+                >
+                  <button
+                    onClick={() => navigate(`/story/${id}/end`)}
+                    style={{ width: "100%", height: 40, textAlign: "center" }}
+                  >
+                    Finish
+                  </button>
+                </div>
               )}
             </div>
           </div>

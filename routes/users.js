@@ -65,7 +65,8 @@ router.get("/profile", userShouldBeLoggedIn, async function (req, res) {
     const { id } = req.user;
     const stories = await models.Story.findAll({
       where: { UserId: id },
-      include: { model: models.User, attributes: ["username"] },
+      include: [{ model: models.User, attributes: ["id", "username"] },
+      { model: models.User, as: "Favouritee", attributes: ["id", "username"]}]
     });
 
     res.send(stories);
@@ -77,9 +78,9 @@ router.get("/profile", userShouldBeLoggedIn, async function (req, res) {
 // gets all favourite stories from a user
 router.get("/favourites", userShouldBeLoggedIn, async function (req, res) {
   try {
-    const stories = await req.user.getFavourite(
-      // {include: {model: models.User, where:{id:models.Story.UserId}}}
-    )
+    const stories = await req.user.getFavourite({
+      // include: { model: models.User, as: "Favouritee", attributes: ["username", "id"]}
+    })
     res.send(stories);
   } catch (error) {
     res.status(500).send(error);

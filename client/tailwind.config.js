@@ -11,6 +11,10 @@ module.exports = {
         second: "#715df4",
       }),
 
+      container: {
+        center: true,
+      },
+
       borderRadius: {
         borderstoryCustom: "5px",
       },
