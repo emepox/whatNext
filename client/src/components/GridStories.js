@@ -7,13 +7,14 @@ import Card from "./Card";
 import Searchbar from "./Searchbar";
 
 
-export default function GridStories({ isProfile }) {
+export default function GridStories({ view }) {
   const navigate = useNavigate();
   const auth = useAuth();
   const [stories, setStories] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilters, setCategoryFilters] = useState([]);
   const [user, setUser] = useState([]);
+  // const [isFavourite, setIsFavourite] = useState(false);
   
 
   const options = [
@@ -26,10 +27,12 @@ export default function GridStories({ isProfile }) {
     { value: "Other", label: "Other" },
   ];
 
+
   useEffect(() => {
-    requestData();
+    requestData(view);
     requestUser();
-  }, []);
+    
+  }, [view]);
 
   // get logged in user info (object)
   const requestUser = async () => {
@@ -46,20 +49,35 @@ export default function GridStories({ isProfile }) {
   };
 
   // get stories
-  const requestData = async () => {
-    try {
-      // if we're in profile, see user's stories
-      if (isProfile) {
-        const { data } = await axios("users/profile/", {
-          headers: {
-            authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        });
-        setStories(data);
-      // else show all stories
-      } else {
-        const { data } = await axios("/stories/");
-        setStories(data);
+  const requestData = async (view) => {
+      try {
+      switch (view){
+        case "profile":
+          {
+            const { data } = await axios("users/profile/", {
+              headers: {
+                authorization: "Bearer " + localStorage.getItem("token"),
+              },
+            });
+            setStories(data);
+          break;
+          }
+        case "favs":
+          { 
+            const { data } = await axios("users/favourites", {
+            headers: {
+              authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            });        
+            setStories(data);
+          break;
+          }
+        case "all":
+          {
+            const { data } = await axios("/stories/");
+            setStories(data);
+          break;
+          }
       }
     } catch (error) {
       console.log(error);
@@ -67,49 +85,20 @@ export default function GridStories({ isProfile }) {
   };
 
   // display all favourited stories
-  const showFavourites = async () => {
-    try{
-      const { data } = await axios("users/favourites", {
-      headers: {
-        authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
-        // const result = await data.map((story) => {story.Favouritee=[{id: story.Favourites.UserId}]})
+  // const showFavourites = async () => {
+  //   try{
+  //     const { data } = await axios("users/favourites", {
+  //     headers: {
+  //       authorization: "Bearer " + localStorage.getItem("token"),
+  //     },
+  //     });        
+  //     setStories(data);
         
-        setStories(data);
-        
-    } catch (error) {
-        console.log(error);
-    }
-  };
-
-  // // add or remove story from favourites
-  // const handleFavourite = async (story) => {
-  //   if (!(story.Favouritee.some(fav => fav.id === user.id) || story.Favourites)){ 
-  //   try {
-  //     await axios('/users/favourites/', {
-  //       method: "POST",
-  //       headers: {
-  //           authorization: "Bearer " + localStorage.getItem("token"),
-  //       },
-  //       data: {storyId: +story.id},
-  //     });
-  //   } catch (err) {
-  //     console.log(err);
+  //   } catch (error) {
+  //       console.log(error);
   //   }
-  //  } else {
-  //     try {
-  //       await axios(`/users/favourites/${story.id}`, {
-  //         method: "DELETE",
-  //         headers: {
-  //             authorization: "Bearer " + localStorage.getItem("token"),
-  //         },
-  //       });
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //  }
   // };
+
 
   const hasCategoryFilter = (story) => {
     return !categoryFilters.length || categoryFilters.includes(story.category);
@@ -145,13 +134,13 @@ export default function GridStories({ isProfile }) {
       {/* SIDEBAR */}
       <div className="md:flex basis-1/5 bg-white  justify-around items-top md:h-screen">
         <Searchbar
-          isProfile={isProfile}
+          view={view}
           user={user}
           options={options}
           requestData={requestData}
           setSearchQuery={setSearchQuery}
           setCategoryFilters={setCategoryFilters}
-          showFavourites={showFavourites}
+          // showFavourites={showFavourites}
         />
       </div>
       {/* CARDS DISPLAY SECTION */}
@@ -169,7 +158,7 @@ export default function GridStories({ isProfile }) {
                   <Card
                     user={user.id}
                     story={story}
-                    isProfile={isProfile}
+                    view={view}
                     handleEdit={() => handleEdit(story.id, story.name)}
                     handleDelete={() => handleDelete(story.id)}
                     handlePlay={() => handlePlay(story.id, story.first)}

@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
-// import user from "../../../models/user";
-
 
 export default function Card({
   story,
-  isProfile,
+  view,
   handleEdit,
   handleDelete,
   handlePlay,
@@ -19,7 +17,6 @@ export default function Card({
 
   useEffect(() => {
     requestRating();
-    console.log(story.Favouritee)
   }, [] );
   
   const requestRating = async () => {
@@ -33,7 +30,6 @@ export default function Card({
 
   // add or remove story from favourites
   const handleFavourite = async () => {
-    // console.log(story.Favouritee)
     if (!(story.Favouritee && story.Favouritee.some(fav => fav.id === user) || story.Favourites)){ 
     try {
       await axios('/users/favourites/', {
@@ -79,7 +75,7 @@ export default function Card({
           <div className="absolute top-0 right-0 text-white p-2 m-2">
             <div className="">
               <div className="relative inline-block text-left dropdown">
-                {!isProfile && (
+                {!(view==="profile") && (
                   <span className="rounded-md shadow-sm">
                     <button
                       onClick={handlePlay}
@@ -95,7 +91,7 @@ export default function Card({
                 )}
               </div>
 
-              {isProfile && (
+              {(view==="profile") && (
                 <div className="relative inline-block text-left dropdown">
                   <span className="rounded-md shadow-sm">
                     <button
