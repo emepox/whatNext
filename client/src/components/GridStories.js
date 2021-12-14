@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import Card from "./Card";
@@ -9,7 +8,6 @@ import Searchbar from "./Searchbar";
 
 export default function GridStories({ view }) {
   const navigate = useNavigate();
-  const auth = useAuth();
   const [stories, setStories] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilters, setCategoryFilters] = useState([]);
@@ -162,7 +160,7 @@ export default function GridStories({ view }) {
                 })
                 .map((story) => (
                   <Card
-                    user={user.id}
+                    key={story.id}
                     story={story}
                     view={view}
                     handleEdit={() => handleEdit(story.id, story.name)}

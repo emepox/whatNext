@@ -96,7 +96,7 @@ export default function StoryDetails() {
                     }}>
                     <div className="flex flex-col items-center justify-center">
                         <div className="flex flex-col items-center justify-center mt-20">
-                            <img src={Texts} className="w-5/12"/>
+                            <img src={Texts} className="w-5/12" alt="text"/>
                             <p className="text-3xl font-bold text-gray-700 mt-5">A blank canvas for you</p>
                             <p className="text-lg text-gray-700 mb-20 mt-3">Every big idea starts with a WhatNext</p>
                         </div>
@@ -116,12 +116,12 @@ export default function StoryDetails() {
                                 <div>
                                     <select name="category" value={newStory.category} onChange={handleChange} className="w-full border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" required>
                                         <option value="">Choose a category</option>
-                                        {categories.map(category => <option value={category}>{category}</option>)}
+                                        { categories.map( (category, i) => <option key={i } value={category}>{category}</option>)}
                                     </select>
                                 </div>
                             </div>
                             <div>
-                            <input maxlength="255" name="media" value={newStory.media} placeholder="Add the URL of an image that illustrates your story" onChange={handleChange} className="border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent pr-inputcustom mb-4" required/>
+                            <input maxLength="255" name="media" value={newStory.media} placeholder="Add the URL of an image that illustrates your story" onChange={handleChange} className="border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent pr-inputcustom mb-4" required/>
                             </div>
                             <div className="flex flex-col items-center justify-center">
                             <button className="bg-blue-500 px-3 py-2 text-white text-base uppercase tracking-wide rounded-full hover:bg-purple-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 ">START WRITING!</button>
