@@ -46,7 +46,7 @@ export default function StoryDetails() {
   // creates new story in DB
   async function createStory() {
     try {
-      const { data } = await axios("/stories", {
+      const { data } = await axios("/api/stories", {
         method: "POST",
         headers: {
           authorization: "Bearer " + localStorage.getItem("token"),
