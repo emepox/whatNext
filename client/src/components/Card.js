@@ -169,8 +169,8 @@ export default function Card({
             <button
               className={
                 ((story.Favouritee && story.Favouritee.length && story.Favouritee.some((fav) => fav.id === user)) || story.Favourites ) 
-                ? "fontAwesome text-purple-500" 
-                : "fontAwesome text-gray-200"}
+                ? "fontAwesome text-red-400" 
+                : "fontAwesome text-gray-200 hover:text-red-300"}
               onClick={() => handleFavourite(view)}
             >
               &#xf004;
