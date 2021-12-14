@@ -78,6 +78,12 @@ export default function GridStories({ view }) {
             setStories(data);
           break;
           }
+        // case "end":
+        //   {
+        //     const { data } = await axios.get(`/stories/${story.id}`);
+        //     setStories(data);
+        //   break;
+        //   }
       }
     } catch (error) {
       console.log(error);
