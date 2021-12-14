@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState} from "react";
 import axios from "axios";
 import Noty from "noty";
 import "../../node_modules/noty/lib/themes/sunset.css";
@@ -26,14 +26,12 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submited");
     addUser();
   };
 
     const addUser = async () => {
-        console.log(newUser)
     try {
-        const { data } = await axios( "/users/register", {
+        await axios( "/users/register", {
         method: "POST",
         data: newUser,
         } );
@@ -86,7 +84,7 @@ export default function Register() {
             </div>
 
             <div className="flex flex-col mb-5">
-              <label for="username" className=" mt-4 mb-1 text-xs tracking-wide text-gray-600">Username:</label>
+              <label htmlFor="username" className=" mt-4 mb-1 text-xs tracking-wide text-gray-600">Username:</label>
               <div className="relative">
                 <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
                   <p className="fas fa-at text-blue-500">&#xf007;</p>
@@ -105,7 +103,7 @@ export default function Register() {
             </div>
 
             <div className="flex flex-col mb-6">
-              <label for="email" className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">Email:</label>
+              <label htmlFor="email" className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">Email:</label>
               <div className="relative">
                 <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
                   <span>
@@ -126,7 +124,7 @@ export default function Register() {
             </div>
 
             <div className="flex flex-col mb-6">
-              <label for="password" className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">Password:</label>
+              <label htmlFor="password" className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">Password:</label>
               <div className="relative">
                 <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
                   <span>
@@ -156,9 +154,9 @@ export default function Register() {
                 <svg
                   className="h-6 w-6"
                   fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >

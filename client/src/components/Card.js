@@ -31,7 +31,7 @@ export default function Card({
 
   return (
     <div
-      key={story.id}
+      
       className="w-72 h-96 max-w-md m-4 bg-white rounded-xl shadow-xl overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400"
     >
       <div className="md:flex">
@@ -39,7 +39,7 @@ export default function Card({
           <img
             className="object-cover h-48 w-screen"
             src={story.media}
-            alt="Game's image"
+            alt="Game"
           />
 
           {/* button with options above img */}

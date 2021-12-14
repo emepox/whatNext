@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import Card from "./Card";
@@ -9,7 +8,6 @@ import Searchbar from "./Searchbar";
 
 export default function GridStories({ isProfile, user }) {
   const navigate = useNavigate();
-  const auth = useAuth();
   const [stories, setStories] = useState([]);
   const [favouritedStories, setFavouritedStories] = useState([])
   const [searchQuery, setSearchQuery] = useState("");
@@ -68,7 +66,6 @@ export default function GridStories({ isProfile, user }) {
 
   // add or remove story from favourites
   const handleFavourite = async (story) => {
-    console.log(story)
     if (!favouritedStories[story.id]){ 
     try {
       await axios('/users/favourites/', {
@@ -155,6 +152,7 @@ export default function GridStories({ isProfile, user }) {
                 })
                 .map((story) => (
                   <Card
+                    key={story.id}
                     story={story}
                     isProfile={isProfile}
                     handleEdit={() => handleEdit(story.id, story.name)}

@@ -1,19 +1,10 @@
 
-import React, { useRef, useState, useEffect } from 'react'
-import { Parallax, ParallaxLayer } from '@react-spring/parallax';
+import React, { useState, useEffect } from 'react'
 import GridStories from './GridStories';
 import axios from "axios";
-import useAuth from "../hooks/useAuth";
-
-const url = (name, wrap = false) =>
-  `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
-
 
 export default function Profile() {
-  const parallax = useRef(null);
-  const auth = useAuth();
   const [user, setUser] = useState([]);
-  const [seeFavs, setSeeFavs] = useState(false);
 
   useEffect(() => {
     requestData();
