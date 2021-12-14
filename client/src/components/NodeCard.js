@@ -16,6 +16,7 @@ export default function NodeCard({ data, isConnectable }) {
   const handleDelete = async () => {
     const { id } = data.node;
     try {
+        if (data.node.first) throw new Error("You can't delete the first situation")
       await axios(`/nodes/${id}`, {
         method: "DELETE",
       });

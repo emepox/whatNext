@@ -51,16 +51,26 @@ router.get("/:id", async function (req, res) {
 router.get("/:id/nodes", async function (req, res) {
   try {
     const { id } = req.params;
+    const story = await models.Story.findOne({where: { id }})
     const nodes = await models.Node.findAll({
-      attributes: ["id", "situation"],
+      attributes: ["id", "situation", "storyId"],
       where: { StoryId: id },
       include: { model: models.Node, as: "Start", attributes: ["id"] },
     });
+    const first = nodes.find(e => e.id === story.first)
 
-    const result = nodes.map((node) => ({
-      ...node.dataValues,
-      Start: node.dataValues.Start.map((e) => e.Edge),
-    }));
+    const result = nodes.map((node) => {
+      return node.id === first.id
+      ?{
+        ...node.dataValues,
+        first:true,
+        Start: node.dataValues.Start.map((e) => e.Edge),
+      }
+      :{
+        ...node.dataValues,
+        Start: node.dataValues.Start.map((e) => e.Edge),
+      }
+    });
     res.send(result);
   } catch (error) {
     res.status(500).send(error);
