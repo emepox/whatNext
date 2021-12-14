@@ -58,15 +58,6 @@ export default function Navbar() {
           )}
           {auth.isLoggedIn && <a className="text-customWhite">|</a>}
 
-          <a
-            href="/home"
-            className="text-base leading-tight font-light text-customWhite hover:text-indigo-500"
-          >
-            about
-          </a>
-
-          <a className="text-customWhite">|</a>
-
            {!auth.isLoggedIn && (
             <NavLink
               to="/login"

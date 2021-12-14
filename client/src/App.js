@@ -1,9 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
-
-import ParallaxComponent from "./components/ParallaxComponent";
-
 import Register from "./components/Register";
 import Login from "./components/Login";
 import CreateStory from "./components/CreateStory";
@@ -27,11 +24,11 @@ export default function App() {
         <BrowserRouter>
           <Navbar />
           <Routes>
-            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/play" element={<AllStories />} />
-            <Route path="/" element={<ParallaxComponent />} />
+            
 
             <Route path="/story/:id/:page" element={<Story />} />
             <Route path="/story/:id/end" element={<StoryEnd />} />

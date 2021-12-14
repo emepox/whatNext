@@ -1,26 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import CreateNode from "./CreateNode";
-import AddEdge from "./AddEdge";
-import EditNode from "./EditNode";
-import DeleteNode from "./DeleteNode";
-import Noty from 'noty';
+import Noty from "noty";
 import "../../node_modules/noty/lib/themes/sunset.css";
 import "../../node_modules/noty/lib/noty.css";
 import "./Login.css";
 
+import FlowChart from "./FlowChart";
+
 const axios = require("axios");
 
-
-export default function CreateStory({ postedStory }) {
-  
+export default function CreateStory() {
   const { state } = useLocation();
   const { id, name } = state;
-  console.log(state)
-  // const { id, name } = postedStory;
-   
+  const [text, setText] = useState("");
   const [nodeList, setNodeList] = useState([]);
-  const [toggle, setToggle] = useState("create");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,184 +26,124 @@ export default function CreateStory({ postedStory }) {
       const { data } = await axios.get(`/stories/${id}/nodes`);
       setNodeList(data);
     } catch (error) {
-      console.error(error);      
+      console.error(error);
+      new Noty({
+        theme: "sunset",
+        type: "error",
+        layout: "topRight",
+        text: "Ouch! Something went wrong 😑... Try again!",
+        timeout: 2000,
+      }).show();
     }
   }
-  
-  const handleToggle = (event) => {
-    event.preventDefault();
-    setToggle(event.target.name);
+
+  const handleChange = (event) => {
+    setText(event.target.value);
   };
 
-  const renderSwitch = () => {
-    switch (toggle) {
-      case "create":
-        return (
-          <CreateNode storyId={id} getNodes={getNodes} nodeList={nodeList} />
-        );
-      case "connect":
-        return <AddEdge nodeList={nodeList} />;
-      // case "edit":
-      //   return <EditNode getNodes={getNodes} nodeList={nodeList} />;
-      // case "delete":
-      //   return <DeleteNode getNodes={getNodes} nodeList={nodeList} />;  
+  async function createNode(event) {
+    event.preventDefault();
+    try {
+      const { data } = await axios.post("/nodes", {
+        situation: text,
+        StoryId: id,
+      });
+
+      if (!nodeList.length)
+        await axios.put(`/stories/${id}/first`, { firstId: data.id });
+      getNodes();
+      setText("");
+      new Noty({
+        theme: "sunset",
+        type: "success",
+        layout: "topRight",
+        text: "New scenario saved!",
+        timeout: 2000,
+      }).show();
+    } catch (error) {
+      console.error(error);
+      new Noty({
+        theme: "sunset",
+        type: "error",
+        layout: "topRight",
+        text: "Ouch! Something went wrong 😑... Try again!",
+        timeout: 2000,
+      }).show();
     }
-  };
+  }
 
   const handleButton = (event) => {
     event.preventDefault();
     finishStory();
-  }
+  };
 
   async function finishStory() {
-  try {
-    await axios.put(`/stories/${id}/finish`);
-    new Noty({
-      theme: 'sunset',
-      type: 'success',
-      layout: 'topRight',
-      text: 'Your WhatNext is ready to go! 🚀',
-      timeout: 2000,
-      callbacks: {
-        afterClose: function () {
-          navigate(`/play`);
-        }
-      }
-    }).show();
-  } catch (error) {
-    console.error(error);
-    new Noty({
-      theme: 'sunset',
-      type: 'error',
-      layout: 'topRight',
-      text: "Ouch! Something went wrong 😑... Try again!",
-      timeout: 2000
-    }).show();
+    try {
+      await axios.put(`/stories/${id}/finish`);
+      new Noty({
+        theme: "sunset",
+        type: "success",
+        layout: "topRight",
+        text: "Your WhatNext is ready to go! 🚀",
+        timeout: 1000,
+        callbacks: {
+          afterClose: function () {
+            navigate(`/play`);
+          },
+        },
+      }).show();
+    } catch (error) {
+      console.error(error);
+      new Noty({
+        theme: "sunset",
+        type: "error",
+        layout: "topRight",
+        text: "Ouch! Something went wrong 😑... Try again!",
+        timeout: 2000,
+      }).show();
+    }
   }
-}
-
-const handleDelete = async (id) =>{
-  try {
-      await axios(`/nodes/${id}`, {
-      method: 'DELETE',
-    });
-    getNodes()
-    new Noty({
-      theme: 'mint',
-      type: 'success',
-      layout: 'topRight',
-      text: 'Scenario deleted successfully ✨',
-      timeout: 2000,
-    }).show();
-    new Noty({
-      theme: 'mint',
-      type: 'information',
-      layout: 'topRight',
-      text: "👉 Now you can EDIT other scenarios, CREATE a new one and/or CONNECT them!",
-      timeout: 6000,
-    }).show();
-  } catch (error) {
-    console.log(error);
-    new Noty({
-      theme: 'mint',
-      type: 'error',
-      layout: 'topRight',
-      text: `${error.message}`,
-      timeout: 2000
-    }).show();
-  }
-}
-
-const handleEdit = async (id, situation) =>{
-  try {
-      await axios(`/nodes/edit/${id}`, {
-      method: 'PUT',
-      data: {
-          situation
-      },
-    });
-    getNodes()
-    new Noty({
-      theme: 'mint',
-      type: 'success',
-      layout: 'topRight',
-      text: 'Scenario edited successfully ✨',
-      timeout: 2000,
-    }).show();
-    new Noty({
-      theme: 'mint',
-      type: 'information',
-      layout: 'topRight',
-      text: "👉 Now you can EDIT other scenarios, CREATE a new one and/or CONNECT them!",
-      timeout: 6000,
-    }).show();
-  } catch (error) {
-    console.log(error);
-    new Noty({
-      theme: 'mint',
-      type: 'error',
-      layout: 'topRight',
-      text: `${error.message}`,
-      timeout: 2000
-    }).show();
-  }
-}
 
   return (
-    <div className="grid grid-cols-2 gap-10">
+    <div>
       <div className="bg-white rounded-2xl shadow-2xl py-7 px-20">
         <div>
-          <h3 className="text-2xl text-bold text-gray-700 flex flex-col items-center justify-center mb-4">{name}</h3>
-          <hr/>
-          <br/>
-          <p className="text-gray-700"> Instructions:
-          <ol className="mt-4">
-            <li> 1. Create at least two scenarios by clicking on "Create scenario". Do not forget to save!</li>
-            <li> 2. Add a choice that, if made by the player, will connect two scenarios by clicking on "Connect scenarios".</li>
-            <li> 3. If you need it, you can also edit or delete saved scenarios</li>
-            <li> 4. When your WhatNext is ready, click on "WhatNext completed!" </li>
-          </ol>
-          </p><br/>
-          <hr/>
-          <form className="flex mt-4">
-            <button name="create" onClick={handleToggle} className="text-yellow-700 bg-yellow-400 p-2 rounded-full m-2 hover:bg-yellow-500 hover:shadow-lg">
-              Create Scenario
-            </button>
-            <button name="connect" onClick={handleToggle} className="text-yellow-700 bg-yellow-400 p-2 rounded-full m-2 hover:bg-yellow-500 hover:shadow-lg">
-              Connect Scenarios
-            </button>
-            
-           
-            <button name="finish" onClick={handleButton} className="text-green-800 bg-green-400 p-2 rounded-full m-2 hover:bg-green-500 hover:shadow-lg">
-              Story Completed!
+          <h3 className="text-4xl text-bold text-gray-700 flex flex-col items-center justify-center mb-4">
+            {name}
+          </h3>
+          <hr />
+          <form className="mt-4" onSubmit={createNode}>
+            <p className="text-gray-700 mb-3">
+              Add a situation:{" "}
+              <i>Player will read this before making a choice</i>
+            </p>
+            <textarea
+              rows="2"
+              value={text}
+              onChange={handleChange}
+              placeholder="Type in a scenario"
+              className="w-full border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              required
+            ></textarea>
+            <button className="text-white bg-green-400 py-2 px-3 rounded-full m-2 hover:bg-green-500 hover:shadow-lg">
+              save
             </button>
           </form>
-          <br/>
-          </div>
-          <div>
-          {renderSwitch()}
+          <hr />
           <br />
+          <div className="h-128">
+            <FlowChart getNodes={getNodes} nodeList={nodeList} />
           </div>
+          <button
+            name="finish"
+            onClick={handleButton}
+            className="text-white bg-green-400 p-2 rounded-full m-2 hover:bg-green-500 hover:shadow-lg"
+          >
+            save story
+          </button>
+          <br />
         </div>
-
-        <div className="text-gray-700 bg-white rounded-2xl shadow-2xl py-7 px-20">
-          <p className="font-semibold">ALL SAVED SCENARIOS</p>
-          
-          <div>
-            {nodeList &&
-            nodeList.map((node) => 
-              <div key={node.id} className="cols mt-7 p-5 bg-gray-100 rounded shadow-xl">
-                {node.situation} 
-                <button name="delete" onClick={() => handleDelete(node.id)} className="fontAwesome text-red-800 bg-red-400 p-2 rounded-full m-2 hover:bg-yellow-500 hover:shadow-lg">
-                  &#xf1f8; Delete
-                </button>
-                <button name="edit" onClick={() => handleEdit(node.id, node.situation)} className="text-yellow-700 bg-yellow-400 p-2 rounded-full m-2 hover:bg-yellow-500 hover:shadow-lg">
-                  Edit Scenario
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
+      </div>
     </div>
   );
 }

@@ -73,7 +73,9 @@ export default function StoryEnd() {
     
     return (
       <div>
-        {Object.keys(story).length && <Card story={story} user={user}/>}
+        <p className="justify-center text-center text-2xl font-bold text-gray-900 mt-20">Your opining matters!</p>
+        <p className="text-center text-lg text-gray-900 mb-10">How was the game?</p>
+        {Object.keys(story).length && <Card story={story} />}
 
         {/* CONTENEDOR DE RATINGS */}
         <div className="w-72 flex flex-col justify-center md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs mx-auto border border-white bg-white mt-5">
@@ -82,7 +84,7 @@ export default function StoryEnd() {
               className="flex flex-col justify-center content-center"
               onSubmit={(e) => handleSubmit(e)}
             >
-              <p className="text-center">Rate this story</p>
+              <p className="text-center font-semibold text-gray-800 mb-2">Rate this story</p>
 
               <Rating
                 emptySymbol={
@@ -94,7 +96,7 @@ export default function StoryEnd() {
                 onClick={(displayValue) => handleRating(displayValue)}
                 value={rating}
               />
-              <button className="text-base leading-tight font-light text-white bg-purple-500 rounded-full hover:bg-purple-600 py-1">Send</button>
+              <button className="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-xl text-white py-1 mt-3">Send</button>
             </form>
           ) : (
             <div className="text-center"><p>You need to be logged in to rate this story.</p><button><a href="/login">Log in</a></button></div>

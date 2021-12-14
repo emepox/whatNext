@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import * as api from "../services/api";
 import Rating from "react-rating";
 import "./Login.css";
-import Dog from "../img/Dog.png";
 import Textbox from "../img/Textbox.png";
 
 import { useSpring, config, animated } from "@react-spring/web";
@@ -172,7 +171,6 @@ export default function Story() {
               <p className="text-sm font-light text-gray-600 my-3">
               What will happen next? You decide
               </p>
-
 
               <div className="h-1 w-full mx-auto border-b my-5"></div>
 

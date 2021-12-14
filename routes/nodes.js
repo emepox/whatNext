@@ -44,13 +44,31 @@ router.put("/:id/edges", userShouldBeLoggedIn, async function (req, res) {
     let nextNode = await models.Node.findOne({
       where: { id: nextId },
     });
-    await nextNode.setNext(+id, { through: { option: option } });
+    await nextNode.addNext(+id, { through: { option: option } });
 
     res.send({ message: "edge established" });
   } catch (error) {
     res.status(500).send(error.message);
   }
 });
+
+router.delete("/:id/edges", userShouldBeLoggedIn, async function (req, res) {
+
+    try {
+      const { id } = req.params; // ID of parent node
+      const { nextId } = req.body; // only for new nodes
+      // console.log(typeOf(StoryId))
+  
+      let nextNode = await models.Node.findOne({
+        where: { id: nextId },
+      });
+      await nextNode.removeNext(+id);
+  
+      res.send({ message: "edge removed" });
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+  });
 
 router.put("/edit/:id", async function (req, res) {
   try {
