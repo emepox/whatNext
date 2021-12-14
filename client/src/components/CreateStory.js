@@ -44,7 +44,7 @@ export default function CreateStory() {
   async function createNode(event) {
     event.preventDefault();
     try {
-      const { data } = await axios.post("/nodes", {
+      const { data } = await axios.post("/api/nodes", {
         situation: text,
         StoryId: id,
       });
