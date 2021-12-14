@@ -11,6 +11,7 @@ export default function StoryEnd() {
 
     const [ story, setStory ] = useState( {} );
     const [ rating, setRating ] = useState( {} );
+    const [toggle, setToggle] = useState(true)
     const [user, setUser] = useState("");
 
     const { id } = useParams();
@@ -27,6 +28,7 @@ export default function StoryEnd() {
         try {
             const { data } = await axios.get( `/stories/${id}/` );
             setStory( data )
+            
         } catch ( err ) {
             console.log(err)
         }
@@ -62,6 +64,8 @@ export default function StoryEnd() {
                 storyId: story.id,
               },
             });
+
+            setToggle(!toggle)
             
         } catch ( err ) {
             console.log(err)
@@ -74,40 +78,41 @@ export default function StoryEnd() {
     };
     
     // add or remove story from favourites
-  const handleSingleFavourite = async () => {
-    if (!(story.Favouritee && story.Favouritee.some(fav => fav.id === user) || story.Favourites)){ 
-    try {
-      await axios('/users/favourites/', {
-        method: "POST",
-        headers: {
-            authorization: "Bearer " + localStorage.getItem("token"),
-        },
-        data: {storyId: +story.id},
-      });
-      requestStory();
-    } catch (err) {
-      console.log(err);
-    }
-   } else {
-      try {
-        await axios(`/users/favourites/${story.id}`, {
-          method: "DELETE",
-          headers: {
-              authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        });
-      requestStory();
-      } catch (err) {
-        console.log(err);
-      }
-   }
-  };
+  // const handleSingleFavourite = async () => {
+  //   if (!(story.Favouritee && story.Favouritee.some(fav => fav.id === user) || story.Favourites)){ 
+  //   try {
+  //     await axios('/users/favourites/', {
+  //       method: "POST",
+  //       headers: {
+  //           authorization: "Bearer " + localStorage.getItem("token"),
+  //       },
+  //       data: {storyId: +story.id},
+  //     });
+  //     requestStory();
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  //  } else {
+  //     try {
+  //       await axios(`/users/favourites/${story.id}`, {
+  //         method: "DELETE",
+  //         headers: {
+  //             authorization: "Bearer " + localStorage.getItem("token"),
+  //         },
+  //       });
+  //     requestStory();
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //  }
+  // };
+
 
     return (
       <div className="flex flex-col items-center justify-center bg-grayCustom2 h-screen">
         <p className="justify-center text-center text-2xl font-bold text-gray-900">Your opinion matters!</p>
         <p className="text-center text-lg text-gray-900 mb-10">How was the game?</p>
-        {Object.keys(story).length && <Card story={story} handlePlay={() => handlePlay(story.id, story.first)} handleFavourite={handleSingleFavourite}/>}
+        {Object.keys(story).length && <Card toggle={toggle} user={user.id} story={story} handlePlay={() => handlePlay(story.id, story.first)}  onFavourited={requestStory}/>}
 
         {/* CONTENEDOR DE RATINGS */}
         <div className="w-72 flex flex-col justify-center md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs mx-auto border border-white bg-white mt-5">
