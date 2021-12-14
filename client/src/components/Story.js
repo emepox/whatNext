@@ -42,7 +42,7 @@ export default function Story() {
 
   const getStory = async (id) => {
     try {
-      const { data } = await axios.get(`/stories/${id}/`);
+      const { data } = await axios.get(`/api/stories/${id}/`);
       setStory(data);
     } catch (error) {
       console.log(error);
