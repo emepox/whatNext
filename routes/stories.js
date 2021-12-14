@@ -57,7 +57,6 @@ router.get("/:id/nodes", async function (req, res) {
     const { id } = req.params;
     const story = await models.Story.findOne({where: { id }})
     const nodes = await models.Node.findAll({
-      attributes: ["id", "situation", "storyId"],
       where: { StoryId: id },
       include: { model: models.Node, as: "Start", attributes: ["id"] },
     });

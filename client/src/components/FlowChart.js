@@ -16,14 +16,13 @@ export default function FlowTest({ nodeList, getNodes }) {
   }, [nodeList]);
 
   const formater = () => {
-    console.log(nodeList);
     setElements(
       nodeList
         .map((node) => ({
           id: `${node.id}`,
           data: { node, getNodes, handleCancel },
           type: "special",
-          position: {x:node.id*20, y:node.id*20},
+          position: {x:node.x, y:node.y},
         }))
         .concat(
           nodeList
@@ -136,8 +135,29 @@ export default function FlowTest({ nodeList, getNodes }) {
     }
   };
 
-  const handleCoordinates = (event, node) => {
-    console.log(event, node);
+  const handleCoordinates = async (event, node) => {
+    const {id, position} = node
+    try {
+      await axios(`/nodes/${id}/coords`, {
+        method: "PUT",
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        data: {
+          x: position.x,
+          y: position.y,
+        },
+      });
+      getNodes();
+    } catch (error) {
+      new Noty({
+        theme: "sunset",
+        type: "error",
+        layout: "topRight",
+        text: `${error.message}`,
+        timeout: 2000,
+      }).show();
+    }
   }
 
   return (
