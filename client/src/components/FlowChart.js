@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
-import ReactFlow, { MiniMap, Controls } from "react-flow-renderer";
+import ReactFlow, { MiniMap, Controls, isNode } from "react-flow-renderer";
 import NodeCard from "./NodeCard";
 import Noty from "noty";
+import dagre from 'dagre';
 
 const axios = require("axios");
+
+const dagreGraph = new dagre.graphlib.Graph();
+  dagreGraph.setDefaultEdgeLabel(() => ({}));
 
 export default function FlowTest({ nodeList, getNodes }) {
   const [elements, setElements] = useState(null);
@@ -16,13 +20,13 @@ export default function FlowTest({ nodeList, getNodes }) {
   }, [nodeList]);
 
   const formater = () => {
-    setElements(
-      nodeList
+    console.log(nodeList);  
+      const ells = nodeList
         .map((node) => ({
           id: `${node.id}`,
           data: { node, getNodes, handleCancel },
           type: "special",
-          position: { x: node.id * 10, y: node.id * 10 },
+          position:{},
         }))
         .concat(
           nodeList
@@ -38,9 +42,41 @@ export default function FlowTest({ nodeList, getNodes }) {
             )
         )
         .flat(2)
-    );
+        const elements = getLayoutedElements(ells)
+        setElements(elements)
     //     setElements(state => state.concat(nodeList.filter(e => e.Start.length).map(node => node.Start.map(e => ({ id: `e${e.start}-${e.next}`, source: e.start, target: e.next })))))
   };
+
+  const getLayoutedElements = (elements) => {
+  dagreGraph.setGraph({ rankdir: "LR" });
+
+
+  elements.forEach((el) => {
+    if (isNode(el)) {
+      dagreGraph.setNode(el.id, { width: el.__rf.width, height: el.__rf.height });
+    } else {
+      dagreGraph.setEdge(el.source, el.target);
+    }
+  });
+
+  return elements.map((el) => {
+    if (isNode(el)) {
+      const nodeWithPosition = dagreGraph.node(el.id);
+      el.targetPosition = 'left';
+      el.sourcePosition = 'right';
+
+      // unfortunately we need this little hack to pass a slightly different position
+      // to notify react flow about the change. Moreover we are shifting the dagre node position
+      // (anchor=center center) to the top left so it matches the react flow node anchor point (top left).
+      el.position = {
+        x: nodeWithPosition.x - el.__rf.width / 2 + Math.random() / 1000,
+        y: nodeWithPosition.y - el.__rf.height / 2,
+      };
+    }
+
+    return el;
+  });
+};
 
   const handleChange = (event) => {
     setText(event.target.value);
