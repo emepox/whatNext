@@ -136,6 +136,10 @@ export default function FlowTest({ nodeList, getNodes }) {
     }
   };
 
+  const handleCoordinates = (event, node) => {
+    console.log(event, node);
+  }
+
   return (
     <div className="h-full flex">
       <div className="h-full border-2 flex-1">
@@ -145,6 +149,7 @@ export default function FlowTest({ nodeList, getNodes }) {
             nodeTypes={{ special: NodeCard }}
             onConnect={(params) => handleAddEdge(params)}
             onEdgeContextMenu={handleEdit}
+            onNodeDragStop={handleCoordinates}
           >
             <MiniMap />
             <Controls />
