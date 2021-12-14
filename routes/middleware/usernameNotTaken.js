@@ -1,4 +1,3 @@
-// const { Model } = require("sequelize/dist");
 var models = require("../../models")
 
 async function userNotTaken( req, res, next ) {

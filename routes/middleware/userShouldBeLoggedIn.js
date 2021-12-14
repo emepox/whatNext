@@ -13,7 +13,6 @@ function userShouldBeLoggedIn(req, res, next) {
     jwt.verify(token, supersecret, async function (err, decoded) {
       if (err) res.status(401).send({ message: err.message });
       else {
-        //everything is awesome
         req.user_id = decoded.user_id;
         const id = req.user_id;
         console.log("usuario:", id)
