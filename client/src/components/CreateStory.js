@@ -87,7 +87,7 @@ export default function CreateStory() {
         text: "Your WhatNext is ready to go! 🚀",
         timeout: 1000,
         callbacks: {
-          afterClose: function () {
+          onShow: function () {
             navigate(`/play`);
           },
         },

@@ -16,7 +16,8 @@ export default function NodeCard({ data, isConnectable }) {
   const handleDelete = async () => {
     const { id } = data.node;
     try {
-      await axios(`/api/nodes/${id}`, {
+        if (data.node.first) throw new Error("You can't delete the first situation")
+      await axios(`/nodes/${id}`, {
         method: "DELETE",
       });
       data.getNodes();
@@ -71,12 +72,25 @@ export default function NodeCard({ data, isConnectable }) {
     }
   };
 
+  const handleSetFirst = async () => {
+    const { id, storyId } = data.node;
+    await axios.put(`/stories/${storyId}/first`, { firstId: id });
+    new Noty({
+        theme: "sunset",
+        type: "success",
+        layout: "topRight",
+        text: "Situation set as a starting point",
+        timeout: 2000,
+      }).show();
+    data.getNodes();
+  }
+
   return (
-    <div className="flex p-5 bg-gray-100 justify-between rounded shadow-xl w-72">
+    <div className={`flex p-5 ${data.node.first?"bg-purple-300":"bg-gray-100"} justify-between rounded shadow-xl w-72`}>
       <Handle
         type="target"
         position="left"
-        style={{ background: "#555" }}
+        className="bg-gray-500 p-1"
         isConnectable={isConnectable}
       />
       {edited ? (
@@ -132,6 +146,14 @@ export default function NodeCard({ data, isConnectable }) {
                     Edit situation
                   </button>
                   <button
+                    onClick={handleSetFirst}
+                    tabindex="0"
+                    className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
+                    role="menuitem"
+                  >
+                    Set as starting point
+                  </button>
+                  <button
                     onClick={handleDelete}
                     tabindex="1"
                     className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
@@ -147,7 +169,7 @@ export default function NodeCard({ data, isConnectable }) {
       <Handle
         type="source"
         position="right"
-        style={{ background: "#555" }}
+        className="bg-gray-500 p-1"
         isConnectable={isConnectable}
       />
     </div>

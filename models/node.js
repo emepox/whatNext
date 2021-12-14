@@ -18,6 +18,8 @@ module.exports = (sequelize, DataTypes) => {
   };
   Node.init({
     situation: DataTypes.TEXT,
+    x: DataTypes.INTEGER,
+    y: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Node',

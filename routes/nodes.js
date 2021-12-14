@@ -83,27 +83,18 @@ router.put("/edit/:id", async function (req, res) {
   }
 });
 
-// router.put("/:id/edges", async function (req, res) {
-//     try {
-//         const {id} = req.params;  // ID of parent node
-//         const children = [];
-
-//         for (object of req.body){
-//             const {situation, StoryId, option} = object;
-//             const node = await models.Node.create({situation, StoryId});
-
-//             await node.addNext(id, {through: { option: option }})
-
-//             children.push(node.dataValues.id)
-//         }
-
-//        res.send(children)
-
-//     } catch (error) {
-//       res.status(500).send(error);
-//     }
-
-// });
+router.put("/:id/coords", async function (req, res) {
+    try {
+      const { id } = req.params;
+      const node = await models.Node.update(req.body, {
+        where: { id },
+      });
+  
+      res.send("Position successfully updated!");
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
 
 //deletes node by id
 router.delete("/:id", async function (req, res) {
