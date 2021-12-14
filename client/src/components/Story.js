@@ -178,7 +178,7 @@ export default function Story() {
               {currentNode.Start.length ? (
                 currentNode.Start.map((edge) => (
                   
-                    <div className="flex flex-col items-start justify-center transition hover:bg-indigo-50 cursor-pointer transition space-x-5 px-5 h-16">
+                    <div className="flex flex-col items-start justify-center transition hover:bg-indigo-50 cursor-pointer space-x-5 px-5 h-16">
                       <a
                         onClick={() => navigate(`/story/${id}/${edge.next}`)}
                         style={{
@@ -194,7 +194,7 @@ export default function Story() {
                 ))
               ) : (
                 
-                  <div className="flex flex-col items-start justify-center transition hover:bg-indigo-50 cursor-pointer transition space-x-5 px-5 h-16">
+                  <div className="flex flex-col items-start justify-center transition hover:bg-indigo-50 cursor-pointer space-x-5 px-5 h-16">
                     <a
                       onClick={() => navigate(`/story/${id}/end`)}
                       style={{ width: "100%", height: 40, textAlign: "center" }}
