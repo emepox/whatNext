@@ -34,7 +34,7 @@ export default function Card({
   // add or remove story from favourites
   const handleFavourite = async () => {
     // console.log(story.Favouritee)
-    if (!(story.Favouritee.some(fav => fav.id === user) || story.Favourites)){ 
+    if (!(story.Favouritee && story.Favouritee.some(fav => fav.id === user) || story.Favourites)){ 
     try {
       await axios('/users/favourites/', {
         method: "POST",
