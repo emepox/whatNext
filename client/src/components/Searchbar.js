@@ -10,10 +10,8 @@ export default function Searchbar({
   view, 
   user, 
   options, 
-  requestData, 
   setSearchQuery, 
   setCategoryFilters, 
-  // showFavourites 
   }){
 
   const auth = useAuth();
