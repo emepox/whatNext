@@ -66,7 +66,6 @@ export default function GridStories({ isProfile, user }) {
 
   // add or remove story from favourites
   const handleFavourite = async (story) => {
-    console.log(story)
     if (!favouritedStories[story.id]){ 
     try {
       await axios('/users/favourites/', {

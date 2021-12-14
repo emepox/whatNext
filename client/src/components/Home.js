@@ -13,8 +13,6 @@ const url = (name, wrap = false) =>
     wrap ? ")" : ""
   }`;
 
-console.log(url("clients"));
-
 export default function Home() {
   const parallax = useRef(null);
 

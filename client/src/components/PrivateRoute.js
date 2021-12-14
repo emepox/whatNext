@@ -6,7 +6,6 @@ import useAuth from "../hooks/useAuth";
 // screen if you're not yet authenticated.
 function PrivateRoute( { children } ) {
   let auth = useAuth();
-  console.log(auth)
   return auth.isLoggedIn ? children : <Navigate to="/login" />;
 }
 

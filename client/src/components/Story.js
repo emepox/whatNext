@@ -28,7 +28,6 @@ export default function Story() {
       try {
         const { data } = await axios.get(`/stories/${id}/rating`);
         setRating(data);
-        console.log(data);
       } catch (err) {
         console.log(err);
       }
@@ -37,7 +36,6 @@ export default function Story() {
   const getCurrentNode = async (id) => {
     setLoading(true);
     const node = await api.getNode(id);
-    console.log(node);
     setCurrentNode(node);
     setLoading(false);
   };

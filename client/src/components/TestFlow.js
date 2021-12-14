@@ -118,7 +118,6 @@ export default function TestFlow() {
       ];
       
     const onLoad = (reactFlowInstance) => {
-        console.log('flow loaded:', reactFlowInstance);
         reactFlowInstance.fitView();
     };
       

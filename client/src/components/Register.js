@@ -26,12 +26,10 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submited");
     addUser();
   };
 
     const addUser = async () => {
-        console.log(newUser)
     try {
         await axios( "/users/register", {
         method: "POST",
