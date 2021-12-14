@@ -4,8 +4,7 @@ var models = require("../models");
 
 const userShouldBeLoggedIn = require("./middleware/userShouldBeLoggedIn");
 
-// gets ALL STORIES information // READ STORIES PAGE
-
+// gets ALL STORIES information // Story.js component
 router.get("/", async function (req, res) {
   try {
     const stories = await models.Story.findAll({
@@ -24,14 +23,13 @@ router.get("/", async function (req, res) {
         { model: models.User, as: "Favouritee", attributes: ["username", "id"]}
       ]
     });
-
     res.send(stories);
   } catch (error) {
     res.status(500).send(error);
   }
 });
 
-//gets A STORY with a specific ID // READ A STORY
+// gets A STORY with a specific ID // READ A STORY
 // Doesn't need to be guarded YET
 // To guard when functionality PUBLIC/PRIVATE is enabled.
 router.get("/:id", async function (req, res) {
@@ -40,7 +38,7 @@ router.get("/:id", async function (req, res) {
     const stories = await models.Story.findOne({
       where: { id },
       include: [{ model: models.User, attributes: ["username", "id"] },
-      { model: models.User, as: "Favouritee", attributes: ["id", "username"]}]
+      { model: models.User, as: "Favouritee", attributes: ["id", "username"]},]
     });
 
     res.send(stories);
@@ -51,7 +49,6 @@ router.get("/:id", async function (req, res) {
 
 // gets ALL NODES from A STORY
 // To read a story. See above comment.
-
 router.get("/:id/nodes", async function (req, res) {
   try {
     const { id } = req.params;
@@ -81,8 +78,6 @@ router.get("/:id/nodes", async function (req, res) {
 });
 
 // POSTS new story, returns story.id
-// TODO: configure first so it gets the id of the first node of the story
-
 router.post("/", userShouldBeLoggedIn, async function (req, res) {
   const { id } = req.user;
   try {
@@ -124,7 +119,6 @@ router.put("/:id/first", async function (req, res) {
 // POSTING REVIEWS
 
 // With UPSERT
-
 router.put("/:storyId/rating", userShouldBeLoggedIn, async function (req, res) {
   const { id } = req.user;
   const { score, storyId } = req.body;
@@ -151,7 +145,6 @@ router.put("/:storyId/rating", userShouldBeLoggedIn, async function (req, res) {
 });
 
 // Without UPSERT
-
 // router.put("/:storyId/review", userShouldBeLoggedIn, async function (req, res) {
 //   try {
 //     const { storyId } = req.params;
@@ -186,7 +179,7 @@ router.put("/:id/finish", async function (req, res) {
   }
 });
 
-//deletes story by id
+// DELETES STORY BY ID
 router.delete("/:id", async function (req, res) {
   try {
     const { id } = req.params;

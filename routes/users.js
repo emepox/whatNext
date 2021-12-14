@@ -79,7 +79,6 @@ router.get("/profile", userShouldBeLoggedIn, async function (req, res) {
 router.get("/favourites", userShouldBeLoggedIn, async function (req, res) {
   try {
     const stories = await req.user.getFavourite({
-      // include: { model: models.User, as: "Favouritee", attributes: ["username", "id"]}
     })
     res.send(stories);
   } catch (error) {
@@ -107,7 +106,6 @@ router.post("/favourites", userShouldBeLoggedIn, async function (req, res) {
 router.delete("/favourites/:storyId", userShouldBeLoggedIn, async function (req, res) {
   try {
     const { id } = req.user;
-    // const { storyId } = req.body;
     const { storyId } = req.params;
     const user = await models.User.findOne({
       where: { id },

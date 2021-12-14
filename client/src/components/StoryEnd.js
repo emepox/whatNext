@@ -107,7 +107,7 @@ export default function StoryEnd() {
               <button className="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-xl text-white py-1 mt-3">Send</button>
             </form>
           ) : (
-            <div className="text-center"><p>You need to be logged in to rate this story.</p><button><a href="/login">Log in</a></button></div>
+            <div className="text-center text-red-400 italic"><p>Log in to rate this story!</p><button className="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-xl text-white py-1 px-3 mt-3"><a href="/login">Log in</a></button></div>
           )}
         </div>
       </div>
