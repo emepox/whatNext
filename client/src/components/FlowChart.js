@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ReactFlow, { MiniMap, Controls } from "react-flow-renderer";
+import ReactFlow, { MiniMap, Controls, isNode } from "react-flow-renderer";
 import NodeCard from "./NodeCard";
 import Noty from "noty";
 
@@ -22,7 +22,7 @@ export default function FlowTest({ nodeList, getNodes }) {
           id: `${node.id}`,
           data: { node, getNodes, handleCancel },
           type: "special",
-          position: { x: node.id * 10, y: node.id * 10 },
+          position: {x:node.x, y:node.y},
         }))
         .concat(
           nodeList
@@ -135,6 +135,31 @@ export default function FlowTest({ nodeList, getNodes }) {
     }
   };
 
+  const handleCoordinates = async (event, node) => {
+    const {id, position} = node
+    try {
+      await axios(`/api/nodes/${id}/coords`, {
+        method: "PUT",
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        data: {
+          x: position.x,
+          y: position.y,
+        },
+      });
+      getNodes();
+    } catch (error) {
+      new Noty({
+        theme: "sunset",
+        type: "error",
+        layout: "topRight",
+        text: `${error.message}`,
+        timeout: 2000,
+      }).show();
+    }
+  }
+
   return (
     <div className="h-full flex">
       <div className="h-full border-2 flex-1">
@@ -144,6 +169,7 @@ export default function FlowTest({ nodeList, getNodes }) {
             nodeTypes={{ special: NodeCard }}
             onConnect={(params) => handleAddEdge(params)}
             onEdgeContextMenu={handleEdit}
+            onNodeDragStop={handleCoordinates}
           >
             <MiniMap />
             <Controls />

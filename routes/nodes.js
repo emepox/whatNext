@@ -35,7 +35,7 @@ router.post("/", async function (req, res) {
   }
 });
 
-// EDITS NODE
+// EDITS NODE 
 router.put("/edit/:id", async function (req, res) {
   try {
     const { id } = req.params;
@@ -63,6 +63,7 @@ router.delete("/:id", async function (req, res) {
     res.status(500).send(error);
   }
 });
+
 
 // CREATES/EDITS AN EDGE
 router.put("/:id/edges", userShouldBeLoggedIn, async function (req, res) {
@@ -96,6 +97,20 @@ router.delete("/:id/edges", userShouldBeLoggedIn, async function (req, res) {
       res.send({ message: "edge removed" });
     } catch (error) {
       res.status(500).send(error.message);
+    }
+  });
+
+// EDITS NODE POSITION on CreateStory
+router.put("/:id/coords", async function (req, res) {
+    try {
+      const { id } = req.params;
+      const node = await models.Node.update(req.body, {
+        where: { id },
+      });
+  
+      res.send("Position successfully updated!");
+    } catch (error) {
+      res.status(500).send(error);
     }
   });
 

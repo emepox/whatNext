@@ -29,7 +29,7 @@ module.exports = {
 
       height: {
         custom: "80px",
-        128: "32rem",
+        128: "69vh",
         192: "48rem",
       },
 
@@ -76,14 +76,21 @@ module.exports = {
       },
     },
   },
+  transform: {
+    'customRotate': 'rotate(90deg)',
+  },
+
   variants: {
     extend: {
       shadow: ["hover"],
-      translate: ["hover"],
+      translate: ["hover", "group-hover"],
+      transform: ["hover", "group-hover"],
+      transition: ["hover"],
       // skew: ['group-hover']
       scale: ["hover"],
       opacity: ["hover"],
       underline: ["hover"],
+      rotate: ["group-hover", "hover"]
     },
   },
   plugins: [],
