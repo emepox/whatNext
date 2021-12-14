@@ -4,6 +4,7 @@ import Videosample from "../img/Videosample.mp4";
 export default function Videodisplay() {
   return (
     <div className="container flex flex-col items-center justify-center">
+      
       <h1 className="text-center text-4xl text-gray-900 font-medium leading-snug">
         Create stories that users will play
       </h1>
@@ -11,6 +12,7 @@ export default function Videodisplay() {
       <video className="w-11/12" loop={true} autoPlay="autoplay" muted>
         <source src={Videosample} type="video/mp4" />
       </video>
+      
     </div>
   );
 }
