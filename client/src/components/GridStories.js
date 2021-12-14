@@ -153,6 +153,7 @@ export default function GridStories({ isProfile, user }) {
                 })
                 .map((story) => (
                   <Card
+                    key={story.id}
                     story={story}
                     isProfile={isProfile}
                     handleEdit={() => handleEdit(story.id, story.name)}

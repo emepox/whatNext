@@ -92,7 +92,11 @@ export default function Story() {
 
             <div className="bg-white border-2 border-gray-200 p-3 rounded-xl shadow-xl flex items-center justify-between mt-4">
               <div className="flex space-x-6 items-center">
-                <img src={Textbox} className="w-auto h-24 rounded-lg" alt="something more"/>
+                <img
+                  src={Textbox}
+                  className="w-auto h-24 rounded-lg"
+                  alt="something more"
+                />
                 <div>
                   <p className="font-semibold text-lg">Created by</p>
                   <p className="font-semibold text-gray-400">
@@ -146,41 +150,41 @@ export default function Story() {
                 {currentNode.situation}
               </p>
               <p className="text-sm font-light text-gray-600 my-3">
-              What will happen next? You decide
+                What will happen next? You decide
               </p>
 
               <div className="h-1 w-full mx-auto border-b my-5"></div>
 
               {/* OPTIONS */}
               {currentNode.Start.length ? (
-                currentNode.Start.map((edge) => (
-                  
-                    <div className="flex flex-col items-start justify-center transition hover:bg-indigo-50 cursor-pointer space-x-5 px-5 h-16">
+                currentNode.Start.map((edge, i) => (
+                  <div
+                    key={i}
+                    className="flex flex-col items-start justify-center transition hover:bg-indigo-50 cursor-pointer space-x-5 px-5 h-16"
+                  >
                     <button
-                       
-                        onClick={() => navigate(`/story/${id}/${edge.next}`)}
-                        style={{
-                          width: "100%",
-                          height: 40,
-                          textAlign: "center",
-                        }}
-                      >
-                        {edge.option}
-                      </button>
-                    </div>
-                  
-                ))
-              ) : (
-                
-                  <div className="flex flex-col items-start justify-center transition hover:bg-indigo-50 cursor-pointer space-x-5 px-5 h-16">
-                    <button
-                      onClick={() => navigate(`/story/${id}/end`)}
-                      style={{ width: "100%", height: 40, textAlign: "center" }}
+                      onClick={() => navigate(`/story/${id}/${edge.next}`)}
+                      style={{
+                        width: "100%",
+                        height: 40,
+                        textAlign: "center",
+                      }}
                     >
-                      Finish
+                      {edge.option}
                     </button>
                   </div>
-                
+                ))
+              ) : (
+                <div
+                  className="flex flex-col items-start justify-center transition hover:bg-indigo-50 cursor-pointer space-x-5 px-5 h-16"
+                >
+                  <button
+                    onClick={() => navigate(`/story/${id}/end`)}
+                    style={{ width: "100%", height: 40, textAlign: "center" }}
+                  >
+                    Finish
+                  </button>
+                </div>
               )}
             </div>
           </div>
