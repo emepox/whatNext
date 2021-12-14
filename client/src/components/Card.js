@@ -29,7 +29,7 @@ export default function Card({
   }
 
   // add or remove story from favourites
-  const handleFavourite = async () => {
+  const handleFavourite = async (view) => {
     if (!(story.Favouritee && story.Favouritee.some(fav => fav.id === user) || story.Favourites)){ 
     try {
       await axios('/users/favourites/', {
@@ -39,7 +39,7 @@ export default function Card({
         },
         data: {storyId: +story.id},
       });
-      requestData();
+      requestData(view);
     } catch (err) {
       console.log(err);
     }
@@ -51,7 +51,7 @@ export default function Card({
               authorization: "Bearer " + localStorage.getItem("token"),
           },
         });
-        requestData();
+        requestData(view);
       } catch (err) {
         console.log(err);
       }
@@ -167,7 +167,7 @@ export default function Card({
           {auth.isLoggedIn && (
             <button
               className={((story.Favouritee && story.Favouritee.length && story.Favouritee.some((fav) => fav.id === user)) || story.Favourites) ? "fontAwesome text-purple-500" : "fontAwesome text-gray-200"}
-              onClick={handleFavourite}
+              onClick={() => handleFavourite(view)}
             >
               &#xf004;
             </button>
