@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState} from "react";
 import axios from "axios";
 import Noty from "noty";
 import "../../node_modules/noty/lib/themes/sunset.css";
@@ -33,7 +33,7 @@ export default function Register() {
     const addUser = async () => {
         console.log(newUser)
     try {
-        const { data } = await axios( "/users/register", {
+        await axios( "/users/register", {
         method: "POST",
         data: newUser,
         } );

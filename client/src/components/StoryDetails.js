@@ -96,7 +96,7 @@ export default function StoryDetails() {
                     }}>
                     <div className="flex flex-col items-center justify-center">
                         <div className="flex flex-col items-center justify-center mt-20">
-                            <img src={Texts} className="w-5/12"/>
+                            <img src={Texts} className="w-5/12" alt="text"/>
                             <p className="text-3xl font-bold text-gray-700 mt-5">A blank canvas for you</p>
                             <p className="text-lg text-gray-700 mb-20 mt-3">Every big idea starts with a WhatNext</p>
                         </div>

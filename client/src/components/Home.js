@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
+import { Parallax, ParallaxLayer} from "@react-spring/parallax";
 import HomeTitle from "./HomeTitle";
 import About from "./About";
 import Videodisplay from "./Videodisplay";
@@ -46,9 +46,9 @@ export default function Home() {
           style={{ pointerEvents: "none" }}
         >
           <img
-            // src={url("satellite4")}
             src={Create}
-            style={{ width: "12%", marginLeft: "77%" }}
+            style={ { width: "12%", marginLeft: "77%" } }
+            alt="home-creativity"
           />
         </ParallaxLayer>
 
@@ -63,7 +63,7 @@ export default function Home() {
           }}
         >
           {/* <img src={url('earth')} style={{ width: '60%' }} /> */}
-          <img src={Teamwork} style={{ width: "15%" }} />
+          <img src={Teamwork} style={{ width: "15%" }} alt="home"/>
         </ParallaxLayer>
 
         <ParallaxLayer

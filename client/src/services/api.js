@@ -1,5 +1,5 @@
 import axios from "axios";
-import fake_data_story1 from "./fake_data_story1.json"
+// import fake_data_story1 from "./fake_data_story1.json"
 
 export async function getNode(id) {
     //fake
