@@ -29,7 +29,7 @@ module.exports = {
 
       height: {
         custom: "80px",
-        128: "32rem",
+        128: "69vh",
         192: "48rem",
       },
 
