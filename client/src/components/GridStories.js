@@ -119,11 +119,11 @@ export default function GridStories({ view }) {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`stories/${id}`);
-      requestStories();
+      await axios.delete(`stories/${id}`); 
     } catch (err) {
       console.log(err);
     }
+    requestStories(view);
   };
 
   
