@@ -138,7 +138,7 @@ export default function FlowTest({ nodeList, getNodes }) {
   const handleCoordinates = async (event, node) => {
     const {id, position} = node
     try {
-      await axios(`/nodes/${id}/coords`, {
+      await axios(`/api/nodes/${id}/coords`, {
         method: "PUT",
         headers: {
           authorization: "Bearer " + localStorage.getItem("token"),
