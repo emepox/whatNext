@@ -144,7 +144,6 @@ export default function FlowTest({ nodeList, getNodes }) {
             nodeTypes={{ special: NodeCard }}
             onConnect={(params) => handleAddEdge(params)}
             onEdgeContextMenu={handleEdit}
-            snapToGrid = {true}
           >
             <MiniMap />
             <Controls />

@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
-
 export default function Card({
   story,
-  isProfile,
+  view,
   handleEdit,
   handleDelete,
   handlePlay,
-  handleFavourite,
-  favouritedStories
+  requestData,
+  user
 } ) {
   
   const auth = useAuth();
@@ -20,6 +19,7 @@ export default function Card({
     requestRating();
   }, [] );
   
+
   const requestRating = async () => {
      try {
        const { data } = await axios.get(`/stories/${story.id}/rating`);
@@ -28,6 +28,36 @@ export default function Card({
        console.log(err);
      }
   }
+
+  // add or remove story from favourites
+  const handleFavourite = async (view) => {
+    if (!(story.Favouritee && story.Favouritee.some(fav => fav.id === user) || story.Favourites)){ 
+    try {
+      await axios('/users/favourites/', {
+        method: "POST",
+        headers: {
+            authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        data: {storyId: +story.id},
+      });
+      requestData(view);
+    } catch (err) {
+      console.log(err);
+    }
+   } else {
+      try {
+        await axios(`/users/favourites/${story.id}`, {
+          method: "DELETE",
+          headers: {
+              authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        });
+      requestData(view);
+      } catch (err) {
+        console.log(err);
+      }
+   }
+  };
 
   return (
     <div
@@ -46,7 +76,7 @@ export default function Card({
           <div className="absolute top-0 right-0 text-white p-2 m-2">
             <div className="">
               <div className="relative inline-block text-left dropdown">
-                {!isProfile && (
+                {!(view==="profile") && (
                   <span className="rounded-md shadow-sm">
                     <button
                       onClick={handlePlay}
@@ -62,7 +92,7 @@ export default function Card({
                 )}
               </div>
 
-              {isProfile && (
+              {(view==="profile") && (
                 <div className="relative inline-block text-left dropdown">
                   <span className="rounded-md shadow-sm">
                     <button
@@ -134,10 +164,14 @@ export default function Card({
               </span>
             </p>
           </div>
+          {/* && Object.keys(user).length */}
           {auth.isLoggedIn && (
             <button
-              className={favouritedStories[story.id] ? "fontAwesome text-purple-500" : "fontAwesome text-gray-200"}
-              onClick={handleFavourite}
+              className={
+                ((story.Favouritee && story.Favouritee.length && story.Favouritee.some((fav) => fav.id === user)) || story.Favourites ) 
+                ? "fontAwesome text-purple-500" 
+                : "fontAwesome text-gray-200"}
+              onClick={() => handleFavourite(view)}
             >
               &#xf004;
             </button>
@@ -160,7 +194,7 @@ export default function Card({
           </p> */}
           {/* </a> */}
           <p className="mt-3 text-gray-500 mr-2">
-            {story && story.description.length >= 85
+            {(story && story.description.length >= 85)
               ? `${story.description.slice(0, 85)}...`
               : story.description}
           </p>

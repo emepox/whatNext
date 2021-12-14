@@ -91,7 +91,7 @@ export default function NodeCard({ data, isConnectable }) {
           ></textarea>
           <button
             onClick={handleEdit}
-            class="text-color-white px-4 py-1 text-sm text-left bg-white rounded hover:shadow"
+            className="text-color-white px-4 py-1 text-sm text-left bg-white rounded hover:shadow"
           >
             done
           </button>
@@ -101,12 +101,12 @@ export default function NodeCard({ data, isConnectable }) {
           <div className="col rounded text-center">{data.node.situation}</div>
         )
       )}
-      <div class="col ml-2 text-white">
-        <div class="">
-          <div class="inline-block text-left dropdown">
-            <span class="rounded-md shadow-sm">
+      <div className="col ml-2 text-white">
+        <div className="">
+          <div className="inline-block text-left dropdown">
+            <span className="rounded-md shadow-sm">
               <button
-                class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-gray-100 shadow-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 rounded-full"
+                className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-gray-100 shadow-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 rounded-full"
                 type="button"
                 aria-haspopup="true"
                 aria-expanded="true"
@@ -115,18 +115,18 @@ export default function NodeCard({ data, isConnectable }) {
                 <span className="fontAwesome">&#xf142;</span>
               </button>
             </span>
-            <div class="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95">
+            <div className="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95">
               <div
-                class="absolute right-0 w-56 mt-2 origin-top-right bg-white  border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
+                className="absolute right-0 w-56 mt-2 origin-top-right bg-white  border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
                 aria-labelledby="headlessui-menu-button-1"
                 id="headlessui-menu-items-117"
                 role="menu"
               >
-                <div class="py-1">
+                <div className="py-1">
                   <button
                     onClick={() => setEdited(true)}
                     tabindex="0"
-                    class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
+                    className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
                     role="menuitem"
                   >
                     Edit situation
@@ -134,7 +134,7 @@ export default function NodeCard({ data, isConnectable }) {
                   <button
                     onClick={handleDelete}
                     tabindex="1"
-                    class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
+                    className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
                   >
                     Delete situation
                   </button>
