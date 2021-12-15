@@ -4,6 +4,8 @@ const saltRounds = 10;
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+
+    
   await queryInterface.bulkInsert(
     "Users",
     [

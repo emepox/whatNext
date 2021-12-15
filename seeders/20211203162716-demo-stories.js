@@ -1,7 +1,12 @@
 'use strict';
 
+const models = require("../models")
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+
+    const user = await models.User.findOne({where: {username:"margarita"}})
+    const user2 = await models.User.findOne({where: {username:"pepe"}})
 
      await queryInterface.bulkInsert(
        "Stories",
@@ -15,7 +20,7 @@ module.exports = {
            category: "Drama",
            isPrivate: 0,
            isFinished: 1,
-           userId: 1,
+           userId: user.dataValues.id,
            first: 1,
            createdAt: new Date(),
            updatedAt: new Date(),
@@ -30,7 +35,7 @@ module.exports = {
            category: "Drama",
            isPrivate: 0,
            isFinished: 1,
-           userId: 1,
+           userId: user.dataValues.id,
            first: 1,
            createdAt: new Date(),
            updatedAt: new Date(),
@@ -44,7 +49,7 @@ module.exports = {
            category: "Drama",
            isPrivate: 0,
            isFinished: 1,
-           userId: 2,
+           userId: user2.dataValues.id,
            first: 1,
            createdAt: new Date(),
            updatedAt: new Date(),
@@ -58,7 +63,7 @@ module.exports = {
            category: "Drama",
            isPrivate: 0,
            isFinished: 1,
-           userId: 3,
+           userId: user2.dataValues.id,
            first: 1,
            createdAt: new Date(),
            updatedAt: new Date(),
@@ -72,7 +77,7 @@ module.exports = {
            category: "Horror",
            isPrivate: 0,
            isFinished: 1,
-           userId: 1,
+           userId: user.dataValues.id,
            first: 11,
            createdAt: new Date(),
            updatedAt: new Date(),

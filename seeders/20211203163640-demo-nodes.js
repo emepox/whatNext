@@ -1,7 +1,11 @@
 'use strict';
+const models = require("../models")
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+
+    const story = await models.Story.findOne({where: {name:"Jabalí"}})
+    const story2 = await models.Story.findOne({where: {name:"The Three Little Pigs"}})
 
      await queryInterface.bulkInsert(
        "Nodes",
@@ -9,7 +13,7 @@ module.exports = {
          {
            situation:
              "Jabali is walking down the street. A neon sign catches their attention",
-           StoryId: 1,
+           StoryId: story.dataValues.id,
            x: 0,
            y: 0,
            createdAt: new Date(),
@@ -26,7 +30,7 @@ module.exports = {
 
          {
            situation: "Jabali enters a restaurant.",
-           StoryId: 1,
+           StoryId: story2.dataValues.id,
            x: 0,
            y: 0,
            createdAt: new Date(),
