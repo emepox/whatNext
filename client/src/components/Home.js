@@ -12,7 +12,7 @@ export default function Home() {
   const parallax = useRef(null);
 
   return (
-    <div style={{ width: "100%", height: "100%", background: "#ffff" }}>
+    <div className="w-full h-full bg-white">
       <Parallax ref={parallax} pages={3}>
         <ParallaxLayer
           offset={1}

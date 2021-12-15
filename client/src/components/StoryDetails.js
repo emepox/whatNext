@@ -79,7 +79,7 @@ export default function StoryDetails() {
 
   return (
     <div>
-      <Parallax ref={parallax} pages={1}>
+      {/* <Parallax ref={parallax} pages={1}>
         <ParallaxLayer
           offset={0}
           speed={0}
@@ -87,9 +87,9 @@ export default function StoryDetails() {
           style={{
             backgroundColor: "#f6f6f9",
           }}
-        />
+        /> */}
 
-        <ParallaxLayer
+        {/* <ParallaxLayer
           offset={0}
           speed={2.5}
           style={{
@@ -97,9 +97,10 @@ export default function StoryDetails() {
             alignItems: "start",
             justifyContent: "center",
           }}
-        >
-          <div className="flex flex-col items-center justify-center">
-            <div className="flex flex-col items-center justify-center mt-20">
+        > */}
+          <div className="">
+            <div className="flex justify-center">
+              <div className="flex flex-col items-center justify-center mt-20">
               <img src={Texts} className="w-5/12" alt="text" />
               <p className="text-3xl font-bold text-gray-700 mt-5">
                 A blank canvas for you
@@ -108,9 +109,13 @@ export default function StoryDetails() {
                 Every big idea starts with a WhatNext
               </p>
             </div>
+            </div>
+
+
+            <div className="flex justify-center px-4 max-w-xl lg:max-w-2xl mx-auto">
             <form
               onSubmit={handleSubmit}
-              className="rounded-2xl bg-white p-11 space-y-4 shadow-xl opacity-90"
+              className="rounded-2xl bg-white p-11 space-y-4 shadow-xl opacity-90 flex-grow"
             >
               <div>
                 <p className="font-medium self-center text-xl sm:text-3xl text-gray-800 flex flex-col items-center justify-center">
@@ -125,7 +130,7 @@ export default function StoryDetails() {
                   value={newStory.name}
                   placeholder="Title"
                   onChange={handleChange}
-                  className="border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent pr-inputcustom"
+                  className="border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent w-full px-4 py-2"
                   required
                 />
               </div>
@@ -135,20 +140,20 @@ export default function StoryDetails() {
                   rows="4"
                   onChange={handleChange}
                   placeholder="Add a brief summary"
-                  className="w-full border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  className="w-full border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent px-4 py-2"
                   required
                 ></textarea>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="flex items-center space-x-4">
                 <div>
-                  <p className="text-gray-400">Category:</p>
+                  <p className="text-gray-400">Category</p>
                 </div>
-                <div>
+                <div className='flex-grow'>
                   <select
                     name="category"
                     value={newStory.category}
                     onChange={handleChange}
-                    className="w-full border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    className="w-full border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent px-4 py-2"
                     required
                   >
                     <option value="">Choose a category</option>
@@ -167,19 +172,20 @@ export default function StoryDetails() {
                   value={newStory.media}
                   placeholder="Add the URL of an image that illustrates your story"
                   onChange={handleChange}
-                  className="border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent pr-inputcustom mb-4"
+                  className="border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent w-full px-4 py-2"
                   required
                 />
               </div>
               <div className="flex flex-col items-center justify-center">
-                <button className="bg-blue-500 px-3 py-2 text-white text-base uppercase tracking-wide rounded-full hover:bg-purple-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 ">
+                <button className="bg-blue-500 px-6 py-2 text-white text-sm uppercase tracking-tight font-medium rounded-full hover:bg-purple-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50">
                   START WRITING!
                 </button>
               </div>
             </form>
+            </div>
           </div>
-        </ParallaxLayer>
-      </Parallax>
+        {/* </ParallaxLayer>
+      </Parallax> */}
     </div>
   );
 }
