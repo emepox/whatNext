@@ -78,26 +78,8 @@ export default function StoryDetails() {
   }
 
   return (
-    <div>
-      {/* <Parallax ref={parallax} pages={1}>
-        <ParallaxLayer
-          offset={0}
-          speed={0}
-          factor={3}
-          style={{
-            backgroundColor: "#f6f6f9",
-          }}
-        /> */}
 
-        {/* <ParallaxLayer
-          offset={0}
-          speed={2.5}
-          style={{
-            display: "flex",
-            alignItems: "start",
-            justifyContent: "center",
-          }}
-        > */}
+    <div className="bg-grayCustom2 h-screen">
           <div className="">
             <div className="flex justify-center">
               <div className="flex flex-col items-center justify-center mt-20">
@@ -184,8 +166,6 @@ export default function StoryDetails() {
             </form>
             </div>
           </div>
-        {/* </ParallaxLayer>
-      </Parallax> */}
     </div>
   );
 }

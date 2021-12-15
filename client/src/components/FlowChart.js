@@ -162,7 +162,8 @@ export default function FlowTest({ nodeList, getNodes }) {
 
   return (
     <div className="h-full flex">
-      <div className="h-full border-2 flex-1">
+      <div className="h-full w-full flex basis-2/3 flex-col-reverse md:flex-row space-x-4">
+      <div className="h-full w-full border-2 rounded">
         {elements && (
           <ReactFlow
             elements={elements}
@@ -171,13 +172,14 @@ export default function FlowTest({ nodeList, getNodes }) {
             onEdgeContextMenu={handleEdit}
             onNodeDragStop={handleCoordinates}
           >
-            <MiniMap />
+            <MiniMap className="hidden md:block "/>
             <Controls />
           </ReactFlow>
         )}
       </div>
+      
       {edge && (
-        <div className="flex-initial ml-4 basis-1/5">
+        <div className="">
           <form className="mt-4" onSubmit={handleConnect}>
             <p className="text-gray-700 mb-3">
               Add an action that will lead from the first situation to the next.
@@ -210,6 +212,7 @@ export default function FlowTest({ nodeList, getNodes }) {
           </button>
         </div>
       )}
+      </div>
     </div>
   );
 }
