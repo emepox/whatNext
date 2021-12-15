@@ -105,8 +105,8 @@ export default function CreateStory() {
   }
 
   return (
-    <div>
-      <div className="bg-white rounded-2xl shadow-2xl py-7 px-20 h-128">
+    <div className="h-screen">
+      <div className="bg-white p-2 md:py-4 md:px-20 h-full">
           <h3 className="text-4xl text-bold text-gray-700 flex flex-col items-center justify-center mb-4">
             {name}
           </h3>
@@ -128,9 +128,7 @@ export default function CreateStory() {
               save
             </button>
           </form>
-          <hr />
-          <br />
-          <div className="h-4/6">
+          <div className="h-3/5">
             <FlowChart getNodes={getNodes} nodeList={nodeList} />
           </div>
           <button
