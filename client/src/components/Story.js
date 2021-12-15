@@ -50,9 +50,12 @@ export default function Story() {
   };
 
   return (
-    <div className="h-screen flex" style={{ width: "100%", height: "100%" }}>
+    <div
+      className="h-screen lg:flex md:flex-none"
+      style={{ width: "100%", height: "100%" }}
+    >
       {/* BARRA LATERAL - DESCRIPCIÓN DE LA STORY*/}
-      <div className="flex w-1/4 bg-white justify-around items-top">
+      <div className="basis-1/5 bg-white justify-around items-top sm:flex-none">
         {story && (
           <div className="col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-4 xxl:col-span-4 px-6 py-6">
             <p className="text-xl font-bold text-gray-800 flex justify-center items-top m-10">
@@ -73,9 +76,9 @@ export default function Story() {
                 </p>
 
                 <div className="p-4 bg-blue-400 rounded-lg shadow-xl w-full h-32 mt-4">
-                  <div className=" w-80 h-full px-4s">
+                  <div className=" h-full px-4s">
                     <div>
-                      <h3 className="text-center text-white mt-2">
+                      <h3 className="text-center text-white mt-2 break-normal">
                         {story.description}
                       </h3>
                     </div>
@@ -127,7 +130,7 @@ export default function Story() {
       </div>
 
       {/* SECCIÓN DE LA STORY */}
-      <div className="w-3/4 bg-grayCustom1 flex flex-col items-center justify-center">
+      <div className="basis-4/5 bg-grayCustom1 flex flex-col items-center justify-center p-6">
         {story && (
           <div>
             <p className="mb-5 text-2xl font-bold text-gray-900">
@@ -138,7 +141,7 @@ export default function Story() {
 
         {loading && <div>loading</div>}
         {currentNode && (
-          <div className="w-6/12 mx-auto rounded border">
+          <div className="md:w-8/12 mx-auto rounded border">
             <div className="bg-white rounded-lg p-10 shadow-sm overflow-y-auto h-auto">
               <p className="text-xl font-medium text-purple-500">
                 {currentNode.situation}
@@ -169,9 +172,7 @@ export default function Story() {
                   </div>
                 ))
               ) : (
-                <div
-                  className="flex flex-col items-start justify-center transition hover:bg-indigo-50 cursor-pointer space-x-5 px-5 h-16"
-                >
+                <div className="flex flex-col items-start justify-center transition hover:bg-indigo-50 cursor-pointer space-x-5 px-5 h-16">
                   <button
                     onClick={() => navigate(`/story/${id}/end`)}
                     style={{ width: "100%", height: 40, textAlign: "center" }}
