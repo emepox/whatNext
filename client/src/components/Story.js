@@ -56,7 +56,7 @@ export default function Story() {
         {story && (
           <div className="col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-4 xxl:col-span-4 px-6 py-6">
             <p className="text-xl font-bold text-gray-800 flex justify-center items-top m-10">
-              STORY DETAILS
+              NOW PLAYING
             </p>
             <div className="bg-white rounded-xl p-4 shadow-xl border-2 border-gray-200">
               <div className="flex flex-col justify-center items-center">
@@ -68,17 +68,13 @@ export default function Story() {
                   />
                 </div>
                 <p className="font-semibold text-xl mt-1">{story.name}</p>
-                <p className="font-semibold text-base text-blue-500">
+                <p className="uppercase tracking-wide text-sm font-semibold text-blue-400">
                   {story.category}
                 </p>
 
-                <div className="relative p-4 shadow-xl w-full h-32 mt-4">
-                  <div className="absolute inset-0 bg-blue-400 rounded-lg"></div>
-                  <div className="relative w-80 h-full px-4s">
+                <div className="p-4 bg-blue-400 rounded-lg shadow-xl w-full h-32 mt-4">
+                  <div className=" w-80 h-full px-4s">
                     <div>
-                      <h3 className="text-center text-white text-xl font-bold">
-                        What is it about?
-                      </h3>
                       <h3 className="text-center text-white mt-2">
                         {story.description}
                       </h3>
