@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import Card from "./Card";
 import Searchbar from "./Searchbar";
-
+import Noty from "noty";
+import "../../node_modules/noty/lib/themes/sunset.css";
+import "../../node_modules/noty/lib/noty.css";
 
 export default function GridStories({ view }) {
   const navigate = useNavigate();
@@ -13,7 +15,6 @@ export default function GridStories({ view }) {
   const [categoryFilters, setCategoryFilters] = useState([]);
   const [user, setUser] = useState([]);
   // const [isFavourite, setIsFavourite] = useState(false);
-  
 
   const options = [
     { value: "Action", label: "Action" },
@@ -24,7 +25,6 @@ export default function GridStories({ view }) {
     { value: "Mystery", label: "Mystery" },
     { value: "Other", label: "Other" },
   ];
-
 
   useEffect(() => {
     requestStories(view);
@@ -47,40 +47,36 @@ export default function GridStories({ view }) {
 
   // get stories
   const requestStories = async (view) => {
-      try {
-      switch (view){
-        case "profile":
-          {
-            const { data } = await axios("/api/users/profile/", {
-              headers: {
-                authorization: "Bearer " + localStorage.getItem("token"),
-              },
-            });
-            setStories(data);
-          break;
-          }
-        case "favs":
-          { 
-            const { data } = await axios("/api/users/favourites", {
+    try {
+      switch (view) {
+        case "profile": {
+          const { data } = await axios("/api/users/profile/", {
             headers: {
               authorization: "Bearer " + localStorage.getItem("token"),
             },
-            });        
-            setStories(data);
+          });
+          setStories(data);
           break;
-          }
-        case "all":
-          {
-            const { data } = await axios("/api/stories/");
-            setStories(data);
+        }
+        case "favs": {
+          const { data } = await axios("/api/users/favourites", {
+            headers: {
+              authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          setStories(data);
           break;
-          }
+        }
+        case "all": {
+          const { data } = await axios("/api/stories/");
+          setStories(data);
+          break;
+        }
       }
     } catch (error) {
       console.log(error);
     }
   };
-
 
   const hasCategoryFilter = (story) => {
     return !categoryFilters.length || categoryFilters.includes(story.category);
@@ -95,7 +91,18 @@ export default function GridStories({ view }) {
   };
 
   const handlePlay = async (id, first) => {
-    navigate(`/story/${id}/${first}`);
+    try {
+      if (!first) throw new Error("This story is not playable right now!");
+      navigate(`/story/${id}/${first}`);
+    } catch (error) {
+      new Noty({
+        theme: "sunset",
+        type: "error",
+        layout: "topRight",
+        text: `${error.message}`,
+        timeout: 2000,
+      }).show();
+    }
   };
 
   const handleEdit = (id, name) => {
@@ -104,14 +111,12 @@ export default function GridStories({ view }) {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/api/stories/${id}`); 
+      await axios.delete(`/api/stories/${id}`);
     } catch (err) {
       console.log(err);
     }
     requestStories(view);
   };
-
-  
 
   return (
     <div className="md:flex bg-grayCustom2 sm:flex-none ">
@@ -129,28 +134,26 @@ export default function GridStories({ view }) {
       {/* CARDS DISPLAY SECTION */}
 
       <div className="basis-4/5">
-        
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 p-4">
-            {stories &&
-              stories
-                .filter((story) => {
-                  if (hasSearchFilter(story) && hasCategoryFilter(story))
-                    return story;
-                })
-                .map((story) => (
-                  <Card
-                    key={story.id}
-                    story={story}
-                    user={user.id}
-                    view={view}
-                    handleEdit={() => handleEdit(story.id, story.name)}
-                    handleDelete={() => handleDelete(story.id)}
-                    handlePlay={() => handlePlay(story.id, story.first)}
-                    onFavourited={requestStories}
-                  />
-                ))}
-          </div>
-    
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 p-4">
+          {stories &&
+            stories
+              .filter((story) => {
+                if (hasSearchFilter(story) && hasCategoryFilter(story))
+                  return story;
+              })
+              .map((story) => (
+                <Card
+                  key={story.id}
+                  story={story}
+                  user={user.id}
+                  view={view}
+                  handleEdit={() => handleEdit(story.id, story.name)}
+                  handleDelete={() => handleDelete(story.id)}
+                  handlePlay={() => handlePlay(story.id, story.first)}
+                  onFavourited={requestStories}
+                />
+              ))}
+        </div>
       </div>
       {/* END OF CARDS DISPLAY SECTION */}
     </div>

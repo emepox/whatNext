@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import * as api from "../services/api";
 import "./Login.css";
@@ -16,22 +16,20 @@ export default function Story() {
 
   useEffect(() => getCurrentNode(page), [page]);
 
+  useEffect(() => getStory(id), []);
 
-  useEffect( () => getStory( id ), [] );
-  
-    useEffect(() => {
-      requestRating();
-    }, [] );
-  
-  
-    const requestRating = async () => {
-      try {
-        const { data } = await axios.get(`/api/stories/${id}/rating`);
-        setRating(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+  useEffect(() => {
+    requestRating();
+  }, []);
+
+  const requestRating = async () => {
+    try {
+      const { data } = await axios.get(`/api/stories/${id}/rating`);
+      setRating(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const getCurrentNode = async (id) => {
     setLoading(true);
