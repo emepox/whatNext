@@ -44,7 +44,7 @@ export default function Home() {
             alt="home-creativity"
           />
         </ParallaxLayer>
-
+ 
         <ParallaxLayer offset={2.4} speed={-0.4} style={{display: "flex", alignItems: "center", justifyContent: "center", pointerEvents: "none"}}>
 
           {/* <img src={url('earth')} style={{ width: '60%' }} /> */}

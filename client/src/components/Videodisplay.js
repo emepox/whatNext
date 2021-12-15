@@ -1,5 +1,5 @@
 import React from "react";
-import Videosample from "../img/Videosample.mp4";
+import Homevideo from "../img/Homevideo.mp4";
 
 export default function Videodisplay() {
   return (
@@ -9,9 +9,10 @@ export default function Videodisplay() {
         Create stories that users will play
       </h1>
       <div className="h-1 w-24 opacity-75 bg-indigo-500 rounded mb-10 mt-5"></div>
-      <video className="w-11/12" loop={true} autoPlay="autoplay" muted>
-        <source src={Videosample} type="video/mp4" />
+      <video className="w-11/12 rounded-lg shadow-xl" loop={true} autoPlay="autoplay" muted>
+        <source src={Homevideo} type="video/mp4" />
       </video>
+      
       
     </div>
   );
