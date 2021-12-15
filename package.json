@@ -5,6 +5,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "migrate": "npx sequelize-cli db:migrate",
+    "seed": "npx sequelize-cli db:seed:all",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "dependencies": {
