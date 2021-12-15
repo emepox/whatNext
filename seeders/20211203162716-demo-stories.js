@@ -5,13 +5,11 @@ const models = require("../models")
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
-    const user = await models.User.findOne({where: {username:"margarita"}})
-    const user2 = await models.User.findOne({where: {username:"pepe"}})
-
      await queryInterface.bulkInsert(
        "Stories",
        [
          {
+           id: 1,
            name: "Jabalí",
            description: "This is the story of a true survivor: Jabalí.",
            reproductions: 0,
@@ -20,12 +18,13 @@ module.exports = {
            category: "Drama",
            isPrivate: 0,
            isFinished: 1,
-           userId: user.dataValues.id,
+           userId: 1,
            first: 1,
            createdAt: new Date(),
            updatedAt: new Date(),
          },
          {
+           id:2, 
            name: "Jabalí 2: Jabalí unchained",
            description: "Our hero is back without restraints.",
 
@@ -35,12 +34,13 @@ module.exports = {
            category: "Drama",
            isPrivate: 0,
            isFinished: 1,
-           userId: user.dataValues.id,
+           userId: 1,
            first: 1,
            createdAt: new Date(),
            updatedAt: new Date(),
          },
          {
+           id: 3, 
            name: "Jabalí 3: Jabalí returns",
            description: "Jabalí, but more.",
            reproductions: 0,
@@ -49,12 +49,13 @@ module.exports = {
            category: "Drama",
            isPrivate: 0,
            isFinished: 1,
-           userId: user2.dataValues.id,
+           userId: 2,
            first: 1,
            createdAt: new Date(),
            updatedAt: new Date(),
          },
          {
+           id: 4, 
            name: "Jabalí 4: Jabalí strikes back",
            description: "Jabalí is back for vengeance.",
            reproductions: 0,
@@ -63,12 +64,13 @@ module.exports = {
            category: "Drama",
            isPrivate: 0,
            isFinished: 1,
-           userId: user2.dataValues.id,
+           userId: 2,
            first: 1,
            createdAt: new Date(),
            updatedAt: new Date(),
          },
          {
+           id: 5,
            name: "The Three Little Pigs",
            description: "This is the story of the three little pigs.",
            reproductions: 0,
@@ -77,7 +79,7 @@ module.exports = {
            category: "Horror",
            isPrivate: 0,
            isFinished: 1,
-           userId: user.dataValues.id,
+           userId: 1,
            first: 11,
            createdAt: new Date(),
            updatedAt: new Date(),
