@@ -17,7 +17,7 @@ export default function App({scroll}) {
                 <span>Start a</span> <span className="block w-full py-2 text-transparent bg-clip-text leading-12 bg-gradient-to-r from-green-400 to-purple-500 lg:inline">WhatNext</span> <span>and create infinite possibilities 🚀</span>
             </h1>
             <p className="px-0 mb-8 text-lg text-gray-600 md:text-xl lg:px-24">
-            Cat Ipsum. Mew mew stand with legs in litter box, but poop outside or head nudges inspect anything brought into the house.
+            WhatNext is a platform that lets you choose your own adventure: <br/>create or play stories like in the 80s books, but cooler.
             </p>
             <div className="mb-4 space-x-0 md:space-x-2 md:mb-8">
                 <a href="/start" className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-green-400 rounded-2xl sm:w-auto sm:mb-0">
