@@ -129,8 +129,8 @@ export default function GridStories({ view }) {
       {/* CARDS DISPLAY SECTION */}
 
       <div className="basis-4/5">
-        <div className="md:flex m-10">
-          <div className="md:flex md:flex-wrap lg:justify-left">
+        
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 p-4">
             {stories &&
               stories
                 .filter((story) => {
@@ -150,7 +150,7 @@ export default function GridStories({ view }) {
                   />
                 ))}
           </div>
-        </div>
+    
       </div>
       {/* END OF CARDS DISPLAY SECTION */}
     </div>

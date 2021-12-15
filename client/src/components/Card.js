@@ -65,7 +65,7 @@ export default function Card({
   return (
     <div
       
-      className="w-72 h-96 max-w-md m-4 bg-white rounded-xl shadow-xl overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400"
+      className="h-96 max-w-md bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-lg transform hover:scale-105 transition duration-400"
     >
       <div className="md:flex">
         <div className="md:flex-initial">
