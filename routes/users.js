@@ -35,7 +35,6 @@ router.post("/login", async (req, res) => {
       const correctPassword = await bcrypt.compare(password, user.password);
 
       if (!correctPassword) throw new Error("Incorrect password");
-      console.log("Llega hasta aquí", user_id);
 
       var token = jwt.sign({ user_id }, supersecret);
 
@@ -66,7 +65,8 @@ router.get("/profile", userShouldBeLoggedIn, async function (req, res) {
     const { id } = req.user;
     const stories = await models.Story.findAll({
       where: { UserId: id },
-      include: { model: models.User, attributes: ["username"] },
+      include: [{ model: models.User, attributes: ["id", "username"] },
+      { model: models.User, as: "Favouritee", attributes: ["id", "username"]}]
     });
 
     res.send(stories);
@@ -75,10 +75,23 @@ router.get("/profile", userShouldBeLoggedIn, async function (req, res) {
   }
 });
 
+// gets all favourite stories from a user
+router.get("/favourites", userShouldBeLoggedIn, async function (req, res) {
+  try {
+    const stories = await req.user.getFavourite({
+    })
+    res.send(stories);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// adds story to favourites
 router.post("/favourites", userShouldBeLoggedIn, async function (req, res) {
   try {
     const { id } = req.user;
     const { storyId } = req.body;
+    console.log(req.body)
     const user = await models.User.findOne({
       where: { id },
     });
@@ -87,6 +100,22 @@ router.post("/favourites", userShouldBeLoggedIn, async function (req, res) {
   } catch (error) {
     res.status(500).send(error);
   }
-});
+} );
+
+//removes story from favourites
+router.delete("/favourites/:storyId", userShouldBeLoggedIn, async function (req, res) {
+  try {
+    const { id } = req.user;
+    const { storyId } = req.params;
+    const user = await models.User.findOne({
+      where: { id },
+    });
+    await user.removeFavourite(+storyId);
+    res.send("Successfuly removed from favs");
+  } catch (error) {
+    res.status(500).send(error);
+  }
+} );
+
 
 module.exports = router;

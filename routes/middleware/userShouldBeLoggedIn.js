@@ -13,15 +13,13 @@ function userShouldBeLoggedIn(req, res, next) {
     jwt.verify(token, supersecret, async function (err, decoded) {
       if (err) res.status(401).send({ message: err.message });
       else {
-        //everything is awesome
         req.user_id = decoded.user_id;
         const id = req.user_id;
         console.log("usuario:", id)
         const results = await models.User.findOne( { where: { id } } );        
-        const { username, favourites, createdAt, updatedAt } = results.dataValues;
 
-        req.user = { id, username, favourites, createdAt, updatedAt };
-        console.log("I am in the guard, this is the user:",req.user)
+        req.user = results;
+        console.log("I am in the guard")
         next();
       }
     });

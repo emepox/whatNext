@@ -8,7 +8,7 @@ function useProvideAuth() {
 
   const signin = async (user, cb = () => {}) => {
     try {
-      const { data } = await axios.post("/users/login", user);
+      const { data } = await axios.post("/api/users/login", user);
 
       localStorage.setItem("token", data.token);
       setIsLoggedIn(true);

@@ -1,83 +1,97 @@
-import React from 'react'
-import Beetjuice from '../img/Beetjuice.png'
-import Bestpickle from '../img/Bestpickle.png'
-import Citric from '../img/Citric.png'
-import Hot from '../img/Hot.png'
+import React, { useRef } from "react";
+import { Parallax, ParallaxLayer} from "@react-spring/parallax";
+import HomeTitle from "./HomeTitle";
+import About from "./About";
+import Videodisplay from "./Videodisplay";
+import Teamwork from "../img/Teamwork.png";
+import Create from "../img/Create.png";
+
+
 
 export default function Home() {
+  const parallax = useRef(null);
+
   return (
-    <div style={{ width: '100%', height: '100%' }}>
-       
-      {/* <div className="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 gap-3"> */}
-      <div className="md:container md:mx-auto">
-      <div className="grid justify-items-center lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
-      
-      
-        <div className="my-5">
-          <div className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400">
-            <div className="md:flex">
-              <div className="md:flex-initial">
-                <img className="object-cover h-48 w-screen" src={Hot} alt="whatever" />
-                <div className='uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3 ml-2'>
-                  Adventure
-                  </div>
-                  <a href="#" className="block mt-1 text-lg leading-tight font-medium text-black hover:underline ml-2 mt-3">Boar visits the city</a>
-                  <p className="mt-2 text-gray-500 ml-2 mr-2">Join the boar in this new adventure visiting Barcelona. What will happen? Only you can tell</p>
-                </div>
-            </div>
-          </div>
-        </div>
+    <div className="w-full h-full bg-white">
+      <Parallax ref={parallax} pages={3}>
+        <ParallaxLayer
+          offset={1}
+          speed={1}
+          factor={1}
+          style={{ backgroundColor: "#DCE0EB" }}
+        />
+        <ParallaxLayer
+          offset={2}
+          speed={1}
+          factor={3}
+          style={{ backgroundColor: "#1C2530" }}
+        />
+        <ParallaxLayer
+          offset={0}
+          speed={0}
+          factor={3}
+          style={{ backgroundSize: "cover" }}
+        />
 
-        <div className="my-5">
-          <div className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400">
-            <div className="md:flex">
-              <div className="md:flex-initial">
-                <img className="object-cover h-48 w-screen" src={Bestpickle} alt="whatever" />
-                <div className='uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3 ml-2'>
-                  Horror
-                  </div>
-                  <a href="#" className="block mt-1 text-lg leading-tight font-medium text-black hover:underline ml-2 mt-3">Boar tries pickles</a>
-                  <p className="mt-2 text-gray-500 ml-2 mr-2">Join the boar in this new adventure visiting Barcelona. What will happen? Only you can tell</p>
-                </div>
-            </div>
-          </div>
-        </div>
+        <ParallaxLayer
+          offset={1.3}
+          speed={-0.3}
+          style={{ pointerEvents: "none" }}
+        >
+          <img
+            src={Create}
+            style={ { width: "12%", marginLeft: "77%" } }
+            alt="home-creativity"
+          />
+        </ParallaxLayer>
+ 
+        <ParallaxLayer offset={2.4} speed={-0.4} style={{display: "flex", alignItems: "center", justifyContent: "center", pointerEvents: "none"}}>
 
-      
-        <div className="my-5">
-          <div className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400">
-            <div className="md:flex">
-              <div className="md:flex-initial">
-                <img className="object-cover h-48 w-screen" src={Citric} alt="whatever" />
-                <div className='uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3 ml-2'>
-                  Love
-                  </div>
-                  <a href="#" className="block mt-1 text-lg leading-tight font-medium text-black hover:underline ml-2 mt-3">Boar falls in love</a>
-                  <p className="mt-2 text-gray-500 ml-2 mr-2">Join the boar in this new adventure visiting Barcelona. What will happen? Only you can tell</p>
-                </div>
-            </div>
-          </div>
-        </div>
+          {/* <img src={url('earth')} style={{ width: '60%' }} /> */}
+          <img src={Teamwork} style={{ width: "15%" }} alt="home"/>
+        </ParallaxLayer>
 
-        <div className="my-5">
-          <div className="w-72 h-96 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:shadow-lg transform hover:scale-105 transition duration-400">
-            <div className="md:flex">
-              <div className="md:flex-initial">
-                <img className="object-cover h-48 w-screen" src={Beetjuice} alt="whatever" />
-                <div className='uppercase tracking-wide text-sm font-semibold text-indigo-500 mt-3 ml-2'>
-                  Drama
-                  </div>
-                  <a href="#" className="block mt-1 text-lg leading-tight font-medium text-black hover:underline ml-2 mt-3">Boar doesn't get beets</a>
-                  <p className="mt-2 text-gray-500 ml-2 mr-2">Join the boar in this new adventure visiting Barcelona. What will happen? Only you can tell</p>
-                </div>
-            </div>
-          </div>
-        </div>
+        <ParallaxLayer offset={2} speed={-0.5} style={{ backgroundSize: "80%", backgroundPosition: "center",
+            // backgroundImage: url('clients', true),
+          }}
+        />
 
-     
-        </div>
-      
-      </div>
+        <ParallaxLayer
+          offset={0}
+          speed={1.5}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <HomeTitle scroll={() => parallax.current.scrollTo(1)} />
+        </ParallaxLayer>
+
+        <ParallaxLayer
+          offset={1}
+          speed={0.1}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Videodisplay />
+        </ParallaxLayer>
+
+        <ParallaxLayer
+          offset={2}
+          speed={-0.3}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <About />
+        </ParallaxLayer>
+      </Parallax>
     </div>
-  )
+  );
 }

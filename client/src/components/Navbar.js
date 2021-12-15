@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import Noty from "noty";
+import "../../node_modules/noty/lib/themes/sunset.css";
 
 export default function Navbar() {
   const auth = useAuth();
@@ -11,7 +12,7 @@ export default function Navbar() {
     localStorage.removeItem("token");
 
     new Noty({
-      theme: "bootstrap-v4",
+      theme: "sunset",
       type: "success",
       layout: "topRight",
       text: "Logging you out.",
@@ -22,69 +23,66 @@ export default function Navbar() {
 
 
   return (
-    <div>
-      <div className="bg-white opacity-90 shadow-lg px-12 py-8 grid grid-cols-2">
+    <div className="sticky top-0 z-50">
+      <div className="bg-navbarCustom shadow-3xl px-10 sm:px-5 py-8 sm:flex justify-between">
         <a
           href="/"
-          className="block mt-1 text-xl leading-tight font-medium  font-mono italic text-black hover:text-indigo-500"
+          className="block mt-1 text-xl leading-tight font-medium text-customWhite hover:text-indigo-500"
         >
           WhatNext
         </a>
         <div className="text-right space-x-3">
           <a
             href="/start"
-            className="text-base leading-tight font-light text-black hover:text-indigo-500"
+            className="text-base leading-tight font-light text-customWhite hover:text-indigo-500"
           >
-            Create a story
+            create
           </a>
+          <a className="text-customWhite">|</a>
           <a
             href="/play"
-            className="text-base leading-tight font-light text-black hover:text-indigo-500"
+            className="text-base leading-tight font-light text-customWhite hover:text-indigo-500"
           >
-            Play a game
+            play
           </a>
+          <a className="text-customWhite">|</a>
           {auth.isLoggedIn && (
+            
             <NavLink
               to="/profile"
-              className="text-base leading-tight font-light text-black hover:text-indigo-500"
+              className="text-base leading-tight font-light text-customWhite hover:text-indigo-500"
             >
-              Profile
+              profile
             </NavLink>
+            
           )}
-          <a
-            href="/home"
-            className="text-base leading-tight font-light text-black hover:text-indigo-500"
-          >
-            About
-          </a>
-
-          <a>|</a>
+          {auth.isLoggedIn && <a className="text-customWhite">|</a>}
 
            {!auth.isLoggedIn && (
             <NavLink
               to="/login"
-              className="text-base leading-tight font-light text-white bg-purple-400 rounded-full hover:bg-purple-500 px-3 py-2"
+              className="text-base leading-tight font-light text-white bg-purple-500 rounded-full hover:bg-purple-600 px-3 py-2"
             >
-              Login
+              login
             </NavLink>
           )}
 
           {!auth.isLoggedIn && (
             <NavLink
               to="/register"
-              className="text-base leading-tight font-light text-white bg-purple-400 rounded-full hover:bg-purple-500 px-3 py-2"
+              className="text-base leading-tight font-light text-white bg-purple-500 rounded-full hover:bg-purple-600 px-3 py-2"
             >
-              Sign Up 
+              sign up 
             </NavLink>
           )}
 
           {auth.isLoggedIn && (
             <NavLink
               to="/"
-              className="text-base leading-tight font-light text-white bg-purple-400 rounded-full hover:bg-purple-500 px-3 py-2"
+              className="text-base leading-tight font-light text-white bg-purple-500 rounded-full hover:bg-purple-600 px-3 py-2"
               onClick={logout}
             >
-              Logout
+              logout
             </NavLink>
           )}
         </div>

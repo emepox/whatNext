@@ -1,9 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
-
-import ParallaxComponent from "./components/ParallaxComponent";
-import DraggableList from "./components/Draggable";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import CreateStory from "./components/CreateStory";
@@ -14,38 +11,43 @@ import Home from "./components/Home";
 import Navbar from './components/Navbar';
 import Profile from "./components/Profile";
 import AllStories from './components/AllStories';
+import StoryEnd from './components/StoryEnd';
+import GridStories from './components/GridStories';
 
 import AuthProvider from "./components/AuthProvider";
 import PrivateRoute from "./components/PrivateRoute";
-import Test from "./components/Story copy copy";
-
-
 
 
 export default function App() {
   return (
-
-    <div className="bg-bgColor" style={{ width: '100%', height: '100%' }}>
-    
+    <div style={{ width: "100%", height: "100%" }}>
       <AuthProvider>
         <BrowserRouter>
           <Navbar />
           <Routes>
-            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/play" element={<AllStories />} />
-            <Route path="/" element={<ParallaxComponent />} />
-            <Route path="/draggable" element={<DraggableList items={'Lorem ipsum dolor sit'.split(' ')} />} />
+            <Route path="/play" element={<GridStories view="all"/>} />
+            
+
             <Route path="/story/:id/:page" element={<Story />} />
-            <Route path="/test/:id/:page" element={<Test />} />
+            <Route path="/story/:id/end" element={<StoryEnd />} />
 
 
             <Route
               path="/profile"
               element={
                 <PrivateRoute>
-                  <Profile />
+                  <GridStories view="profile"/>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/favourites"
+              element={
+                <PrivateRoute>
+                  <GridStories view="favs"/>
                 </PrivateRoute>
               }
             />
@@ -53,7 +55,6 @@ export default function App() {
               path="/create"
               element={
                 <PrivateRoute>
-
                   <CreateStory />
                 </PrivateRoute>
               }
@@ -69,8 +70,6 @@ export default function App() {
           </Routes>
         </BrowserRouter>
       </AuthProvider>
-
-
     </div>
   );
 }

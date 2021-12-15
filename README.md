@@ -32,6 +32,8 @@ This project uses several additional libraries, which should also get installed 
 - Axios <https://axios-http.com/>
 - Noty <https://ned.im/noty/#/>
 - Tailwind <https://tailwindcss.com/docs>
+- React Spring <https://react-spring.io>
+
 
 ### Database Prep
 
@@ -63,7 +65,9 @@ Happy coding!
 
 ### Database schema
 
-![Database schema](https://github.com/CodeOp-tech/ModularStory/blob/main/client/public/db.png?raw=true) TO BE ADDED
+
+![Database schema](https://github.com/CodeOp-tech/ModularStory/blob/main/client/public/db.png?raw=true) 
+
 
 ### API routes plan
 
@@ -102,16 +106,24 @@ Happy coding!
 
 ## Components
 
-- ParallaxComponent.js
+- Home.js
+  - HomeTitle.js
+  - About.js
+  - Videodisplay.js
 - GridStories.js
   - AllStories.js
+  - Searchbar.js
   - Profile.js
+  - Card.js
 - StoryDetails.js
   - CreateStory.js
-   - CreateNode.js
-   - EditNode.js
-   - AddEdge.js
+  - Flowchart.js
+  - CreateNode.js
+  - NodeCard.js
+  - EditNode.js
+  - AddEdge.js
 - Story.js
+  - StoryEnd.js
 - AuthProvider.js
   - Register.js
   - Login.js
