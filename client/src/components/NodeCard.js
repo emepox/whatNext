@@ -17,7 +17,7 @@ export default function NodeCard({ data, isConnectable }) {
     const { id } = data.node;
     try {
         if (data.node.first) throw new Error("You can't delete the first situation")
-      await axios(`/nodes/${id}`, {
+      await axios(`/api/nodes/${id}`, {
         method: "DELETE",
       });
       data.getNodes();
@@ -74,7 +74,7 @@ export default function NodeCard({ data, isConnectable }) {
 
   const handleSetFirst = async () => {
     const { id, storyId } = data.node;
-    await axios.put(`/stories/${storyId}/first`, { firstId: id });
+    await axios.put(`/api/stories/${storyId}/first`, { firstId: id });
     new Noty({
         theme: "sunset",
         type: "success",
