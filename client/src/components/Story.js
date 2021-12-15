@@ -76,9 +76,9 @@ export default function Story() {
                 </p>
 
                 <div className="p-4 bg-blue-400 rounded-lg shadow-xl w-full h-32 mt-4">
-                  <div className=" w-80 h-full px-4s">
+                  <div className=" h-full px-4s">
                     <div>
-                      <h3 className="text-center text-white mt-2">
+                      <h3 className="text-center text-white mt-2 break-normal">
                         {story.description}
                       </h3>
                     </div>
