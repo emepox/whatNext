@@ -40,7 +40,6 @@ export default function StoryDetails() {
   const handleSubmit = (event) => {
     event.preventDefault();
     createStory();
-    parallax.current.scrollTo(1);
   };
 
   // creates new story in DB

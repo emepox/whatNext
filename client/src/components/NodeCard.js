@@ -90,7 +90,7 @@ export default function NodeCard({ data, isConnectable }) {
       <Handle
         type="target"
         position="left"
-        className="bg-gray-500 p-1"
+        style={{backgroundColor: "red", padding:"0.25rem"}}
         isConnectable={isConnectable}
       />
       {edited ? (
@@ -169,7 +169,7 @@ export default function NodeCard({ data, isConnectable }) {
       <Handle
         type="source"
         position="right"
-        className="bg-gray-500 p-1"
+        style={{backgroundColor: "green", padding:"0.25rem"}}
         isConnectable={isConnectable}
       />
     </div>

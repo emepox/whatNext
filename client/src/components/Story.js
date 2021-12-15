@@ -130,7 +130,7 @@ export default function Story() {
       </div>
 
       {/* SECCIÓN DE LA STORY */}
-      <div className="basis-4/5 bg-grayCustom1 flex flex-col items-center justify-center p-6">
+      <div className="basis-4/5 bg-grayCustom1 flex flex-col items-center justify-center p-6 w-full">
         {story && (
           <div>
             <p className="mb-5 text-2xl font-bold text-gray-900">
