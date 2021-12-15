@@ -104,16 +104,24 @@ Happy coding!
 
 ## Components
 
-- ParallaxComponent.js
+- Home.js
+  - HomeTitle.js
+  - About.js
+  - Videodisplay.js
 - GridStories.js
   - AllStories.js
+  - Searchbar.js
   - Profile.js
+  - Card.js
 - StoryDetails.js
   - CreateStory.js
-   - CreateNode.js
-   - EditNode.js
-   - AddEdge.js
+  - Flowchart.js
+  - CreateNode.js
+  - NodeCard.js
+  - EditNode.js
+  - AddEdge.js
 - Story.js
+  - StoryEnd.js
 - AuthProvider.js
   - Register.js
   - Login.js
