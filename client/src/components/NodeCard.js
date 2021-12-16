@@ -73,8 +73,8 @@ export default function NodeCard({ data, isConnectable }) {
   };
 
   const handleSetFirst = async () => {
-    const { id, storyId } = data.node;
-    await axios.put(`/api/stories/${storyId}/first`, { firstId: id });
+    const { id, StoryId } = data.node;
+    await axios.put(`/api/stories/${StoryId}/first`, { firstId: id });
     new Noty({
         theme: "sunset",
         type: "success",
