@@ -11,7 +11,7 @@ module.exports = {
            description: "This is the story of a true survivor: Jabalí.",
            reproductions: 0,
            media:
-             "https://site-782965.mozfiles.com/files/782965/galleries/20698508/large/JABALI5.jpg?",
+             "https://site-782965.mozfiles.com/files/782965/galleries/20698508/large/JABALI5.jpg",
            category: "Drama",
            isPrivate: 0,
            isFinished: 1,
